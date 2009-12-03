@@ -56,8 +56,8 @@
 
     <bean id="_choiceFieldsView" class="org.jtheque.films.view.impl.frames.ChoiceFieldsView">
         <constructor-arg ref="_mainView"/>
-        <property name="closeAction" ref="closeChoiceFieldsViewAction"/>
-        <property name="validateAction" ref="validateChoiceFieldsViewAction"/>
+        <constructor-arg ref="validateChoiceFieldsViewAction"/>
+        <constructor-arg ref="closeChoiceFieldsViewAction"/>
     </bean>
 
     <bean id="_coverView" class="org.jtheque.films.view.impl.frames.CoverView">
@@ -94,15 +94,15 @@
 
     <bean id="_lendingsView" class="org.jtheque.films.view.impl.frames.LendingsView">
         <constructor-arg ref="_mainView"/>
-        <property name="closeAction" ref="closeLendingsViewAction"/>
-        <property name="lendAction" ref="lendFilmAction"/>
-        <property name="returnAction" ref="returnCurrentFilmAction"/>
+        <constructor-arg ref="lendFilmAction"/>
+        <constructor-arg ref="returnCurrentFilmAction"/>
+        <constructor-arg ref="closeLendingsViewAction"/>
     </bean>
 
     <bean id="_publicationView" class="org.jtheque.films.view.impl.frames.PublicationView">
         <constructor-arg ref="_mainView"/>
-        <property name="closeAction" ref="closePublicationViewAction"/>
-        <property name="validateAction" ref="validatePublicationViewAction"/>
+        <constructor-arg ref="validatePublicationViewAction"/>
+        <constructor-arg ref="closePublicationViewAction"/>
     </bean>
 
     <bean id="_searchView" class="org.jtheque.films.view.impl.frames.SearchView">

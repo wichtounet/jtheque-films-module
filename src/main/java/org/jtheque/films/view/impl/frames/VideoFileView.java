@@ -1,12 +1,16 @@
 package org.jtheque.films.view.impl.frames;
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
+import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.IVideoFileView;
+import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
@@ -41,27 +45,23 @@ import java.util.Collection;
 public final class VideoFileView extends SwingDialogView implements IVideoFileView {
     private DataContainerCachedComboBoxModel<Film> model;
     private FileChooserPanel fieldFile;
-
-    @Resource
-    private IFilmsService filmsService;
-
-    private Action validateAction;
-    private Action closeAction;
+    
+    private final Action validateAction;
+    private final Action closeAction;
 
     /**
      * Construct a new VideoFileView modal to his parent view.
      *
      * @param parent The parent frame.
+     * @param validateAction The action to validate the view. 
+     * @param closeAction The action to close the view. 
      */
-    public VideoFileView(Frame parent) {
+    public VideoFileView(Frame parent, Action validateAction, Action closeAction) {
         super(parent);
-    }
-
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+        
+        this.validateAction = validateAction;
+        this.closeAction = closeAction;
+        
         setContentPane(buildContentPane());
         pack();
 
@@ -84,7 +84,7 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
 
         builder.addI18nLabel("video.file.view.film", builder.gbcSet(0, 1));
 
-        model = new DataContainerCachedComboBoxModel<Film>(filmsService);
+        model = new DataContainerCachedComboBoxModel<Film>(Managers.getManager(IBeansManager.class).<IFilmsService>getBean("filmsService"));
 
         JComponent combo = builder.addComboBox(model, builder.gbcSet(1, 1));
         SwingUtils.addFieldValidateAction(combo, validateAction);
@@ -106,23 +106,5 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
     @Override
     public Film getFilm() {
         return model.getSelectedData();
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

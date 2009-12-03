@@ -11,7 +11,6 @@ import org.jtheque.films.view.able.IPublicationView;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
 
-import javax.annotation.PostConstruct;
 import javax.swing.Action;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -49,8 +48,8 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     private JTextField fieldPort;
     private JThequeCheckBox passiveBox;
 
-    private Action validateAction;
-    private Action closeAction;
+    private final Action validateAction;
+    private final Action closeAction;
 
     private static final int FIELD_COLUMNS = 15;
 
@@ -58,16 +57,15 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * Construct a new Publication View.
      *
      * @param parent The parent frame.
+     * @param validateAction The action to validate the view. 
+     * @param closeAction The action to close the view. 
      */
-    public PublicationView(Frame parent) {
+    public PublicationView(Frame parent, Action validateAction, Action closeAction) {
         super(parent);
-    }
+        
+        this.validateAction = validateAction;
+        this.closeAction = closeAction;
 
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
         setTitleKey("publication.view.title");
         setContentPane(buildContentPane());
         pack();
@@ -177,23 +175,5 @@ public final class PublicationView extends SwingDialogView implements IPublicati
         infos.setPort(Integer.parseInt(fieldPort.getText()));
 
         return infos;
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

@@ -16,8 +16,12 @@ package org.jtheque.films.view.impl.models;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.BeansManager;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
+import org.jtheque.films.services.impl.ActorService;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.listeners.ViewStateListener;
@@ -37,16 +41,14 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     private Film currentFilm;
 
     private Collection<Film> displayList;
-
-    @Resource
-    private IFilmsService filmsService;
-
+    
     /**
      * Init the view.
      */
-    @PostConstruct
-    private void init() {
-        filmsService.addDataListener(this);
+    public FilmsModel() {
+        super();
+        
+        getFilmsService().addDataListener(this);
     }
 
     @Override
@@ -55,7 +57,7 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
         getDisplayList().clear();
 
         if (films == null) {
-            getDisplayList().addAll(filmsService.getFilms());
+            getDisplayList().addAll(getFilmsService().getFilms());
         } else {
             getDisplayList().addAll(films);
         }
@@ -71,7 +73,7 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     @Override
     public Collection<Film> getDisplayList() {
         if (displayList == null) {
-            displayList = filmsService.getFilms();
+            displayList = getFilmsService().getFilms();
         }
 
         return displayList;
@@ -104,6 +106,15 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     @Override
     public void addViewStateListener(ViewStateListener listener) {
         getEventListenerList().add(ViewStateListener.class, listener);
+    }
+
+    /**
+     * Return the service for the films. 
+     * 
+     * @return The service for the films. 
+     */
+    private static IFilmsService getFilmsService() {
+        return Managers.getManager(IBeansManager.class).getBean("filmsService");
     }
 
     /**

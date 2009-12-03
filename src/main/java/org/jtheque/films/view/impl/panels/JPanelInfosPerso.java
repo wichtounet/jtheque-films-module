@@ -49,10 +49,15 @@ public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
     private JComboBox comboNote;
     private JTextArea areaComment;
 
+    public JPanelInfosPerso() {
+        super();
+        
+        build();
+    }
+
     /**
      * Build the panel.
      */
-    @PostConstruct
     private void build() {
         PanelBuilder builder = new PanelBuilder(this);
 

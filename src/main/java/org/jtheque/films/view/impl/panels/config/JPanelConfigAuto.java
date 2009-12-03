@@ -17,16 +17,16 @@ package org.jtheque.films.view.impl.panels.config;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
+import org.jtheque.films.services.impl.utils.config.Configuration;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -41,17 +41,12 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
     private static final long serialVersionUID = 6787412105243753090L;
 
     private JTextField fieldNumberOfActors;
-
-    @Resource
-    private IFilmsModule filmsModule;
-
-    /**
-     * Init the view.
-     */
-    @PostConstruct
-    private void init() {
+    
+    public JPanelConfigAuto() {
+        super();
+        
         build();
-        fillAllFields();
+        cancel();
     }
 
     @Override
@@ -71,22 +66,15 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
         fieldNumberOfActors = builder.add(new JTextField(4),
                 builder.gbcSet(1, 0, GridBagUtils.NONE, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, 1.0, 1.0));
     }
-
-    /**
-     * Fill all films.
-     */
-    private void fillAllFields() {
-        fieldNumberOfActors.setText(Integer.toString(filmsModule.getConfiguration().getNumberOfActors()));
-    }
-
+    
     @Override
     public void apply() {
-        filmsModule.getConfiguration().setNumberOfActors(Integer.parseInt(fieldNumberOfActors.getText()));
+        getConfig().setNumberOfActors(Integer.parseInt(fieldNumberOfActors.getText()));
     }
-
+    
     @Override
     public void cancel() {
-        fillAllFields();
+        fieldNumberOfActors.setText(Integer.toString(getConfig().getNumberOfActors()));
     }
 
     @Override
@@ -97,5 +85,14 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
     @Override
     public JComponent getComponent() {
         return this;
+    }
+
+    /**
+     * Return the configuration of the films module. 
+     * 
+     * @return The configuration of the films module. 
+     */
+    private static Configuration getConfig(){
+        return Managers.getManager(IBeansManager.class).<IFilmsModule>getBean("filmsModule").getConfiguration();
     }
 }

@@ -16,11 +16,13 @@ package org.jtheque.films.view.impl.panels;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
+import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.view.able.IInfosActorsView;
 import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.films.view.impl.models.list.DataCachedContainerListModel;
@@ -29,8 +31,6 @@ import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -58,9 +58,7 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
 
     private final JThequeSimpleAction removeAction;
     private final JThequeSimpleAction addAction;
-
-    @Resource
-    private IActorService actorsService;
+    
     private static final double AN_HALF = 0.5;
 
     /**
@@ -74,16 +72,18 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
 
         this.removeAction = removeAction;
         this.addAction = addAction;
+        
+        build();
     }
 
     /**
      * Build the view.
      */
-    @PostConstruct
     private void build() {
         PanelBuilder builder = new PanelBuilder(this);
 
-        actorsModel = new DataCachedContainerListModel<Person>(actorsService);
+        actorsModel = new DataCachedContainerListModel<Person>(
+                Managers.getManager(IBeansManager.class).<DataContainer<Person>>getBean("actorsService"));
 
         listActors = builder.addList(actorsModel, null,
                 builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 1, 0, AN_HALF, 1.0));

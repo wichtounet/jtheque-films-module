@@ -17,19 +17,19 @@ package org.jtheque.films.view.impl.frames;
  */
 
 import org.jdesktop.swingx.JXTable;
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
+import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
-import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.ILendingsView;
 import org.jtheque.films.view.impl.editors.DataCellEditor;
 import org.jtheque.films.view.impl.menus.JMenuBarLendings;
 import org.jtheque.films.view.impl.models.table.LendingsTableModel;
-import org.jtheque.primary.services.able.IBorrowersService;
+import org.jtheque.primary.od.able.Person;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.swing.Action;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -48,30 +48,32 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
 
     private LendingsTableModel model;
     private JXTable tableLendings;
-
-    @Resource
-    private IBorrowersService borrowersService;
-
-    @Resource
-    private IFilmsService filmsService;
-
-    private Action lendAction;
-    private Action returnAction;
-    private Action closeAction;
+    
+    private final Action lendAction;
+    private final Action returnAction;
+    private final Action closeAction;
 
     /**
      * Construct a new <code>JFrameLendings</code>.
      *
      * @param parent The parent frame.
+     * @param lendAction The action to lend a film. 
+     * @param returnAction The action to return a film. 
+     * @param closeAction The action to close the view. 
      */
-    public LendingsView(Frame parent) {
+    public LendingsView(Frame parent, Action lendAction, Action returnAction, Action closeAction) {
         super(parent);
+        
+        this.lendAction = lendAction;
+        this.returnAction = returnAction;
+        this.closeAction = closeAction;
+
+        build();
     }
 
     /**
      * Build the view.
      */
-    @PostConstruct
     private void build() {
         setJMenuBar(new JMenuBarLendings());
         setTitleKey("lendings.view.title");
@@ -94,8 +96,8 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
         setTableHeader();
 
         tableLendings = new JXTable(model);
-        tableLendings.getColumn(1).setCellEditor(new DataCellEditor(filmsService));
-        tableLendings.getColumn(2).setCellEditor(new DataCellEditor(borrowersService));
+        tableLendings.getColumn(1).setCellEditor(new DataCellEditor(Managers.getManager(IBeansManager.class).<DataContainer<Person>>getBean("filmsService")));
+        tableLendings.getColumn(2).setCellEditor(new DataCellEditor(Managers.getManager(IBeansManager.class).<DataContainer<Person>>getBean("borrowersService")));
         tableLendings.getTableHeader().setReorderingAllowed(false);
         tableLendings.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tableLendings.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
@@ -154,32 +156,5 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to lend a film.
-     *
-     * @param lendAction The action to lend a film.
-     */
-    public void setLendAction(Action lendAction) {
-        this.lendAction = lendAction;
-    }
-
-    /**
-     * Set the action to return a film.
-     *
-     * @param returnAction The action to return a film.
-     */
-    public void setReturnAction(Action returnAction) {
-        this.returnAction = returnAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

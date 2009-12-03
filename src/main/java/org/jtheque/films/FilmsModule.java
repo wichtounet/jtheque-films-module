@@ -76,6 +76,7 @@ import org.jtheque.primary.view.impl.choice.ChoiceAction;
 import org.jtheque.primary.view.impl.choice.ChoiceActionFactory;
 import org.jtheque.primary.view.impl.sort.Sorter;
 import org.jtheque.primary.view.impl.sort.SorterFactory;
+import org.jtheque.utils.collections.ArrayUtils;
 import org.jtheque.utils.collections.CollectionUtils;
 
 /**
@@ -131,10 +132,10 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
     public FilmsModule(ChoiceAction[] choiceActions, TabComponent[] tabComponents, Sorter[] sorters, ConfigTabComponent[] configTabComponents) {
         super();
 
-        this.choiceActions = choiceActions;
-        this.tabComponents = tabComponents;
-        this.sorters = sorters;
-        this.configTabComponents = configTabComponents;
+        this.choiceActions = ArrayUtils.copyOf(choiceActions);
+        this.tabComponents = ArrayUtils.copyOf(tabComponents);
+        this.sorters = ArrayUtils.copyOf(sorters);
+        this.configTabComponents = ArrayUtils.copyOf(configTabComponents);
     }
 
     /**

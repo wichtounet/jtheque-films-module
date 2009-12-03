@@ -45,23 +45,22 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
     private JCheckBox boxImage;
     private JCheckBox boxResume;
 
-    private Action closeAction;
-    private Action validateAction;
+    private final Action closeAction;
+    private final Action validateAction;
 
     /**
      * Construct a new JFrameChoiceFields.
      *
      * @param parent The parent frame.
+     * @param closeAction The action to close the view. 
+     * @param validateAction The action to validate the view. 
      */
-    public ChoiceFieldsView(Frame parent) {
+    public ChoiceFieldsView(Frame parent, Action closeAction, Action validateAction) {
         super(parent);
-    }
-
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+        
+        this.closeAction = closeAction;
+        this.validateAction = validateAction;
+        
         setContentPane(buildContentPane());
         pack();
 
@@ -126,23 +125,5 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

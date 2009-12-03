@@ -41,8 +41,7 @@ import java.util.Collection;
  */
 public final class LendFilmView extends SwingDialogView implements ILendFilmView {
     private static final long serialVersionUID = 2370792054850689428L;
-
-    /* Graphics components */
+    
     private DataContainerCachedComboBoxModel<Film> modelFilms;
     private DataContainerCachedComboBoxModel<Person> modelBorrowers;
 

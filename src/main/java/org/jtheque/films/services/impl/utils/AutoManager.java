@@ -35,7 +35,7 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class AutoManager {
-    private static AutoManager instance;
+    private static final AutoManager INSTANCE = new AutoManager();
 
     @Resource
     private IFilmsService filmsService;
@@ -58,11 +58,7 @@ public final class AutoManager {
      * @return The unique instance of the class.
      */
     public static AutoManager getInstance() {
-        if (instance == null) {
-            instance = new AutoManager();
-        }
-
-        return instance;
+        return INSTANCE;
     }
 
     /**

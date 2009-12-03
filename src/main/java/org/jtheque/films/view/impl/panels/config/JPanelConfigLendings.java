@@ -107,22 +107,22 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
      * Fill all the fields with the value of the current configuration.
      */
     private void fillAllFields() {
-        boxControlLendings.setSelected(filmsModule.getConfiguration().mustControlLendingsOnStartup());
-        boxSendMail.setSelected(filmsModule.getConfiguration().areMailSendAutomatically());
-        fieldDays.setText(Integer.toString(filmsModule.getConfiguration().getTimeBeforeAutomaticSend()));
-        fieldMessage.setText(filmsModule.getConfiguration().getAutomaticMail());
-        boxAvertWithDialog.setSelected(filmsModule.getConfiguration().alertWithDialog());
-        boxAvertWithMail.setSelected(filmsModule.getConfiguration().alertWithMail());
+        boxControlLendings.setSelected(getConfiguration().mustControlLendingsOnStartup());
+        boxSendMail.setSelected(getConfiguration().areMailSendAutomatically());
+        fieldDays.setText(Integer.toString(getConfiguration().getTimeBeforeAutomaticSend()));
+        fieldMessage.setText(getConfiguration().getAutomaticMail());
+        boxAvertWithDialog.setSelected(getConfiguration().alertWithDialog());
+        boxAvertWithMail.setSelected(getConfiguration().alertWithMail());
     }
 
     @Override
     public void apply() {
-        filmsModule.getConfiguration().setMustControlLendingsOnStartup(boxControlLendings.isSelected());
-        filmsModule.getConfiguration().setMailSendAutomatically(boxSendMail.isSelected());
-        filmsModule.getConfiguration().setTimeBeforeAutomaticSend(Integer.parseInt(fieldDays.getText()));
-        filmsModule.getConfiguration().setAutomaticMail(fieldMessage.getText());
-        filmsModule.getConfiguration().setAlertWithDialog(boxAvertWithDialog.isSelected());
-        filmsModule.getConfiguration().setAlertWithMail(boxAvertWithMail.isSelected());
+        getConfig().setMustControlLendingsOnStartup(boxControlLendings.isSelected());
+        getConfig().setMailSendAutomatically(boxSendMail.isSelected());
+        getConfig().setTimeBeforeAutomaticSend(Integer.parseInt(fieldDays.getText()));
+        getConfig().setAutomaticMail(fieldMessage.getText());
+        getConfig().setAlertWithDialog(boxAvertWithDialog.isSelected());
+        getConfig().setAlertWithMail(boxAvertWithMail.isSelected());
     }
 
     @Override
@@ -180,5 +180,14 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
     public void setMailEnabled(boolean selected) {
         fieldDays.setEnabled(selected);
         fieldMessage.setEnabled(selected);
+    }
+
+    /**
+     * Return the configuration of the films module. 
+     * 
+     * @return The configuration of the films module. 
+     */
+    private static Configuration getConfig(){
+        return Managers.getManager(IBeansManager.class).<IFilmsModule>getBean("filmsModule").getConfiguration();
     }
 }

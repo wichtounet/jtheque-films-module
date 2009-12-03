@@ -47,7 +47,7 @@ public final class JTFFile implements JTNotZippedFile {
 
     private boolean correctSeparators = true;
 
-    private AbstractJTFileHeader header = new JTFFileHeader();
+    private final AbstractJTFileHeader header = new JTFFileHeader();
 
     @Override
     public AbstractJTFileHeader getHeader() {
@@ -193,14 +193,5 @@ public final class JTFFile implements JTNotZippedFile {
      */
     public void setType(Type type) {
         this.type = type;
-    }
-
-    /**
-     * Set the header.
-     *
-     * @param header The header.
-     */
-    private void setHeader(AbstractJTFileHeader header) {
-        this.header = header;
     }
 }

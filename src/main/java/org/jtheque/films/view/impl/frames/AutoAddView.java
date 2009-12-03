@@ -17,7 +17,6 @@ package org.jtheque.films.view.impl.frames;
  */
 
 import org.jtheque.core.managers.error.JThequeError;
-import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
@@ -56,7 +55,7 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
 
     private int phase = PHASE_1;
 
-    private final JThequeSimpleAction chooseSiteAction;
+    private final Action chooseSiteAction;
     private final Action closeViewAction;
     private final Action displayInfosAboutSiteAction;
     private final Action validateViewAction;
@@ -70,7 +69,7 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
      * @param displayInfosAboutSiteAction The action to display informations about site.
      * @param validateViewAction          The action to validate the view.
      */
-    public AutoAddView(Frame parent, JThequeSimpleAction chooseSiteAction, Action closeViewAction, Action displayInfosAboutSiteAction,
+    public AutoAddView(Frame parent, Action chooseSiteAction, Action closeViewAction, Action displayInfosAboutSiteAction,
                        Action validateViewAction) {
         super(parent);
 

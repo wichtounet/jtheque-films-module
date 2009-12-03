@@ -81,12 +81,13 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
         this.addTitleAction = addTitleAction;
         this.validateAction = validateAction;
         this.cancelAction = cancelAction;
+        
+        build();
     }
 
     /**
      * Init the view.
      */
-    @PostConstruct
     private void build() {
         setTitleKey("auto.import.view.title");
         setContentPane(buildContentPane());
