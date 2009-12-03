@@ -17,6 +17,7 @@ package org.jtheque.films.view.impl.panels.config;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
@@ -24,6 +25,7 @@ import org.jtheque.core.utils.ui.Borders;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
+import org.jtheque.films.services.impl.utils.config.Configuration;
 import org.jtheque.films.view.impl.actions.config.AcCheckLendings;
 import org.jtheque.films.view.impl.actions.config.AcCheckMail;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -107,12 +109,12 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
      * Fill all the fields with the value of the current configuration.
      */
     private void fillAllFields() {
-        boxControlLendings.setSelected(getConfiguration().mustControlLendingsOnStartup());
-        boxSendMail.setSelected(getConfiguration().areMailSendAutomatically());
-        fieldDays.setText(Integer.toString(getConfiguration().getTimeBeforeAutomaticSend()));
-        fieldMessage.setText(getConfiguration().getAutomaticMail());
-        boxAvertWithDialog.setSelected(getConfiguration().alertWithDialog());
-        boxAvertWithMail.setSelected(getConfiguration().alertWithMail());
+        boxControlLendings.setSelected(getConfig().mustControlLendingsOnStartup());
+        boxSendMail.setSelected(getConfig().areMailSendAutomatically());
+        fieldDays.setText(Integer.toString(getConfig().getTimeBeforeAutomaticSend()));
+        fieldMessage.setText(getConfig().getAutomaticMail());
+        boxAvertWithDialog.setSelected(getConfig().alertWithDialog());
+        boxAvertWithMail.setSelected(getConfig().alertWithMail());
     }
 
     @Override
