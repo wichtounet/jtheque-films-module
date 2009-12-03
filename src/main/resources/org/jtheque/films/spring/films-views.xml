@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jtheque="http://www.jtheque.com/schema/jtheque"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.jtheque.com/schema/jtheque
+            http://www.jtheque.com/schema/jtheque/jtheque.xsd"
+       default-lazy-init="true">
+
+    <!--  Proxy -->
+
+    <jtheque:proxy id="autoAddFilmView" type="org.jtheque.films.view.impl.frames.AutoAddView"/>
+    <jtheque:proxy id="autoImportView" type="org.jtheque.films.view.impl.frames.AutoImportVIew"/>
+    <jtheque:proxy id="choiceFieldsView" type="org.jtheque.films.view.impl.frames.ChoiceFieldsView"/>
+    <jtheque:proxy id="coverView" type="org.jtheque.films.view.impl.frames.CoverView"/>
+    <jtheque:proxy id="exportView" type="org.jtheque.films.view.impl.frames.ExportView"/>
+    <jtheque:proxy id="filmographyView" type="org.jtheque.films.view.impl.frames.FilmographyView"/>
+    <jtheque:proxy id="importView" type="org.jtheque.films.view.impl.frames.ImportView"/>
+    <jtheque:proxy id="lendFilmView" type="org.jtheque.films.view.impl.frames.LendFilmView"/>
+    <jtheque:proxy id="publicationView" type="org.jtheque.films.view.impl.frames.PublicationView"/>
+    <jtheque:proxy id="searchView" type="org.jtheque.films.view.impl.frames.SearchView"/>
+    <jtheque:proxy id="sitesView" type="org.jtheque.films.view.impl.frames.SitesView"/>
+    <jtheque:proxy id="videoFileView" type="org.jtheque.films.view.impl.frames.VideoFileView"/>
+    <jtheque:proxy id="videoView" type="org.jtheque.films.view.impl.frames.VideoView"/>
+    <jtheque:proxy id="lendingsView" type="org.jtheque.films.view.impl.frames.LendingsView"/>
+
+    <jtheque:proxy id="actorView" type="org.jtheque.films.view.impl.panels.ActorView"/>
+    <jtheque:proxy id="filmView" type="org.jtheque.films.view.impl.panels.FilmView"/>
+    <jtheque:proxy id="realizerView" type="org.jtheque.films.view.impl.panels.RealizerView"/>
+
+    <jtheque:proxy id="configAutoView" type="org.jtheque.films.view.impl.panels.config.JPanelConfigAuto"/>
+    <jtheque:proxy id="configLendingsView" type="org.jtheque.films.view.impl.panels.config.JPanelConfigLendings"/>
+
+    <!-- Real views -->
+
+    <bean id="_autoAddFilmView" class="org.jtheque.films.view.impl.frames.AutoAddView">
+        <constructor-arg ref="_mainView"/>
+        <constructor-arg ref="chooseSiteAction"/>
+        <constructor-arg ref="closeAutoAddView"/>
+        <constructor-arg ref="displayInfosAboutSiteAction"/>
+        <constructor-arg ref="validateAutoAddViewAction"/>
+        <property name="model" ref="autoAddModel"/>
+    </bean>
+
+    <bean id="_autoImportView" class="org.jtheque.films.view.impl.frames.AutoImportVIew">
+        <constructor-arg ref="_mainView"/>
+        <constructor-arg ref="searchTitlesAction"/>
+        <constructor-arg ref="deleteTitleAction"/>
+        <constructor-arg ref="addTitleAction"/>
+        <constructor-arg ref="validateAutoImportViewAction"/>
+        <constructor-arg ref="cancelAutoImportViewAction"/>
+        <property name="model" ref="autoImportModel"/>
+    </bean>
+
+    <bean id="_choiceFieldsView" class="org.jtheque.films.view.impl.frames.ChoiceFieldsView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeChoiceFieldsViewAction"/>
+        <property name="validateAction" ref="validateChoiceFieldsViewAction"/>
+    </bean>
+
+    <bean id="_coverView" class="org.jtheque.films.view.impl.frames.CoverView">
+        <constructor-arg ref="_mainView"/>
+        <constructor-arg ref="updateCoverAction"/>
+        <constructor-arg ref="closeCoverViewAction"/>
+        <constructor-arg ref="printCoverAction"/>
+        <constructor-arg ref="exportCoverAction"/>
+    </bean>
+
+    <bean id="_exportView" class="org.jtheque.films.view.impl.frames.ExportView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeExportViewAction"/>
+        <property name="validateAction" ref="validateExportViewAction"/>
+    </bean>
+
+    <bean id="_filmographyView" class="org.jtheque.films.view.impl.frames.FilmographyView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeFilmographyViewAction"/>
+    </bean>
+
+    <bean id="_importView" class="org.jtheque.films.view.impl.frames.ImportView">
+        <constructor-arg ref="_mainView"/>
+        <constructor-arg ref="validateImportViewAction"/>
+        <constructor-arg ref="closeImportViewAction"/>
+    </bean>
+
+    <bean id="_lendFilmView" class="org.jtheque.films.view.impl.frames.LendFilmView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeLendFilmViewAction"/>
+        <property name="validateAction" ref="validateLendFilmViewAction"/>
+        <property name="newBorrowerAction" ref="newBorrowerAction"/>
+    </bean>
+
+    <bean id="_lendingsView" class="org.jtheque.films.view.impl.frames.LendingsView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeLendingsViewAction"/>
+        <property name="lendAction" ref="lendFilmAction"/>
+        <property name="returnAction" ref="returnCurrentFilmAction"/>
+    </bean>
+
+    <bean id="_publicationView" class="org.jtheque.films.view.impl.frames.PublicationView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closePublicationViewAction"/>
+        <property name="validateAction" ref="validatePublicationViewAction"/>
+    </bean>
+
+    <bean id="_searchView" class="org.jtheque.films.view.impl.frames.SearchView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeSearchViewAction"/>
+        <property name="validateAction" ref="validateSearchViewAction"/>
+        <property name="actorSearchPanel" ref="actorSearchPanel"/>
+        <property name="realizerSearchPanel" ref="realizerSearchPanel"/>
+        <property name="filmSearchPanel" ref="filmSearchPanel"/>
+    </bean>
+
+    <bean id="_sitesView" class="org.jtheque.films.view.impl.frames.SitesView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeSitesViewAction"/>
+    </bean>
+
+    <bean id="_videoFileView" class="org.jtheque.films.view.impl.frames.VideoFileView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeVideoFileViewAction"/>
+        <property name="validateAction" ref="validateVideoFileViewAction"/>
+    </bean>
+
+    <bean id="_videoView" class="org.jtheque.films.view.impl.frames.VideoView">
+        <constructor-arg ref="_mainView"/>
+        <property name="closeAction" ref="closeVideoViewAction"/>
+        <property name="newAction" ref="newVideoFileAction"/>
+        <property name="openAction" ref="openVideoFileAction"/>
+        <property name="refreshAction" ref="refreshVideoViewAction"/>
+    </bean>
+
+    <!-- Panels -->
+
+    <bean id="_actorView" class="org.jtheque.films.view.impl.panels.ActorView">
+        <constructor-arg ref="newCountryAction"/>
+        <constructor-arg ref="sortActorsByNoteAction"/>
+        <constructor-arg ref="sortActorsByCountryAction"/>
+        <constructor-arg ref="actorToolBar"/>
+        <property name="model" ref="actorModel"/>
+    </bean>
+
+    <bean id="_filmView" class="org.jtheque.films.view.impl.panels.FilmView">
+        <property name="model" ref="filmsModel"/>
+        <property name="newTypeAction" ref="newTypeAction"/>
+        <property name="sortByKindAction" ref="sortFilmsByKindAction"/>
+        <property name="sortByRealizerAction" ref="sortFilmsByRealizerAction"/>
+        <property name="sortByTypeAction" ref="sortFilmsByTypeAction"/>
+        <property name="sortByYearAction" ref="sortFilmsByYearAction"/>
+        <property name="panelActors" ref="filmActorsView"/>
+        <property name="panelInfos" ref="filmInfosView"/>
+        <property name="panelKinds" ref="filmKindsView"/>
+        <property name="panelOthers" ref="filmOthersView"/>
+        <property name="panelPerso" ref="filmPersoView"/>
+        <property name="toolBar" ref="filmToolBar"/>
+    </bean>
+
+    <bean id="filmActorsView" class="org.jtheque.films.view.impl.panels.JPanelInfosActors">
+        <constructor-arg ref="removeActorFromList"/>
+        <constructor-arg ref="addActorToList"/>
+    </bean>
+
+    <bean id="filmInfosView" class="org.jtheque.films.view.impl.panels.JPanelInfosFilm">
+        <property name="newSagaAction" ref="newSagaAction"/>
+        <property name="newLanguageAction" ref="newLanguageAction"/>
+    </bean>
+
+    <bean id="filmKindsView" class="org.jtheque.films.view.impl.panels.JPanelInfosKinds">
+        <property name="newAction" ref="newKindAction"/>
+        <property name="addAction" ref="addKindToList"/>
+        <property name="removeAction" ref="removeKindFromList"/>
+    </bean>
+
+    <bean id="filmOthersView" class="org.jtheque.films.view.impl.panels.JPanelInfosOthers"/>
+    <bean id="filmPersoView" class="org.jtheque.films.view.impl.panels.JPanelInfosPerso"/>
+
+    <bean id="_realizerView" class="org.jtheque.films.view.impl.panels.RealizerView">
+        <property name="model" ref="realizerModel"/>
+        <constructor-arg ref="newCountryAction"/>
+        <constructor-arg ref="sortRealizersByNoteAction"/>
+        <constructor-arg ref="sortRealizersByCountryAction"/>
+        <constructor-arg ref="realizerToolBar"/>
+    </bean>
+
+    <!-- Toolbars -->
+
+    <bean id="actorToolBar" class="org.jtheque.films.view.impl.toolbars.JPanelActorToolBar">
+        <property name="saveAction" ref="saveActorAction"/>
+        <property name="cancelAction" ref="cancelActorAction"/>
+        <property name="deleteAction" ref="deleteActorAction"/>
+        <property name="newAction" ref="newActorAction"/>
+        <property name="editAction" ref="editActorAction"/>
+        <property name="displayAction" ref="displayActorAction"/>
+    </bean>
+
+    <bean id="realizerToolBar" class="org.jtheque.films.view.impl.toolbars.JPanelRealizerToolBar">
+        <property name="saveAction" ref="saveRealizerAction"/>
+        <property name="cancelAction" ref="cancelRealizerAction"/>
+        <property name="deleteAction" ref="deleteRealizerAction"/>
+        <property name="newAction" ref="newRealizerAction"/>
+        <property name="editAction" ref="editRealizerAction"/>
+    </bean>
+
+    <bean id="filmToolBar" class="org.jtheque.films.view.impl.toolbars.JPanelFilmToolBar">
+        <property name="saveAction" ref="saveFilmAction"/>
+        <property name="cancelAction" ref="cancelFilmAction"/>
+        <property name="deleteAction" ref="deleteFilmAction"/>
+        <property name="newAction" ref="newFilmToolbarAction"/>
+        <property name="autoAddAction" ref="autoAddFilmAction"/>
+        <property name="manualEditAction" ref="manualEditFilmAction"/>
+        <property name="autoEditAction" ref="autoEditFilmAction"/>
+        <property name="printAction" ref="printFilmAction"/>
+        <property name="sendByMailAction" ref="sendFilmByMailAction"/>
+        <property name="exportAction" ref="exportFilmAction"/>
+    </bean>
+
+    <!-- Search Panels -->
+
+    <bean id="actorSearchPanel" class="org.jtheque.films.view.impl.panels.search.JPanelActorSearch"/>
+    <bean id="filmSearchPanel" class="org.jtheque.films.view.impl.panels.search.JPanelFilmSearch"/>
+    <bean id="realizerSearchPanel" class="org.jtheque.films.view.impl.panels.search.JPanelRealizerSearch"/>
+
+    <!-- Config Panels -->
+
+    <bean id="_configAutoView" class="org.jtheque.films.view.impl.panels.config.JPanelConfigAuto"/>
+    <bean id="_configLendingsView" class="org.jtheque.films.view.impl.panels.config.JPanelConfigLendings"/>
+
+    <!-- Models -->
+
+    <bean id="actorModel" class="org.jtheque.films.view.impl.models.ActorsModel"/>
+    <bean id="autoAddModel" class="org.jtheque.films.view.impl.models.AutoAddModel"/>
+    <bean id="autoImportModel" class="org.jtheque.films.view.impl.models.AutoImportModel"/>
+    <bean id="filmographyModel" class="org.jtheque.films.view.impl.models.FilmographyModel"/>
+    <bean id="filmsModel" class="org.jtheque.films.view.impl.models.FilmsModel"/>
+    <bean id="realizerModel" class="org.jtheque.films.view.impl.models.RealizersModel"/>
+
+</beans>

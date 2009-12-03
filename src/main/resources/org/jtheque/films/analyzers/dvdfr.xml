@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getters>
+    <pages>
+        <films>
+            <url>http://www.dvdfr.com/dvd/</url>
+        </films>
+        <results>
+            <url><![CDATA[http://www.dvdfr.com/search/multisearch.php?multiname=]]></url>
+            <transformers>
+                <appender><![CDATA[&x=0&y=0&searchTitle=1&searchPeople=1&searchmode=AND]]></appender>
+                <replacer>
+                    <from/>
+                    <to>+</to>
+                </replacer>
+            </transformers>
+        </results>
+    </pages>
+
+    <getter field="films" multiline="true">
+        <startcondition>
+            <contains><![CDATA[<div class="listeDeDVD">]]></contains>
+        </startcondition>
+        <stopcondition>
+            <contains><![CDATA[<div class="letterFilter">]]></contains>
+        </stopcondition>
+        <getcondition>
+            <contains><![CDATA[<h3><a href="http://www.dvdfr.com/dvd/]]></contains>
+        </getcondition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[/dvd/]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <prepender><![CDATA[%%%]]></prepender>
+            <replacer>
+                <from><![CDATA[">]]></from>
+                <to><![CDATA[---]]></to>
+            </replacer>
+            <replacer>
+                <from><![CDATA[&amp;]]></from>
+                <to><![CDATA[&]]></to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="image">
+        <condition>
+            <contains><![CDATA[<div id="cover">]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[src="]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[" width="]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="kind">
+        <condition>
+            <contains><![CDATA[<div class="separator mb">]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+        </operations>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html">]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="date">
+        <condition>
+            <contains><![CDATA[<div id="infoProgramme">]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+            <nextLine/>
+        </operations>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<p>]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</p>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <last>4</last>
+        </transformers>
+    </getter>
+
+    <getter field="realizer">
+        <condition>
+            <contains><![CDATA[<dt>RÃ©alisation</dt>]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+        </operations>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html">]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</a></dd>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="duration">
+        <condition>
+            <contains><![CDATA[<dt class="duree">DurÃ©e</dt>]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+            <trim/>
+        </operations>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<dd>]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[&nbsp;min.</dd>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="actors" multiline="true">
+        <startcondition>
+            <contains><![CDATA[<dt>Avec&hellip;</dt>]]></contains>
+        </startcondition>
+        <stopcondition>
+            <contains><![CDATA[<dt>ScÃ©nario</dt>]]></contains>
+        </stopcondition>
+        <getcondition>
+            <contains><![CDATA[<dd><a href="http]]></contains>
+        </getcondition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a></dd>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <replacer>
+                <from><![CDATA[">]]></from>
+                <to>%%%</to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="resume">
+        <condition>
+            <contains><![CDATA[<h3>Synopsis</h3>]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+            <nextLine/>
+        </operations>
+        <iterator>
+            <condition>
+                <notcontains><![CDATA[</p>]]></notcontains>
+            </condition>
+            <operations>
+                <appendLine/>
+                <nextLine/>
+            </operations>
+        </iterator>
+    </getter>
+</getters>

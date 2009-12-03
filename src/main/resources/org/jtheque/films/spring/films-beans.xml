@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true">
+
+    <bean id="filmsModule" class="org.jtheque.films.FilmsModule" lazy-init="false">
+        <constructor-arg>
+            <list>
+                <bean class="org.jtheque.films.view.impl.choiceActions.DeleteChoiceAction"/>
+                <bean class="org.jtheque.films.view.impl.choiceActions.ModifyChoiceAction"/>
+                <bean class="org.jtheque.films.view.impl.choiceActions.ReturnChoiceAction"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <ref bean="filmView"/>
+                <ref bean="actorView"/>
+                <ref bean="realizerView"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <bean class="org.jtheque.films.view.impl.sort.NoneSorter">
+                    <constructor-arg ref="actorController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.NoneSorter">
+                    <constructor-arg ref="realizerController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.NoneSorter">
+                    <constructor-arg ref="filmController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByCountrySorter">
+                    <constructor-arg ref="actorController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByCountrySorter">
+                    <constructor-arg ref="realizerController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByNoteSorter">
+                    <constructor-arg ref="actorController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByNoteSorter">
+                    <constructor-arg ref="filmController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByNoteSorter">
+                    <constructor-arg ref="realizerController"/>
+                </bean>
+                <bean class="org.jtheque.films.view.impl.sort.ByKindSorter"/>
+                <bean class="org.jtheque.films.view.impl.sort.ByTypeSorter"/>
+                <bean class="org.jtheque.films.view.impl.sort.ByRealizerSorter"/>
+                <bean class="org.jtheque.films.view.impl.sort.ByYearSorter"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <ref bean="configAutoView"/>
+                <ref bean="configLendingsView"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Daos -->
+
+    <bean id="daoFilms" class="org.jtheque.films.persistence.dao.impl.DaoFilms"/>
+
+    <!-- Controllers -->
+
+    <bean id="actorController" class="org.jtheque.films.controllers.impl.ActorController">
+        <property name="autoAddState">
+            <bean class="org.jtheque.films.controllers.impl.state.actor.AutoAddActorState"/>
+        </property>
+        <property name="modifyState">
+            <bean class="org.jtheque.films.controllers.impl.state.actor.ModifyActorState"/>
+        </property>
+        <property name="newObjectState">
+            <bean class="org.jtheque.films.controllers.impl.state.actor.NewActorState"/>
+        </property>
+        <property name="viewState">
+            <bean class="org.jtheque.films.controllers.impl.state.actor.ViewActorState"/>
+        </property>
+    </bean>
+
+    <bean id="autoAddFilmController" class="org.jtheque.films.controllers.impl.AutoAddController"/>
+    <bean id="autoImportFilmController" class="org.jtheque.films.controllers.impl.AutoImportController"/>
+    <bean id="choiceFieldsController" class="org.jtheque.films.controllers.impl.ChoiceFieldsController"/>
+    <bean id="coverController" class="org.jtheque.films.controllers.impl.CoverController"/>
+    <bean id="exportController" class="org.jtheque.films.controllers.impl.ExportController"/>
+
+    <bean id="filmController" class="org.jtheque.films.controllers.impl.FilmController">
+        <property name="autoAddState">
+            <bean class="org.jtheque.films.controllers.impl.state.film.AutoAddFilmState"/>
+        </property>
+        <property name="modifyState">
+            <bean class="org.jtheque.films.controllers.impl.state.film.ModifyFilmState"/>
+        </property>
+        <property name="newObjectState">
+            <bean class="org.jtheque.films.controllers.impl.state.film.NewFilmState"/>
+        </property>
+        <property name="viewState">
+            <bean class="org.jtheque.films.controllers.impl.state.film.ViewFilmState"/>
+        </property>
+    </bean>
+
+    <bean id="filmographyController" class="org.jtheque.films.controllers.impl.FilmographyController"/>
+    <bean id="importController" class="org.jtheque.films.controllers.impl.ImportController"/>
+    <bean id="filmLendController" class="org.jtheque.films.controllers.impl.LendController"/>
+    <bean id="filmLendingsController" class="org.jtheque.films.controllers.impl.LendingsController"/>
+    <bean id="publicationController" class="org.jtheque.films.controllers.impl.PublicationController"/>
+
+    <bean id="realizerController" class="org.jtheque.films.controllers.impl.RealizerController">
+        <property name="autoAddState">
+            <bean class="org.jtheque.films.controllers.impl.state.realizer.AutoAddRealizerState"/>
+        </property>
+        <property name="modifyState">
+            <bean class="org.jtheque.films.controllers.impl.state.realizer.ModifyRealizerState"/>
+        </property>
+        <property name="newObjectState">
+            <bean class="org.jtheque.films.controllers.impl.state.realizer.NewRealizerState"/>
+        </property>
+        <property name="viewState">
+            <bean class="org.jtheque.films.controllers.impl.state.realizer.ViewRealizerState"/>
+        </property>
+    </bean>
+
+    <bean id="filmSearchController" class="org.jtheque.films.controllers.impl.SearchController"/>
+    <bean id="sitesController" class="org.jtheque.films.controllers.impl.SitesController"/>
+    <bean id="videoController" class="org.jtheque.films.controllers.impl.VideoController"/>
+    <bean id="videoFileController" class="org.jtheque.films.controllers.impl.VideoFileController"/>
+
+    <!-- Services -->
+
+    <bean id="actorService" class="org.jtheque.films.services.impl.ActorService"/>
+    <bean id="autoImportService" class="org.jtheque.films.services.impl.AutoImportService"/>
+    <bean id="autoService" class="org.jtheque.films.services.impl.FilmAutoService"/>
+    <bean id="filmCollectionsService" class="org.jtheque.primary.services.impl.CollectionsService"/>
+    <bean id="coverService" class="org.jtheque.films.services.impl.CoverService"/>
+    <bean id="filmsService" class="org.jtheque.films.services.impl.FilmsService"/>
+    <bean id="filmNotesService" class="org.jtheque.films.services.impl.NotesService"/>
+    <bean id="publicationService" class="org.jtheque.films.services.impl.PublicationService"/>
+    <bean id="realizersService" class="org.jtheque.films.services.impl.RealizersService"/>
+
+    <import resource="films-actions.xml"/>
+    <import resource="films-views.xml"/>
+
+</beans>

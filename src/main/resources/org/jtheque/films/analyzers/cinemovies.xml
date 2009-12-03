@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getters>
+    <pages>
+        <films>
+            <url>http://www.cinemovies.fr/</url>
+        </films>
+        <results>
+            <url>http://www.cinemovies.fr/resultat_recherche.php?cherche=</url>
+            <transformers>
+                <replacer>
+                    <from/>
+                    <to>+</to>
+                </replacer>
+            </transformers>
+        </results>
+    </pages>
+
+    <getter field="films" multiline="true">
+        <startcondition>
+            <starts><![CDATA[<div id=searchcontent>]]></starts>
+        </startcondition>
+        <stopcondition>
+            <starts><![CDATA[</div>]]></starts>
+        </stopcondition>
+        <getcondition>
+            <contains><![CDATA[<a title="Voir la fiche film de ]]></contains>
+        </getcondition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[class="bodyFont5" href="]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <prepender><![CDATA[%%%]]></prepender>
+            <replacer>
+                <from><![CDATA[">]]></from>
+                <to><![CDATA[---]]></to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="date">
+        <condition>
+            <contains><![CDATA[Date(s) de Sortie(s)]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[class='nest'>]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <last>4</last>
+        </transformers>
+    </getter>
+
+    <getter field="duration">
+        <condition>
+            <contains>DurÃ©e :</contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[valign="top">]]></text>
+                    <from><![CDATA[DurÃ©e :]]></from>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</td></tr>]]></text>
+                    <from><![CDATA[DurÃ©e :]]></from>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="image">
+        <condition>
+            <starts><![CDATA[<a class="default-image more" href="fiche_affiches.]]></starts>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<img src="]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[" alt="]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <prepender>http://www.cinemovies.fr/</prepender>
+            <replacer>
+                <from>Paff</from>
+                <to>Gaff</to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="realizer">
+        <condition>
+            <contains><![CDATA[RÃ©alisÃ© par :]]></contains>
+        </condition>
+        <operations>
+            <nextLine/>
+        </operations>
+        <value>
+            <start>
+                <string first="true" last="true">
+                    <text><![CDATA[ class="bodyFont2">]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="kind">
+        <condition>
+            <contains><![CDATA[<a href="search_genre]]></contains>
+        </condition>
+        <conditional>
+            <if>
+                <condition>
+                    <contains><![CDATA[</b></a>,<a href="search]]></contains>
+                </condition>
+                <value>
+                    <start>
+                        <string first="true">
+                            <text><![CDATA[.html" class="arial8black "><b>]]></text>
+                        </string>
+                    </start>
+                    <end>
+                        <string>
+                            <text><![CDATA[</b></a>,<a href="search_]]></text>
+                        </string>
+                    </end>
+                </value>
+            </if>
+            <else>
+                <value>
+                    <start>
+                        <string first="true">
+                            <text><![CDATA[.html" class="bodyFont2">]]></text>
+                        </string>
+                    </start>
+                    <end>
+                        <string>
+                            <text><![CDATA[</a>]]></text>
+                        </string>
+                    </end>
+                </value>
+            </else>
+        </conditional>
+    </getter>
+
+    <getter field="resume">
+        <condition>
+            <contains><![CDATA[<div class=searchban>L'histoire</div>]]></contains>
+        </condition>
+        <iterator>
+            <before>
+                <nextLine/>
+                <append>
+                    <value>
+                        <start>
+                            <string first="true">
+                                <text><![CDATA[<div id="story_fiche">]]></text>
+                            </string>
+                        </start>
+                        <end>
+                            <lineEnd/>
+                        </end>
+                    </value>
+                </append>
+                <nextLine/>
+            </before>
+            <condition>
+                <notcontains><![CDATA[</div>]]></notcontains>
+            </condition>
+            <operations>
+                <appendLine/>
+                <nextLine/>
+            </operations>
+            <after>
+                <append>
+                    <value>
+                        <start>
+                            <absolute>0</absolute>
+                        </start>
+                        <end>
+                            <string>
+                                <text><![CDATA[</div>]]></text>
+                            </string>
+                        </end>
+                    </value>
+                </append>
+            </after>
+        </iterator>
+    </getter>
+
+    <getter field="actors">
+        <condition>
+            <starts><![CDATA[<b>Avec :</b></td>]]></starts>
+        </condition>
+        <iterator>
+            <before>
+                <nextLine/>
+                <trim/>
+                <appendText>%%%</appendText>
+                <append>
+                    <value>
+                        <start>
+                            <string last="true" first="true">
+                                <text><![CDATA[ class="bodyFont2">]]></text>
+                            </string>
+                        </start>
+                        <end>
+                            <string>
+                                <text><![CDATA[</a>]]></text>
+                            </string>
+                        </end>
+                    </value>
+                </append>
+                <nextLine/>
+            </before>
+            <condition>
+                <starts><![CDATA[<a href="perso-]]></starts>
+            </condition>
+            <operations>
+                <appendText>%%%</appendText>
+                <append>
+                    <value>
+                        <start>
+                            <string last="true" first="true">
+                                <text><![CDATA[ class="bodyFont2">]]></text>
+                            </string>
+                        </start>
+                        <end>
+                            <string last="true">
+                                <text><![CDATA[</a>]]></text>
+                            </string>
+                        </end>
+                    </value>
+                </append>
+                <nextLine/>
+            </operations>
+        </iterator>
+    </getter>
+</getters>

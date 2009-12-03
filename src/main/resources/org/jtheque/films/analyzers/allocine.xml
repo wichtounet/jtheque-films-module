@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getters>
+    <pages>
+        <films>
+            <url>http://www.allocine.fr/film/fichefilm_gen_cfilm=</url>
+            <transformers>
+                <appender>.html</appender>
+            </transformers>
+        </films>
+        <actors>
+            <url>http://www.allocine.fr/film/casting_gen_cfilm=</url>
+            <transformers>
+                <appender>.html</appender>
+            </transformers>
+        </actors>
+        <results>
+            <url><![CDATA[http://www.allocine.fr/recherche/?rub=1&motcle=]]></url>
+            <transformers>
+                <replacer>
+                    <from/>
+                    <to>+</to>
+                </replacer>
+            </transformers>
+        </results>
+    </pages>
+
+    <getter field="films">
+        <condition>
+            <contains><![CDATA[<h2 class="SpBlocTitle" >Films <h4>(]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[style="border: 1px solid #808080;" /></a></td><td valign="top">]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</table><script type="text/javascript">]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <splitter>
+                <split><![CDATA[<h4><a href="/film]]></split>
+                <new>%%%</new>
+                <value>
+                    <start>
+                        <string first="true">
+                            <text><![CDATA[fichefilm_gen_cfilm=]]></text>
+                        </string>
+                    </start>
+                    <end>
+                        <string last="true">
+                            <text><![CDATA[</a></h4>]]></text>
+                        </string>
+                    </end>
+                </value>
+            </splitter>
+            <replacer>
+                <from><![CDATA[.html" class="link1">]]></from>
+                <to><![CDATA[---]]></to>
+            </replacer>
+            <deleter><![CDATA[<b>]]></deleter>
+            <deleter><![CDATA[</b>]]></deleter>
+        </transformers>
+    </getter>
+
+    <getter field="date">
+        <condition>
+            <contains><![CDATA[Date de sortie : <b>]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html"  class="link1"> ]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <last>4</last>
+        </transformers>
+    </getter>
+
+    <getter field="duration">
+        <condition>
+            <contains><![CDATA[<h3 class="SpProse">DurÃ©e : ]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text>DurÃ©e :</text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[min.&nbsp;]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <deleter/>
+        </transformers>
+    </getter>
+
+    <getter field="image">
+        <condition>
+            <contains><![CDATA[" class="affichette" />]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<img src="]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[" border="0" alt="]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="kind">
+        <condition>
+            <contains><![CDATA[<h3 class="SpProse">Genre : ]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html" class="link1">]]></text>
+                    <from><![CDATA[Genre : ]]></from>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a>]]></text>
+                    <from><![CDATA[Genre : ]]></from>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="realizer">
+        <condition>
+            <contains><![CDATA[RÃ©alisÃ© par ]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html">]]></text>
+                    <from><![CDATA[RÃ©alisÃ© par <a]]></from>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</a>]]></text>
+                    <from><![CDATA[RÃ©alisÃ© par <a]]></from>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="actors" multiline="true">
+        <startcondition>
+            <contains><![CDATA[font-weight:bold;">Acteurs</h2>]]></contains>
+        </startcondition>
+        <stopcondition>
+            <contains><![CDATA[</table>]]></contains>
+        </stopcondition>
+        <getcondition>
+            <contains><![CDATA[/personne/fichepersonne_gen_cpersonne=]]></contains>
+        </getcondition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[.html" class="link1">]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</a>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="resume">
+        <condition>
+            <starts><![CDATA[<td valign="top" style="padding:10 0 0 0"><div align="justify"><h4>]]></starts>
+        </condition>
+        <conditional>
+            <if>
+                <condition>
+                    <contains><![CDATA[</h4>]]></contains>
+                </condition>
+                <value>
+                    <start>
+                        <string first="true">
+                            <text><![CDATA[<h4>]]></text>
+                        </string>
+                    </start>
+                    <end>
+                        <string>
+                            <text><![CDATA[</h4>]]></text>
+                        </string>
+                    </end>
+                </value>
+            </if>
+            <else>
+                <iterator>
+                    <before>
+                        <append>
+                            <value>
+                                <start>
+                                    <string first="true">
+                                        <text><![CDATA[<h4>]]></text>
+                                    </string>
+                                </start>
+                                <end>
+                                    <lineEnd/>
+                                </end>
+                            </value>
+                        </append>
+                        <nextLine/>
+                    </before>
+                    <condition>
+                        <notcontains><![CDATA[</h4>]]></notcontains>
+                    </condition>
+                    <operations>
+                        <appendLine/>
+                        <nextLine/>
+                    </operations>
+                    <after>
+                        <append>
+                            <value>
+                                <start>
+                                    <absolute>0</absolute>
+                                </start>
+                                <end>
+                                    <string>
+                                        <text><![CDATA[</h4>]]></text>
+                                    </string>
+                                </end>
+                            </value>
+                        </append>
+                    </after>
+                </iterator>
+            </else>
+        </conditional>
+    </getter>
+</getters>

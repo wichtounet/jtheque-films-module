@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="Form001" pageWidth="1000" pageHeight="842" columnWidth="960" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+    <style name="Crosstab Data Text" isDefault="false" hAlign="Center"/>
+    <parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="REPORT_KIND" class="java.lang.String"/>
+    <parameter name="REPORT_TYPE" class="java.lang.String"/>
+    <parameter name="REPORT_REALIZER" class="java.lang.String"/>
+    <parameter name="REPORT_YEAR" class="java.lang.String"/>
+    <parameter name="REPORT_DURATION" class="java.lang.String"/>
+    <parameter name="REPORT_LANGUAGE" class="java.lang.String"/>
+    <parameter name="REPORT_NOTE" class="java.lang.String"/>
+    <parameter name="REPORT_ACTORS" class="java.lang.String"/>
+    <parameter name="REPORT_FILM" class="java.lang.String"/>
+    <field name="title" class="java.lang.String"/>
+    <field name="kinds" class="java.lang.String"/>
+    <field name="type" class="java.lang.String"/>
+    <field name="realizer" class="java.lang.String"/>
+    <field name="year" class="java.lang.String"/>
+    <field name="duration" class="java.lang.String"/>
+    <field name="language" class="java.lang.String"/>
+    <field name="actors" class="java.lang.String"/>
+    <field name="note" class="java.lang.String"/>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="63">
+            <textField>
+                <reportElement x="0" y="10" width="960" height="25"/>
+                <textElement>
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="2" y="39" width="454" height="20"/>
+                <textElement/>
+                <textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band/>
+    </pageHeader>
+    <columnHeader>
+        <band height="28">
+            <textField>
+                <reportElement mode="Transparent" x="152" y="4" width="181" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_ACTORS}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Transparent" x="720" y="4" width="116" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_LANGUAGE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Transparent" x="842" y="4" width="81" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_DURATION}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="499" y="4" width="119" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_REALIZER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Transparent" x="438" y="4" width="53" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_YEAR}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="623" y="4" width="89" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_TYPE}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="338" y="4" width="92" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_KIND}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="0" y="24" width="1000" height="2"/>
+            </line>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="23">
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="3" width="146" height="18"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="338" y="3" width="92" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{kinds}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="623" y="3" width="89" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{type}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="499" y="3" width="119" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{realizer}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="438" y="3" width="53" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{year}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="842" y="3" width="81" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{duration}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="720" y="3" width="116" height="18"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{language}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true" pattern="">
+                <reportElement x="152" y="3" width="181" height="18"/>
+                <textElement verticalAlignment="Top"/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{actors}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="-24" width="146" height="18"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_FILM}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band/>
+    </columnFooter>
+    <pageFooter>
+        <band/>
+    </pageFooter>
+    <summary>
+        <band/>
+    </summary>
+</jasperReport>

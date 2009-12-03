@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getters>
+    <pages>
+        <films>
+            <url>http://www.moviecovers.com/film/titre_</url>
+        </films>
+        <results>
+            <url><![CDATA[http://www.moviecovers.com/multicrit.html?titre=]]></url>
+            <transformers>
+                <replacer>
+                    <from/>
+                    <to>+</to>
+                </replacer>
+                <appender><![CDATA[&slow=1&listes=1]]></appender>
+            </transformers>
+        </results>
+    </pages>
+
+    <getter field="films" multiline="true">
+        <startcondition>
+            <contains><![CDATA[<BR><TABLE border=0 cellpadding=0 cellspacing=0 width="100%">]]></contains>
+        </startcondition>
+        <stopcondition>
+            <contains><![CDATA[</TABLE>]]></contains>
+        </stopcondition>
+        <getcondition>
+            <contains><![CDATA[<LI><A href="]]></contains>
+        </getcondition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA["/film/titre_"]]></text>
+                </string>
+            </start>
+            <end>
+                <string last="true">
+                    <text><![CDATA[</A>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <prepender><![CDATA[%%%]]></prepender>
+            <replacer>
+                <from><![CDATA[">]]></from>
+                <to><![CDATA[---]]></to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="image">
+        <condition>
+            <contains><![CDATA[hspace=20 vspace=4 src="]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[hspace=20 vspace=4 src="]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA["></A>]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <replacer>
+                <from>http://www.moviecovers.com/getjpg.html</from>
+                <to>http://data.moviecovers.com/DATA/zipcache</to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="date">
+        <condition>
+            <contains><![CDATA[<A href="/multicrit.html?anneemin=]]></contains>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<A href="/multicrit.html?anneemin=]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[&anneemax]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="realizer">
+        <condition>
+            <starts><![CDATA[<A href="/multicrit.html?real=]]></starts>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[&slow=0&int=1">]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[</A></TD></TR>]]></text>
+                </string>
+            </end>
+        </value>
+    </getter>
+
+    <getter field="duration">
+        <condition>
+            <starts><![CDATA[<TR><TH align="right" valign="top">Dur&eacute;e</TH>]]></starts>
+        </condition>
+        <operations>
+            <nextLine/>
+            <nextLine/>
+        </operations>
+        <value>
+            <start>
+                <absolute>0</absolute>
+            </start>
+            <end>
+                <lineEnd/>
+            </end>
+        </value>
+        <transformers>
+            <replacer>
+                <from>H</from>
+                <to>h</to>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="kind">
+        <condition>
+            <starts><![CDATA[<A href="/multicrit.html?genre=]]></starts>
+        </condition>
+        <value>
+            <start>
+                <string first="true">
+                    <text><![CDATA[<A href="/multicrit.html?genre=]]></text>
+                </string>
+            </start>
+            <end>
+                <string>
+                    <text><![CDATA[&slow=0&int=1">]]></text>
+                </string>
+            </end>
+        </value>
+        <transformers>
+            <replacer>
+                <from>%20</from>
+                <to/>
+            </replacer>
+        </transformers>
+    </getter>
+
+    <getter field="resume" disabled="true"/>
+
+    <getter field="actors">
+        <condition>
+            <starts><![CDATA[<TR><TH align="right" valign="top">Acteurs principaux</TH>]]></starts>
+        </condition>
+        <operations>
+            <nextLine/>
+            <nextLine/>
+            <delete><![CDATA[/A></TD></TR>]]></delete>
+        </operations>
+        <value>
+            <start>
+                <absolute>0</absolute>
+            </start>
+            <end>
+                <lineEnd/>
+            </end>
+        </value>
+        <transformers>
+            <splitter>
+                <split><![CDATA[/A>, <A ]]></split>
+                <new>%%%</new>
+                <value>
+                    <start>
+                        <string first="true">
+                            <text><![CDATA[&slow=0&int=1">]]></text>
+                        </string>
+                    </start>
+                    <end>
+                        <string last="true">
+                            <text><![CDATA[<]]></text>
+                        </string>
+                    </end>
+                </value>
+            </splitter>
+        </transformers>
+    </getter>
+</getters>
