@@ -2,6 +2,12 @@ Versions
 
     Ce document présente les différentes versions de JTheque Films To Buy Module. 
 
+* 1.4.1 01.12.2009 Passage à JTheque Core 2.0.2
+
+    * Passage à JTheque Core 2.0.2
+    * Organisation des dossiers Maven 2
+    * Gros lifting du code
+
 * 1.4 26.09.2009 Passage à JTheque Core 2.0, Maven 2
 
     * Passage à JTheque Core 2.0

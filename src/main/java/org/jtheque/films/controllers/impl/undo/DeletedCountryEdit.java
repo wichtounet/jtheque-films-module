@@ -24,8 +24,6 @@ import org.jtheque.primary.services.able.ICountriesService;
 
 import javax.annotation.Resource;
 import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 
 /**
  * An edit for a deletion of country.
@@ -54,14 +52,14 @@ public final class DeletedCountryEdit extends AbstractUndoableEdit {
     }
 
     @Override
-    public void undo() throws CannotUndoException {
+    public void undo() {
         super.undo();
 
         countriesService.create(country);
     }
 
     @Override
-    public void redo() throws CannotRedoException {
+    public void redo() {
         super.redo();
 
         countriesService.delete(country);

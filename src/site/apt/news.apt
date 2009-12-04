@@ -1,6 +1,11 @@
 News
 
-* 25.09.2009  Nouveau site
+* 04.12.2009 JTheque Films Module 1.4.1
+
+    Je viens de publier JTheque Films Module 1.4.1. Cette nouvelle version utilise maintenant JTheque Core 2.0.2 et
+    suit l'organisation des dossiers Maven 2. En plus de cela, elle a subi un lifting au niveau du code. 
+
+* 25.09.2009 Nouveau site
 
     Je suis heureux de vous annoncer la mise en place d'un nouveau site pour JTheque Films Module. Ce nouveau 
     site est maintenant géré avec Maven 2. Cela m'évite beaucoup de travail et fournit une architecture

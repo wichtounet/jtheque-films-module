@@ -1,10 +1,28 @@
-Download JTheque Films To Buy Module 1.4
+Download JTheque Films To Buy Module 1.4.1
 
    JTheque Films To Buy Module is distributed as a Jar Archive, the sources are distributed in several
    formats for your convenience. 
 
-   JTheque Films To Buy Module 1.4 is distributed under 
+   JTheque Films To Buy Module 1.4.1 is distributed under 
    {{{http://www.gnu.org/copyleft/gpl.html} GNU General Public License, version 3}}.
+
+*-------------------------+---------+----------------+-----------------+
+|                         |  Lien   | Checksum (MD5) | Checksum (SHA1) |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.md5} jtheque-films-module-1.4.1.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1.jar.sha1}} | 
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2} jtheque-films-module-1.4.1-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.md5} jtheque-films-module-1.4.1-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.sha1} jtheque-films-module-1.4.1-src.tar.bz2.sha1}} | 
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz} jtheque-films-module-1.4.1-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.md5} jtheque-films-module-1.4.1-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.sha1} jtheque-films-module-1.4.1-src.tar.gz.sha1}} | 
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip} jtheque-films-module-1.4.1-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip.md5} jtheque-films-module-1.4.1-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1-src.zip.sha1}} | 
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.md5} jtheque-films-module-1.4.1-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.sha1} jtheque-films-module-1.4.1-javadoc.jar.sha1}} | 
+*-------------------------+---------+----------------+-----------------+
+| Release Notes           | {{{versions.html} 1.4.1}} | | |
+*-------------------------+---------+----------------+-----------------+
+
+* {JTheque Films Module Module 1.4}
 
 *-------------------------+---------+----------------+-----------------+
 |                         |  Lien   | Checksum (MD5) | Checksum (SHA1) |

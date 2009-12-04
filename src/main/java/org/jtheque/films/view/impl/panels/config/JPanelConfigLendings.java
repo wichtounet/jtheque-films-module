@@ -31,7 +31,6 @@ import org.jtheque.films.view.impl.actions.config.AcCheckMail;
 import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -52,9 +51,6 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
     private JTextArea fieldMessage;
     private JCheckBox boxAvertWithDialog;
     private JCheckBox boxAvertWithMail;
-
-    @Resource
-    private IFilmsModule filmsModule;
 
     /**
      * Init the panel.
@@ -185,11 +181,11 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
     }
 
     /**
-     * Return the configuration of the films module. 
-     * 
-     * @return The configuration of the films module. 
+     * Return the configuration of the films module.
+     *
+     * @return The configuration of the films module.
      */
-    private static Configuration getConfig(){
+    private static Configuration getConfig() {
         return Managers.getManager(IBeansManager.class).<IFilmsModule>getBean("filmsModule").getConfiguration();
     }
 }

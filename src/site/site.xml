@@ -27,7 +27,7 @@
         </menu>
 
         <menu name="Obtenir JTheque Films Module">
-            <item name="TÃ©lÃ©chargement" href="download.html"/>
+            <item name="Téléchargement" href="download.html"/>
             <item name="Versions" href="versions.html"/>
         </menu>
 

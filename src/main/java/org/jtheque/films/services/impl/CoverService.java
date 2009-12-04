@@ -39,6 +39,7 @@ import org.jtheque.films.services.impl.utils.cover.Format;
 import org.jtheque.films.services.impl.utils.file.exports.datasources.FilmsDatasource;
 import org.jtheque.films.services.impl.utils.file.jt.FileFilterFactory;
 import org.jtheque.films.utils.Constants;
+import org.jtheque.utils.collections.ArrayUtils;
 
 import javax.print.attribute.AttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -80,7 +81,7 @@ public final class CoverService implements ICoverService {
 
     @Override
     public Format[] getFormats() {
-        return formats;
+        return ArrayUtils.copyOf(formats);
     }
 
     @Override

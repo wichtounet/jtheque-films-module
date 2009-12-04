@@ -27,7 +27,6 @@ import org.jtheque.films.view.able.IAutoImportView;
 import org.jtheque.films.view.impl.models.able.IAutoImportFilm;
 import org.jtheque.films.view.impl.models.combo.SitesComboBoxModel;
 
-import javax.annotation.PostConstruct;
 import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -81,7 +80,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
         this.addTitleAction = addTitleAction;
         this.validateAction = validateAction;
         this.cancelAction = cancelAction;
-        
+
         build();
     }
 

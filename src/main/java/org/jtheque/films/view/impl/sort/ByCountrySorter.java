@@ -26,7 +26,6 @@ import org.jtheque.primary.view.impl.models.tree.JThequeTreeModel;
 import org.jtheque.primary.view.impl.models.tree.TreeElement;
 import org.jtheque.primary.view.impl.sort.Sorter;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,9 +35,6 @@ import java.util.Map;
  * @author Baptiste Wicht
  */
 public final class ByCountrySorter implements Sorter {
-    @Resource
-    private ICountriesService countriesService;
-
     private final IPrincipalController<? extends Person> controller;
 
     /**

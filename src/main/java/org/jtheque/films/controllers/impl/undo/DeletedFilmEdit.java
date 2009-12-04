@@ -24,8 +24,6 @@ import org.jtheque.films.services.able.IFilmsService;
 
 import javax.annotation.Resource;
 import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 
 /**
  * An edit for a deletion of film.
@@ -54,14 +52,14 @@ public final class DeletedFilmEdit extends AbstractUndoableEdit {
     }
 
     @Override
-    public void undo() throws CannotUndoException {
+    public void undo() {
         super.undo();
 
         filmsService.create(film);
     }
 
     @Override
-    public void redo() throws CannotRedoException {
+    public void redo() {
         super.redo();
 
         filmsService.delete(film);

@@ -30,7 +30,6 @@ import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.od.able.Type;
 import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.ICountriesService;
 import org.jtheque.primary.services.able.IKindsService;
 import org.jtheque.primary.services.able.ILanguagesService;
 import org.jtheque.primary.services.able.ILendingsService;
@@ -44,9 +43,6 @@ import javax.annotation.Resource;
  * @author Baptiste Wicht
  */
 public final class XMLBackupWriter implements BackupWriter {
-    @Resource
-    private ICountriesService countriesService;
-
     @Resource
     private ILendingsService lendingsService;
 

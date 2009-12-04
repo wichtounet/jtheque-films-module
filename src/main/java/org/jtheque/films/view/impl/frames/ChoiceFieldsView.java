@@ -22,7 +22,6 @@ import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.view.able.IChoiceFieldsView;
 
-import javax.annotation.PostConstruct;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 import java.awt.Container;
@@ -51,16 +50,16 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
     /**
      * Construct a new JFrameChoiceFields.
      *
-     * @param parent The parent frame.
-     * @param closeAction The action to close the view. 
-     * @param validateAction The action to validate the view. 
+     * @param parent         The parent frame.
+     * @param closeAction    The action to close the view.
+     * @param validateAction The action to validate the view.
      */
     public ChoiceFieldsView(Frame parent, Action closeAction, Action validateAction) {
         super(parent);
-        
+
         this.closeAction = closeAction;
         this.validateAction = validateAction;
-        
+
         setContentPane(buildContentPane());
         pack();
 

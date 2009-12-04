@@ -56,13 +56,13 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     /**
      * Construct a new Publication View.
      *
-     * @param parent The parent frame.
-     * @param validateAction The action to validate the view. 
-     * @param closeAction The action to close the view. 
+     * @param parent         The parent frame.
+     * @param validateAction The action to validate the view.
+     * @param closeAction    The action to close the view.
      */
     public PublicationView(Frame parent, Action validateAction, Action closeAction) {
         super(parent);
-        
+
         this.validateAction = validateAction;
         this.closeAction = closeAction;
 

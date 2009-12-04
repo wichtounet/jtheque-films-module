@@ -41,10 +41,13 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
     private static final long serialVersionUID = 6787412105243753090L;
 
     private JTextField fieldNumberOfActors;
-    
+
+    /**
+     * Construct a new JPanelConfigAuto. 
+     */
     public JPanelConfigAuto() {
         super();
-        
+
         build();
         cancel();
     }
@@ -66,12 +69,12 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
         fieldNumberOfActors = builder.add(new JTextField(4),
                 builder.gbcSet(1, 0, GridBagUtils.NONE, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, 1.0, 1.0));
     }
-    
+
     @Override
     public void apply() {
         getConfig().setNumberOfActors(Integer.parseInt(fieldNumberOfActors.getText()));
     }
-    
+
     @Override
     public void cancel() {
         fieldNumberOfActors.setText(Integer.toString(getConfig().getNumberOfActors()));
@@ -88,11 +91,11 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
     }
 
     /**
-     * Return the configuration of the films module. 
-     * 
-     * @return The configuration of the films module. 
+     * Return the configuration of the films module.
+     *
+     * @return The configuration of the films module.
      */
-    private static Configuration getConfig(){
+    private static Configuration getConfig() {
         return Managers.getManager(IBeansManager.class).<IFilmsModule>getBean("filmsModule").getConfiguration();
     }
 }

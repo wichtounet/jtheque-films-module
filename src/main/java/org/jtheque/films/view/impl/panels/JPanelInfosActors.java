@@ -58,7 +58,7 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
 
     private final JThequeSimpleAction removeAction;
     private final JThequeSimpleAction addAction;
-    
+
     private static final double AN_HALF = 0.5;
 
     /**
@@ -72,7 +72,7 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
 
         this.removeAction = removeAction;
         this.addAction = addAction;
-        
+
         build();
     }
 

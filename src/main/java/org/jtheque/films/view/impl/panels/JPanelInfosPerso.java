@@ -29,7 +29,6 @@ import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
 import org.jtheque.primary.view.impl.renderers.NoteComboRenderer;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -49,9 +48,12 @@ public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
     private JComboBox comboNote;
     private JTextArea areaComment;
 
-    public JPanelInfosPerso() {
+    /**
+     * Construct a new JPanelInfosPerso. 
+     */
+    public JPanelInfosPerso(){
         super();
-        
+
         build();
     }
 

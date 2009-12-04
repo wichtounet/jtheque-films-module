@@ -48,7 +48,7 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
 
     private LendingsTableModel model;
     private JXTable tableLendings;
-    
+
     private final Action lendAction;
     private final Action returnAction;
     private final Action closeAction;
@@ -56,14 +56,14 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
     /**
      * Construct a new <code>JFrameLendings</code>.
      *
-     * @param parent The parent frame.
-     * @param lendAction The action to lend a film. 
-     * @param returnAction The action to return a film. 
-     * @param closeAction The action to close the view. 
+     * @param parent       The parent frame.
+     * @param lendAction   The action to lend a film.
+     * @param returnAction The action to return a film.
+     * @param closeAction  The action to close the view.
      */
     public LendingsView(Frame parent, Action lendAction, Action returnAction, Action closeAction) {
         super(parent);
-        
+
         this.lendAction = lendAction;
         this.returnAction = returnAction;
         this.closeAction = closeAction;

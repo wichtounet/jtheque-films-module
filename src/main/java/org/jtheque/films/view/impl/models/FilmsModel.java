@@ -17,18 +17,14 @@ package org.jtheque.films.view.impl.models;
  */
 
 import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.beans.BeansManager;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
-import org.jtheque.films.services.impl.ActorService;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.listeners.ViewStateListener;
 import org.jtheque.primary.view.impl.models.PrincipalDataModel;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.Collection;
 
 /**
@@ -41,13 +37,13 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     private Film currentFilm;
 
     private Collection<Film> displayList;
-    
+
     /**
      * Init the view.
      */
     public FilmsModel() {
         super();
-        
+
         getFilmsService().addDataListener(this);
     }
 
@@ -109,9 +105,9 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     }
 
     /**
-     * Return the service for the films. 
-     * 
-     * @return The service for the films. 
+     * Return the service for the films.
+     *
+     * @return The service for the films.
      */
     private static IFilmsService getFilmsService() {
         return Managers.getManager(IBeansManager.class).getBean("filmsService");

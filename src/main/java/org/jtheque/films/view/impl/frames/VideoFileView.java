@@ -3,20 +3,16 @@ package org.jtheque.films.view.impl.frames;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
-import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.IVideoFileView;
-import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import java.awt.Container;
@@ -45,23 +41,23 @@ import java.util.Collection;
 public final class VideoFileView extends SwingDialogView implements IVideoFileView {
     private DataContainerCachedComboBoxModel<Film> model;
     private FileChooserPanel fieldFile;
-    
+
     private final Action validateAction;
     private final Action closeAction;
 
     /**
      * Construct a new VideoFileView modal to his parent view.
      *
-     * @param parent The parent frame.
-     * @param validateAction The action to validate the view. 
-     * @param closeAction The action to close the view. 
+     * @param parent         The parent frame.
+     * @param validateAction The action to validate the view.
+     * @param closeAction    The action to close the view.
      */
     public VideoFileView(Frame parent, Action validateAction, Action closeAction) {
         super(parent);
-        
+
         this.validateAction = validateAction;
         this.closeAction = closeAction;
-        
+
         setContentPane(buildContentPane());
         pack();
 
