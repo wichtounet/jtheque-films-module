@@ -1,86 +1,104 @@
-Télécharger JTheque Films Module 1.4.1
+Télécharger JTheque Films Module 1.4.2
 
    JTheque Films Module est distribué sous forme d'une archive Jar, les sources de JTheque Films Module sont 
    distribués sous plusieurs formes pour votre convenance. 
 
-   JTheque Films Module 1.4.1 est distribué sous licence {{{http://www.gnu.org/copyleft/gpl.html} GNU General Public License, version 3}}.
+   JTheque Films Module 1.4.2 est distribué sous licence {{{http://www.gnu.org/copyleft/gpl.html} GNU General Public License, version 3}}.
 
 *-------------------------+---------+----------------+-----------------+
 |                         |  Lien   | Checksum (MD5) | Checksum (SHA1) |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4.1 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.md5} jtheque-films-module-1.4.1.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1.jar.sha1}} | 
+| JTheque Films Module 1.4.2 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2.jar} jtheque-films-module-1.4.2.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2.jar.md5} jtheque-films-module-1.4.2.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2.jar.sha1} jtheque-films-module-1.4.2.jar.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4.1 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2} jtheque-films-module-1.4.1-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.md5} jtheque-films-module-1.4.1-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.sha1} jtheque-films-module-1.4.1-src.tar.bz2.sha1}} | 
+| JTheque Films Module 1.4.2 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.bz2} jtheque-films-module-1.4.2-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.bz2.md5} jtheque-films-module-1.4.2-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.bz2.sha1} jtheque-films-module-1.4.2-src.tar.bz2.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4.1 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz} jtheque-films-module-1.4.1-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.md5} jtheque-films-module-1.4.1-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.sha1} jtheque-films-module-1.4.1-src.tar.gz.sha1}} | 
+| JTheque Films Module 1.4.2 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.gz} jtheque-films-module-1.4.2-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.gz.md5} jtheque-films-module-1.4.2-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.tar.gz.sha1} jtheque-films-module-1.4.2-src.tar.gz.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4.1 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip} jtheque-films-module-1.4.1-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip.md5} jtheque-films-module-1.4.1-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1-src.zip.sha1}} | 
+| JTheque Films Module 1.4.2 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.zip} jtheque-films-module-1.4.2-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-src.zip.md5} jtheque-films-module-1.4.2-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2.jar.sha1} jtheque-films-module-1.4.2-src.zip.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4.1 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.md5} jtheque-films-module-1.4.1-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.sha1} jtheque-films-module-1.4.1-javadoc.jar.sha1}} | 
+| JTheque Films Module 1.4.2 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-javadoc.jar} jtheque-films-module-1.4.2.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-javadoc.jar.md5} jtheque-films-module-1.4.2-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.2/jtheque-films-module-1.4.2-javadoc.jar.sha1} jtheque-films-module-1.4.2-javadoc.jar.sha1}} |
+*-------------------------+---------+----------------+-----------------+
+| Release Notes           | {{{versions.html} 1.4.2}} | | |
+*-------------------------+---------+----------------+-----------------+
+
+* {JTheque Films Module 1.4.1}
+
+*-------------------------+---------+----------------+-----------------+
+|                         |  Lien   | Checksum (MD5) | Checksum (SHA1) |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.md5} jtheque-films-module-1.4.1.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1.jar.sha1}} |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2} jtheque-films-module-1.4.1-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.md5} jtheque-films-module-1.4.1-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.bz2.sha1} jtheque-films-module-1.4.1-src.tar.bz2.sha1}} |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz} jtheque-films-module-1.4.1-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.md5} jtheque-films-module-1.4.1-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.tar.gz.sha1} jtheque-films-module-1.4.1-src.tar.gz.sha1}} |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip} jtheque-films-module-1.4.1-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-src.zip.md5} jtheque-films-module-1.4.1-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1.jar.sha1} jtheque-films-module-1.4.1-src.zip.sha1}} |
+*-------------------------+---------+----------------+-----------------+
+| JTheque Films Module 1.4.1 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar} jtheque-films-module-1.4.1.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.md5} jtheque-films-module-1.4.1-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4.1/jtheque-films-module-1.4.1-javadoc.jar.sha1} jtheque-films-module-1.4.1-javadoc.jar.sha1}} |
 *-------------------------+---------+----------------+-----------------+
 | Release Notes           | {{{versions.html} 1.4.1}} | | |
 *-------------------------+---------+----------------+-----------------+
 
-* {JTheque Films Module Module 1.4}
+* {JTheque Films Module 1.4}
 
 *-------------------------+---------+----------------+-----------------+
 |                         |  Lien   | Checksum (MD5) | Checksum (SHA1) |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar} jtheque-films-module-1.4.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.md5} jtheque-films-module-1.4.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.sha1} jtheque-films-module-1.4.jar.sha1}} | 
+| JTheque Films Module 1.4 (jar)                | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar} jtheque-films-module-1.4.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.md5} jtheque-films-module-1.4.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.sha1} jtheque-films-module-1.4.jar.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2} jtheque-films-module-1.4-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2.md5} jtheque-films-module-1.4-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2.sha1} jtheque-films-module-1.4-src.tar.bz2.sha1}} | 
+| JTheque Films Module 1.4 (Source tar.bz2)     | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2} jtheque-films-module-1.4-src.tar.bz2}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2.md5} jtheque-films-module-1.4-src.tar.bz2.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.bz2.sha1} jtheque-films-module-1.4-src.tar.bz2.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz} jtheque-films-module-1.4-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz.md5} jtheque-films-module-1.4-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz.sha1} jtheque-films-module-1.4-src.tar.gz.sha1}} | 
+| JTheque Films Module 1.4 (Source tar.gz)      | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz} jtheque-films-module-1.4-src.tar.gz}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz.md5} jtheque-films-module-1.4-src.tar.gz.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.tar.gz.sha1} jtheque-films-module-1.4-src.tar.gz.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.zip} jtheque-films-module-1.4-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.zip.md5} jtheque-films-module-1.4-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.sha1} jtheque-films-module-1.4-src.zip.sha1}} | 
+| JTheque Films Module 1.4 (Source zip)         | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.zip} jtheque-films-module-1.4-src.zip}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-src.zip.md5} jtheque-films-module-1.4-src.zip.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4.jar.sha1} jtheque-films-module-1.4-src.zip.sha1}} |
 *-------------------------+---------+----------------+-----------------+
-| JTheque Films Module 1.4 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar} jtheque-films-module-1.4.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar.md5} jtheque-films-module-1.4-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar.sha1} jtheque-films-module-1.4-javadoc.jar.sha1}} | 
+| JTheque Films Module 1.4 (Javadoc jar)        | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar} jtheque-films-module-1.4.jar}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar.md5} jtheque-films-module-1.4-javadoc.jar.md5}} | {{{http://jtheque.developpez.com/repository/org/jtheque/jtheque-films-module/1.4/jtheque-films-module-1.4-javadoc.jar.sha1} jtheque-films-module-1.4-javadoc.jar.sha1}} |
 *-------------------------+---------+----------------+-----------------+
 | Release Notes           | {{{versions.html} 1.4}} | | |
 *-------------------------+---------+----------------+-----------------+
 
-* {JTheque Films Module Module 1.3}
+* {JTheque Films Module 1.3}
 
 *-------------------------+---------+
 |                         |  Lien   |
 *-------------------------+---------+
-| JTheque Films Module Module 1.3 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.3/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} | 
+| JTheque Films Module 1.3 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.3/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} |
 *-------------------------+---------+
-| JTheque Films Module Module 1.3 (Source zip)         | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.3/JTheque-Films-Module_src.zip} JTheque-Films-Module_src.zip}} | 
+| JTheque Films Module 1.3 (Source zip)         | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.3/JTheque-Films-Module_src.zip} JTheque-Films-Module_src.zip}} |
 *-------------------------+---------+
-| JTheque Films Module Module 1.3 (Javadoc zip)        | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.3/JTheque-Films-Module_doc.zip} JTheque-Films-Module_doc.zip}} | 
+| JTheque Films Module 1.3 (Javadoc zip)        | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.3/JTheque-Films-Module_doc.zip} JTheque-Films-Module_doc.zip}} |
 *-------------------------+---------+
-| Release Notes           | {{{versions.html} 1.3}} | 
-*-------------------------+---------+
-
-* {JTheque Films Module Module 1.2}
-
-*-------------------------+---------+
-|                         |  Lien   |
-*-------------------------+---------+
-| JTheque Films Module Module 1.2 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.2/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} | 
-*-------------------------+---------+
-| Release Notes           | {{{versions.html} 1.2}} | 
+| Release Notes           | {{{versions.html} 1.3}} |
 *-------------------------+---------+
 
-* {JTheque Films Module Module 1.1}
+* {JTheque Films Module 1.2}
 
 *-------------------------+---------+
 |                         |  Lien   |
 *-------------------------+---------+
-| JTheque Films Module Module 1.1 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.1/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} | 
+| JTheque Films Module 1.2 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.2/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} |
 *-------------------------+---------+
-| Release Notes           | {{{versions.html} 1.1}} | 
+| Release Notes           | {{{versions.html} 1.2}} |
 *-------------------------+---------+
 
-* {JTheque Films Module Module 1.0}
+* {JTheque Films Module 1.1}
 
 *-------------------------+---------+
 |                         |  Lien   |
 *-------------------------+---------+
-| JTheque Films Module Module 1.0 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module Module/1.0/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} | 
+| JTheque Films Module 1.1 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.1/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} |
 *-------------------------+---------+
-| Release Notes           | {{{versions.html} 1.0}} | 
+| Release Notes           | {{{versions.html} 1.1}} |
+*-------------------------+---------+
+
+* {JTheque Films Module 1.0}
+
+*-------------------------+---------+
+|                         |  Lien   |
+*-------------------------+---------+
+| JTheque Films Module 1.0 (jar)                | {{{http://jtheque.developpez.com/archives/JTheque Films Module/1.0/JTheque-Films-Module.jar} JTheque-Films-Module.jar}} |
+*-------------------------+---------+
+| Release Notes           | {{{versions.html} 1.0}} |
 *-------------------------+---------+
 
 * Pré-requis sytèmes
