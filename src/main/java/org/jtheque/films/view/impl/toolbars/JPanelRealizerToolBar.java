@@ -19,12 +19,15 @@ package org.jtheque.films.view.impl.toolbars;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.utils.ui.Borders;
+import org.jtheque.films.view.impl.actions.realizer.AcCancelRealizer;
+import org.jtheque.films.view.impl.actions.realizer.AcDeleteRealizer;
+import org.jtheque.films.view.impl.actions.realizer.AcEditRealizer;
+import org.jtheque.films.view.impl.actions.realizer.AcNewRealizer;
+import org.jtheque.films.view.impl.actions.realizer.AcSaveRealizer;
 import org.jtheque.primary.view.able.ToolbarView;
 import org.jtheque.primary.view.able.ViewMode;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -39,35 +42,27 @@ import java.awt.GridBagConstraints;
 public final class JPanelRealizerToolBar extends JPanel implements ToolbarView {
     private static final long serialVersionUID = -688094676844153411L;
 
-    private JButton buttonAdd;
-    private JButton buttonEdit;
-    private JButton buttonSave;
-    private JButton buttonCancel;
-    private JButton buttonDelete;
+    private final JButton buttonAdd;
+    private final JButton buttonEdit;
+    private final JButton buttonSave;
+    private final JButton buttonCancel;
+    private final JButton buttonDelete;
 
     private ViewMode mode = ViewMode.VIEW;
 
     private final GridBagUtils gbc = new GridBagUtils();
 
-    private Action saveAction;
-    private Action cancelAction;
-    private Action deleteAction;
-    private Action newAction;
-    private Action editAction;
-
-    /**
-     * Build the tool bar.
-     */
-    @PostConstruct
-    private void build() {
+    public JPanelRealizerToolBar() {
+        super();
+        
         setBackground(Color.white);
         setBorder(Borders.DIALOG_BORDER);
-
-        buttonSave = new JButton(saveAction);
-        buttonCancel = new JButton(cancelAction);
-        buttonDelete = new JButton(deleteAction);
-        buttonAdd = new JButton(newAction);
-        buttonEdit = new JButton(editAction);
+        
+        buttonSave = new JButton(new AcSaveRealizer());
+        buttonCancel = new JButton(new AcCancelRealizer());
+        buttonDelete = new JButton(new AcDeleteRealizer());
+        buttonAdd = new JButton(new AcNewRealizer());
+        buttonEdit = new JButton(new AcEditRealizer());
 
         add(Box.createHorizontalGlue(), gbc.gbcSet(0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.BASELINE_LEADING, 1.0, 1.0));
 
@@ -130,50 +125,5 @@ public final class JPanelRealizerToolBar extends JPanel implements ToolbarView {
     @Override
     public void setDisplayMode(ViewMode mode) {
         setMode(mode);
-    }
-
-    /**
-     * Set the action to save the current realizer.
-     *
-     * @param saveAction The action to save the current realizer.
-     */
-    public void setSaveAction(Action saveAction) {
-        this.saveAction = saveAction;
-    }
-
-    /**
-     * Set the action to cancel the current realizer.
-     *
-     * @param cancelAction The action to cancel the current realizer.
-     */
-    public void setCancelAction(Action cancelAction) {
-        this.cancelAction = cancelAction;
-    }
-
-    /**
-     * Set the action to delete the current realizer.
-     *
-     * @param deleteAction The action to delete the current realizer.
-     */
-    public void setDeleteAction(Action deleteAction) {
-        this.deleteAction = deleteAction;
-    }
-
-    /**
-     * Set the action to create a new realizer.
-     *
-     * @param newAction The action to create a new realizer.
-     */
-    public void setNewAction(Action newAction) {
-        this.newAction = newAction;
-    }
-
-    /**
-     * Set the action to edit the current realizer.
-     *
-     * @param editAction The action to edit the current realizer.
-     */
-    public void setEditAction(Action editAction) {
-        this.editAction = editAction;
     }
 }

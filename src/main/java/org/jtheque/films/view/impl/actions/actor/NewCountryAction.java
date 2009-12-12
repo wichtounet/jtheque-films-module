@@ -23,13 +23,11 @@ import org.jtheque.primary.view.impl.actions.country.AbstractAcNewCountry;
  *
  * @author Baptiste Wicht
  */
-public final class AcNewPays extends AbstractAcNewCountry {
-    private static final long serialVersionUID = -7066992938277331080L;
-
+public final class NewCountryAction extends AbstractAcNewCountry {
     /**
-     * Construct a new AcNewPays.
+     * Construct a new NewCountryAction.
      */
-    public AcNewPays() {
+    public NewCountryAction() {
         super("generic.view.actions.new");
     }
 }

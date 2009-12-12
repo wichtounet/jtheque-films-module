@@ -17,15 +17,14 @@ package org.jtheque.films.view.impl.actions.file;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.IErrorManager;
 import org.jtheque.core.managers.error.InternationalizedError;
 import org.jtheque.core.managers.log.ILoggingManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IImportController;
-import org.jtheque.films.view.able.IImportView;
 import org.jtheque.utils.io.FileException;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -34,14 +33,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateImportView extends JThequeAction {
-    private static final long serialVersionUID = 5974024945309214485L;
-
-    @Resource
-    private IImportController importController;
-
-    @Resource
-    private IImportView importView;
-
     /**
      * Construct a new AcValidateImportView.
      */
@@ -51,13 +42,15 @@ public final class AcValidateImportView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        IImportController importController = Managers.getManager(IBeansManager.class).getBean("importController");
+        
         try {
-            importController.importData(importView.getFilePath());
+            importController.importData(importController.getView().getFilePath());
         } catch (FileException e1) {
             Managers.getManager(ILoggingManager.class).getLogger(getClass()).error(e1);
             Managers.getManager(IErrorManager.class).addError(new InternationalizedError(
                     "export.errors.file.filenotfound.title",
-                    "export.errors.file.filenotfound" + importView.getFilePath()));
+                    "export.errors.file.filenotfound" + importController.getView().getFilePath()));
         }
 
         importController.closeView();

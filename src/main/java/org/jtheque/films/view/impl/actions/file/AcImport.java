@@ -34,8 +34,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcImport extends JThequeAction {
-    private static final long serialVersionUID = 4671099547631620923L;
-
     private final FileType fileType;
 
     @Resource

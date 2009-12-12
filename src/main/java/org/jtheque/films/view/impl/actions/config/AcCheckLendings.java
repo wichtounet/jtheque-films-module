@@ -16,7 +16,9 @@ package org.jtheque.films.view.impl.actions.config;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.view.able.IConfigView;
+import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.films.view.impl.panels.config.JPanelConfigLendings;
 
@@ -29,15 +31,14 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcCheckLendings extends JThequeSimpleAction {
-    private static final long serialVersionUID = 482068021746781190L;
-
     @Resource
     private IConfigView configView;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JPanelConfigLendings config = (JPanelConfigLendings) configView.getSelectedPanelConfig();
-
+        JPanelConfigLendings config = 
+                (JPanelConfigLendings) Managers.getManager(IViewManager.class).getViews().getConfigView().getSelectedPanelConfig();
+        
         boolean selected = config.getBoxControlLendings().isSelected();
         config.setLendingsConfigurationEnabled(selected);
     }

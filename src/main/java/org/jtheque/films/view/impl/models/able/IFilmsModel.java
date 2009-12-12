@@ -17,28 +17,12 @@ package org.jtheque.films.view.impl.models.able;
  */
 
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.primary.view.impl.listeners.ViewStateListener;
 import org.jtheque.primary.view.impl.models.able.IPrincipalDataModel;
 
 /**
  * @author Baptiste Wicht
  */
 public interface IFilmsModel extends IPrincipalDataModel<Film> {
-
-    /**
-     * Set if the view is enabled or not.
-     *
-     * @param enabled A boolean flag indicating if the view is enabled.
-     */
-    void setEnabled(boolean enabled);
-
-    /**
-     * Indicate if the view is enabled or not.
-     *
-     * @return true if the view is enabled else false.
-     */
-    boolean isEnabled();
-
     /**
      * Return the current film.
      *
@@ -52,12 +36,4 @@ public interface IFilmsModel extends IPrincipalDataModel<Film> {
      * @param currentFilm The new current film
      */
     void setCurrentFilm(Film currentFilm);
-
-    /**
-     * Add a view state listener.
-     *
-     * @param listener The listener.
-     */
-    void addViewStateListener(ViewStateListener listener);
-
 }

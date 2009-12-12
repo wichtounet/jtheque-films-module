@@ -17,13 +17,13 @@ package org.jtheque.films.view.impl.actions.file;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.edt.SimpleTask;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IExportController;
 import org.jtheque.films.view.able.IExportView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -32,14 +32,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateExportView extends JThequeAction {
-    private static final long serialVersionUID = -1686157263127493029L;
-
-    @Resource
-    private IExportController exportController;
-
-    @Resource
-    private IExportView exportView;
-
     /**
      * Construct a new AcValidateExportView.
      */
@@ -49,7 +41,7 @@ public final class AcValidateExportView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (exportView.validateContent()) {
+        if (Managers.getManager(IBeansManager.class).<IExportView>getBean("exportView").validateContent()) {
             Managers.getManager(IViewManager.class).execute(new ExportTask());
         }
     }
@@ -62,17 +54,19 @@ public final class AcValidateExportView extends JThequeAction {
     private final class ExportTask extends SimpleTask {
         @Override
         public void run() {
-            exportView.startWait();
+            final IExportController exportController = Managers.getManager(IBeansManager.class).getBean("exportController");
+            
+            exportController.getView().startWait();
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    exportController.export(exportView.getSearcher(), exportView.getFilePath());
+                    exportController.export(exportController.getView().getSearcher(), exportController.getView().getFilePath());
 
                     Managers.getManager(IViewManager.class).execute(new SimpleTask() {
                         @Override
                         public void run() {
-                            exportView.stopWait();
+                            exportController.getView().stopWait();
                         }
                     });
 

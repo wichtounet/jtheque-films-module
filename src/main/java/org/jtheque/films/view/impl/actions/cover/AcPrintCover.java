@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.cover;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.services.able.ICoverService;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,11 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcPrintCover extends JThequeAction {
-    private static final long serialVersionUID = -6791055361978541369L;
-
-    @Resource
-    private ICoverService service;
-
     /**
      * Construct a AcValidateSagaView.
      */
@@ -42,6 +38,6 @@ public final class AcPrintCover extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        service.printCurrentReport();
+        Managers.getManager(IBeansManager.class).<ICoverService>getBean("coverService").printCurrentReport();
     }
 }

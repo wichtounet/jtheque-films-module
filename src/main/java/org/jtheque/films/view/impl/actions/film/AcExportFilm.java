@@ -17,6 +17,7 @@ package org.jtheque.films.view.impl.actions.film;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IExportController;
@@ -33,8 +34,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcExportFilm extends JThequeAction {
-    private static final long serialVersionUID = -3137832948841121926L;
-
     private final SimpleFilter jTFFilter = new SimpleFilter("Files JTF(*.jtf)", ".jtf");
 
     @Resource
@@ -48,6 +47,8 @@ public final class AcExportFilm extends JThequeAction {
      */
     public AcExportFilm() {
         super("film.view.actions.export");
+        
+        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override

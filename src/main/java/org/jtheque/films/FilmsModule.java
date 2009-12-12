@@ -43,7 +43,6 @@ import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.core.utils.ui.constraints.MaxLengthConstraint;
 import org.jtheque.core.utils.ui.constraints.NotNullConstraint;
-import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.persistence.FilmsSchema;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
@@ -79,13 +78,16 @@ import org.jtheque.primary.view.impl.sort.SorterFactory;
 import org.jtheque.utils.collections.ArrayUtils;
 import org.jtheque.utils.collections.CollectionUtils;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * A JTheque Module for managing films.
  *
  * @author Baptiste Wicht
  */
-@Module(id = "jtheque-films-module", i18n = "classpath:org/jtheque/films/i18n/films", version = "1.3.1-SNAPSHOT", core = "2.0.2",
-        jarFile = "jtheque-films-module-1.4.1-SNAPSHOT.jar", updateURL = "http://jtheque.developpez.com/public/versions/FilmsModule.versions")
+@Module(id = "jtheque-films-module", i18n = "classpath:org/jtheque/films/i18n/films", version = "1.4.2", core = "2.0.2",
+        jarFile = "jtheque-films-module-1.4.2.jar", updateURL = "http://jtheque.developpez.com/public/versions/FilmsModule.versions")
 public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
     private ConfigManager config;
 
@@ -175,8 +177,8 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
 
         addFeatures();
 
-        //Config panels
-
+        UIManager.put("JXTitledPanel.title.foreground", Color.white);
+        
         for (ConfigTabComponent component : configTabComponents) {
             Managers.getManager(IViewManager.class).addConfigTabComponent(component);
         }
@@ -209,9 +211,7 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
 
         addHelpFeatures(manager);
         addFileFeatures(manager);
-        addFilmFeatures(manager);
-        addActorsFeatures(manager);
-        addRealizersFeature(manager);
+        addEmptyFeatures(manager);
         addLendingsFeature(manager);
         addOthersFeature(manager);
 
@@ -247,38 +247,10 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
      *
      * @param manager The feature manager.
      */
-    private void addRealizersFeature(IFeatureManager manager) {
-        realizersFeature = manager.createFeature(300, FeatureType.PACK, "menu.jtheque.realizers");
-
-        manager.addSubFeature(realizersFeature, "newRealizerAction", FeatureType.ACTION, 1, Constants.IMAGE_BASE_NAME, "add_perso");
-
-        manager.addFeature(realizersFeature);
-    }
-
-    /**
-     * Add the actors features.
-     *
-     * @param manager The feature manager.
-     */
-    private void addActorsFeatures(IFeatureManager manager) {
-        actorsFeature = manager.createFeature(200, FeatureType.PACK, "menu.jtheque.actors");
-
-        manager.addSubFeature(actorsFeature, "newActorAction", FeatureType.ACTION, 1, Constants.IMAGE_BASE_NAME, "add_perso");
-
-        manager.addFeature(actorsFeature);
-    }
-
-    /**
-     * Add the film features.
-     *
-     * @param manager The feature manager.
-     */
-    private void addFilmFeatures(IFeatureManager manager) {
-        filmsFeature = manager.createFeature(100, FeatureType.PACK, "menu.jtheque.films");
-
-        manager.addSubFeature(filmsFeature, "newFilmAction", FeatureType.ACTION, 1, Constants.IMAGE_BASE_NAME, "add_film");
-
-        manager.addFeature(filmsFeature);
+    private void addEmptyFeatures(IFeatureManager manager) {
+        manager.addFeature(realizersFeature = manager.createFeature(300, FeatureType.PACK, "menu.jtheque.realizers"));
+        manager.addFeature(actorsFeature = manager.createFeature(200, FeatureType.PACK, "menu.jtheque.actors"));
+        manager.addFeature(filmsFeature = manager.createFeature(100, FeatureType.PACK, "menu.jtheque.films"));
     }
 
     /**
@@ -294,7 +266,6 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         publicationFeature = manager.addSubFeature(manager.getFeature(CoreFeature.FILE), "openPublicationViewAction", FeatureType.ACTION, 102);
 
         addExportFeatures(manager);
-
         addImportFeatures(manager);
 
         coverFeature = manager.addSubFeature(manager.getFeature(CoreFeature.FILE), "openCoverViewAction", FeatureType.SEPARATED_ACTION, 105);
@@ -303,9 +274,7 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
 
         searchFeature = manager.createFeature(100, FeatureType.ACTIONS, "menu.jtheque.edit.find");
 
-        manager.addSubFeature(searchFeature, "searchFilmAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(searchFeature, "searchActorAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(searchFeature, "searchRealizerAction", FeatureType.ACTION, 3);
+        addSubFeatures(manager, searchFeature, "searchFilmAction", "searchActorAction", "searchRealizerAction");
 
         manager.getFeature(CoreFeature.EDIT).addSubFeature(searchFeature);
     }
@@ -320,15 +289,9 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         exportFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         exportFeature.setIcon("export");
 
-        manager.addSubFeature(exportFeature, "exportToExcelAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(exportFeature, "exportToXMLAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(exportFeature, "exportToHTMLAction", FeatureType.ACTION, 3);
-        manager.addSubFeature(exportFeature, "exportToPDFAction", FeatureType.ACTION, 4);
-        manager.addSubFeature(exportFeature, "exportToTXTAction", FeatureType.ACTION, 5);
-        manager.addSubFeature(exportFeature, "exportToJTFEAction", FeatureType.ACTION, 6);
-        manager.addSubFeature(exportFeature, "exportToCSVAction", FeatureType.ACTION, 7);
-        manager.addSubFeature(exportFeature, "exportToRTFAction", FeatureType.ACTION, 8);
-
+        addSubFeatures(manager, exportFeature, "exportToExcelAction", "exportToXMLAction", "exportToHTMLAction", 
+                "exportToPDFAction", "exportToTXTAction", "exportToJTFEAction", "exportToCSVAction", "exportToRTFAction");
+        
         manager.getFeature(CoreFeature.FILE).addSubFeature(exportFeature);
     }
 
@@ -342,9 +305,7 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         importFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         importFeature.setIcon("import");
 
-        manager.addSubFeature(importFeature, "importFromXMLAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(importFeature, "importFromJTFAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(importFeature, "importFromJTFEAction", FeatureType.ACTION, 3);
+        addSubFeatures(manager, importFeature, "importFromXMLAction", "importFromJTFAction", "importFromJTFEAction");
 
         manager.getFeature(CoreFeature.FILE).addSubFeature(importFeature);
     }
@@ -374,13 +335,9 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         newFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         newFeature.setIcon("add_others");
 
-        manager.addSubFeature(newFeature, "newKindAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(newFeature, "newTypeAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(newFeature, "newLanguageAction", FeatureType.ACTION, 3);
-        manager.addSubFeature(newFeature, "newBorrowerMenuAction", FeatureType.ACTION, 4);
-        manager.addSubFeature(newFeature, "newCountryMenuAction", FeatureType.ACTION, 5);
-        manager.addSubFeature(newFeature, "newSagaAction", FeatureType.ACTION, 6);
-
+        addSubFeatures(manager, newFeature, "newKindAction", "newTypeAction", "newLanguageMenuAction",
+                "newBorrowerMenuAction", "newCountryMenuAction", "newSagaAction");
+        
         othersFeature.addSubFeature(newFeature);
     }
 
@@ -394,13 +351,9 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         deleteFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         deleteFeature.setIcon("delete_others");
 
-        manager.addSubFeature(deleteFeature, "deleteKindMenuAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(deleteFeature, "deleteTypeMenuAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(deleteFeature, "deleteLanguageMenuAction", FeatureType.ACTION, 3);
-        manager.addSubFeature(deleteFeature, "deleteCountryMenuAction", FeatureType.ACTION, 4);
-        manager.addSubFeature(deleteFeature, "deleteBorrowerMenuAction", FeatureType.ACTION, 5);
-        manager.addSubFeature(deleteFeature, "deleteSagaMenuAction", FeatureType.ACTION, 6);
-
+        addSubFeatures(manager, deleteFeature, "deleteKindMenuAction", "deleteTypeAction", "deleteLanguageMenuAction", 
+                "deleteCountryMenuAction", "deleteBorrowerMenuAction", "deleteSagaMenuAction");
+        
         othersFeature.addSubFeature(deleteFeature);
     }
 
@@ -414,16 +367,18 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         editFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         editFeature.setIcon("edit_others");
 
-        manager.addSubFeature(editFeature, "editKindMenuAction", FeatureType.ACTION, 1);
-        manager.addSubFeature(editFeature, "editTypeMenuAction", FeatureType.ACTION, 2);
-        manager.addSubFeature(editFeature, "editLanguageMenuAction", FeatureType.ACTION, 3);
-        manager.addSubFeature(editFeature, "editBorrowerMenuAction", FeatureType.ACTION, 5);
-        manager.addSubFeature(editFeature, "editCountryMenuAction", FeatureType.ACTION, 4);
-        manager.addSubFeature(editFeature, "editSagaMenuAction", FeatureType.ACTION, 6);
-
+        addSubFeatures(manager, editFeature, "editKindMenuAction", "editTypeAction", "editLanguageMenuAction", 
+                "editBorrowerMenuAction", "editCountryMenuAction", "editSagaMenuAction");
+        
         othersFeature.addSubFeature(editFeature);
     }
 
+    private static void addSubFeatures(IFeatureManager manager, Feature parent, String... actions){
+        for(int i = 0; i < actions.length; i++){
+            manager.addSubFeature(parent, actions[i], FeatureType.ACTION, i + 1);
+        }
+    }
+    
     @Override
     public boolean chooseCollection(String collection, String password, boolean create) {
         ICollectionsService collectionsService = Managers.getManager(IBeansManager.class).getBean("collectionsService");
@@ -450,8 +405,6 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         configureBackupAndRestore();
 
         configureViewConstraints();
-
-        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").getView().selectFirst();
 
         if (getConfiguration().mustControlLendingsOnStartup()) {
             verifyLendings();

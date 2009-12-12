@@ -9,6 +9,8 @@ import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.IVideoFileView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.video.file.AcValidateVideoFileView;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
@@ -42,21 +44,13 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
     private DataContainerCachedComboBoxModel<Film> model;
     private FileChooserPanel fieldFile;
 
-    private final Action validateAction;
-    private final Action closeAction;
-
     /**
      * Construct a new VideoFileView modal to his parent view.
      *
      * @param parent         The parent frame.
-     * @param validateAction The action to validate the view.
-     * @param closeAction    The action to close the view.
      */
-    public VideoFileView(Frame parent, Action validateAction, Action closeAction) {
+    public VideoFileView(Frame parent) {
         super(parent);
-
-        this.validateAction = validateAction;
-        this.closeAction = closeAction;
 
         setContentPane(buildContentPane());
         pack();
@@ -72,6 +66,8 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
     private Container buildContentPane() {
         PanelBuilder builder = new PanelBuilder();
 
+        Action validateAction = new AcValidateVideoFileView();
+        
         fieldFile = new FileChooserPanel();
         fieldFile.setTextKey("video.file.view.file");
         SwingUtils.addFieldValidateAction(fieldFile, validateAction);
@@ -85,7 +81,8 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
         JComponent combo = builder.addComboBox(model, builder.gbcSet(1, 1));
         SwingUtils.addFieldValidateAction(combo, validateAction);
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 2, 1), validateAction, closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 2, 1), 
+                validateAction, new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }

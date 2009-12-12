@@ -16,6 +16,8 @@ package org.jtheque.films.view.impl.actions.auto.choice;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IAutoAddController;
 import org.jtheque.films.services.impl.utils.EditArguments;
@@ -30,8 +32,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateChoiceFieldsView extends JThequeAction {
-    private static final long serialVersionUID = -3466236201212260162L;
-
     @Resource
     private IAutoAddController autoAddController;
 
@@ -43,6 +43,8 @@ public final class AcValidateChoiceFieldsView extends JThequeAction {
      */
     public AcValidateChoiceFieldsView() {
         super("generic.view.actions.validate");
+        
+        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override

@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.film;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IFilmController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -30,9 +31,6 @@ import java.awt.event.ActionEvent;
 public final class AcManualEdit extends JThequeAction {
     private static final long serialVersionUID = 1506516842802832928L;
 
-    @Resource
-    private IFilmController filmController;
-
     /**
      * Construct a new AcManualEdit.
      */
@@ -42,6 +40,6 @@ public final class AcManualEdit extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        filmController.manualEdit();
+        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").manualEdit();
     }
 }

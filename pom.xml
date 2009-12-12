@@ -16,7 +16,7 @@
     <artifactId>jtheque-films-module</artifactId>
     <packaging>jar</packaging>
     <name>JTheque Films Module</name>
-    <version>1.4.1</version>
+    <version>1.4.2</version>
 
     <url>http://jtheque.developpez.com/collections/films</url>
 

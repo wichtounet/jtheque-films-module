@@ -21,10 +21,10 @@ import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.view.able.IImportView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.file.AcValidateImportView;
 import org.jtheque.utils.io.SimpleFilter;
 
-import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -40,28 +40,14 @@ public final class ImportView extends SwingDialogView implements IImportView {
 
     private FileChooserPanel chooser;
 
-    private final Action validateAction;
-    private final Action closeAction;
-
     /**
      * Construct a new <code>JFrameImport</code>.
      *
      * @param parent         The parent frame.
-     * @param validateAction The action to validate the view.
-     * @param closeAction    The action to close the view.
      */
-    public ImportView(Frame parent, Action validateAction, Action closeAction) {
+    public ImportView(Frame parent) {
         super(parent);
-
-        this.validateAction = validateAction;
-        this.closeAction = closeAction;
-    }
-
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+        
         setResizable(false);
         setTitleKey("import.view.title");
         setContentPane(buildContentPane());
@@ -83,7 +69,7 @@ public final class ImportView extends SwingDialogView implements IImportView {
         chooser.setBackground(Color.white);
         builder.add(chooser, builder.gbcSet(0, 0));
 
-        builder.addButtonBar(builder.gbcSet(0, 1), validateAction, closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 1), new AcValidateImportView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }

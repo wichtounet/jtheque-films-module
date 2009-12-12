@@ -16,6 +16,8 @@ package org.jtheque.films.view.impl.actions.video.file;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.IVideoFileView;
@@ -44,6 +46,8 @@ public final class AcValidateVideoFileView extends JThequeAction {
      */
     public AcValidateVideoFileView() {
         super("video.file.view.actions.validate");
+        
+        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override

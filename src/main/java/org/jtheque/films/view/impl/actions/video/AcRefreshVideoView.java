@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.video;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.view.able.IVideoView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,9 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcRefreshVideoView extends JThequeAction {
-    @Resource
-    private IVideoView videoView;
-
     /**
      * Construct a new AcOpenVideoFile.
      */
@@ -40,6 +38,6 @@ public final class AcRefreshVideoView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        videoView.refreshList();
+        Managers.getManager(IBeansManager.class).<IVideoView>getBean("videoView").refreshList();
     }
 }

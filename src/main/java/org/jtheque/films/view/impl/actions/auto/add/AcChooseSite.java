@@ -17,6 +17,7 @@ package org.jtheque.films.view.impl.actions.auto.add;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.edt.SimpleTask;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
@@ -34,8 +35,6 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class AcChooseSite extends JThequeSimpleAction {
-    private static final long serialVersionUID = 3194558380565655475L;
-
     @Resource
     private IFilmAutoService filmAutoService;
 
@@ -49,6 +48,8 @@ public final class AcChooseSite extends JThequeSimpleAction {
         super();
 
         setText(">>");
+        
+        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override

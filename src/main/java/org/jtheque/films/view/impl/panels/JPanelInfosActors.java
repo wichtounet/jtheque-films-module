@@ -20,10 +20,11 @@ import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.persistence.able.DataContainer;
-import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.view.able.IInfosActorsView;
+import org.jtheque.films.view.impl.actions.film.AcAddActorToList;
+import org.jtheque.films.view.impl.actions.film.AcRemoveActorFromList;
 import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.films.view.impl.models.list.DataCachedContainerListModel;
 import org.jtheque.films.view.impl.models.list.SimpleModel;
@@ -46,44 +47,28 @@ import java.util.HashSet;
  * @author Baptiste Wicht
  */
 public final class JPanelInfosActors extends JPanel implements IInfosActorsView {
-    private static final long serialVersionUID = 447863972139498415L;
+    private final JButton buttonAdd;
+    private final JButton buttonRemove;
+    
+    private final JList listActors;
+    private final JList listActorsForFilm;
 
-    private JButton buttonAdd;
-    private JButton buttonRemove;
-    private JList listActors;
-    private JList listActorsForFilm;
-
-    private DataCachedContainerListModel<Person> actorsModel;
-    private SimpleModel<Person> actorsForFilmModel;
-
-    private final JThequeSimpleAction removeAction;
-    private final JThequeSimpleAction addAction;
+    private final DataCachedContainerListModel<Person> actorsModel;
+    private final SimpleModel<Person> actorsForFilmModel;
 
     private static final double AN_HALF = 0.5;
 
     /**
      * Construct a new JPanelInfosActors.
-     *
-     * @param removeAction The action to remove the an actor.
-     * @param addAction    The action to add an actor.
+     * 
      */
-    public JPanelInfosActors(JThequeSimpleAction removeAction, JThequeSimpleAction addAction) {
+    public JPanelInfosActors(){
         super();
 
-        this.removeAction = removeAction;
-        this.addAction = addAction;
-
-        build();
-    }
-
-    /**
-     * Build the view.
-     */
-    private void build() {
         PanelBuilder builder = new PanelBuilder(this);
 
         actorsModel = new DataCachedContainerListModel<Person>(
-                Managers.getManager(IBeansManager.class).<DataContainer<Person>>getBean("actorsService"));
+                Managers.getManager(IBeansManager.class).<DataContainer<Person>>getBean("actorService"));
 
         listActors = builder.addList(actorsModel, null,
                 builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 1, 0, AN_HALF, 1.0));
@@ -95,10 +80,10 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
                 builder.gbcSet(2, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, AN_HALF, 1.0));
         listActorsForFilm.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        buttonAdd = builder.addButton(addAction, builder.gbcSet(1, 0));
+        buttonAdd = builder.addButton(new AcAddActorToList(), builder.gbcSet(1, 0));
         buttonAdd.setEnabled(false);
 
-        buttonRemove = builder.addButton(removeAction, builder.gbcSet(1, 1));
+        buttonRemove = builder.addButton(new AcRemoveActorFromList(), builder.gbcSet(1, 1));
         buttonRemove.setEnabled(false);
     }
 

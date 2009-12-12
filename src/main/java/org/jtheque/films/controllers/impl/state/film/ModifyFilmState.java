@@ -53,7 +53,7 @@ public final class ModifyFilmState implements ControllerState {
 
     @Override
     public void apply() {
-        getViewModel().setEnabled(true);
+        controller.getView().setEnabled(true);
         controller.getView().getToolbarView().setDisplayMode(ViewMode.EDIT);
 
         getViewModel().getCurrentFilm().saveToMemento();

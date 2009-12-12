@@ -29,13 +29,14 @@ import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.od.able.Saga;
 import org.jtheque.primary.services.able.ILanguagesService;
 import org.jtheque.primary.services.able.ISagasService;
+import org.jtheque.primary.view.impl.actions.language.AcNewLanguage;
+import org.jtheque.primary.view.impl.actions.saga.NewSagaAction;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -52,8 +53,6 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
-    private static final long serialVersionUID = 7846094711921875146L;
-
     private DataContainerCachedComboBoxModel<Person> modelRealizer;
     private DataContainerCachedComboBoxModel<Language> modelLanguage;
     private DataContainerCachedComboBoxModel<Saga> modelSaga;
@@ -68,9 +67,6 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
 
     private JButton buttonAddLanguage;
     private JButton buttonAddSaga;
-
-    private Action newLanguageAction;
-    private Action newSagaAction;
 
     @Resource
     private ILanguagesService languagesService;
@@ -165,8 +161,8 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
 
         comboLanguage = builder.addComboBox(modelLanguage, builder.gbcSet(1, 3));
         comboLanguage.setEnabled(false);
-
-        buttonAddLanguage = builder.addButton(newLanguageAction, builder.gbcSet(2, 3));
+        
+        buttonAddLanguage = builder.addButton(new AcNewLanguage("generic.view.actions.new"), builder.gbcSet(2, 3));
         buttonAddLanguage.setEnabled(false);
     }
 
@@ -183,7 +179,7 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
         comboSaga = builder.addComboBox(modelSaga, builder.gbcSet(1, 4));
         comboSaga.setEnabled(false);
 
-        buttonAddSaga = builder.addButton(newSagaAction, builder.gbcSet(2, 4));
+        buttonAddSaga = builder.addButton(new NewSagaAction(), builder.gbcSet(2, 4));
         buttonAddSaga.setEnabled(false);
     }
 
@@ -267,24 +263,6 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
         ConstraintManager.validate(Properties.Film.REALIZER, modelRealizer.getSelectedData(), errors);
         ConstraintManager.validate(Properties.Film.SAGA, modelSaga.getSelectedData(), errors);
         ConstraintManager.validate(Properties.Film.LANGUAGE, modelLanguage.getSelectedData(), errors);
-    }
-
-    /**
-     * Set the action to create a new saga.
-     *
-     * @param newSagaAction The action to create a new saga.
-     */
-    public void setNewSagaAction(Action newSagaAction) {
-        this.newSagaAction = newSagaAction;
-    }
-
-    /**
-     * Set the action to create a new language.
-     *
-     * @param newLanguageAction The action to create a new language.
-     */
-    public void setNewLanguageAction(Action newLanguageAction) {
-        this.newLanguageAction = newLanguageAction;
     }
 
     @Override

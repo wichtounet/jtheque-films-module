@@ -8,131 +8,17 @@
             http://www.jtheque.com/schema/jtheque
             http://www.jtheque.com/schema/jtheque/jtheque.xsd"
        default-lazy-init="true">
-
-    <!-- Actor -->
-
-    <bean id="sortActorsByCountryAction" class="org.jtheque.films.view.impl.actions.sort.AcSortActor">
-        <constructor-arg value="actor.view.actions.sort.country"/>
-        <constructor-arg value="Countries"/>
-    </bean>
-
-    <bean id="sortActorsByNoteAction" class="org.jtheque.films.view.impl.actions.sort.AcSortActor">
-        <constructor-arg value="actor.view.actions.sort.note"/>
-        <constructor-arg value="Notes"/>
-    </bean>
-
-    <bean id="newCountryAction" class="org.jtheque.films.view.impl.actions.actor.AcNewPays"/>
-
-    <bean id="saveActorAction" class="org.jtheque.films.view.impl.actions.actor.AcSaveActor"/>
-    <bean id="cancelActorAction" class="org.jtheque.films.view.impl.actions.actor.AcCancelActor"/>
-    <bean id="deleteActorAction" class="org.jtheque.films.view.impl.actions.actor.AcDeleteActor"/>
-    <bean id="newActorAction" class="org.jtheque.films.view.impl.actions.actor.AcNewActor"/>
-    <bean id="editActorAction" class="org.jtheque.films.view.impl.actions.actor.AcEditActor"/>
-    <bean id="displayActorAction" class="org.jtheque.films.view.impl.actions.actor.AcDisplayFilmography"/>
-
-    <!-- Auto add -->
-
-    <jtheque:display id="displayInfosAboutSiteAction" key="auto.add.view.actions.infos" view="sitesView"/>
-
-    <bean id="chooseSiteAction" class="org.jtheque.films.view.impl.actions.auto.add.AcChooseSite"/>
-    <bean id="validateAutoAddViewAction" class="org.jtheque.films.view.impl.actions.auto.add.AcValidateAutoAddView"/>
-    <bean id="closeAutoAddView" class="org.jtheque.films.view.impl.actions.auto.add.AcCloseAutoAddView"/>
-
-    <!-- Auto import -->
-
-    <jtheque:close id="cancelAutoImportViewAction" key="generic.view.actions.cancel" view="autoImportView"/>
+    
     <jtheque:display id="openAutoImportViewAction" key="menu.jtheque.import.folder" view="autoImportView"/>
 
-    <bean id="addTitleAction" class="org.jtheque.films.view.impl.actions.auto.imports.AcAddTitle"/>
-    <bean id="deleteTitleAction" class="org.jtheque.films.view.impl.actions.auto.imports.AcDeleteTitle"/>
-    <bean id="searchTitlesAction" class="org.jtheque.films.view.impl.actions.auto.imports.AcSearchTitles"/>
-    <bean id="validateAutoImportViewAction" class="org.jtheque.films.view.impl.actions.auto.imports.AcValidateAutoImportView"/>
-
-    <!-- Choice fields -->
-
-    <jtheque:close id="closeChoiceFieldsViewAction" key="generic.view.actions.cancel" view="choiceFieldsView"/>
-
-    <bean id="validateChoiceFieldsViewAction" class="org.jtheque.films.view.impl.actions.auto.choice.AcValidateChoiceFieldsView"/>
-
-    <!-- Cover view -->
-
-    <jtheque:close id="closeCoverViewAction" key="generic.view.actions.cancel" view="coverView"/>
     <jtheque:display id="openCoverViewAction" key="cover.view.actions.open" view="coverView"/>
 
-    <bean id="exportCoverAction" class="org.jtheque.films.view.impl.actions.cover.AcExportCover"/>
-    <bean id="printCoverAction" class="org.jtheque.films.view.impl.actions.cover.AcPrintCover"/>
-    <bean id="updateCoverAction" class="org.jtheque.films.view.impl.actions.cover.AcUpdateCover"/>
+    <bean id="newKindAction" class="org.jtheque.primary.view.impl.actions.kind.AcNewKind"/>
 
-    <!-- Export -->
-
-    <jtheque:close id="closeExportViewAction" key="generic.view.actions.close" view="exportView"/>
-
-    <bean id="validateExportViewAction" class="org.jtheque.films.view.impl.actions.file.AcValidateExportView"/>
-
-    <!-- Filmography -->
-
-    <jtheque:close id="closeFilmographyViewAction" key="generic.view.actions.close" view="filmographyView"/>
-
-    <!-- Films -->
-
-    <bean id="sortFilmsByKindAction" class="org.jtheque.films.view.impl.actions.sort.AcSortFilm">
-        <constructor-arg value="film.view.actions.sort.kind"/>
-        <constructor-arg value="Kinds"/>
-    </bean>
-
-    <bean id="sortFilmsByTypeAction" class="org.jtheque.films.view.impl.actions.sort.AcSortFilm">
-        <constructor-arg value="film.view.actions.sort.type"/>
-        <constructor-arg value="Types"/>
-    </bean>
-
-    <bean id="sortFilmsByRealizerAction" class="org.jtheque.films.view.impl.actions.sort.AcSortFilm">
-        <constructor-arg value="film.view.actions.sort.realizer"/>
-        <constructor-arg value="Realizers"/>
-    </bean>
-
-    <bean id="sortFilmsByYearAction" class="org.jtheque.films.view.impl.actions.sort.AcSortFilm">
-        <constructor-arg value="film.view.actions.sort.year"/>
-        <constructor-arg value="Year"/>
-    </bean>
-
-    <bean id="removeActorFromList" class="org.jtheque.films.view.impl.actions.film.AcRemoveActorFromList"/>
-    <bean id="addActorToList" class="org.jtheque.films.view.impl.actions.film.AcAddActorToList"/>
     <bean id="removeKindFromList" class="org.jtheque.films.view.impl.actions.film.AcRemoveKindFromList"/>
     <bean id="addKindToList" class="org.jtheque.films.view.impl.actions.film.AcAddKindToList"/>
-    <bean id="newLanguageAction" class="org.jtheque.primary.view.impl.actions.language.AcNewLanguage">
-        <constructor-arg value="generic.view.actions.new"/>
-    </bean>
-    <bean id="newTypeAction" class="org.jtheque.primary.view.impl.actions.type.AcNewType"/>
-    <bean id="newKindAction" class="org.jtheque.primary.view.impl.actions.kind.AcNewKind"/>
-    <bean id="newSagaAction" class="org.jtheque.primary.view.impl.actions.saga.NewSagaAction"/>
-
-    <bean id="saveFilmAction" class="org.jtheque.films.view.impl.actions.film.AcSaveFilm"/>
-    <bean id="cancelFilmAction" class="org.jtheque.films.view.impl.actions.film.AcCancel"/>
-    <bean id="deleteFilmAction" class="org.jtheque.films.view.impl.actions.film.AcDelete"/>
-    <bean id="newFilmToolbarAction" class="org.jtheque.films.view.impl.actions.film.AcNewFilm">
-        <constructor-arg value="film.view.actions.add.manual"/>
-    </bean>
-    <bean id="autoAddFilmAction" class="org.jtheque.films.view.impl.actions.auto.add.AcAutoAddFilm"/>
-    <bean id="manualEditFilmAction" class="org.jtheque.films.view.impl.actions.film.AcManualEdit"/>
-    <bean id="autoEditFilmAction" class="org.jtheque.films.view.impl.actions.film.AcAutoEdit"/>
-    <bean id="printFilmAction" class="org.jtheque.films.view.impl.actions.film.AcPrintFilm"/>
-    <bean id="sendFilmByMailAction" class="org.jtheque.films.view.impl.actions.film.AcSendFilmByMail"/>
-    <bean id="exportFilmAction" class="org.jtheque.films.view.impl.actions.film.AcExportFilm"/>
-    <bean id="newFilmAction" class="org.jtheque.films.view.impl.actions.film.AcNewFilm">
-        <constructor-arg value="jtheque.actions.new"/>
-    </bean>
-
-    <!-- Import -->
-
-    <jtheque:close id="closeImportViewAction" key="generic.view.actions.cancel" view="importView"/>
-
-    <bean id="validateImportViewAction" class="org.jtheque.films.view.impl.actions.file.AcValidateImportView"/>
-
-    <!-- Lendings -->
-
+    
     <jtheque:display id="openLendingsViewAction" key="jtheque.actions.lendings" view="lendingsView"/>
-
-    <!-- Module -->
 
     <bean id="refreshListAction" class="org.jtheque.films.view.impl.actions.jtheque.AcRefreshList"/>
     <bean id="printListAction" class="org.jtheque.films.view.impl.actions.jtheque.AcPrintList"/>
@@ -203,87 +89,23 @@
         <constructor-arg value=""/>
     </bean>
 
-    <!-- AbstractLanguage -->
-
     <bean id="newLanguageMenuAction" class="org.jtheque.primary.view.impl.actions.language.AcNewLanguage">
         <constructor-arg value="Property:jtheque.actions.language"/>
     </bean>
-
-    <!-- Lend film -->
-
-    <jtheque:close id="closeLendFilmViewAction" key="generic.view.actions.cancel" view="lendFilmView"/>
-
-    <bean id="validateLendFilmViewAction" class="org.jtheque.films.view.impl.actions.lend.AcValidateLendView"/>
-
-    <!-- Lendings -->
-
+    
     <jtheque:display id="lendFilmAction" key="lendings.view.actions.lend" view="lendFilmView"/>
+    
     <bean id="returnFilmAction" class="org.jtheque.films.view.impl.actions.lendings.ReturnFilmAction"/>
 
-    <bean id="returnCurrentFilmAction" class="org.jtheque.films.view.impl.actions.lendings.AcReturnCurrentFilm"/>
-
-    <jtheque:close id="closeLendingsViewAction" key="generic.view.actions.cancel" view="lendingsView"/>
-
-    <!-- Publication -->
-
-    <jtheque:close id="closePublicationViewAction" key="generic.view.actions.cancel" view="publicationView"/>
     <jtheque:display id="openPublicationViewAction" key="publication.view.actions.open" view="publicationView"/>
-
-    <bean id="validatePublicationViewAction" class="org.jtheque.films.view.impl.actions.publication.AcValidatePublicationView"/>
-
-    <!-- AbstractRealizer -->
-
-    <bean id="sortRealizersByCountryAction" class="org.jtheque.films.view.impl.actions.sort.AcSortRealizer">
-        <constructor-arg value="realizer.view.actions.sort.country"/>
-        <constructor-arg value="Countries"/>
-    </bean>
-
-    <bean id="sortRealizersByNoteAction" class="org.jtheque.films.view.impl.actions.sort.AcSortRealizer">
-        <constructor-arg value="realizer.view.actions.sort.note"/>
-        <constructor-arg value="Notes"/>
-    </bean>
-
-    <bean id="saveRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcSaveRealizer"/>
-    <bean id="cancelRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcCancelRealizer"/>
-    <bean id="deleteRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcDeleteRealizer"/>
-    <bean id="newRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcNewRealizer">
-        <constructor-arg value="generic.view.actions.add"/>
-    </bean>
-    <bean id="editRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcEditRealizer"/>
-
-    <!-- Search -->
-
-    <jtheque:close id="closeSearchViewAction" key="generic.view.actions.cancel" view="searchView"/>
-
-    <bean id="validateSearchViewAction" class="org.jtheque.films.view.impl.actions.search.AcValidateSearchView"/>
+    
     <bean id="searchFilmAction" class="org.jtheque.films.view.impl.actions.film.AcSearchFilm"/>
     <bean id="searchActorAction" class="org.jtheque.films.view.impl.actions.actor.AcSearchActor"/>
     <bean id="searchRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcSearchRealizer"/>
 
-    <!-- Sites -->
-
-    <jtheque:close id="closeSitesViewAction" key="generic.view.actions.close" view="sitesView"/>
     <jtheque:display id="openSitesViewAction" key="generic.view.actions.close" view="sitesView"/>
 
-    <!-- Video -->
-
-    <jtheque:close id="closeVideoViewAction" key="generic.view.actions.cancel" view="videoView"/>
     <jtheque:display id="openVideoViewAction" key="video.view.actions.display" view="videoView"/>
-
-    <bean id="openVideoFileAction" class="org.jtheque.films.view.impl.actions.video.AcOpenVideoFile"/>
-    <bean id="newVideoFileAction" class="org.jtheque.films.view.impl.actions.video.AcNewVideoFile"/>
-    <bean id="refreshVideoViewAction" class="org.jtheque.films.view.impl.actions.video.AcRefreshVideoView"/>
-
-    <!-- Video File -->
-
-    <jtheque:close id="closeVideoFileViewAction" key="generic.view.actions.cancel" view="videoFileView"/>
-    <bean id="validateVideoFileViewAction" class="org.jtheque.films.view.impl.actions.video.file.AcValidateVideoFileView"/>
-
-    <!-- Others -->
-
-    <bean id="newBorrowerAction" class="org.jtheque.primary.view.impl.actions.borrower.AcNewBorrower">
-        <constructor-arg value="generic.view.actions.new"/>
-    </bean>
 
     <bean id="newBorrowerMenuAction" class="org.jtheque.primary.view.impl.actions.borrower.AcNewBorrower">
         <constructor-arg value="jtheque.actions.borrower"/>
@@ -320,5 +142,14 @@
     <bean id="editSagaMenuAction" class="org.jtheque.primary.view.impl.actions.saga.AcEditSaga">
         <constructor-arg value="actions.saga"/>
     </bean>
-
+    
+    <bean id="newBorrowerAction" class="org.jtheque.primary.view.impl.actions.borrower.AcNewBorrower">
+        <constructor-arg value="generic.view.actions.new"/>
+    </bean>
+    
+    <bean id="newSagaAction" class="org.jtheque.primary.view.impl.actions.saga.NewSagaAction"/>
+    <jtheque:display id="newTypeAction" key="type.actions.new" view="typeView"/>
+    
+    <bean id="editTypeAction" class="org.jtheque.primary.view.impl.actions.type.AcEditType"/>
+    <bean id="deleteTypeAction" class="org.jtheque.primary.view.impl.actions.type.AcDeleteType"/>
 </beans>

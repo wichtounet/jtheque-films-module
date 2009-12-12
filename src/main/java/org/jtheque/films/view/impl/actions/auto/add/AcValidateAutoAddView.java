@@ -17,6 +17,7 @@ package org.jtheque.films.view.impl.actions.auto.add;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.edt.SimpleTask;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
@@ -32,8 +33,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateAutoAddView extends JThequeAction {
-    private static final long serialVersionUID = -859591053047928367L;
-
     @Resource
     private IAutoAddController autoAddController;
 
@@ -42,6 +41,8 @@ public final class AcValidateAutoAddView extends JThequeAction {
      */
     public AcValidateAutoAddView() {
         super("generic.view.actions.ok");
+        
+        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override

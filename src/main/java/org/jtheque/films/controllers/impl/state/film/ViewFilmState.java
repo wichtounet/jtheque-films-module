@@ -53,7 +53,7 @@ public final class ViewFilmState implements ControllerState {
 
     @Override
     public void apply() {
-        controller.getViewModel().setEnabled(false);
+        controller.getView().setEnabled(false);
         controller.getView().getToolbarView().setDisplayMode(ViewMode.VIEW);
 
         if (getViewModel().getCurrentFilm() != null) {

@@ -5,12 +5,14 @@ import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.services.impl.utils.VideoFile;
 import org.jtheque.films.view.able.IVideoView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.video.AcNewVideoFile;
+import org.jtheque.films.view.impl.actions.video.AcOpenVideoFile;
+import org.jtheque.films.view.impl.actions.video.AcRefreshVideoView;
 import org.jtheque.films.view.impl.models.list.VideoListModel;
 import org.jtheque.films.view.impl.renderers.VideoListRenderer;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import java.awt.Container;
@@ -41,12 +43,7 @@ import java.util.Collection;
 public final class VideoView extends SwingDialogView implements IVideoView {
     private JList list;
 
-    private VideoListModel model;
-
-    private Action openAction;
-    private Action refreshAction;
-    private Action newAction;
-    private Action closeAction;
+    private final VideoListModel model;
 
     /**
      * Construct a new VideoView.
@@ -55,13 +52,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
      */
     public VideoView(Frame parent) {
         super(parent);
-    }
-
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+        
         model = new VideoListModel();
 
         setTitleKey("video.view.title");
@@ -70,7 +61,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
 
         setLocationRelativeTo(getOwner());
     }
-
+    
     /**
      * Build the content pane.
      *
@@ -88,7 +79,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
         builder.addScrolled(list, builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 0, -1, 1.0, 1.0));
 
         builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.NONE, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, 1.0, 0.0),
-                refreshAction, openAction, newAction, closeAction);
+                new AcRefreshVideoView(), new AcOpenVideoFile(), new AcNewVideoFile(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -105,41 +96,5 @@ public final class VideoView extends SwingDialogView implements IVideoView {
     @Override
     public void refreshList() {
         model.refresh();
-    }
-
-    /**
-     * Set the action to open the video.
-     *
-     * @param openAction The action to open the video.
-     */
-    public void setOpenAction(Action openAction) {
-        this.openAction = openAction;
-    }
-
-    /**
-     * Set the action to create a new video.
-     *
-     * @param newAction The action to create a new video.
-     */
-    public void setNewAction(Action newAction) {
-        this.newAction = newAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
-    }
-
-    /**
-     * Set the action to refresh the view.
-     *
-     * @param refreshAction The action to refresh the view.
-     */
-    public void setRefreshAction(Action refreshAction) {
-        this.refreshAction = refreshAction;
     }
 }

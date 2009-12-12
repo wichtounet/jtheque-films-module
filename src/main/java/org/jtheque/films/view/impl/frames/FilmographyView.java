@@ -21,10 +21,10 @@ import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.services.impl.utils.Filmography;
 import org.jtheque.films.view.able.IFilmographyView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.models.able.IFilmographyModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.swing.Action;
 import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLEditorKit;
 import java.awt.Container;
@@ -40,8 +40,6 @@ public final class FilmographyView extends SwingDialogView implements IFilmograp
     private static final long serialVersionUID = 7168128065378572964L;
 
     private JTextPane textFilmo;
-
-    private Action closeAction;
 
     /**
      * Construct a new <code>JFrameFilmography</code>.
@@ -101,7 +99,7 @@ public final class FilmographyView extends SwingDialogView implements IFilmograp
 
         builder.addScrolled(textFilmo, builder.gbcSet(0, 0, GridBagUtils.BOTH));
 
-        builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL), closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL), new CloseViewAction("generic.view.actions.close", this));
 
         return builder.getPanel();
     }
@@ -144,14 +142,5 @@ public final class FilmographyView extends SwingDialogView implements IFilmograp
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

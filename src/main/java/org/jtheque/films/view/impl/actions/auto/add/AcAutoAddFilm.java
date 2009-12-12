@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.auto.add;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IAutoAddController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,11 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcAutoAddFilm extends JThequeAction {
-    private static final long serialVersionUID = -5987872857618331512L;
-
-    @Resource
-    private IAutoAddController autoAddController;
-
     /**
      * Construct a new AcAutoAddFilm.
      */
@@ -42,6 +38,6 @@ public final class AcAutoAddFilm extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        autoAddController.add();
+        Managers.getManager(IBeansManager.class).<IAutoAddController>getBean("autoAddController").add();
     }
 }

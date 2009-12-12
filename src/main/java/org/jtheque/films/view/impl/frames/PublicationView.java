@@ -8,6 +8,8 @@ import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.services.impl.utils.file.FTPConnectionInfos;
 import org.jtheque.films.utils.Constants.Properties.Publication;
 import org.jtheque.films.view.able.IPublicationView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.publication.AcValidatePublicationView;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
 
@@ -48,23 +50,15 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     private JTextField fieldPort;
     private JThequeCheckBox passiveBox;
 
-    private final Action validateAction;
-    private final Action closeAction;
-
     private static final int FIELD_COLUMNS = 15;
 
     /**
      * Construct a new Publication View.
      *
      * @param parent         The parent frame.
-     * @param validateAction The action to validate the view.
-     * @param closeAction    The action to close the view.
      */
-    public PublicationView(Frame parent, Action validateAction, Action closeAction) {
+    public PublicationView(Frame parent) {
         super(parent);
-
-        this.validateAction = validateAction;
-        this.closeAction = closeAction;
 
         setTitleKey("publication.view.title");
         setContentPane(buildContentPane());
@@ -81,13 +75,15 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     private Container buildContentPane() {
         PanelBuilder builder = new PanelBuilder();
 
-        addPathFields(builder);
-        addAuthenticationFields(builder);
-        addPortField(builder);
+        Action validateAction = new AcValidatePublicationView();
+        
+        addPathFields(builder, validateAction);
+        addAuthenticationFields(builder, validateAction);
+        addPortField(builder, validateAction);
         addPassiveField(builder);
 
         builder.addButtonBar(builder.gbcSet(0, 6, GridBagUtils.HORIZONTAL, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, 1.0, 1.0),
-                validateAction, closeAction);
+                validateAction, new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -96,8 +92,9 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * Add the field for the path.
      *
      * @param builder The builder of the view.
+     * @param validateAction
      */
-    private void addPathFields(PanelBuilder builder) {
+    private void addPathFields(PanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.HOST, builder.gbcSet(0, 0));
 
         fieldHost = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 0, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
@@ -115,8 +112,9 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * Add the field for the authentication.
      *
      * @param builder The builder of the view.
+     * @param validateAction
      */
-    private void addAuthenticationFields(PanelBuilder builder) {
+    private void addAuthenticationFields(PanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.USER, builder.gbcSet(0, 2));
 
         fieldUser = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 2, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
@@ -133,8 +131,9 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * Add the field for the port.
      *
      * @param builder The builder of the view.
+     * @param validateAction
      */
-    private void addPortField(PanelBuilder builder) {
+    private void addPortField(PanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.PORT, builder.gbcSet(0, 4));
 
         fieldPort = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 4, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));

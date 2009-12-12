@@ -16,11 +16,12 @@ package org.jtheque.films.view.impl.actions.film;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
-import org.jtheque.films.view.able.IFilmView;
+import org.jtheque.films.view.able.IInfosKindsView;
 import org.jtheque.utils.collections.ArrayUtils;
 
-import javax.annotation.Resource;
 import javax.swing.DefaultListModel;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
@@ -31,11 +32,6 @@ import java.util.Arrays;
  * @author Baptiste Wicht
  */
 public final class AcAddKindToList extends JThequeSimpleAction {
-    private static final long serialVersionUID = -1335864379997427135L;
-
-    @Resource
-    private IFilmView filmView;
-
     /**
      * Construct a new <code>AcAddKindToList</code>.
      */
@@ -47,10 +43,12 @@ public final class AcAddKindToList extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DefaultListModel kindsModel = filmView.getPanelKinds().getKindsModel();
-        DefaultListModel kindsForFilmModel = filmView.getPanelKinds().getKindsForFilmModel();
+        IInfosKindsView kindsView = Managers.getManager(IBeansManager.class).getBean("filmKindsView");
+        
+        DefaultListModel kindsModel = kindsView.getKindsModel();
+        DefaultListModel kindsForFilmModel = kindsView.getKindsForFilmModel();
 
-        int[] selectedKinds = filmView.getPanelKinds().getSelectedKindsIndexes();
+        int[] selectedKinds = kindsView.getSelectedKindsIndexes();
 
         Arrays.sort(selectedKinds);
 

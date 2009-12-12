@@ -17,12 +17,12 @@ package org.jtheque.films.view.impl.actions.lend;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.ILendController;
 import org.jtheque.films.view.able.ILendFilmView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -31,11 +31,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateLendView extends JThequeAction {
-    private static final long serialVersionUID = 2773756389541921446L;
-
-    @Resource
-    private ILendController lendController;
-
     /**
      * Construct a new AcValidateLendView.
      */
@@ -45,6 +40,8 @@ public final class AcValidateLendView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ILendController lendController = Managers.getManager(IBeansManager.class).getBean("lendController");
+        
         ILendFilmView view = lendController.getView();
 
         if (view.getSelectedBorrower() == null || view.getSelectedFilm() == null) {

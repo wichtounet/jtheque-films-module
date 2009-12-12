@@ -16,12 +16,16 @@ package org.jtheque.films.view.impl.frames;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.ILendFilmView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.lend.AcValidateLendView;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.services.able.IBorrowersService;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
@@ -50,10 +54,6 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
 
     @Resource
     private IFilmsService filmsService;
-
-    private Action validateAction;
-    private Action closeAction;
-    private Action newBorrowerAction;
 
     /**
      * Construct a new <code>JFrameLendFilm</code> and initialize the frame.
@@ -96,9 +96,10 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
 
         builder.addComboBox(modelBorrowers, builder.gbcSet(1, 1));
 
-        builder.addButton(newBorrowerAction, builder.gbcSet(2, 1));
+        builder.addButton(Managers.getManager(IBeansManager.class).<Action>getBean("newBorrowerAction"), builder.gbcSet(2, 1));
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 3, 1), validateAction, closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 3, 1), 
+                new AcValidateLendView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -115,32 +116,5 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to create a new borrower.
-     *
-     * @param newBorrowerAction The action to create a new borrower.
-     */
-    public void setNewBorrowerAction(Action newBorrowerAction) {
-        this.newBorrowerAction = newBorrowerAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
     }
 }

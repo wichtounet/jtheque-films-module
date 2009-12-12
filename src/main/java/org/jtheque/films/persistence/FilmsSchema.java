@@ -70,7 +70,7 @@ public final class FilmsSchema extends AbstractSchema {
 
     @Override
     public String[] getDependencies() {
-        return new String[]{"PrimaryUtils-schema"};
+        return new String[]{"PrimaryUtils-Schema"};
     }
 
     @Override

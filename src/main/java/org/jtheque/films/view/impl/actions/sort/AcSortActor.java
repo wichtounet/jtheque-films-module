@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.sort;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.films.view.able.IActorView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,13 +29,8 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcSortActor extends JThequeSimpleAction {
-    private static final long serialVersionUID = 1651417572276677829L;
-
     private final String sortType;
-
-    @Resource
-    private IActorView actorView;
-
+    
     /**
      * Construct a new AcSortActor.
      *
@@ -51,6 +47,6 @@ public final class AcSortActor extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        actorView.sort(sortType);
+        Managers.getManager(IBeansManager.class).<IActorView>getBean("actorView").sort(sortType);
     }
 }

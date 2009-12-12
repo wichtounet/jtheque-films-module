@@ -1,11 +1,12 @@
 package org.jtheque.films.view.impl.actions.video;
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.services.impl.utils.VideoFile;
 import org.jtheque.films.view.able.IVideoView;
 import org.jtheque.utils.DesktopUtils;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -31,9 +32,6 @@ import java.io.File;
  * @author Baptiste Wicht
  */
 public final class AcOpenVideoFile extends JThequeAction {
-    @Resource
-    private IVideoView videoView;
-
     /**
      * Construct a new AcOpenVideoFile.
      */
@@ -43,7 +41,7 @@ public final class AcOpenVideoFile extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        VideoFile file = videoView.getSelectedFile();
+        VideoFile file = Managers.getManager(IBeansManager.class).<IVideoView>getBean("videoView").getSelectedFile();
 
         DesktopUtils.open(new File(file.getFilm().getFilePath()));
     }

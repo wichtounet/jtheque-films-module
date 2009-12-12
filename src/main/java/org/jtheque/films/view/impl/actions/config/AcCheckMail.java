@@ -17,7 +17,6 @@ package org.jtheque.films.view.impl.actions.config;
  */
 
 import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.view.able.IConfigView;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.films.view.impl.panels.config.JPanelConfigLendings;
@@ -34,9 +33,7 @@ public final class AcCheckMail extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        IConfigView view = Managers.getManager(IViewManager.class).getViews().getConfigView();
-
-        JPanelConfigLendings config = (JPanelConfigLendings) view.getSelectedPanelConfig();
+        JPanelConfigLendings config = (JPanelConfigLendings) Managers.getManager(IViewManager.class).getViews().getConfigView().getSelectedPanelConfig();
 
         boolean selected = config.getBoxSendMail().isSelected();
         config.setMailEnabled(selected);

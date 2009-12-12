@@ -33,6 +33,9 @@ public final class Constants {
 
     public static final String FILM_ICON = "film";
 
+    public static final double A_QUARTER = 0.25;
+    public static final double AN_HALF = 0.25;
+    
     /**
      * Construct a new Constants. This class isn't instanciable.
      */

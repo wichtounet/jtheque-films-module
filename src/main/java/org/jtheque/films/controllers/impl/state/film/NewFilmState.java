@@ -56,7 +56,7 @@ public final class NewFilmState implements ControllerState {
     @Override
     public void apply() {
         getViewModel().setCurrentFilm(filmsService.getDefaultFilm());
-        getViewModel().setEnabled(true);
+        controller.getView().setEnabled(true);
         controller.getView().getToolbarView().setDisplayMode(ViewMode.NEW);
     }
 

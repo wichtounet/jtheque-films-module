@@ -21,8 +21,9 @@ import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.view.able.IChoiceFieldsView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.auto.choice.AcValidateChoiceFieldsView;
 
-import javax.swing.Action;
 import javax.swing.JCheckBox;
 import java.awt.Container;
 import java.awt.Frame;
@@ -44,21 +45,13 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
     private JCheckBox boxImage;
     private JCheckBox boxResume;
 
-    private final Action closeAction;
-    private final Action validateAction;
-
     /**
      * Construct a new JFrameChoiceFields.
      *
      * @param parent         The parent frame.
-     * @param closeAction    The action to close the view.
-     * @param validateAction The action to validate the view.
      */
-    public ChoiceFieldsView(Frame parent, Action closeAction, Action validateAction) {
+    public ChoiceFieldsView(Frame parent) {
         super(parent);
-
-        this.closeAction = closeAction;
-        this.validateAction = validateAction;
 
         setContentPane(buildContentPane());
         pack();
@@ -82,7 +75,7 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
         boxImage = builder.addI18nCheckBox(Film.IMAGE, builder.gbcSet(0, 5));
         boxResume = builder.addI18nCheckBox(Film.RESUME, builder.gbcSet(0, 6));
 
-        builder.addButtonBar(builder.gbcSet(0, 7), closeAction, validateAction);
+        builder.addButtonBar(builder.gbcSet(0, 7), new CloseViewAction("generic.view.actions.cancel", this), new AcValidateChoiceFieldsView());
 
         return builder.getPanel();
     }

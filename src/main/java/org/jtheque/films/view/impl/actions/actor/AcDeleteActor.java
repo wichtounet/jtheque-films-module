@@ -17,12 +17,12 @@ package org.jtheque.films.view.impl.actions.actor;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IActorController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -31,11 +31,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcDeleteActor extends JThequeAction {
-    private static final long serialVersionUID = -4065895872194033911L;
-
-    @Resource
-    private IActorController actorController;
-
     /**
      * Construct a new AcDeleteActor.
      */
@@ -45,6 +40,8 @@ public final class AcDeleteActor extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        IActorController actorController = Managers.getManager(IBeansManager.class).getBean("actorController");
+        
         final boolean yes = Managers.getManager(IViewManager.class).askUserForConfirmation(
                 Managers.getManager(ILanguageManager.class).getMessage("actor.dialogs.confirmDelete",
                         actorController.getViewModel().getCurrentActor().getDisplayableText()),

@@ -17,6 +17,7 @@ package org.jtheque.films.view.impl.actions.film;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.resource.IResourceManager;
 import org.jtheque.core.managers.resource.ImageType;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
@@ -24,7 +25,6 @@ import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.controllers.able.ISearchController;
 import org.jtheque.films.utils.Constants;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -33,14 +33,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcSearchFilm extends JThequeAction {
-    private static final long serialVersionUID = 2451913093274074013L;
-
-    @Resource
-    private IFilmController filmController;
-
-    @Resource
-    private ISearchController searchController;
-
     /**
      * Construct a new AcSearchFilm.
      */
@@ -52,7 +44,9 @@ public final class AcSearchFilm extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        searchController.setResearchController(filmController);
+        ISearchController searchController = Managers.getManager(IBeansManager.class).getBean("filmSearchController");
+        
+        searchController.setResearchController(Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController"));
         searchController.displayView();
     }
 }

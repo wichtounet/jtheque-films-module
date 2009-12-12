@@ -24,6 +24,10 @@ import org.jtheque.films.services.impl.utils.web.FilmResult;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.view.able.IAutoAddView;
+import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
+import org.jtheque.films.view.impl.actions.auto.add.AcChooseSite;
+import org.jtheque.films.view.impl.actions.auto.add.AcCloseAutoAddView;
+import org.jtheque.films.view.impl.actions.auto.add.AcValidateAutoAddView;
 import org.jtheque.films.view.impl.models.able.IAutoAddModel;
 import org.jtheque.films.view.impl.models.list.SitesListModel;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -55,28 +59,13 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
 
     private int phase = PHASE_1;
 
-    private final Action chooseSiteAction;
-    private final Action closeViewAction;
-    private final Action displayInfosAboutSiteAction;
-    private final Action validateViewAction;
-
     /**
      * Construct a new JFrameAutoAdd.
      *
      * @param parent                      The parent frame.
-     * @param chooseSiteAction            The action to choose the site.
-     * @param closeViewAction             The action to close the view.
-     * @param displayInfosAboutSiteAction The action to display informations about site.
-     * @param validateViewAction          The action to validate the view.
      */
-    public AutoAddView(Frame parent, Action chooseSiteAction, Action closeViewAction, Action displayInfosAboutSiteAction,
-                       Action validateViewAction) {
+    public AutoAddView(Frame parent) {
         super(parent);
-
-        this.chooseSiteAction = chooseSiteAction;
-        this.closeViewAction = closeViewAction;
-        this.displayInfosAboutSiteAction = displayInfosAboutSiteAction;
-        this.validateViewAction = validateViewAction;
     }
 
     /**
@@ -101,13 +90,17 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
 
         builder.addI18nLabel(Film.TITLE, builder.gbcSet(0, 0));
 
+        Action chooseSiteAction = new AcChooseSite();
+        
         fieldTitle = builder.add(new JTextField(), builder.gbcSet(1, 0));
         SwingUtils.addFieldValidateAction(fieldTitle, chooseSiteAction);
 
-        addListsPanel(builder);
+        addListsPanel(builder, chooseSiteAction);
 
         builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 2, 1),
-                displayInfosAboutSiteAction, validateViewAction, closeViewAction);
+                new DisplayBeanViewAction("auto.add.view.actions.infos", "sitesView"), 
+                new AcValidateAutoAddView(),
+                new AcCloseAutoAddView());
 
         return builder.getPanel();
     }
@@ -116,8 +109,9 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
      * Add the list panel.
      *
      * @param parent The parent builder.
+     * @param chooseSiteAction The action to choose a site. 
      */
-    private void addListsPanel(PanelBuilder parent) {
+    private void addListsPanel(PanelBuilder parent, Action chooseSiteAction) {
         PanelBuilder builder = parent.addPanel(parent.gbcSet(0, 1, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 2, 1));
 
         listSites = new JList(new SitesListModel());

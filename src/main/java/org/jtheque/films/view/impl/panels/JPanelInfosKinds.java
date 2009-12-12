@@ -16,24 +16,26 @@ package org.jtheque.films.view.impl.panels;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
+import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.persistence.able.DataContainerProvider;
 import org.jtheque.core.managers.persistence.able.DataListener;
-import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.view.able.IInfosKindsView;
+import org.jtheque.films.view.impl.actions.film.AcAddKindToList;
+import org.jtheque.films.view.impl.actions.film.AcRemoveKindFromList;
 import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.films.view.impl.models.list.DataCachedContainerListModel;
 import org.jtheque.films.view.impl.models.list.SimpleModel;
 import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.services.able.IKindsService;
+import org.jtheque.primary.view.impl.actions.kind.AcNewKind;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -47,33 +49,24 @@ import java.util.HashSet;
  * @author Baptiste Wicht
  */
 public final class JPanelInfosKinds extends JPanel implements DataListener, IInfosKindsView {
-    private static final long serialVersionUID = 447863972139498415L;
+    private final JButton buttonAdd;
+    private final JButton buttonRemove;
+    private final JButton buttonNew;
+    
+    private final JList listKinds;
+    private final JList listKindsForFilm;
 
-    private JButton buttonAdd;
-    private JButton buttonRemove;
-    private JButton buttonNew;
-    private JList listKinds;
-    private JList listKindsForFilm;
-
-    private DataCachedContainerListModel<Kind> kindsModel;
-    private SimpleModel<Kind> kindsForFilmModel;
-
-    private JThequeSimpleAction removeAction;
-    private JThequeSimpleAction addAction;
-    private Action newAction;
-
-    @Resource
-    private IKindsService kindsService;
+    private final DataCachedContainerListModel<Kind> kindsModel;
+    private final SimpleModel<Kind> kindsForFilmModel;
+    
     private static final double AN_HALF = 0.5;
 
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+    public JPanelInfosKinds() {
+        super();
+        
         PanelBuilder builder = new PanelBuilder(this);
 
-        kindsModel = new DataCachedContainerListModel<Kind>(kindsService);
+        kindsModel = new DataCachedContainerListModel<Kind>(Managers.getManager(IBeansManager.class).<DataContainer<Kind>>getBean("kindsService"));
 
         DataContainerProvider.getInstance().getContainerForDataType(IKindsService.DATA_TYPE).addDataListener(this);
 
@@ -81,13 +74,13 @@ public final class JPanelInfosKinds extends JPanel implements DataListener, IInf
                 builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 1, 0, AN_HALF, 1.0));
         listKinds.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        buttonAdd = builder.addButton(addAction, builder.gbcSet(1, 0));
+        buttonAdd = builder.addButton(new AcAddKindToList(), builder.gbcSet(1, 0));
         buttonAdd.setEnabled(false);
 
-        buttonRemove = builder.addButton(removeAction, builder.gbcSet(1, 1));
+        buttonRemove = builder.addButton(new AcRemoveKindFromList(), builder.gbcSet(1, 1));
         buttonRemove.setEnabled(false);
 
-        buttonNew = builder.addButton(newAction, builder.gbcSet(1, 2));
+        buttonNew = builder.addButton(new AcNewKind(), builder.gbcSet(1, 2));
         buttonNew.setEnabled(false);
 
         kindsForFilmModel = new SimpleModel<Kind>();
@@ -95,7 +88,6 @@ public final class JPanelInfosKinds extends JPanel implements DataListener, IInf
         listKindsForFilm = builder.addList(kindsForFilmModel, null,
                 builder.gbcSet(2, 0, GridBagUtils.BOTH, GridBagUtils.ABOVE_BASELINE_LEADING, 1, 0, AN_HALF, 1.0));
         listKindsForFilm.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
     }
 
     @Override
@@ -154,33 +146,6 @@ public final class JPanelInfosKinds extends JPanel implements DataListener, IInf
         for (Kind o : kindsForFilmModel.getObjects()) {
             kindsModel.removeElement(o);
         }
-    }
-
-    /**
-     * Set the action to remove a kind.
-     *
-     * @param removeAction The action to remove a kind.
-     */
-    public void setRemoveAction(JThequeSimpleAction removeAction) {
-        this.removeAction = removeAction;
-    }
-
-    /**
-     * Set the action to add a kind.
-     *
-     * @param addAction The action to add a kind.
-     */
-    public void setAddAction(JThequeSimpleAction addAction) {
-        this.addAction = addAction;
-    }
-
-    /**
-     * Set the action to create a new kind.
-     *
-     * @param newAction The action to remove a new kind.
-     */
-    public void setNewAction(Action newAction) {
-        this.newAction = newAction;
     }
 
     @Override

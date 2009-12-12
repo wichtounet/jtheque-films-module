@@ -31,8 +31,6 @@ import javax.swing.undo.AbstractUndoableEdit;
  * @author Baptiste Wicht
  */
 public final class CreatedFilmEdit extends AbstractUndoableEdit {
-    private static final long serialVersionUID = -3037357344759861059L;
-
     private final Film film;
 
     @Resource

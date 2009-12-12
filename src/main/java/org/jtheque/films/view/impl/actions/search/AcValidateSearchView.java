@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.search;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.ISearchController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,11 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidateSearchView extends JThequeAction {
-    private static final long serialVersionUID = 7412134722837933376L;
-
-    @Resource
-    private ISearchController searchController;
-
     /**
      * Construct a new AcValidateSearchView.
      */
@@ -42,6 +38,8 @@ public final class AcValidateSearchView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ISearchController searchController = Managers.getManager(IBeansManager.class).getBean("searchController");
+        
         searchController.search(searchController.getView().buildSearcher());
     }
 }

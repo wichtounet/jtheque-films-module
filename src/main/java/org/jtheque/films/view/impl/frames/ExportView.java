@@ -25,12 +25,12 @@ import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.view.able.IExportView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.file.AcValidateExportView;
 import org.jtheque.films.view.impl.panels.search.JPanelFilmSearch;
 import org.jtheque.utils.io.SimpleFilter;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -47,9 +47,6 @@ public final class ExportView extends SwingDialogView implements IExportView {
     private FileChooserPanel chooser;
     private JPanelFilmSearch searchPanel;
 
-    private Action validateAction;
-    private Action closeAction;
-
     /**
      * Construct a new <code>JFrameExport</code>.
      *
@@ -57,12 +54,13 @@ public final class ExportView extends SwingDialogView implements IExportView {
      */
     public ExportView(Frame parent) {
         super(parent);
+        
+        build();
     }
 
     /**
      * Build the view.
      */
-    @PostConstruct
     private void build() {
         setTitleKey("export.view.title");
         setContentPane(buildContentPane());
@@ -88,7 +86,8 @@ public final class ExportView extends SwingDialogView implements IExportView {
         searchPanel.setBorder(Borders.createTitledBorder("export.view.search"));
         builder.add(searchPanel, builder.gbcSet(0, 1, GridBagUtils.BOTH));
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL), validateAction, closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL), 
+                new AcValidateExportView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -113,23 +112,5 @@ public final class ExportView extends SwingDialogView implements IExportView {
     @Override
     protected void validate(Collection<JThequeError> errors) {
         ValidationUtils.rejectIfEmpty(getFilePath(), "export.view.filePath", errors);
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
     }
 }

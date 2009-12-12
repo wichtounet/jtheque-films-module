@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.realizer;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IRealizerController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,22 +29,16 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcNewRealizer extends JThequeAction {
-    private static final long serialVersionUID = -3095166168746313455L;
-
-    @Resource
-    private IRealizerController realizerController;
-
     /**
      * Construct a new AcNewRealizer.
-     *
-     * @param key The internationalization key.
+     *  
      */
-    public AcNewRealizer(String key) {
-        super(key);
+    public AcNewRealizer() {
+        super("generic.view.actions.add");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        realizerController.createRealizer();
+        Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController").createRealizer();
     }
 }

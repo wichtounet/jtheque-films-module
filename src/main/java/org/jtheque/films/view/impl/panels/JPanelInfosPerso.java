@@ -42,11 +42,9 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
-    private static final long serialVersionUID = 9170558888311015960L;
-
-    private NotesComboBoxModel modelNote;
-    private JComboBox comboNote;
-    private JTextArea areaComment;
+    private final NotesComboBoxModel modelNote;
+    private final JComboBox comboNote;
+    private final JTextArea areaComment;
 
     /**
      * Construct a new JPanelInfosPerso. 
@@ -54,13 +52,6 @@ public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
     public JPanelInfosPerso(){
         super();
 
-        build();
-    }
-
-    /**
-     * Build the panel.
-     */
-    private void build() {
         PanelBuilder builder = new PanelBuilder(this);
 
         builder.addI18nLabel(Properties.Film.NOTE, builder.gbcSet(0, 0));

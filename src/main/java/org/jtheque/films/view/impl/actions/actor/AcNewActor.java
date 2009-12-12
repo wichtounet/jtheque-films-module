@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.actor;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IActorController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,11 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcNewActor extends JThequeAction {
-    private static final long serialVersionUID = -3095166168746313455L;
-
-    @Resource
-    private IActorController actorController;
-
     /**
      * Construct a new AcNewActor.
      */
@@ -42,6 +38,6 @@ public final class AcNewActor extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        actorController.createActor();
+        Managers.getManager(IBeansManager.class).<IActorController>getBean("actorController").createActor();
     }
 }

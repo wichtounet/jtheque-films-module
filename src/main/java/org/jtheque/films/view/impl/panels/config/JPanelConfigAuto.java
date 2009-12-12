@@ -38,8 +38,6 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent {
-    private static final long serialVersionUID = 6787412105243753090L;
-
     private JTextField fieldNumberOfActors;
 
     /**

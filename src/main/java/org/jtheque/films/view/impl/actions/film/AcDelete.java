@@ -17,12 +17,12 @@ package org.jtheque.films.view.impl.actions.film;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IFilmController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -31,11 +31,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcDelete extends JThequeAction {
-    private static final long serialVersionUID = 1220800654712365346L;
-
-    @Resource
-    private IFilmController filmController;
-
     /**
      * Construct a new AcDelete.
      */
@@ -47,11 +42,11 @@ public final class AcDelete extends JThequeAction {
     public void actionPerformed(ActionEvent e) {
         final boolean yes = Managers.getManager(IViewManager.class).askUserForConfirmation(
                 Managers.getManager(ILanguageManager.class).getMessage("film.dialogs.confirmDelete",
-                        filmController.getViewModel().getCurrentFilm().getDisplayableText()),
+                        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").getViewModel().getCurrentFilm().getDisplayableText()),
                 Managers.getManager(ILanguageManager.class).getMessage("film.dialogs.confirmDelete.title"));
 
         if (yes) {
-            filmController.deleteCurrentFilm();
+            Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").deleteCurrentFilm();
         }
     }
 }

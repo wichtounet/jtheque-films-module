@@ -16,14 +16,14 @@ package org.jtheque.films.view.impl.models;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.view.impl.models.able.IActorsModel;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.models.PrincipalDataModel;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.Collection;
 
 /**
@@ -36,14 +36,13 @@ public final class ActorsModel extends PrincipalDataModel<Person> implements IAc
 
     private Person currentActor;
 
-    @Resource
-    private IActorService actorService;
+    private final IActorService actorService;
 
-    /**
-     * Init the model.
-     */
-    @PostConstruct
-    private void init() {
+    public ActorsModel() {
+        super();
+        
+        actorService = Managers.getManager(IBeansManager.class).getBean("actorService");
+        
         actorService.addDataListener(this);
     }
 

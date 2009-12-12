@@ -21,14 +21,13 @@ import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.primary.view.able.PrincipalDataView;
 import org.jtheque.primary.view.able.ToolbarView;
 import org.jtheque.primary.view.impl.listeners.CurrentObjectListener;
-import org.jtheque.primary.view.impl.listeners.ViewStateListener;
 
 import java.awt.image.BufferedImage;
 
 /**
  * @author Baptiste Wicht
  */
-public interface IFilmView extends CurrentObjectListener, TabComponent, ViewStateListener, PrincipalDataView {
+public interface IFilmView extends CurrentObjectListener, TabComponent, PrincipalDataView {
     /**
      * Fill a <code>FilmFormBean</code> with the infos in the interface.
      *
@@ -42,20 +41,6 @@ public interface IFilmView extends CurrentObjectListener, TabComponent, ViewStat
      * @param image The image of the film to display.
      */
     void setImageOfPanel(BufferedImage image);
-
-    /**
-     * Return the actors panels.
-     *
-     * @return The actors panel.
-     */
-    IInfosActorsView getPanelActors();
-
-    /**
-     * Return the kinds panels.
-     *
-     * @return The kinds panel.
-     */
-    IInfosKindsView getPanelKinds();
 
     @Override
     ToolbarView getToolbarView();

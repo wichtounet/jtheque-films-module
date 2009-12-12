@@ -34,8 +34,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcExport extends JThequeAction {
-    private static final long serialVersionUID = -2448963462025446778L;
-
     private final FileType fileType;
 
     @Resource

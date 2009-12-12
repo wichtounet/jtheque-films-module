@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.sort;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.films.view.able.IRealizerView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,12 +29,7 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcSortRealizer extends JThequeSimpleAction {
-    private static final long serialVersionUID = 1651417172586677829L;
-
     private final String sortType;
-
-    @Resource
-    private IRealizerView realizerView;
 
     /**
      * Construct a new AcSortRealizer.
@@ -50,6 +46,6 @@ public final class AcSortRealizer extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        realizerView.sort(sortType);
+        Managers.getManager(IBeansManager.class).<IRealizerView>getBean("realizerView").sort(sortType);
     }
 }

@@ -16,11 +16,12 @@ package org.jtheque.films.view.impl.actions.auto.imports;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.view.able.IAutoImportView;
 import org.jtheque.utils.StringUtils;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -29,11 +30,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcDeleteTitle extends JThequeAction {
-    private static final long serialVersionUID = -8086054102467874235L;
-
-    @Resource
-    private IAutoImportView autoImportView;
-
     /**
      * Create a new AcDeleteTitle action.
      */
@@ -43,6 +39,8 @@ public final class AcDeleteTitle extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        IAutoImportView autoImportView = Managers.getManager(IBeansManager.class).getBean("autoImportView");
+        
         String title = autoImportView.getSelectedTitle();
 
         if (!StringUtils.isEmpty(title)) {

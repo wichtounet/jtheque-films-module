@@ -1,9 +1,10 @@
 package org.jtheque.films.view.impl.actions.video;
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IVideoFileController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /*
@@ -28,9 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcNewVideoFile extends JThequeAction {
-    @Resource
-    private IVideoFileController videoFileController;
-
     /**
      * Construct a new AcNewVideoFile.
      */
@@ -40,6 +38,6 @@ public final class AcNewVideoFile extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        videoFileController.displayView();
+        Managers.getManager(IBeansManager.class).<IVideoFileController>getBean("videoFileController").displayView();
     }
 }

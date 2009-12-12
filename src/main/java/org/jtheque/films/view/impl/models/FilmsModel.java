@@ -22,7 +22,6 @@ import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
-import org.jtheque.primary.view.impl.listeners.ViewStateListener;
 import org.jtheque.primary.view.impl.models.PrincipalDataModel;
 
 import java.util.Collection;
@@ -33,7 +32,6 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class FilmsModel extends PrincipalDataModel<Film> implements IFilmsModel {
-    private boolean enabled;
     private Film currentFilm;
 
     private Collection<Film> displayList;
@@ -76,18 +74,6 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
     }
 
     @Override
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-
-        fireStateChanged();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
     public Film getCurrentFilm() {
         return currentFilm;
     }
@@ -98,12 +84,7 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
 
         fireCurrentObjectChanged(new ObjectChangedEvent(this, currentFilm));
     }
-
-    @Override
-    public void addViewStateListener(ViewStateListener listener) {
-        getEventListenerList().add(ViewStateListener.class, listener);
-    }
-
+    
     /**
      * Return the service for the films.
      *
@@ -111,16 +92,5 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
      */
     private static IFilmsService getFilmsService() {
         return Managers.getManager(IBeansManager.class).getBean("filmsService");
-    }
-
-    /**
-     * Fire a state changed event.
-     */
-    private void fireStateChanged() {
-        ViewStateListener[] listeners = getEventListenerList().getListeners(ViewStateListener.class);
-
-        for (ViewStateListener listener : listeners) {
-            listener.stateChanged();
-        }
     }
 }

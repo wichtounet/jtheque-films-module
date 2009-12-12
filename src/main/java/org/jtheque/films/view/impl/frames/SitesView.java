@@ -25,12 +25,12 @@ import org.jtheque.films.controllers.able.ISitesController;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.utils.FileUtils;
 import org.jtheque.films.view.able.ISitesView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.models.list.SitesListModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextPane;
@@ -53,8 +53,6 @@ public final class SitesView extends SwingDialogView implements ISitesView {
     private JList listSites;
     private DefaultListModel sitesModel;
     private JTextPane textSites;
-
-    private Action closeAction;
 
     @Logger
     private IJThequeLogger logger;
@@ -118,7 +116,7 @@ public final class SitesView extends SwingDialogView implements ISitesView {
 
         builder.addScrolled(textSites, builder.gbcSet(1, 0));
 
-        builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL, 2, 1), closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL, 2, 1), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -135,14 +133,5 @@ public final class SitesView extends SwingDialogView implements ISitesView {
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 }

@@ -18,6 +18,7 @@ package org.jtheque.films.controllers.able;
 
 import org.jtheque.core.managers.view.able.controller.Controller;
 import org.jtheque.films.utils.Constants;
+import org.jtheque.films.view.able.IImportView;
 import org.jtheque.utils.io.FileException;
 
 /**
@@ -40,4 +41,7 @@ public interface IImportController extends Controller {
      * @throws FileException If there is an I/O problem during the import.
      */
     void importData(String filePath) throws FileException;
+    
+    @Override
+    IImportView getView();
 }

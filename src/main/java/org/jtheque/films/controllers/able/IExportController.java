@@ -20,6 +20,7 @@ import org.jtheque.core.managers.view.able.controller.Controller;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.utils.Constants;
+import org.jtheque.films.view.able.IExportView;
 
 /**
  * An export controller specification.
@@ -50,4 +51,6 @@ public interface IExportController extends Controller {
      */
     void exportFilm(String filePath, Film film);
 
+    @Override
+    IExportView getView();
 }

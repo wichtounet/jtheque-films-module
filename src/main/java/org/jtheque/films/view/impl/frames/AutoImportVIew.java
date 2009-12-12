@@ -24,10 +24,14 @@ import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.view.able.IAutoImportView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.auto.imports.AcAddTitle;
+import org.jtheque.films.view.impl.actions.auto.imports.AcDeleteTitle;
+import org.jtheque.films.view.impl.actions.auto.imports.AcSearchTitles;
+import org.jtheque.films.view.impl.actions.auto.imports.AcValidateAutoImportView;
 import org.jtheque.films.view.impl.models.able.IAutoImportFilm;
 import org.jtheque.films.view.impl.models.combo.SitesComboBoxModel;
 
-import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
@@ -55,31 +59,13 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
 
     private int phase = PHASE_1;
 
-    private final Action searchTitlesAction;
-    private final Action deleteTitleAction;
-    private final Action addTitleAction;
-    private final Action validateAction;
-    private final Action cancelAction;
-
     /**
      * Construct a new JFrameAutoImport.
      *
      * @param parent             The parent frame.
-     * @param searchTitlesAction The action to search titles.
-     * @param deleteTitleAction  The action to delete title.
-     * @param addTitleAction     The action to add a title.
-     * @param validateAction     The action to validate the view.
-     * @param cancelAction       The action to cancel the view.
      */
-    public AutoImportVIew(Frame parent, Action searchTitlesAction, Action deleteTitleAction, Action addTitleAction,
-                          Action validateAction, Action cancelAction) {
+    public AutoImportVIew(Frame parent) {
         super(parent);
-
-        this.searchTitlesAction = searchTitlesAction;
-        this.deleteTitleAction = deleteTitleAction;
-        this.addTitleAction = addTitleAction;
-        this.validateAction = validateAction;
-        this.cancelAction = cancelAction;
 
         build();
     }
@@ -107,18 +93,18 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
         addDirectoryChooser(builder);
         addFileModeField(builder);
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagConstraints.HORIZONTAL, 2, 1), searchTitlesAction);
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagConstraints.HORIZONTAL, 2, 1), new AcSearchTitles());
 
         addTitleList(builder);
 
         builder.addButtonBar(builder.gbcSet(0, 4, GridBagConstraints.HORIZONTAL, 2, 1),
-                deleteTitleAction, addTitleAction);
+                new AcDeleteTitle(), new AcAddTitle());
 
         addWebModeField(builder);
         addSiteField(builder);
 
         builder.addButtonBar(builder.gbcSet(0, 7, GridBagConstraints.HORIZONTAL, 2, 1),
-                validateAction, cancelAction);
+                new AcValidateAutoImportView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }

@@ -24,13 +24,15 @@ import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.PanelBuilder;
 import org.jtheque.films.view.able.ILendingsView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
+import org.jtheque.films.view.impl.actions.lendings.AcReturnCurrentFilm;
 import org.jtheque.films.view.impl.editors.DataCellEditor;
 import org.jtheque.films.view.impl.menus.JMenuBarLendings;
 import org.jtheque.films.view.impl.models.table.LendingsTableModel;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.swing.Action;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.Container;
@@ -49,24 +51,13 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
     private LendingsTableModel model;
     private JXTable tableLendings;
 
-    private final Action lendAction;
-    private final Action returnAction;
-    private final Action closeAction;
-
     /**
      * Construct a new <code>JFrameLendings</code>.
      *
      * @param parent       The parent frame.
-     * @param lendAction   The action to lend a film.
-     * @param returnAction The action to return a film.
-     * @param closeAction  The action to close the view.
      */
-    public LendingsView(Frame parent, Action lendAction, Action returnAction, Action closeAction) {
+    public LendingsView(Frame parent) {
         super(parent);
-
-        this.lendAction = lendAction;
-        this.returnAction = returnAction;
-        this.closeAction = closeAction;
 
         build();
     }
@@ -108,7 +99,8 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
         builder.addScrolled(tableLendings, builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 0, -1, 1.0, 1.0));
 
         builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL, 0, 0),
-                lendAction, returnAction, closeAction);
+                new DisplayBeanViewAction("lendings.view.actions.lend", "lendFilmView"), new AcReturnCurrentFilm(), 
+                new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }

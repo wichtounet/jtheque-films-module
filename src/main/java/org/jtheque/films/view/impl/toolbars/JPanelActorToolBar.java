@@ -19,12 +19,16 @@ package org.jtheque.films.view.impl.toolbars;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.utils.ui.Borders;
+import org.jtheque.films.view.impl.actions.actor.AcCancelActor;
+import org.jtheque.films.view.impl.actions.actor.AcDeleteActor;
+import org.jtheque.films.view.impl.actions.actor.AcDisplayFilmography;
+import org.jtheque.films.view.impl.actions.actor.AcEditActor;
+import org.jtheque.films.view.impl.actions.actor.AcNewActor;
+import org.jtheque.films.view.impl.actions.actor.AcSaveActor;
 import org.jtheque.primary.view.able.ToolbarView;
 import org.jtheque.primary.view.able.ViewMode;
 import org.jtheque.utils.ui.GridBagUtils;
 
-import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -39,38 +43,29 @@ import java.awt.GridBagConstraints;
 public final class JPanelActorToolBar extends JPanel implements ToolbarView {
     private static final long serialVersionUID = -688094676844153411L;
 
-    private JButton buttonAdd;
-    private JButton buttonEdit;
-    private JButton buttonSave;
-    private JButton buttonCancel;
-    private JButton buttonDelete;
-    private JButton buttonFilmo;
+    private final JButton buttonAdd;
+    private final JButton buttonEdit;
+    private final JButton buttonSave;
+    private final JButton buttonCancel;
+    private final JButton buttonDelete;
+    private final JButton buttonFilmo;
 
     private ViewMode mode = ViewMode.VIEW;
 
     private final GridBagUtils gbc = new GridBagUtils();
 
-    private Action saveAction;
-    private Action cancelAction;
-    private Action deleteAction;
-    private Action newAction;
-    private Action editAction;
-    private Action displayAction;
-
-    /**
-     * Build the view.
-     */
-    @PostConstruct
-    private void build() {
+    public JPanelActorToolBar() {
+        super();
+        
         setBackground(Color.white);
         setBorder(Borders.DIALOG_BORDER);
 
-        buttonSave = new JButton(saveAction);
-        buttonCancel = new JButton(cancelAction);
-        buttonDelete = new JButton(deleteAction);
-        buttonAdd = new JButton(newAction);
-        buttonEdit = new JButton(editAction);
-        buttonFilmo = new JButton(displayAction);
+        buttonSave = new JButton(new AcSaveActor());
+        buttonCancel = new JButton(new AcCancelActor());
+        buttonDelete = new JButton(new AcDeleteActor());
+        buttonAdd = new JButton(new AcNewActor());
+        buttonEdit = new JButton(new AcEditActor());
+        buttonFilmo = new JButton(new AcDisplayFilmography());
 
         add(Box.createHorizontalGlue(), gbc.gbcSet(0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.BASELINE_LEADING, 1.0, 1.0));
 
@@ -135,59 +130,5 @@ public final class JPanelActorToolBar extends JPanel implements ToolbarView {
     @Override
     public void setDisplayMode(ViewMode mode) {
         setMode(mode);
-    }
-
-    /**
-     * Set the action to save the current actor.
-     *
-     * @param saveAction The action to save the current actor.
-     */
-    public void setSaveAction(Action saveAction) {
-        this.saveAction = saveAction;
-    }
-
-    /**
-     * Set the action to cancel the current actor.
-     *
-     * @param cancelAction The action to cancel the current actor.
-     */
-    public void setCancelAction(Action cancelAction) {
-        this.cancelAction = cancelAction;
-    }
-
-    /**
-     * Set the action to delete the current actor.
-     *
-     * @param deleteAction The action to delete the current actor.
-     */
-    public void setDeleteAction(Action deleteAction) {
-        this.deleteAction = deleteAction;
-    }
-
-    /**
-     * Set the action to create a new actor.
-     *
-     * @param newAction The action to create a new actor.
-     */
-    public void setNewAction(Action newAction) {
-        this.newAction = newAction;
-    }
-
-    /**
-     * Set the action to edit the current actor.
-     *
-     * @param editAction The action to edit the current actor.
-     */
-    public void setEditAction(Action editAction) {
-        this.editAction = editAction;
-    }
-
-    /**
-     * Set the action to display the filmography.
-     *
-     * @param displayAction The action to display the filmography.
-     */
-    public void setDisplayAction(Action displayAction) {
-        this.displayAction = displayAction;
     }
 }

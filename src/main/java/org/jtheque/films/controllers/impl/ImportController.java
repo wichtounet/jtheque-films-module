@@ -16,7 +16,6 @@ package org.jtheque.films.controllers.impl;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.core.managers.view.able.IView;
 import org.jtheque.core.managers.view.able.controller.AbstractController;
 import org.jtheque.films.controllers.able.IImportController;
 import org.jtheque.films.services.impl.utils.file.imports.ImportManager;
@@ -52,7 +51,7 @@ public final class ImportController extends AbstractController implements IImpor
     }
 
     @Override
-    public IView getView() {
+    public IImportView getView() {
         return importView;
     }
 }

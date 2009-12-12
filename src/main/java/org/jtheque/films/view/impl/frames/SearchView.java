@@ -27,11 +27,12 @@ import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.controllers.able.IRealizerController;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.view.able.ISearchView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.search.AcValidateSearchView;
 import org.jtheque.films.view.impl.panels.search.JPanelSearch;
 import org.jtheque.primary.od.able.Data;
 
 import javax.annotation.PostConstruct;
-import javax.swing.Action;
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -44,15 +45,11 @@ import java.util.Collection;
 public final class SearchView extends SwingDialogView implements ISearchView {
     private static final long serialVersionUID = -8315962232919880990L;
 
-    /* Research's panels */
     private JPanelSearch filmSearchPanel;
     private JPanelSearch actorSearchPanel;
     private JPanelSearch realizerSearchPanel;
 
     private JPanelSearch currentPanel;
-
-    private Action validateAction;
-    private Action closeAction;
 
     /**
      * Construct a new SearchView.
@@ -95,7 +92,7 @@ public final class SearchView extends SwingDialogView implements ISearchView {
 
         builder.add(currentPanel, builder.gbcSet(0, 0));
 
-        builder.addButtonBar(builder.gbcSet(0, 1), validateAction, closeAction);
+        builder.addButtonBar(builder.gbcSet(0, 1), new AcValidateSearchView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }
@@ -126,24 +123,6 @@ public final class SearchView extends SwingDialogView implements ISearchView {
 
     @Override
     protected void validate(Collection<JThequeError> errors) {
-    }
-
-    /**
-     * Set the action to validate the view.
-     *
-     * @param validateAction The action to validate the view.
-     */
-    public void setValidateAction(Action validateAction) {
-        this.validateAction = validateAction;
-    }
-
-    /**
-     * Set the action to close the view.
-     *
-     * @param closeAction The action to close the view.
-     */
-    public void setCloseAction(Action closeAction) {
-        this.closeAction = closeAction;
     }
 
     /**

@@ -16,11 +16,12 @@ package org.jtheque.films.view.impl.actions.film;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
-import org.jtheque.films.view.able.IFilmView;
+import org.jtheque.films.view.able.IInfosActorsView;
 import org.jtheque.utils.collections.ArrayUtils;
 
-import javax.annotation.Resource;
 import javax.swing.DefaultListModel;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
@@ -31,11 +32,6 @@ import java.util.Arrays;
  * @author Baptiste Wicht
  */
 public final class AcRemoveActorFromList extends JThequeSimpleAction {
-    private static final long serialVersionUID = -8163503906464833282L;
-
-    @Resource
-    private IFilmView filmView;
-
     /**
      * Construct a new <code>AcRemoveActorFromList</code>.
      */
@@ -47,10 +43,12 @@ public final class AcRemoveActorFromList extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DefaultListModel modelActors = filmView.getPanelActors().getActorsModel();
-        DefaultListModel modelActorsForFilm = filmView.getPanelActors().getActorsForFilmModel();
+        IInfosActorsView actorsView = Managers.getManager(IBeansManager.class).getBean("filmActorsView");
+        
+        DefaultListModel modelActors = actorsView.getActorsModel();
+        DefaultListModel modelActorsForFilm = actorsView.getActorsForFilmModel();
 
-        int[] selectedActors = filmView.getPanelActors().getSelectedActorsForFilmIndexes();
+        int[] selectedActors = actorsView.getSelectedActorsForFilmIndexes();
 
         Arrays.sort(selectedActors);
 

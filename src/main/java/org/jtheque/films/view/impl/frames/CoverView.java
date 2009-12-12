@@ -25,13 +25,16 @@ import org.jtheque.films.services.able.ICoverService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.impl.utils.cover.Format;
 import org.jtheque.films.view.able.ICoverView;
+import org.jtheque.films.view.impl.actions.CloseViewAction;
+import org.jtheque.films.view.impl.actions.cover.AcExportCover;
+import org.jtheque.films.view.impl.actions.cover.AcPrintCover;
+import org.jtheque.films.view.impl.actions.cover.AcUpdateCover;
 import org.jtheque.films.view.impl.models.combo.CoverFormatComboBoxModel;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.swing.Action;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -54,27 +57,13 @@ public final class CoverView extends SwingDialogView implements ICoverView {
     private CoverFormatComboBoxModel modelFormats;
     private JXImagePanel viewer;
 
-    private final Action updateAction;
-    private final Action closeAction;
-    private final Action printAction;
-    private final Action exportAction;
-
     /**
      * Construct a new CoverView.
      *
      * @param frame        The parent frame.
-     * @param updateAction The action to update the cover.
-     * @param closeAction  The action to close the view.
-     * @param printAction  The action to print the cover.
-     * @param exportAction The action to export the cover.
      */
-    public CoverView(Frame frame, Action updateAction, Action closeAction, Action printAction, Action exportAction) {
+    public CoverView(Frame frame) {
         super(frame);
-
-        this.updateAction = updateAction;
-        this.closeAction = closeAction;
-        this.printAction = printAction;
-        this.exportAction = exportAction;
     }
 
     /**
@@ -118,7 +107,7 @@ public final class CoverView extends SwingDialogView implements ICoverView {
         builder.add(viewer, builder.gbcSet(0, 2, GridBagUtils.BOTH, 2, 1));
 
         builder.addButtonBar(builder.gbcSet(0, 3, GridBagUtils.HORIZONTAL, 2, 1),
-                updateAction, printAction, exportAction, closeAction);
+                new AcUpdateCover(), new AcPrintCover(), new AcExportCover(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
     }

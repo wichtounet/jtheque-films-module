@@ -16,11 +16,13 @@ package org.jtheque.films.view.impl.menus;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.resource.IResourceManager;
 import org.jtheque.core.managers.view.impl.components.menu.JThequeMenu;
 import org.jtheque.core.managers.view.impl.components.menu.JThequeMenuItem;
+import org.jtheque.films.view.impl.actions.CloseBeanViewAction;
+import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
+import org.jtheque.films.view.impl.actions.lendings.AcReturnCurrentFilm;
 
+import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -40,12 +42,12 @@ public final class JMenuBarLendings extends JMenuBar {
 
         JMenu menu = new JThequeMenu("menu.lendings");
 
-        addAction(menu, "lendFilmAction");
-        addAction(menu, "returnCurrentFilmAction");
+        addAction(menu, new DisplayBeanViewAction("lendings.view.actions.lend", "lendFilmView"));
+        addAction(menu, new AcReturnCurrentFilm());
 
         menu.addSeparator();
 
-        addAction(menu, "closeLendingsViewAction");
+        addAction(menu, new CloseBeanViewAction("generic.view.actions.close", "lendingsView"));
 
         add(menu);
     }
@@ -56,7 +58,7 @@ public final class JMenuBarLendings extends JMenuBar {
      * @param menu   The menu.
      * @param action The name of the action bean.
      */
-    private static void addAction(JMenu menu, String action) {
-        menu.add(new JThequeMenuItem(Managers.getManager(IResourceManager.class).getAction(action)));
+    private static void addAction(JMenu menu, Action action) {
+        menu.add(new JThequeMenuItem(action));
     }
 }

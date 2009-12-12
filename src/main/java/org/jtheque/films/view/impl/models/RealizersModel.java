@@ -16,14 +16,14 @@ package org.jtheque.films.view.impl.models;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.models.PrincipalDataModel;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.Collection;
 
 /**
@@ -35,15 +35,14 @@ public final class RealizersModel extends PrincipalDataModel<Person> implements 
     private Collection<Person> displayList;
 
     private Person currentRealizer;
+    
+    private final IRealizersService realizersService;
 
-    @Resource
-    private IRealizersService realizersService;
-
-    /**
-     * Init the view.
-     */
-    @PostConstruct
-    private void init() {
+    public RealizersModel() {
+        super();
+        
+        realizersService = Managers.getManager(IBeansManager.class).getBean("realizersService");
+                
         realizersService.addDataListener(this);
     }
 

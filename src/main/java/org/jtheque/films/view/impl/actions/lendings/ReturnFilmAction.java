@@ -29,8 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class ReturnFilmAction extends JThequeAction {
-    private static final long serialVersionUID = 2033212310981426905L;
-
     @Resource
     private IChoiceController choiceController;
 

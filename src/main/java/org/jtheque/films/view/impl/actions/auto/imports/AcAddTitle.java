@@ -17,13 +17,13 @@ package org.jtheque.films.view.impl.actions.auto.imports;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.view.able.IAutoImportView;
 import org.jtheque.utils.StringUtils;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -32,11 +32,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcAddTitle extends JThequeAction {
-    private static final long serialVersionUID = -8086054102467874235L;
-
-    @Resource
-    private IAutoImportView autoImportView;
-
     /**
      * Create a new AcAddTitle action.
      */
@@ -50,6 +45,8 @@ public final class AcAddTitle extends JThequeAction {
                 askUserForText(Managers.getManager(ILanguageManager.class).getMessage("auto.import.input.title"));
 
         if (!StringUtils.isEmpty(title)) {
+            IAutoImportView autoImportView = Managers.getManager(IBeansManager.class).getBean("autoImportView");
+            
             autoImportView.getModelTitles().addElement(title);
             autoImportView.getModel().getTitles().add(title);
         }

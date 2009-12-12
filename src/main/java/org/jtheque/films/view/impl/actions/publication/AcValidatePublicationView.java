@@ -16,13 +16,14 @@ package org.jtheque.films.view.impl.actions.publication;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IPublicationController;
 import org.jtheque.films.services.able.IPublicationService;
 import org.jtheque.films.services.impl.utils.file.FTPConnectionInfos;
 import org.jtheque.films.view.able.IPublicationView;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -31,14 +32,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcValidatePublicationView extends JThequeAction {
-    private static final long serialVersionUID = -6791055361978541369L;
-
-    @Resource
-    private IPublicationService service;
-
-    @Resource
-    private IPublicationController publicationController;
-
     /**
      * Construct a AcValidateSagaView.
      */
@@ -48,12 +41,12 @@ public final class AcValidatePublicationView extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        IPublicationView view = publicationController.getView();
+        IPublicationView view = Managers.getManager(IBeansManager.class).<IPublicationController>getBean("publicationController").getView();
 
         if (view.validateContent()) {
             FTPConnectionInfos infos = view.getConnectionInfos();
 
-            service.uploadListOfFilms(infos);
+            Managers.getManager(IBeansManager.class).<IPublicationService>getBean("publicationService").uploadListOfFilms(infos);
 
             view.closeDown();
         }

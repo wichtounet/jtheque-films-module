@@ -16,10 +16,11 @@ package org.jtheque.films.view.impl.actions.film;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.view.impl.actions.JThequeAction;
 import org.jtheque.films.controllers.able.IFilmController;
 
-import javax.annotation.Resource;
 import java.awt.event.ActionEvent;
 
 /**
@@ -28,11 +29,6 @@ import java.awt.event.ActionEvent;
  * @author Baptiste Wicht
  */
 public final class AcCancel extends JThequeAction {
-    private static final long serialVersionUID = -6709810280801155818L;
-
-    @Resource
-    private IFilmController filmController;
-
     /**
      * Construct a new AcCancel.
      */
@@ -42,6 +38,6 @@ public final class AcCancel extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        filmController.cancel();
+        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").cancel();
     }
 }
