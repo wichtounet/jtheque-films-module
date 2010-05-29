@@ -24,9 +24,8 @@ import org.jtheque.core.utils.file.jt.JTFileWriter;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.file.jt.sources.JTFDataSource;
 import org.jtheque.films.utils.Constants;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.IntDate;
 import org.jtheque.utils.io.FileUtils;
 
@@ -59,7 +58,7 @@ public final class JTFFileWriter extends JTFileWriter {
 
             stream.writeLong(Constants.Files.JT.JTCATEGORYSEPARATOR);
 
-            Collection<Country> countries = new HashSet<Country>(10);
+            Collection<SimpleData> countries = new HashSet<SimpleData>(10);
 
             writeActors(stream, film, countries);
             writeRealizer(stream, film, countries);
@@ -98,7 +97,7 @@ public final class JTFFileWriter extends JTFileWriter {
      * @param countries The countries.
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
-    private static void writeActors(DataOutputStream stream, Film film, Collection<Country> countries) throws IOException {
+    private static void writeActors(DataOutputStream stream, Film film, Collection<SimpleData> countries) throws IOException {
         if (film.hasActors()) {
             stream.writeInt(Constants.Files.JT.NO_CONTENT);
         } else {
@@ -133,7 +132,7 @@ public final class JTFFileWriter extends JTFileWriter {
      * @param countries The countries.
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
-    private static void writeRealizer(DataOutputStream stream, Film film, Collection<Country> countries) throws IOException {
+    private static void writeRealizer(DataOutputStream stream, Film film, Collection<SimpleData> countries) throws IOException {
         if (film.hasRealizer()) {
             stream.writeInt(Constants.Files.JT.NO_CONTENT);
         } else {
@@ -188,7 +187,7 @@ public final class JTFFileWriter extends JTFileWriter {
 
             boolean first = true;
 
-            for (Kind kind : film.getKinds()) {
+            for (SimpleData kind : film.getKinds()) {
                 if (first) {
                     first = false;
                 } else {
@@ -228,7 +227,7 @@ public final class JTFFileWriter extends JTFileWriter {
      * @param countries The countries to write.
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
-    private static void writeCountries(DataOutputStream stream, Collection<Country> countries) throws IOException {
+    private static void writeCountries(DataOutputStream stream, Collection<SimpleData> countries) throws IOException {
         if (countries.isEmpty()) {
             stream.writeInt(Constants.Files.JT.NO_CONTENT);
         } else {
@@ -236,7 +235,7 @@ public final class JTFFileWriter extends JTFileWriter {
 
             boolean first = true;
 
-            for (Country country : countries) {
+            for (SimpleData country : countries) {
                 if (first) {
                     first = false;
                 } else {

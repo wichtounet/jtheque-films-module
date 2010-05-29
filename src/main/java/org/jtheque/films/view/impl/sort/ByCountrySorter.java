@@ -17,10 +17,9 @@ package org.jtheque.films.view.impl.sort;
  */
 
 import org.jtheque.primary.controller.able.IPrincipalController;
-import org.jtheque.primary.od.able.Country;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.ICountriesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.view.impl.models.tree.Category;
 import org.jtheque.primary.view.impl.models.tree.JThequeTreeModel;
 import org.jtheque.primary.view.impl.models.tree.TreeElement;
@@ -48,19 +47,19 @@ public final class ByCountrySorter implements Sorter {
 
     @Override
     public boolean canSort(String content, String sortType) {
-        return content.equals(controller.getDataType()) && sortType.equals(ICountriesService.DATA_TYPE);
+        return content.equals(controller.getDataType()) && sortType.equals(SimpleData.DataType.KIND.getDataType());
     }
 
     @Override
     public void sort(JThequeTreeModel model) {
         TreeElement root = model.getRoot();
 
-        Map<Country, Category> groups = new HashMap<Country, Category>(controller.getDisplayList().size() / 4);
+        Map<SimpleData, Category> groups = new HashMap<SimpleData, Category>(controller.getDisplayList().size() / 4);
 
         for (Data data : controller.getDisplayList()) {
             Person person = (Person) data;
 
-            Country country = person.getTheCountry();
+            SimpleData country = person.getTheCountry();
 
             if (!groups.containsKey(country)) {
                 Category category = new Category(country.getDisplayableText());

@@ -19,7 +19,8 @@ package org.jtheque.films.view.impl.renderers;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.resource.IResourceManager;
 import org.jtheque.core.managers.resource.ImageType;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.services.impl.utils.VideoFile;
 import org.jtheque.films.utils.Constants;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -50,7 +51,7 @@ public final class VideoListRenderer extends JPanel implements ListCellRenderer 
     public VideoListRenderer() {
         super();
 
-        PanelBuilder builder = new PanelBuilder(this);
+        PanelBuilder builder = new JThequePanelBuilder(this);
 
         labelIcon = builder.add(
                 new JLabel(Managers.getManager(IResourceManager.class).getIcon(Constants.IMAGE_BASE_NAME, "videofile", ImageType.PNG)),

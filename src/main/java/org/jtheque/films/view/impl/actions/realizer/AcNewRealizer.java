@@ -39,6 +39,6 @@ public final class AcNewRealizer extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController").createRealizer();
+        Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController").create();
     }
 }

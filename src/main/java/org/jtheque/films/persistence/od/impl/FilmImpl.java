@@ -17,15 +17,15 @@ package org.jtheque.films.persistence.od.impl;
  */
 
 import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.properties.IPropertiesManager;
 import org.jtheque.core.managers.resource.IResourceManager;
 import org.jtheque.core.managers.resource.ImageType;
+import org.jtheque.core.utils.PropertiesUtils;
 import org.jtheque.core.utils.db.EntityUtils;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.utils.Constants;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.HashCodeUtils;
 
 import javax.swing.Icon;
@@ -73,7 +73,7 @@ public final class FilmImpl extends AbstractFilm {
 
     @Override
     public boolean equals(Object obj) {
-        return Managers.getManager(IPropertiesManager.class).areEquals(
+        return PropertiesUtils.areEquals(
                 this, obj,
                 "title", "actors", "year", "kinds", "comment", "duration", "theLending", "image", "theLanguage",
                 "note", "theRealizer", "resume", "theType", "kinds");
@@ -89,7 +89,7 @@ public final class FilmImpl extends AbstractFilm {
     public void saveToMemento() {
         mementoState = true;
 
-        memento = Managers.getManager(IPropertiesManager.class).createMemento(this);
+        memento = PropertiesUtils.createMemento(this);
 
         if (memento == null) {
             mementoState = false;
@@ -99,7 +99,7 @@ public final class FilmImpl extends AbstractFilm {
     @Override
     public void restoreMemento() {
         if (mementoState) {
-            Managers.getManager(IPropertiesManager.class).restoreMemento(this, memento);
+            PropertiesUtils.restoreMemento(this, memento);
         }
     }
 
@@ -159,7 +159,7 @@ public final class FilmImpl extends AbstractFilm {
     }
 
     @Override
-    public void addKinds(Set<Kind> kinds) {
+    public void addKinds(Set<SimpleData> kinds) {
         getKinds().addAll(kinds);
     }
 
@@ -171,7 +171,7 @@ public final class FilmImpl extends AbstractFilm {
     }
 
     @Override
-    public void addKind(Kind kind) {
+    public void addKind(SimpleData kind) {
         getKinds().add(kind);
     }
 
@@ -181,7 +181,7 @@ public final class FilmImpl extends AbstractFilm {
     }
 
     @Override
-    public boolean containsKind(Kind kind) {
+    public boolean containsKind(SimpleData kind) {
         return getKinds().contains(kind);
     }
 }

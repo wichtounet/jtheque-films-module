@@ -18,7 +18,8 @@ package org.jtheque.films.view.impl.panels.search;
 
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.language.ILanguageManager;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.search.DataSearcher;
@@ -34,13 +35,9 @@ import org.jtheque.films.services.impl.utils.search.filters.YearFilter;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.view.impl.editors.DurationEditor;
 import org.jtheque.films.view.impl.models.spinner.SpinnerDurationModel;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -73,23 +70,23 @@ public final class JPanelFilmSearch extends JPanelSearch {
     private JSpinner fieldDurationTo;
 
     private NotesComboBoxModel modelNotes;
-    private DataContainerCachedComboBoxModel<Kind> modelKinds;
+    private DataContainerCachedComboBoxModel<SimpleData> modelKinds;
     private DataContainerCachedComboBoxModel<Person> modelActors;
-    private DataContainerCachedComboBoxModel<Type> modelTypes;
+    private DataContainerCachedComboBoxModel<SimpleData> modelTypes;
     private DataContainerCachedComboBoxModel<Person> modelRealizers;
-    private DataContainerCachedComboBoxModel<Language> modelLanguages;
+    private DataContainerCachedComboBoxModel<SimpleData> modelLanguages;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
     private IRealizersService realizersService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IActorService actorService;
@@ -99,7 +96,7 @@ public final class JPanelFilmSearch extends JPanelSearch {
      */
     @PostConstruct
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         addKindChoice(builder);
         addActorChoice(builder);
@@ -116,12 +113,12 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addKindChoice(PanelBuilder builder) {
+    private void addKindChoice(I18nPanelBuilder builder) {
         boxKind = builder.add(new JCheckBox(), builder.gbcSet(0, 0));
 
         builder.addI18nLabel(Film.KIND, builder.gbcSet(1, 0));
 
-        modelKinds = new DataContainerCachedComboBoxModel<Kind>(kindsService);
+        modelKinds = new DataContainerCachedComboBoxModel<SimpleData>(kindsService);
 
         builder.addComboBox(modelKinds, builder.gbcSet(2, 0, GridBagUtils.NONE, 2, 1));
     }
@@ -131,7 +128,7 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addActorChoice(PanelBuilder builder) {
+    private void addActorChoice(I18nPanelBuilder builder) {
         boxActor = builder.add(new JCheckBox(), builder.gbcSet(0, 1));
 
         builder.addI18nLabel(Film.ACTORS, builder.gbcSet(1, 1));
@@ -146,12 +143,12 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addTypeChoice(PanelBuilder builder) {
+    private void addTypeChoice(I18nPanelBuilder builder) {
         boxType = builder.add(new JCheckBox(), builder.gbcSet(0, 2));
 
         builder.addI18nLabel(Film.TYPE, builder.gbcSet(1, 2));
 
-        modelTypes = new DataContainerCachedComboBoxModel<Type>(typesService);
+        modelTypes = new DataContainerCachedComboBoxModel<SimpleData>(typesService);
 
         builder.addComboBox(modelTypes, builder.gbcSet(2, 2, GridBagUtils.NONE, 2, 1));
     }
@@ -161,7 +158,7 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addRealizerChoice(PanelBuilder builder) {
+    private void addRealizerChoice(I18nPanelBuilder builder) {
         boxRealizer = builder.add(new JCheckBox(), builder.gbcSet(0, 4));
 
         builder.addI18nLabel(Film.REALIZER, builder.gbcSet(1, 4));
@@ -176,12 +173,12 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addLanguageChoice(PanelBuilder builder) {
+    private void addLanguageChoice(I18nPanelBuilder builder) {
         boxLanguage = builder.add(new JCheckBox(), builder.gbcSet(0, 5));
 
         builder.addI18nLabel(Film.LANGUAGE, builder.gbcSet(1, 5));
 
-        modelLanguages = new DataContainerCachedComboBoxModel<Language>(languagesService);
+        modelLanguages = new DataContainerCachedComboBoxModel<SimpleData>(languagesService);
 
         builder.addComboBox(modelLanguages, builder.gbcSet(2, 5, GridBagUtils.NONE, 2, 1));
     }
@@ -191,12 +188,12 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addNoteChoice(PanelBuilder builder) {
+    private void addNoteChoice(I18nPanelBuilder builder) {
         boxNote = builder.add(new JCheckBox(), builder.gbcSet(0, 6));
 
         builder.addI18nLabel(Film.NOTE, builder.gbcSet(1, 6));
 
-        modelNotes = new NotesComboBoxModel();
+        modelNotes = new NotesComboBoxModel(daoNotes);
 
         builder.addComboBox(modelNotes, builder.gbcSet(2, 6, GridBagUtils.NONE, 2, 1));
     }
@@ -206,7 +203,7 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addYearChoice(PanelBuilder builder) {
+    private void addYearChoice(I18nPanelBuilder builder) {
         boxYear = builder.add(new JCheckBox(), builder.gbcSet(0, 3));
 
         builder.addI18nLabel(Film.YEAR, builder.gbcSet(1, 3));
@@ -223,7 +220,7 @@ public final class JPanelFilmSearch extends JPanelSearch {
      *
      * @param builder The builder of the panel.
      */
-    private void addDurationChoice(PanelBuilder builder) {
+    private void addDurationChoice(I18nPanelBuilder builder) {
         boxDuration = builder.add(new JCheckBox(), builder.gbcSet(0, 7));
 
         builder.addI18nLabel(Film.DURATION, builder.gbcSet(1, 7));

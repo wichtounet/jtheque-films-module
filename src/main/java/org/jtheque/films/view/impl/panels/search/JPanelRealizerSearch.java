@@ -18,14 +18,15 @@ package org.jtheque.films.view.impl.panels.search;
 
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.language.ILanguageManager;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.films.services.impl.utils.search.DataSearcher;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.services.impl.utils.search.filters.CountryFilter;
 import org.jtheque.films.services.impl.utils.search.filters.NoteFilter;
 import org.jtheque.films.utils.Constants.Properties.Person;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.services.able.ICountriesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
 
@@ -46,23 +47,23 @@ public final class JPanelRealizerSearch extends JPanelSearch {
     private JCheckBox boxCountry;
 
     private NotesComboBoxModel modelNotes;
-    private DataContainerCachedComboBoxModel<Country> modelCountries;
+    private DataContainerCachedComboBoxModel<SimpleData> modelCountries;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     /**
      * Build the panel.
      */
     @PostConstruct
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         boxNote = builder.add(new JCheckBox(), builder.gbcSet(0, 0));
 
         builder.addI18nLabel(Person.NOTE, builder.gbcSet(1, 0));
 
-        modelNotes = new NotesComboBoxModel();
+        modelNotes = new NotesComboBoxModel(daoNotes);
 
         builder.addComboBox(modelNotes, builder.gbcSet(2, 0));
 
@@ -70,7 +71,7 @@ public final class JPanelRealizerSearch extends JPanelSearch {
 
         builder.addI18nLabel(Person.COUNTRY, builder.gbcSet(1, 1));
 
-        modelCountries = new DataContainerCachedComboBoxModel<Country>(countriesService);
+        modelCountries = new DataContainerCachedComboBoxModel<SimpleData>(countriesService);
 
         builder.addComboBox(modelCountries, builder.gbcSet(2, 1));
     }

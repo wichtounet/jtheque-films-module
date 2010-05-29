@@ -17,20 +17,18 @@ package org.jtheque.films.view.impl.panels;
  */
 
 import org.jtheque.core.managers.error.JThequeError;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.utils.Constants.Properties;
 import org.jtheque.films.view.able.IInfosFilmView;
 import org.jtheque.films.view.impl.fb.IFilmFormBean;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Saga;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ISagasService;
-import org.jtheque.primary.view.impl.actions.language.AcNewLanguage;
-import org.jtheque.primary.view.impl.actions.saga.NewSagaAction;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
+import org.jtheque.primary.view.impl.actions.principal.CreateNewPrincipalAction;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -54,8 +52,8 @@ import java.util.Collection;
  */
 public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
     private DataContainerCachedComboBoxModel<Person> modelRealizer;
-    private DataContainerCachedComboBoxModel<Language> modelLanguage;
-    private DataContainerCachedComboBoxModel<Saga> modelSaga;
+    private DataContainerCachedComboBoxModel<SimpleData> modelLanguage;
+    private DataContainerCachedComboBoxModel<SimpleData> modelSaga;
 
     private JComboBox comboRealizer;
     private JComboBox comboLanguage;
@@ -69,20 +67,20 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
     private JButton buttonAddSaga;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
     private IRealizersService realizersService;
 
     @Resource
-    private ISagasService sagasService;
+    private ISimpleDataService sagasService;
 
     /**
      * Build the panel.
      */
     @PostConstruct
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         addRealizerField(builder);
 
@@ -105,7 +103,7 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      *
      * @param builder The builder of the panel.
      */
-    private void addRealizerField(PanelBuilder builder) {
+    private void addRealizerField(I18nPanelBuilder builder) {
         builder.addI18nLabel(Properties.Film.REALIZER, builder.gbcSet(0, 0));
 
         modelRealizer = new DataContainerCachedComboBoxModel<Person>(realizersService);
@@ -120,7 +118,7 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      * @param builder The builder of the panel.
      * @param format  The format of the year.
      */
-    private void addYearField(PanelBuilder builder, NumberFormat format) {
+    private void addYearField(I18nPanelBuilder builder, NumberFormat format) {
         builder.addI18nLabel(Properties.Film.YEAR, builder.gbcSet(0, 1));
 
         fieldYear = new JFormattedTextField(format);
@@ -139,7 +137,7 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      * @param builder The builder of the panel.
      * @param format  The format of the duration.
      */
-    private void addDurationField(PanelBuilder builder, NumberFormat format) {
+    private void addDurationField(I18nPanelBuilder builder, NumberFormat format) {
         builder.addI18nLabel(Properties.Film.DURATION, builder.gbcSet(0, 2));
 
         fieldDuration = builder.add(new JFormattedTextField(format), builder.gbcSet(1, 2));
@@ -154,15 +152,16 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      *
      * @param builder The builder of the panel.
      */
-    private void addLanguageField(PanelBuilder builder) {
+    private void addLanguageField(I18nPanelBuilder builder) {
         builder.addI18nLabel(Properties.Film.LANGUAGE, builder.gbcSet(0, 3));
 
-        modelLanguage = new DataContainerCachedComboBoxModel<Language>(languagesService);
+        modelLanguage = new DataContainerCachedComboBoxModel<SimpleData>(languagesService);
 
         comboLanguage = builder.addComboBox(modelLanguage, builder.gbcSet(1, 3));
         comboLanguage.setEnabled(false);
         
-        buttonAddLanguage = builder.addButton(new AcNewLanguage("generic.view.actions.new"), builder.gbcSet(2, 3));
+        buttonAddLanguage = builder.addButton(
+				new CreateNewPrincipalAction("generic.view.actions.new", "languageController"), builder.gbcSet(2, 3));
         buttonAddLanguage.setEnabled(false);
     }
 
@@ -171,15 +170,16 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      *
      * @param builder The builder of the panel.
      */
-    private void addSagaField(PanelBuilder builder) {
+    private void addSagaField(I18nPanelBuilder builder) {
         builder.addI18nLabel(Properties.Film.SAGA, builder.gbcSet(0, 4));
 
-        modelSaga = new DataContainerCachedComboBoxModel<Saga>(sagasService);
+        modelSaga = new DataContainerCachedComboBoxModel<SimpleData>(sagasService);
 
         comboSaga = builder.addComboBox(modelSaga, builder.gbcSet(1, 4));
         comboSaga.setEnabled(false);
 
-        buttonAddSaga = builder.addButton(new NewSagaAction(), builder.gbcSet(2, 4));
+        buttonAddSaga = builder.addButton(new CreateNewPrincipalAction("generic.view.actions.new", "sagaController"), 
+				builder.gbcSet(2, 4));
         buttonAddSaga.setEnabled(false);
     }
 
@@ -188,7 +188,7 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
      *
      * @param builder The builder of the panel.
      */
-    private void addResumeField(PanelBuilder builder) {
+    private void addResumeField(I18nPanelBuilder builder) {
         builder.addI18nLabel(Properties.Film.RESUME, builder.gbcSet(0, 5));
 
         areaResume = new JTextArea();

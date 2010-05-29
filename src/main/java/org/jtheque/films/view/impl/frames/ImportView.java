@@ -19,9 +19,9 @@ package org.jtheque.films.view.impl.frames;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.view.able.IImportView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.file.AcValidateImportView;
 import org.jtheque.utils.io.SimpleFilter;
 
@@ -62,7 +62,7 @@ public final class ImportView extends SwingDialogView implements IImportView {
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         chooser = new FileChooserPanel();
         chooser.setTextKey("import.view.filePath");

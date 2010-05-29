@@ -18,10 +18,10 @@ package org.jtheque.films.view.impl.frames;
 
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.view.able.IChoiceFieldsView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.auto.choice.AcValidateChoiceFieldsView;
 
 import javax.swing.JCheckBox;
@@ -65,7 +65,7 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
      * @return The builded content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         boxKind = builder.addI18nCheckBox(Film.KIND, builder.gbcSet(0, 0));
         boxRealizer = builder.addI18nCheckBox(Film.REALIZER, builder.gbcSet(0, 1));

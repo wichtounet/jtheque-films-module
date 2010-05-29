@@ -46,7 +46,7 @@ public final class AcDelete extends JThequeAction {
                 Managers.getManager(ILanguageManager.class).getMessage("film.dialogs.confirmDelete.title"));
 
         if (yes) {
-            Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").deleteCurrentFilm();
+            Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").deleteCurrent();
         }
     }
 }

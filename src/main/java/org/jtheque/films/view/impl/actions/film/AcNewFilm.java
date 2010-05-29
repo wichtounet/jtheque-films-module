@@ -39,6 +39,6 @@ public final class AcNewFilm extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").createFilm();
+        Managers.getManager(IBeansManager.class).<IFilmController>getBean("filmController").create();
     }
 }

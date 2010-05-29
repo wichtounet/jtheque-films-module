@@ -20,12 +20,12 @@ import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.Borders;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.view.able.IExportView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.file.AcValidateExportView;
 import org.jtheque.films.view.impl.panels.search.JPanelFilmSearch;
 import org.jtheque.utils.io.SimpleFilter;
@@ -75,7 +75,7 @@ public final class ExportView extends SwingDialogView implements IExportView {
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         chooser = new FileChooserPanel();
         chooser.setTextKey("export.view.filePath");

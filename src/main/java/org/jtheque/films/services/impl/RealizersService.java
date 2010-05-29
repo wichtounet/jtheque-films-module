@@ -21,7 +21,7 @@ import org.jtheque.films.services.able.INotesService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.primary.dao.able.IDaoPersons;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.ICountriesService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +42,7 @@ public final class RealizersService implements IRealizersService {
     private INotesService notesService;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     private Person defaultRealizer;
 
@@ -118,7 +118,7 @@ public final class RealizersService implements IRealizersService {
                 defaultRealizer.setName(DEFAULT_REALIZER);
                 defaultRealizer.setFirstName(DEFAULT_REALIZER);
                 defaultRealizer.setNote(notesService.getDefaultNote());
-                defaultRealizer.setTheCountry(countriesService.getDefaultCountry());
+                defaultRealizer.setTheCountry(countriesService.getDefaultSimpleData());
                 daoPersons.create(defaultRealizer);
             }
         }

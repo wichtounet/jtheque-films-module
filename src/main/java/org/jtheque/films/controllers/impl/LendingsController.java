@@ -22,7 +22,7 @@ import org.jtheque.core.managers.view.able.IView;
 import org.jtheque.core.managers.view.able.controller.AbstractController;
 import org.jtheque.films.controllers.able.ILendingsController;
 import org.jtheque.films.view.able.ILendingsView;
-import org.jtheque.primary.controller.impl.undo.DeletedLendingEdit;
+import org.jtheque.primary.controller.impl.undo.GenericDataDeletedEdit;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.services.able.ILendingsService;
 
@@ -52,7 +52,7 @@ public final class LendingsController extends AbstractController implements ILen
         boolean deleted = lendingsService.delete(lending);
 
         if (deleted) {
-            Managers.getManager(IUndoRedoManager.class).addEdit(new DeletedLendingEdit(lending));
+            Managers.getManager(IUndoRedoManager.class).addEdit(new GenericDataDeletedEdit<Lending>("lendingsService", lending));
         }
     }
 }

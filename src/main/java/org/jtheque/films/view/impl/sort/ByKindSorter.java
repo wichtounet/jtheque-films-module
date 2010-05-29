@@ -19,8 +19,7 @@ package org.jtheque.films.view.impl.sort;
 import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.services.able.IKindsService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.view.impl.models.tree.Category;
 import org.jtheque.primary.view.impl.models.tree.JThequeTreeModel;
 import org.jtheque.primary.view.impl.models.tree.TreeElement;
@@ -41,17 +40,17 @@ public final class ByKindSorter implements Sorter {
 
     @Override
     public boolean canSort(String content, String sortType) {
-        return IFilmsService.DATA_TYPE.equals(content) && sortType.equals(IKindsService.DATA_TYPE);
+        return IFilmsService.DATA_TYPE.equals(content) && sortType.equals(SimpleData.DataType.KIND.getDataType());
     }
 
     @Override
     public void sort(JThequeTreeModel model) {
         TreeElement root = model.getRoot();
 
-        List<Kind> groups = new ArrayList<Kind>(10);
+        List<SimpleData> groups = new ArrayList<SimpleData>(10);
 
         for (Film film : filmController.getDisplayList()) {
-            for (Kind kind : film.getKinds()) {
+            for (SimpleData kind : film.getKinds()) {
                 if (!groups.contains(kind)) {
                     root.add(new Category(kind.getElementName()));
                     groups.add(kind);

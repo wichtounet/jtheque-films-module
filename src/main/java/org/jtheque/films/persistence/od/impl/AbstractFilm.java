@@ -16,16 +16,13 @@ package org.jtheque.films.persistence.od.impl;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.collection.Collection;
 import org.jtheque.core.utils.db.Note;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IActorService;
-import org.jtheque.primary.od.able.Collection;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Saga;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.od.impl.abstraction.AbstractData;
 
 import java.util.HashSet;
@@ -39,9 +36,9 @@ import java.util.Set;
 public abstract class AbstractFilm extends AbstractData implements Film {
     private Collection collection;
     private String title;
-    private Type type;
+    private SimpleData type;
     private Person realizer;
-    private Language language;
+    private SimpleData language;
     private int year;
     private int duration;
     private Note note;
@@ -51,8 +48,8 @@ public abstract class AbstractFilm extends AbstractData implements Film {
     private String image;
     private String filePath;
     private final Set<Person> actors = new HashSet<Person>(10);
-    private final Set<Kind> kinds = new HashSet<Kind>(5);
-    private Saga theSaga;
+    private final Set<SimpleData> kinds = new HashSet<SimpleData>(5);
+    private SimpleData theSaga;
 
     @Override
     public final void setTitle(String title) {
@@ -75,12 +72,12 @@ public abstract class AbstractFilm extends AbstractData implements Film {
     }
 
     @Override
-    public final void setTheType(Type type) {
+    public final void setTheType(SimpleData type) {
         this.type = type;
     }
 
     @Override
-    public final Type getTheType() {
+    public final SimpleData getTheType() {
         return type;
     }
 
@@ -117,12 +114,12 @@ public abstract class AbstractFilm extends AbstractData implements Film {
     }
 
     @Override
-    public final void setTheLanguage(Language language) {
+    public final void setTheLanguage(SimpleData language) {
         this.language = language;
     }
 
     @Override
-    public final Language getTheLanguage() {
+    public final SimpleData getTheLanguage() {
         return language;
     }
 
@@ -182,7 +179,7 @@ public abstract class AbstractFilm extends AbstractData implements Film {
     }
 
     @Override
-    public final Set<Kind> getKinds() {
+    public final Set<SimpleData> getKinds() {
         return kinds;
     }
 
@@ -197,12 +194,12 @@ public abstract class AbstractFilm extends AbstractData implements Film {
     }
 
     @Override
-    public final Saga getTheSaga() {
+    public final SimpleData getTheSaga() {
         return theSaga;
     }
 
     @Override
-    public final void setTheSaga(Saga theSaga) {
+    public final void setTheSaga(SimpleData theSaga) {
         this.theSaga = theSaga;
     }
 

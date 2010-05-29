@@ -21,14 +21,15 @@ import org.jtheque.core.managers.undo.IUndoRedoManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.films.controllers.able.IRealizerController;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.films.view.impl.fb.IPersonFormBean;
 import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.controller.impl.undo.CreatedPersonEdit;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
+import org.jtheque.primary.controller.impl.undo.GenericDataDeletedEdit;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.able.ViewMode;
+import org.jtheque.primary.view.able.fb.IPersonFormBean;
 
 import javax.annotation.Resource;
 
@@ -37,7 +38,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class NewRealizerState implements ControllerState {
+public final class NewRealizerState extends AbstractControllerState {
     @Resource
     private IRealizerController controller;
 
@@ -66,14 +67,12 @@ public final class NewRealizerState implements ControllerState {
 
         Person realizer = realizersService.getEmptyRealizer();
 
-        realizer.setName(infos.getName());
-        realizer.setFirstName(infos.getFirstName());
-        realizer.setNote(infos.getNote());
-        realizer.setTheCountry(infos.getCountry());
+        infos.fillPerson(realizer);
 
         realizersService.create(realizer);
 
-        Managers.getManager(IUndoRedoManager.class).addEdit(new CreatedPersonEdit(realizer));
+        Managers.getManager(IUndoRedoManager.class).addEdit(
+				new GenericDataDeletedEdit<Person>("realizersService", realizer));
 
         controller.getView().resort();
 
@@ -91,43 +90,6 @@ public final class NewRealizerState implements ControllerState {
         }
 
         return nextState;
-    }
-
-    @Override
-    public ControllerState create() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState manualEdit() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState delete() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Person realizer = (Person) data;
-
-        assert realizer.getType().equals(IRealizersService.PERSON_TYPE) : "The person must of type Actor";
-
-        if (Managers.getManager(IViewManager.class).askI18nUserForConfirmation(
-                "realizer.dialogs.confirmSave", "realizer.dialogs.confirmSave.title")) {
-            controller.save();
-        }
-
-        getViewModel().setCurrentRealizer(realizer);
-
-        return controller.getAutoAddState();
     }
 
     @Override

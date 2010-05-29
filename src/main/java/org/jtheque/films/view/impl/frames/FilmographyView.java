@@ -18,10 +18,10 @@ package org.jtheque.films.view.impl.frames;
 
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.services.impl.utils.Filmography;
 import org.jtheque.films.view.able.IFilmographyView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.models.able.IFilmographyModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
@@ -88,7 +88,7 @@ public final class FilmographyView extends SwingDialogView implements IFilmograp
      * @return The content pane.
      */
     private Container buildContentPane(Filmography filmo) {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         textFilmo = new JTextPane();
         textFilmo.setContentType("text/html");

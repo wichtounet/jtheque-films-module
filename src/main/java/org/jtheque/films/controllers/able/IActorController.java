@@ -28,32 +28,11 @@ import javax.swing.event.TreeSelectionListener;
  *
  * @author Baptiste Wicht
  */
-public interface IActorController extends IPrincipalController<Person>, TreeSelectionListener {
+public interface IActorController extends IPrincipalController<Person> {
     /**
      * Save the current actor.
      */
     void save();
-
-    /**
-     * Edit the current actor.
-     */
-    void manualEdit();
-
-    /**
-     * Create a new actor.
-     */
-    void createActor();
-
-    /**
-     * Delete the current actor.
-     */
-    void deleteCurrentActor();
-
-    /**
-     * Cancel the current state.
-     */
-    void cancel();
-
 
     @Override
     IActorsModel getViewModel();

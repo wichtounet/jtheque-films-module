@@ -24,16 +24,12 @@ import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.IPersonService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 
 import javax.annotation.Resource;
 
@@ -47,13 +43,13 @@ public final class XMLBackupWriter implements BackupWriter {
     private ILendingsService lendingsService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private IBorrowersService borrowersService;
+    private IPersonService borrowersService;
 
     @Resource
     private IFilmsService filmsService;
@@ -65,7 +61,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private IRealizersService realizersService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     /**
      * Construct a new XMLBackupWriter.
@@ -81,7 +77,7 @@ public final class XMLBackupWriter implements BackupWriter {
         XMLWriter writer = (XMLWriter) object;
 
         writeFilms(writer);
-        writePersons(writer, "actor", actorService.getActors());
+        writePersons(writer, "actor", actorService.getPersons());
         writePersons(writer, "realizer", realizersService.getRealizers());
         writeKinds(writer);
         writeTypes(writer);
@@ -134,7 +130,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private static void addKindsOfFilm(XMLWriter writer, Film film) {
         writer.add("kinds");
 
-        for (Kind kind : film.getKinds()) {
+        for (SimpleData kind : film.getKinds()) {
             writer.addOnly("kind", kind.getId());
         }
 
@@ -190,7 +186,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private void writeLanguages(XMLWriter writer) {
         writer.add("languages");
 
-        for (Language language : languagesService.getLanguages()) {
+        for (SimpleData language : languagesService.getDatas()) {
             writer.add("language");
 
             writer.addOnly("id", language.getId());
@@ -210,7 +206,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private void writeKinds(XMLWriter writer) {
         writer.add("kinds");
 
-        for (Kind kind : kindsService.getKinds()) {
+        for (SimpleData kind : kindsService.getDatas()) {
             writer.add("kind");
 
             writer.addOnly("id", kind.getId());
@@ -230,7 +226,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private void writeTypes(XMLWriter writer) {
         writer.add("types");
 
-        for (Type type : typesService.getTypes()) {
+        for (SimpleData type : typesService.getDatas()) {
             writer.add("type");
 
             writer.addOnly("id", type.getId());
@@ -250,7 +246,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private void writeCountries(XMLWriter writer) {
         writer.add("countries");
 
-        for (Type type : typesService.getTypes()) {
+        for (SimpleData type : typesService.getDatas()) {
             writer.add("country");
 
             writer.addOnly("id", type.getId());
@@ -270,7 +266,7 @@ public final class XMLBackupWriter implements BackupWriter {
     private void writeBorrowers(XMLWriter writer) {
         writer.add("borrowers");
 
-        for (Person borrower : borrowersService.getBorrowers()) {
+        for (Person borrower : borrowersService.getPersons()) {
             writer.add("borrower");
 
             writer.addOnly("id", borrower.getId());

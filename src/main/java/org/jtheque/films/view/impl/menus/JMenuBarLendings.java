@@ -18,8 +18,6 @@ package org.jtheque.films.view.impl.menus;
 
 import org.jtheque.core.managers.view.impl.components.menu.JThequeMenu;
 import org.jtheque.core.managers.view.impl.components.menu.JThequeMenuItem;
-import org.jtheque.films.view.impl.actions.CloseBeanViewAction;
-import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
 import org.jtheque.films.view.impl.actions.lendings.AcReturnCurrentFilm;
 
 import javax.swing.Action;

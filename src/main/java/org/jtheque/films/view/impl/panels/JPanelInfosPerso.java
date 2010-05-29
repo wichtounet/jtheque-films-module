@@ -17,7 +17,8 @@ package org.jtheque.films.view.impl.panels;
  */
 
 import org.jtheque.core.managers.error.JThequeError;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.utils.Constants.Properties;
@@ -52,13 +53,13 @@ public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
     public JPanelInfosPerso(){
         super();
 
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         builder.addI18nLabel(Properties.Film.NOTE, builder.gbcSet(0, 0));
 
-        ListCellRenderer noteRenderer = new NoteComboRenderer();
+        ListCellRenderer noteRenderer = new NoteComboRenderer(daoNotes);
 
-        modelNote = new NotesComboBoxModel();
+        modelNote = new NotesComboBoxModel(daoNotes);
 
         comboNote = builder.addComboBox(modelNote, builder.gbcSet(1, 0));
         comboNote.setEnabled(false);

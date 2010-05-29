@@ -22,15 +22,15 @@ import org.jtheque.films.IFilmsModule;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.INotesService;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.primary.utils.web.analyzers.generic.GenericGenerator;
 import org.jtheque.primary.utils.web.analyzers.generic.field.FieldGetter;
 import org.jtheque.primary.utils.web.analyzers.generic.operation.ScannerPossessor;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.bean.DataUtils;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.annotation.Resource;
 import java.util.Scanner;
@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
  */
 public final class GenericFilmAnalyzer extends AbstractFilmAnalyzer implements ScannerPossessor {
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IRealizersService realizersService;
@@ -52,7 +52,7 @@ public final class GenericFilmAnalyzer extends AbstractFilmAnalyzer implements S
     private INotesService notesService;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
     private IActorService actorService;
@@ -191,10 +191,10 @@ public final class GenericFilmAnalyzer extends AbstractFilmAnalyzer implements S
             if (StringUtils.isNotEmpty(value)) {
                 value = StringUtils.setFirstLetterOnlyUpper(value);
 
-                if (kindsService.exists(value)) {
-                    getFilm().addKind(kindsService.getKind(value));
+                if (kindsService.exist(value)) {
+                    getFilm().addKind(kindsService.getSimpleData(value));
                 } else {
-                    Kind kind = kindsService.getEmptyKind();
+                    SimpleData kind = kindsService.getEmptySimpleData();
 
                     kind.setName(value);
 
@@ -243,7 +243,7 @@ public final class GenericFilmAnalyzer extends AbstractFilmAnalyzer implements S
             Person realizer = realizersService.getEmptyRealizer();
             realizer.setName(name);
             realizer.setFirstName(firstName);
-            realizer.setTheCountry(countriesService.getDefaultCountry());
+            realizer.setTheCountry(countriesService.getDefaultSimpleData());
             realizer.setNote(notesService.getDefaultNote());
 
             realizersService.create(realizer);
@@ -295,13 +295,13 @@ public final class GenericFilmAnalyzer extends AbstractFilmAnalyzer implements S
      */
     private void addActor(String name, String firstName) {
         if (actorService.exist(firstName, name)) {
-            Person actor = actorService.getActor(firstName, name);
+            Person actor = actorService.getPerson(firstName, name);
             getFilm().addActor(actor);
         } else {
-            Person actor = actorService.getEmptyActor();
+            Person actor = actorService.getEmptyPerson();
             actor.setName(name);
             actor.setFirstName(firstName);
-            actor.setTheCountry(countriesService.getDefaultCountry());
+            actor.setTheCountry(countriesService.getDefaultSimpleData());
             actor.setNote(notesService.getDefaultNote());
 
             actorService.create(actor);

@@ -3,11 +3,8 @@ package org.jtheque.films.view.impl.fb;
 import org.jtheque.core.utils.db.Note;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Saga;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 
 import java.util.Set;
 
@@ -27,7 +24,7 @@ public interface IFilmFormBean extends FormBean {
      *
      * @param type The new type.
      */
-    void setType(Type type);
+    void setType(SimpleData type);
 
     /**
      * Set the year of the film.
@@ -55,7 +52,7 @@ public interface IFilmFormBean extends FormBean {
      *
      * @param language The language of the film.
      */
-    void setLanguage(Language language);
+    void setLanguage(SimpleData language);
 
     /**
      * Set the note of the realizer.
@@ -90,7 +87,7 @@ public interface IFilmFormBean extends FormBean {
      *
      * @param saga The saga of the film.
      */
-    void setSaga(Saga saga);
+    void setSaga(SimpleData saga);
 
     /**
      * Set the file path.
@@ -104,7 +101,7 @@ public interface IFilmFormBean extends FormBean {
      *
      * @param kinds The kinds of the film.
      */
-    void setKinds(Set<Kind> kinds);
+    void setKinds(Set<SimpleData> kinds);
 
     /**
      * Fill a film with the info of the form bean.

@@ -30,18 +30,12 @@ import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.DataUtils;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.IPersonService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.bean.IntDate;
 
 import javax.annotation.Resource;
@@ -54,10 +48,10 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class XMLBackupReader implements BackupReader {
-    private final Collection<Language> languages = new ArrayList<Language>(10);
-    private final Collection<Country> countries = new ArrayList<Country>(10);
-    private final Collection<Kind> kinds = new ArrayList<Kind>(10);
-    private final Collection<Type> types = new ArrayList<Type>(10);
+    private final Collection<SimpleData> languages = new ArrayList<SimpleData>(10);
+    private final Collection<SimpleData> countries = new ArrayList<SimpleData>(10);
+    private final Collection<SimpleData> kinds = new ArrayList<SimpleData>(10);
+    private final Collection<SimpleData> types = new ArrayList<SimpleData>(10);
     private final Collection<Lending> lendings = new ArrayList<Lending>(10);
     private final Collection<Person> borrowers = new ArrayList<Person>(10);
     private final Collection<Person> realizers = new ArrayList<Person>(20);
@@ -65,19 +59,19 @@ public final class XMLBackupReader implements BackupReader {
     private final Collection<Film> films = new ArrayList<Film>(25);
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
     private ILendingsService lendingsService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private IBorrowersService borrowersService;
+    private IPersonService borrowersService;
 
     @Resource
     private IFilmsService filmsService;
@@ -89,7 +83,7 @@ public final class XMLBackupReader implements BackupReader {
     private IRealizersService realizersService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     private static final DaoNotes DAO_NOTES = DaoNotes.getInstance();
 
@@ -135,7 +129,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//languages/language");
 
         for (Object languageElement : xpa.selectNodes(root)) {
-            Language language = languagesService.getEmptyLanguage();
+            SimpleData language = languagesService.getEmptySimpleData();
             language.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(languageElement)));
             language.setName(XPath.newInstance("./name").valueOf(languageElement));
 
@@ -155,7 +149,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//countries/country");
 
         for (Object countryElement : xpa.selectNodes(root)) {
-            Country country = countriesService.getEmptyCountry();
+            SimpleData country = countriesService.getEmptySimpleData();
             country.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(countryElement)));
             country.setName(XPath.newInstance("./name").valueOf(countryElement));
 
@@ -175,7 +169,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//kinds/kinds");
 
         for (Object kindElement : xpa.selectNodes(root)) {
-            Kind kind = kindsService.getEmptyKind();
+            SimpleData kind = kindsService.getEmptySimpleData();
             kind.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(kindElement)));
             kind.setName(XPath.newInstance("./name").valueOf(kindElement));
 
@@ -195,7 +189,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//types/type");
 
         for (Object typeElement : xpa.selectNodes(root)) {
-            Type type = typesService.getEmptyType();
+            SimpleData type = typesService.getEmptySimpleData();
             type.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(typeElement)));
             type.setName(XPath.newInstance("./id").valueOf(typeElement));
 
@@ -215,7 +209,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//borrowers/borrower");
 
         for (Object borrowerElement : xpa.selectNodes(root)) {
-            Person borrower = borrowersService.getEmptyBorrower();
+            Person borrower = borrowersService.getEmptyPerson();
             borrower.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(borrowerElement)));
             borrower.setName(XPath.newInstance("./name").valueOf(borrowerElement));
             borrower.setFirstName(XPath.newInstance("./firstname").valueOf(borrowerElement));
@@ -261,7 +255,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance("//actors/actor");
 
         for (Object actorElement : xpa.selectNodes(root)) {
-            Person actor = actorService.getEmptyActor();
+            Person actor = actorService.getEmptyPerson();
             actor.getTemporaryContext().setId(Integer.parseInt(XPath.newInstance("./id").valueOf(actorElement)));
             actor.setName(XPath.newInstance("./name").valueOf(actorElement));
             actor.setFirstName(XPath.newInstance("./firstname").valueOf(actorElement));
@@ -350,7 +344,7 @@ public final class XMLBackupReader implements BackupReader {
         XPath xpa = XPath.newInstance(".//kinds/kind");
 
         for (Object kindElement : xpa.selectNodes(filmElement)) {
-            Kind kind = DataUtils.getDataByTemporaryId(
+            SimpleData kind = DataUtils.getDataByTemporaryId(
                     Integer.parseInt(XPath.newInstance(".").valueOf(kindElement)), kinds);
 
             film.addKind(kind);

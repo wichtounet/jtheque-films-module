@@ -11,9 +11,7 @@ import org.jtheque.films.services.impl.utils.EditArguments;
 import org.jtheque.films.services.impl.utils.web.analyzers.GenericFilmAnalyzer;
 import org.jtheque.films.services.impl.utils.web.analyzers.GenericFilmResultAnalyzer;
 import org.jtheque.films.utils.Constants.Site;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.primary.utils.web.analyzers.generic.GenericGenerator;
 import org.jtheque.primary.utils.web.analyzers.generic.Page;
 import org.jtheque.primary.utils.web.analyzers.generic.Pages;
@@ -53,16 +51,16 @@ import java.util.Scanner;
  */
 public final class GenericWebGetter extends AbstractWebGetter implements ScannerPossessor, UpdateListener {
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
     private INotesService notesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IFilmsService filmsService;
@@ -131,9 +129,9 @@ public final class GenericWebGetter extends AbstractWebGetter implements Scanner
         getAnalyzer().setFilm(film);
 
         film.setTitle(search.getTitre());
-        film.setTheLanguage(languagesService.getDefaultLanguage());
+        film.setTheLanguage(languagesService.getDefaultSimpleData());
         film.setNote(notesService.getDefaultNote());
-        film.setTheType(typesService.getDefaultType());
+        film.setTheType(typesService.getDefaultSimpleData());
 
         String index = search.getIndex();
 
@@ -156,7 +154,7 @@ public final class GenericWebGetter extends AbstractWebGetter implements Scanner
      */
     private void completeKinds(Film film) {
         if (film.hasKinds()) {
-            film.addKind(kindsService.getDefaultKind());
+            film.addKind(kindsService.getDefaultSimpleData());
         }
     }
 

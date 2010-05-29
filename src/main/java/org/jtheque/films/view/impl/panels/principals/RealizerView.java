@@ -24,22 +24,25 @@ import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.utils.ui.Borders;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.utils.Constants;
 import org.jtheque.films.view.able.IRealizerView;
-import org.jtheque.films.view.impl.actions.actor.NewCountryAction;
 import org.jtheque.films.view.impl.actions.sort.AcSortRealizer;
-import org.jtheque.films.view.impl.fb.IPersonFormBean;
-import org.jtheque.films.view.impl.fb.PersonFormBean;
 import org.jtheque.films.view.impl.models.RealizersModel;
 import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.films.view.impl.toolbars.JPanelRealizerToolBar;
 import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.od.able.Country;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.view.able.fb.IPersonFormBean;
+import org.jtheque.primary.view.impl.actions.principal.CreateNewPrincipalAction;
+import org.jtheque.primary.view.impl.components.panels.AbstractPrincipalDataPanel;
 import org.jtheque.primary.view.impl.components.panels.JThequeTitledPanel;
+import org.jtheque.primary.view.impl.fb.PersonFormBean;
 import org.jtheque.primary.view.impl.listeners.ObjectChangedEvent;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
@@ -50,7 +53,9 @@ import javax.annotation.PostConstruct;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.TreeSelectionListener;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.Collection;
 
@@ -59,12 +64,14 @@ import java.util.Collection;
  *
  * @author Baptiste Wicht
  */
-public final class RealizerView extends AbstractPrincipalDelegatedView implements IRealizerView {
+public final class RealizerView extends AbstractPrincipalDelegatedView<AbstractPrincipalDataPanel<IRealizersModel>> implements IRealizerView {
     /**
      * Construct a new ActorView.
      */
     public RealizerView() {
         super(3, "realizer.data.title");
+
+        UIManager.put("JXTitledPanel.title.foreground", Color.white);
     }
 
 
@@ -106,7 +113,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
 
         private JTextField fieldFirstName;
         private JTextField fieldName;
-        private DataContainerCachedComboBoxModel<Country> modelCountries;
+        private DataContainerCachedComboBoxModel<SimpleData> modelCountries;
         private NotesComboBoxModel modelNote;
         private JComboBox comboCountries;
         private JComboBox comboNote;
@@ -120,7 +127,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
 
             setModel(new RealizersModel());
             
-            newCountryAction = new NewCountryAction();
+            newCountryAction = new CreateNewPrincipalAction("generic.view.actions.new", "realizersController");
         }
 
         /**
@@ -129,7 +136,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
         private void build() {
             getModel().addDisplayListListener(this);
 
-            PanelBuilder builder = new PanelBuilder(this);
+            PanelBuilder builder = new JThequePanelBuilder(this);
 
             buildPanelList(builder);
             buildPanelTri(builder);
@@ -152,7 +159,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
             panelRealizer.setBorder(new DropShadowBorder());
             panelRealizer.setTitleFont(panelRealizer.getTitleFont().deriveFont(Font.BOLD));
 
-            PanelBuilder builder = new PanelBuilder();
+            I18nPanelBuilder builder = new JThequePanelBuilder();
 
             JPanelRealizerToolBar toolBar = new JPanelRealizerToolBar();
 
@@ -174,7 +181,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
          *
          * @param builder The builder of the view.
          */
-        private void addNamesFields(PanelBuilder builder) {
+        private void addNamesFields(I18nPanelBuilder builder) {
             builder.addI18nLabel(Constants.Properties.Person.FIRST_NAME, builder.gbcSet(0, 1));
 
             fieldFirstName = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 1, GridBagUtils.NONE, 0, 1));
@@ -193,10 +200,11 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
          *
          * @param builder The builder.
          */
-        private void addCountryField(PanelBuilder builder) {
+        private void addCountryField(I18nPanelBuilder builder) {
             builder.addI18nLabel(Constants.Properties.Person.COUNTRY, builder.gbcSet(0, 3));
 
-            modelCountries = new DataContainerCachedComboBoxModel<Country>(Managers.getManager(IBeansManager.class).<DataContainer<Country>>getBean("countriesService"));
+            modelCountries = new DataContainerCachedComboBoxModel<SimpleData>(
+					Managers.getManager(IBeansManager.class).<DataContainer<SimpleData>>getBean("countriesService"));
 
             comboCountries = builder.addComboBox(modelCountries, builder.gbcSet(1, 3));
             comboCountries.setEnabled(false);
@@ -211,14 +219,14 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
          *
          * @param builder The builder.
          */
-        private void addNoteField(PanelBuilder builder) {
+        private void addNoteField(I18nPanelBuilder builder) {
             builder.addI18nLabel(Constants.Properties.Person.NOTE, builder.gbcSet(0, 4));
 
-            modelNote = new NotesComboBoxModel();
+            modelNote = new NotesComboBoxModel(daoNotes);
 
             comboNote = builder.addComboBox(modelNote, builder.gbcSet(1, 4, GridBagUtils.NONE, GridBagUtils.ABOVE_BASELINE_LEADING, 0, 0, 1.0, 1.0));
             comboNote.setEnabled(false);
-            comboNote.setRenderer(new NoteComboRenderer());
+            comboNote.setRenderer(new NoteComboRenderer(daoNotes));
         }
 
         /**
@@ -231,7 +239,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
             panelTri.setBorder(new DropShadowBorder());
             panelTri.setTitleFont(panelTri.getTitleFont().deriveFont(Font.BOLD));
 
-            PanelBuilder builder = new PanelBuilder();
+            PanelBuilder builder = new JThequePanelBuilder();
 
             JXHyperlink linkTriPays = builder.add(new JXHyperlink(new AcSortRealizer("realizer.view.actions.sort.country", "Countries")),
                     builder.gbcSet(0, 0, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
@@ -256,7 +264,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView implement
             panelList.setBorder(new DropShadowBorder());
             panelList.setTitleFont(panelList.getTitleFont().deriveFont(Font.BOLD));
 
-            PanelBuilder builder = new PanelBuilder();
+            PanelBuilder builder = new JThequePanelBuilder();
 
             setTreeModel(getSorter().createInitialModel(IRealizersService.DATA_TYPE));
 

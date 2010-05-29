@@ -48,7 +48,7 @@ public final class AcDeleteActor extends JThequeAction {
                 Managers.getManager(ILanguageManager.class).getMessage("actor.dialogs.confirmDelete.title"));
 
         if (yes) {
-            actorController.deleteCurrentActor();
+            actorController.deleteCurrent();
         }
     }
 }

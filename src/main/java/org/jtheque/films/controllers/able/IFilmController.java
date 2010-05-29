@@ -34,34 +34,6 @@ public interface IFilmController extends IPrincipalController<Film>, MouseListen
      * Save the current film.
      */
     void save();
-
-    /**
-     * Display a film in the interface.
-     *
-     * @param film The film to edit.
-     */
-    void view(Film film);
-
-    /**
-     * Edit manually a film.
-     */
-    void manualEdit();
-
-    /**
-     * Create a new film.
-     */
-    void createFilm();
-
-    /**
-     * Delete the current film.
-     */
-    void deleteCurrentFilm();
-
-    /**
-     * Cancel the current state.
-     */
-    void cancel();
-
     /**
      * Send the current film by email.
      */

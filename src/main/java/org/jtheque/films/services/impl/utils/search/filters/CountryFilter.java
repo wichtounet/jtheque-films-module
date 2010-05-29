@@ -16,8 +16,8 @@ package org.jtheque.films.services.impl.utils.search.filters;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.primary.od.able.Country;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.collections.Filter;
 
 /**
@@ -27,14 +27,14 @@ import org.jtheque.utils.collections.Filter;
  * @param <T> The type of object to filters.
  */
 public final class CountryFilter<T extends Person> implements Filter<T> {
-    private final Country country;
+    private final SimpleData country;
 
     /**
      * Construct a new <code>CountryFilter</code>.
      *
      * @param country The country to filter for.
      */
-    public CountryFilter(Country country) {
+    public CountryFilter(SimpleData country) {
         super();
 
         this.country = country;

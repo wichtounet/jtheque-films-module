@@ -28,15 +28,9 @@ import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.file.jt.JTFFile;
 import org.jtheque.films.utils.Constants;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.bean.Version;
 import org.jtheque.utils.io.FileException;
 import org.jtheque.utils.io.FileUtils;
@@ -59,16 +53,16 @@ public final class JTFFileReader extends JTFileReader {
     private boolean correctSeparators;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IActorService actorsService;
@@ -164,7 +158,7 @@ public final class JTFFileReader extends JTFileReader {
             Set<Person> actors = new HashSet<Person>(12);
 
             while (!endOfActorsList) {
-                Person actor = actorsService.getEmptyActor();
+                Person actor = actorsService.getEmptyPerson();
 
                 actor.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
                 actor.setFirstName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -226,7 +220,7 @@ public final class JTFFileReader extends JTFileReader {
      */
     private void readLanguage(DataInputStream stream, JTFFile file) throws IOException {
         if (stream.readInt() == Constants.Files.JT.CONTENT) {
-            Language language = languagesService.getEmptyLanguage();
+            SimpleData language = languagesService.getEmptySimpleData();
 
             language.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
 
@@ -262,11 +256,11 @@ public final class JTFFileReader extends JTFileReader {
      */
     private void readOneKind(DataInputStream stream, JTFFile file) throws IOException {
         if (stream.readInt() == Constants.Files.JT.CONTENT) {
-            Kind kind = kindsService.getEmptyKind();
+            SimpleData kind = kindsService.getEmptySimpleData();
 
             kind.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
 
-            Set<Kind> kinds = new HashSet<Kind>(1);
+            Set<SimpleData> kinds = new HashSet<SimpleData>(1);
 
             kinds.add(kind);
 
@@ -288,10 +282,10 @@ public final class JTFFileReader extends JTFileReader {
     private void readMultipleKinds(DataInputStream stream, JTFFile file) throws IOException {
         if (stream.readInt() == Constants.Files.JT.CONTENT) {
             boolean endOfKindsList = false;
-            Set<Kind> kinds = new HashSet<Kind>(5);
+            Set<SimpleData> kinds = new HashSet<SimpleData>(5);
 
             while (!endOfKindsList) {
-                Kind kind = kindsService.getEmptyKind();
+                SimpleData kind = kindsService.getEmptySimpleData();
 
                 kind.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
 
@@ -308,7 +302,7 @@ public final class JTFFileReader extends JTFileReader {
 
             file.setKinds(kinds);
         } else {
-            file.setKinds(Collections.<Kind>emptySet());
+            file.setKinds(Collections.<SimpleData>emptySet());
 
             if (stream.readLong() != Constants.Files.JT.JTCATEGORYSEPARATOR) {
                 correctSeparators = false;
@@ -325,7 +319,7 @@ public final class JTFFileReader extends JTFileReader {
      */
     private void readType(DataInputStream stream, JTFFile file) throws IOException {
         if (stream.readInt() == Constants.Files.JT.CONTENT) {
-            Type type = typesService.getEmptyType();
+            SimpleData type = typesService.getEmptySimpleData();
 
             type.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
 
@@ -347,10 +341,10 @@ public final class JTFFileReader extends JTFileReader {
     private void readCountries(DataInputStream stream, JTFFile file) throws IOException {
         if (stream.readInt() == Constants.Files.JT.CONTENT) {
             boolean endOfCountries = false;
-            Collection<Country> countries = new ArrayList<Country>(12);
+            Collection<SimpleData> countries = new ArrayList<SimpleData>(12);
 
             while (!endOfCountries) {
-                Country country = countriesService.getEmptyCountry();
+                SimpleData country = countriesService.getEmptySimpleData();
 
                 country.getTemporaryContext().setId(stream.readInt());
                 country.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -368,7 +362,7 @@ public final class JTFFileReader extends JTFileReader {
 
             file.setCountries(countries);
         } else {
-            file.setCountries(Collections.<Country>emptyList());
+            file.setCountries(Collections.<SimpleData>emptyList());
 
             if (stream.readLong() != Constants.Files.JT.JTCATEGORYSEPARATOR) {
                 correctSeparators = false;

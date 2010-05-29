@@ -22,8 +22,8 @@ import org.jtheque.films.controllers.able.IActorController;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.view.impl.models.able.IActorsModel;
 import org.jtheque.primary.controller.able.ControllerState;
-import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.controller.impl.undo.DeletedPersonEdit;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
+import org.jtheque.primary.controller.impl.undo.GenericDataDeletedEdit;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.able.ViewMode;
@@ -35,7 +35,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class ViewActorState implements ControllerState {
+public final class ViewActorState extends AbstractControllerState {
     @Resource
     private IActorController controller;
 
@@ -62,20 +62,6 @@ public final class ViewActorState implements ControllerState {
     }
 
     @Override
-    public ControllerState save(FormBean infos) {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState cancel() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
     public ControllerState create() {
         return controller.getNewObjectState();
     }
@@ -90,23 +76,12 @@ public final class ViewActorState implements ControllerState {
         boolean deleted = actorService.delete(getViewModel().getCurrentActor());
 
         if (deleted) {
-            Managers.getManager(IUndoRedoManager.class).addEdit(new DeletedPersonEdit(getViewModel().getCurrentActor()));
+            Managers.getManager(IUndoRedoManager.class).addEdit(new GenericDataDeletedEdit<Person>("personServices", getViewModel().getCurrentActor()));
 
             controller.getView().selectFirst();
         }
 
         return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Person actor = (Person) data;
-
-        assert actor.getType().equals(IActorService.PERSON_TYPE) : "The person must of type Actor";
-
-        getViewModel().setCurrentActor(actor);
-
-        return controller.getAutoAddState();
     }
 
     @Override

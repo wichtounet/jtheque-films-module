@@ -25,11 +25,9 @@ import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.INotesService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.VideoFile;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.print.PrintUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,13 +52,13 @@ public final class FilmsService implements IFilmsService {
     private IRealizersService realizersService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Override
     @Transactional
@@ -113,9 +111,9 @@ public final class FilmsService implements IFilmsService {
         emptyFilm.setTitle(Managers.getManager(ILanguageManager.class).getMessage("generic.view.actions.new"));
         emptyFilm.setNote(notesService.getDefaultNote());
         emptyFilm.setTheRealizer(realizersService.getDefaultRealizer());
-        emptyFilm.addKind(kindsService.getDefaultKind());
-        emptyFilm.setTheType(typesService.getDefaultType());
-        emptyFilm.setTheLanguage(languagesService.getDefaultLanguage());
+        emptyFilm.addKind(kindsService.getDefaultSimpleData());
+        emptyFilm.setTheType(typesService.getDefaultSimpleData());
+        emptyFilm.setTheLanguage(languagesService.getDefaultSimpleData());
 
         return emptyFilm;
     }
@@ -151,7 +149,7 @@ public final class FilmsService implements IFilmsService {
         builder.append("Title : ").append(film.getTitle());
         builder.append("\nKind : ");
 
-        for (Kind kind : film.getKinds()) {
+        for (SimpleData kind : film.getKinds()) {
             builder.append("\n - ").append(kind.getDisplayableText());
         }
 

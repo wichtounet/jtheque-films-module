@@ -19,13 +19,13 @@ package org.jtheque.films.view.impl.frames;
 import org.jdesktop.swingx.JXImagePanel;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.ICoverService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.impl.utils.cover.Format;
 import org.jtheque.films.view.able.ICoverView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.cover.AcExportCover;
 import org.jtheque.films.view.impl.actions.cover.AcPrintCover;
 import org.jtheque.films.view.impl.actions.cover.AcUpdateCover;
@@ -84,7 +84,7 @@ public final class CoverView extends SwingDialogView implements ICoverView {
      * @return The builded content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         builder.addI18nLabel("cover.view.film", builder.gbcSet(0, 0));
 
@@ -102,7 +102,7 @@ public final class CoverView extends SwingDialogView implements ICoverView {
 
         viewer = new JXImagePanel();
         viewer.setBackground(Color.white);
-        viewer.setImage(coverService.getReportImage(modelFilms.getSelectedData(), modelFormats.getSelectedFormat()));
+        viewer.setImage(coverService.getReportImage(modelFilms.getSelectedData(), modelFormats.getSelectedItem()));
 
         builder.add(viewer, builder.gbcSet(0, 2, GridBagUtils.BOTH, 2, 1));
 
@@ -124,7 +124,7 @@ public final class CoverView extends SwingDialogView implements ICoverView {
 
     @Override
     public Format getSelectedFormat() {
-        return modelFormats.getSelectedFormat();
+        return modelFormats.getSelectedItem();
     }
 
     @Override

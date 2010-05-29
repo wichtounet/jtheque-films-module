@@ -17,7 +17,7 @@ package org.jtheque.films.services.impl.utils.search.filters;
  */
 
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.primary.od.able.Language;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.collections.Filter;
 
 /**
@@ -26,14 +26,14 @@ import org.jtheque.utils.collections.Filter;
  * @author Baptiste Wicht
  */
 public final class LanguageFilter implements Filter<Film> {
-    private final Language language;
+    private final SimpleData language;
 
     /**
      * Construct a new LanguageFilter.
      *
      * @param language The language to filter with.
      */
-    public LanguageFilter(Language language) {
+    public LanguageFilter(SimpleData language) {
         super();
 
         this.language = language;

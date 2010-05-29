@@ -28,7 +28,6 @@ import org.jtheque.films.view.able.IFilmView;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.impl.PrincipalController;
-import org.jtheque.primary.view.impl.models.tree.TreeElement;
 import org.jtheque.utils.DesktopMail;
 import org.jtheque.utils.DesktopUtils;
 import org.jtheque.utils.StringUtils;
@@ -37,14 +36,9 @@ import org.jtheque.utils.io.FileUtils;
 import org.jtheque.utils.io.SimpleFilter;
 import org.jtheque.utils.print.PrintUtils;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.swing.JTree;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.tree.TreePath;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.Collection;
 
 /**
  * A film controller implementation.
@@ -60,12 +54,9 @@ public final class FilmController extends PrincipalController<Film> implements I
 
     private final SimpleFilter imagesFilter = new SimpleFilter("Images(*.jpg,*.png)", ".jpg,.png,.gif");
 
-    /**
-     * Init the view.
-     */
-    @PostConstruct
-    public void init() {
-        setState(getViewState());
+    public FilmController(ControllerState viewState, ControllerState modifyState,
+                          ControllerState newObjectState, ControllerState autoAddState){
+        super(viewState, modifyState, newObjectState, autoAddState);
     }
 
     @Override
@@ -95,75 +86,13 @@ public final class FilmController extends PrincipalController<Film> implements I
     }
 
     @Override
-    public void valueChanged(TreeSelectionEvent event) {
-        TreePath current = ((JTree) event.getSource()).getSelectionPath();
-
-        if (current != null && current.getLastPathComponent() instanceof TreeElement) {
-            Film film = (Film) current.getLastPathComponent();
-
-            if (film != null) {
-                view(film);
-            }
-        }
-    }
-
-    @Override
-    public void save() {
-        ControllerState newState = getState().save(filmView.fillFilmFormBean());
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
     public IFilmsModel getViewModel() {
         return (IFilmsModel) filmView.getModel();
     }
 
     @Override
-    public void view(Film film) {
-        ControllerState newState = getState().view(film);
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void manualEdit() {
-        ControllerState newState = getState().manualEdit();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void createFilm() {
-        ControllerState newState = getState().create();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void deleteCurrentFilm() {
-        ControllerState newState = getState().delete();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void cancel() {
-        ControllerState newState = getState().cancel();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
+    public void save() {
+        save(filmView.fillFilmFormBean());
     }
 
     @Override
@@ -208,10 +137,5 @@ public final class FilmController extends PrincipalController<Film> implements I
     @Override
     public String getDataType() {
         return IFilmsService.DATA_TYPE;
-    }
-
-    @Override
-    public Collection<Film> getDisplayList() {
-        return getViewModel().getDisplayList();
     }
 }

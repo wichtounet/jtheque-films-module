@@ -22,8 +22,8 @@ import org.jtheque.films.controllers.able.IRealizerController;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.primary.controller.able.ControllerState;
-import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.controller.impl.undo.DeletedPersonEdit;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
+import org.jtheque.primary.controller.impl.undo.GenericDataDeletedEdit;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.able.ViewMode;
@@ -35,7 +35,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class ViewRealizerState implements ControllerState {
+public final class ViewRealizerState extends AbstractControllerState {
     @Resource
     private IRealizerController controller;
 
@@ -62,20 +62,6 @@ public final class ViewRealizerState implements ControllerState {
     }
 
     @Override
-    public ControllerState save(FormBean bean) {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState cancel() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
     public ControllerState create() {
         return controller.getNewObjectState();
     }
@@ -90,23 +76,13 @@ public final class ViewRealizerState implements ControllerState {
         boolean deleted = realizersService.delete(getViewModel().getCurrentRealizer());
 
         if (deleted) {
-            Managers.getManager(IUndoRedoManager.class).addEdit(new DeletedPersonEdit(getViewModel().getCurrentRealizer()));
+            Managers.getManager(IUndoRedoManager.class).addEdit(
+					new GenericDataDeletedEdit<Person>("realizersService", getViewModel().getCurrentRealizer()));
 
             controller.getView().selectFirst();
         }
 
         return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Person realizer = (Person) data;
-
-        assert realizer.getType().equals(IRealizersService.PERSON_TYPE) : "The person must of type Actor";
-
-        getViewModel().setCurrentRealizer(realizer);
-
-        return controller.getAutoAddState();
     }
 
     @Override

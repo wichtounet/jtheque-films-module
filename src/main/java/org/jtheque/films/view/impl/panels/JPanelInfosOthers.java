@@ -2,7 +2,8 @@ package org.jtheque.films.view.impl.panels;
 
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.utils.Constants.Properties;
@@ -45,7 +46,7 @@ public final class JPanelInfosOthers extends JPanel implements IInfosOthersView 
      */
     @PostConstruct
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        PanelBuilder builder = new JThequePanelBuilder(this);
 
         fieldFile = new FileChooserPanel();
         fieldFile.setTextKey(Properties.Film.FILE_PATH);

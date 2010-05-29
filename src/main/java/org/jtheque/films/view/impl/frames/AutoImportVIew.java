@@ -16,21 +16,13 @@ package org.jtheque.films.view.impl.frames;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXRadioGroup;
-import org.jtheque.core.managers.error.JThequeError;
-import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
-import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
-import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.view.able.IAutoImportView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.auto.imports.AcAddTitle;
 import org.jtheque.films.view.impl.actions.auto.imports.AcDeleteTitle;
 import org.jtheque.films.view.impl.actions.auto.imports.AcSearchTitles;
 import org.jtheque.films.view.impl.actions.auto.imports.AcValidateAutoImportView;
 import org.jtheque.films.view.impl.models.able.IAutoImportFilm;
-import org.jtheque.films.view.impl.models.combo.SitesComboBoxModel;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -54,7 +46,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
     private JXRadioGroup<String> fileMode;
     private JXRadioGroup<String> webMode;
 
-    private SitesComboBoxModel sitesModel;
+    private SimpleComboBoxModel<Site> sitesModel;
     private DefaultListModel modelListTitles;
 
     private int phase = PHASE_1;
@@ -88,7 +80,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         addDirectoryChooser(builder);
         addFileModeField(builder);
@@ -127,7 +119,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
      *
      * @param builder The panel builder.
      */
-    private void addFileModeField(PanelBuilder builder) {
+    private void addFileModeField(I18nPanelBuilder builder) {
         builder.addI18nLabel("auto.import.file.mode", builder.gbcSet(0, 1));
 
         String[] values = {getMessage("auto.import.file.mode.file"), getMessage("auto.import.file.mode.directory")};
@@ -159,7 +151,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
      *
      * @param builder The panel builder.
      */
-    private void addWebModeField(PanelBuilder builder) {
+    private void addWebModeField(I18nPanelBuilder builder) {
         String[] values;
         builder.addI18nLabel("auto.import.web.mode", builder.gbcSet(0, 5));
 
@@ -177,10 +169,10 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
      *
      * @param builder The panel builder.
      */
-    private void addSiteField(PanelBuilder builder) {
+    private void addSiteField(I18nPanelBuilder builder) {
         builder.addI18nLabel("auto.import.web.site", builder.gbcSet(0, 6));
 
-        sitesModel = new SitesComboBoxModel();
+        sitesModel = new SimpleComboBoxModel<Site>(Site.values());
 
         builder.addComboBox(sitesModel, builder.gbcSet(1, 6));
     }
@@ -217,7 +209,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
 
     @Override
     public Site getSelectedSite() {
-        return sitesModel.getSelectedSite();
+        return sitesModel.getSelectedItem();
     }
 
     @Override

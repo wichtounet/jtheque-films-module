@@ -19,12 +19,12 @@ package org.jtheque.films.controllers.impl.state.film;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.undo.IUndoRedoManager;
 import org.jtheque.films.controllers.able.IFilmController;
-import org.jtheque.films.controllers.impl.undo.DeletedFilmEdit;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.controller.able.ControllerState;
-import org.jtheque.primary.controller.able.FormBean;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
+import org.jtheque.primary.controller.impl.undo.GenericDataDeletedEdit;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.view.able.ViewMode;
 
@@ -35,7 +35,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class ViewFilmState implements ControllerState {
+public final class ViewFilmState extends AbstractControllerState {
     @Resource
     private IFilmController controller;
 
@@ -62,20 +62,6 @@ public final class ViewFilmState implements ControllerState {
     }
 
     @Override
-    public ControllerState save(FormBean bean) {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState cancel() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
     public ControllerState create() {
         return controller.getNewObjectState();
     }
@@ -90,21 +76,12 @@ public final class ViewFilmState implements ControllerState {
         boolean deleted = filmsService.delete(getViewModel().getCurrentFilm());
 
         if (deleted) {
-            Managers.getManager(IUndoRedoManager.class).addEdit(new DeletedFilmEdit(getViewModel().getCurrentFilm()));
+            Managers.getManager(IUndoRedoManager.class).addEdit(new GenericDataDeletedEdit<Film>("filmsService", getViewModel().getCurrentFilm()));
 
             controller.getView().selectFirst();
         }
 
         return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Film film = (Film) data;
-
-        getViewModel().setCurrentFilm(film);
-
-        return controller.getAutoAddState();
     }
 
     @Override

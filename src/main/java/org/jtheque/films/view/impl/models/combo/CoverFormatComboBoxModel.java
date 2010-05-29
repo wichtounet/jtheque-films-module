@@ -1,12 +1,10 @@
 package org.jtheque.films.view.impl.models.combo;
 
-import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.beans.IBeansManager;
+import org.jtheque.core.managers.view.impl.components.model.SimpleComboBoxModel;
+import org.jtheque.core.utils.CoreUtils;
 import org.jtheque.films.services.able.ICoverService;
 import org.jtheque.films.services.impl.utils.cover.Format;
-
-import javax.annotation.Resource;
-import javax.swing.DefaultComboBoxModel;
+import org.jtheque.utils.collections.CollectionUtils;
 
 /*
  * This file is part of JTheque.
@@ -29,42 +27,22 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Baptiste Wicht
  */
-public final class CoverFormatComboBoxModel extends DefaultComboBoxModel {
-    @Resource
-    private ICoverService coverService;
-
+public final class CoverFormatComboBoxModel extends SimpleComboBoxModel<Format> {
     /**
      * Construct a new CoverFormatComboBoxModel.
      */
     public CoverFormatComboBoxModel() {
         super();
 
-        Managers.getManager(IBeansManager.class).inject(this);
-    }
-
-    @Override
-    public Object getElementAt(int index) {
-        return coverService.getFormats()[index];
-    }
-
-    @Override
-    public int getSize() {
-        return coverService.getFormats().length;
-    }
-
-    /**
-     * Return the selected format in the model.
-     *
-     * @return The format who's selected.
-     */
-    public Format getSelectedFormat() {
-        return (Format) getSelectedItem();
+        ICoverService coverService = CoreUtils.getBean("coverService");
+        
+        setElements(coverService.getFormats());
     }
 
     /**
      * Select the first element.
      */
     public void selectFirst() {
-        setSelectedItem(coverService.getFormats()[0]);
+        setSelectedItem(CollectionUtils.first(getObjects()));
     }
 }

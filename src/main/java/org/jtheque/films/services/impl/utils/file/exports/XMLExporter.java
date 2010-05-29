@@ -21,8 +21,8 @@ import org.jtheque.core.utils.file.XMLWriter;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.utils.Constants;
 import org.jtheque.films.utils.Constants.Files.FileType;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.IntDate;
 
 /**
@@ -142,7 +142,7 @@ public final class XMLExporter extends AbstractExporter<Film> {
     private static void exportKinds(Film film, XMLWriter writer) {
         writer.add("kinds");
 
-        for (Kind kind : film.getKinds()) {
+        for (SimpleData kind : film.getKinds()) {
             writer.add("kind");
 
             writer.addOnly("name", kind.getName());

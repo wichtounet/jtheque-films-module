@@ -20,14 +20,14 @@ import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.ILendFilmView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.lend.AcValidateLendView;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.IBorrowersService;
+import org.jtheque.primary.services.able.IPersonService;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
@@ -50,7 +50,7 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
     private DataContainerCachedComboBoxModel<Person> modelBorrowers;
 
     @Resource
-    private IBorrowersService borrowersService;
+    private IPersonService borrowersService;
 
     @Resource
     private IFilmsService filmsService;
@@ -82,7 +82,7 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         builder.addI18nLabel("lend.view.film", builder.gbcSet(0, 0));
 

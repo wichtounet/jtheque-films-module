@@ -17,7 +17,7 @@ package org.jtheque.films.services.impl.utils.search.filters;
  */
 
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.collections.Filter;
 
 /**
@@ -26,14 +26,14 @@ import org.jtheque.utils.collections.Filter;
  * @author Baptiste Wicht
  */
 public final class TypeFilter implements Filter<Film> {
-    private final Type type;
+    private final SimpleData type;
 
     /**
      * Construct a new TypeFilter.
      *
      * @param type The type to filter for.
      */
-    public TypeFilter(Type type) {
+    public TypeFilter(SimpleData type) {
         super();
 
         this.type = type;

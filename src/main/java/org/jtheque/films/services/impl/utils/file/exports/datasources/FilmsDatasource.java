@@ -6,8 +6,8 @@ import net.sf.jasperreports.engine.JRField;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.properties.IPropertiesManager;
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -137,7 +137,7 @@ public final class FilmsDatasource implements JRDataSource {
         StringBuilder builder = new StringBuilder(50);
 
         boolean firstKind = true;
-        for (Kind kind : film.getKinds()) {
+        for (SimpleData kind : film.getKinds()) {
             if (firstKind) {
                 builder.append(kind.getDisplayableText());
                 firstKind = false;

@@ -38,6 +38,6 @@ public final class AcNewActor extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        Managers.getManager(IBeansManager.class).<IActorController>getBean("actorController").createActor();
+        Managers.getManager(IBeansManager.class).<IActorController>getBean("actorController").create();
     }
 }

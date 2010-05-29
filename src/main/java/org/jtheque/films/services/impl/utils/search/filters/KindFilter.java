@@ -17,7 +17,7 @@ package org.jtheque.films.services.impl.utils.search.filters;
  */
 
 import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.primary.od.able.Kind;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.collections.Filter;
 
 /**
@@ -26,14 +26,14 @@ import org.jtheque.utils.collections.Filter;
  * @author Baptiste Wicht
  */
 public final class KindFilter implements Filter<Film> {
-    private final Kind kind;
+    private final SimpleData kind;
 
     /**
      * Construct a new KindFilter.
      *
      * @param kind The kind to filter for.
      */
-    public KindFilter(Kind kind) {
+    public KindFilter(SimpleData kind) {
         super();
 
         this.kind = kind;

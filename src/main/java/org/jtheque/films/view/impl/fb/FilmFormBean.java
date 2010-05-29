@@ -19,11 +19,8 @@ package org.jtheque.films.view.impl.fb;
 import org.jtheque.core.utils.db.Note;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Saga;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,10 +33,10 @@ import java.util.Set;
  */
 public final class FilmFormBean implements IFilmFormBean {
     private String title;
-    private Type type;
+    private SimpleData type;
     private Person realizer;
-    private Language language;
-    private Saga saga;
+    private SimpleData language;
+    private SimpleData saga;
     private int year;
     private int duration;
     private Note note;
@@ -47,7 +44,7 @@ public final class FilmFormBean implements IFilmFormBean {
     private String comment;
     private String filePath;
     private Set<Person> actors = new HashSet<Person>(15);
-    private Set<Kind> kinds = new HashSet<Kind>(5);
+    private Set<SimpleData> kinds = new HashSet<SimpleData>(5);
 
     @Override
     public void setTitle(String title) {
@@ -55,7 +52,7 @@ public final class FilmFormBean implements IFilmFormBean {
     }
 
     @Override
-    public void setType(Type type) {
+    public void setType(SimpleData type) {
         this.type = type;
     }
 
@@ -77,7 +74,7 @@ public final class FilmFormBean implements IFilmFormBean {
     }
 
     @Override
-    public void setLanguage(Language language) {
+    public void setLanguage(SimpleData language) {
         this.language = language;
     }
 
@@ -102,7 +99,7 @@ public final class FilmFormBean implements IFilmFormBean {
     }
 
     @Override
-    public void setSaga(Saga saga) {
+    public void setSaga(SimpleData saga) {
         this.saga = saga;
     }
 
@@ -112,8 +109,8 @@ public final class FilmFormBean implements IFilmFormBean {
     }
 
     @Override
-    public void setKinds(Set<Kind> kinds) {
-        this.kinds = new HashSet<Kind>(kinds);
+    public void setKinds(Set<SimpleData> kinds) {
+        this.kinds = new HashSet<SimpleData>(kinds);
     }
 
     @Override

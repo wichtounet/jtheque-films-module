@@ -21,7 +21,8 @@ import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
 import org.jtheque.films.services.impl.utils.config.Configuration;
@@ -59,7 +60,7 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
      * Build the view.
      */
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         builder.addI18nLabel("config.auto.actors",
                 builder.gbcSet(0, 0, GridBagUtils.NONE, GridBagUtils.ABOVE_BASELINE_LEADING));

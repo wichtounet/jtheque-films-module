@@ -21,13 +21,13 @@ import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.core.managers.view.able.controller.Controller;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.controllers.able.IActorController;
 import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.controllers.able.IRealizerController;
 import org.jtheque.films.services.impl.utils.search.Searcher;
 import org.jtheque.films.view.able.ISearchView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.search.AcValidateSearchView;
 import org.jtheque.films.view.impl.panels.search.JPanelSearch;
 import org.jtheque.primary.od.able.Data;
@@ -88,7 +88,7 @@ public final class SearchView extends SwingDialogView implements ISearchView {
      * @return the content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         builder.add(currentPanel, builder.gbcSet(0, 0));
 

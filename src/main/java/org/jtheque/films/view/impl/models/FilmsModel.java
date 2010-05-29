@@ -34,8 +34,6 @@ import java.util.Collection;
 public final class FilmsModel extends PrincipalDataModel<Film> implements IFilmsModel {
     private Film currentFilm;
 
-    private Collection<Film> displayList;
-
     /**
      * Init the view.
      */
@@ -45,35 +43,12 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
         getFilmsService().addDataListener(this);
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void updateDisplayList(Collection<Film> films) {
-        getDisplayList().clear();
+	@Override
+	public Collection<Film> getDatas(){
+		return getFilmsService().getDatas();
+	}
 
-        if (films == null) {
-            getDisplayList().addAll(getFilmsService().getFilms());
-        } else {
-            getDisplayList().addAll(films);
-        }
-
-        fireDisplayListChanged();
-    }
-
-    @Override
-    public void updateDisplayList() {
-        updateDisplayList(null);
-    }
-
-    @Override
-    public Collection<Film> getDisplayList() {
-        if (displayList == null) {
-            displayList = getFilmsService().getFilms();
-        }
-
-        return displayList;
-    }
-
-    @Override
+	@Override
     public Film getCurrentFilm() {
         return currentFilm;
     }

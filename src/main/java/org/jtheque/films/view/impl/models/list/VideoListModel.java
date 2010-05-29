@@ -18,24 +18,18 @@ package org.jtheque.films.view.impl.models.list;
 
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
+import org.jtheque.core.managers.view.impl.components.model.SimpleListModel;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.impl.utils.VideoFile;
-import org.jtheque.utils.collections.CollectionUtils;
 
 import javax.annotation.Resource;
-import javax.swing.DefaultListModel;
-import java.util.List;
 
 /**
  * A List model to display the modules.
  *
  * @author Baptiste Wicht
  */
-public final class VideoListModel extends DefaultListModel {
-    private static final long serialVersionUID = -4658778193485774835L;
-
-    private List<VideoFile> files;
-
+public final class VideoListModel extends SimpleListModel<VideoFile> {
     @Resource
     private IFilmsService filmsService;
 
@@ -47,30 +41,13 @@ public final class VideoListModel extends DefaultListModel {
 
         Managers.getManager(IBeansManager.class).inject(this);
 
-        files = CollectionUtils.copyOf(filmsService.getVideoFiles());
-    }
-
-    @Override
-    public Object getElementAt(int index) {
-        return files.get(index);
-    }
-
-    @Override
-    public Object get(int index) {
-        return files.get(index);
-    }
-
-    @Override
-    public int getSize() {
-        return files.size();
+        setElements(filmsService.getVideoFiles());
     }
 
     /**
      * Refresh the model.
      */
     public void refresh() {
-        files = CollectionUtils.copyOf(filmsService.getVideoFiles());
-
-        fireContentsChanged(this, 0, files.size());
+        setElements(filmsService.getVideoFiles());
     }
 }

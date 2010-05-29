@@ -30,15 +30,9 @@ import org.jtheque.films.services.able.INotesService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.utils.Constants;
 import org.jtheque.films.utils.Constants.Files.FileType;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.io.FileException;
 import org.jtheque.utils.io.FileUtils;
 
@@ -53,13 +47,13 @@ public final class XMLImporter implements Importer {
     private final ILanguageManager resources = Managers.getManager(ILanguageManager.class);
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
     private IFilmsService filmsService;
@@ -73,10 +67,10 @@ public final class XMLImporter implements Importer {
     @Resource
     private INotesService notesService;
 
-    private final DaoNotes daoNotes = DaoNotes.getInstance();
-
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
+
+    private final DaoNotes daoNotes = DaoNotes.getInstance();
 
     /**
      * Construct a new XMLImporter.
@@ -162,11 +156,11 @@ public final class XMLImporter implements Importer {
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importLanguage(XMLOverReader reader, Film film) throws XMLException {
-        Language language = languagesService.getEmptyLanguage();
+        SimpleData language = languagesService.getEmptySimpleData();
         language.setName(reader.readString("./language"));
 
         if (languagesService.exist(language)) {
-            language.setId(languagesService.getLanguage(language.getName()).getId());
+            language.setId(languagesService.getSimpleData(language.getName()).getId());
         } else {
             languagesService.create(language);
         }
@@ -182,11 +176,11 @@ public final class XMLImporter implements Importer {
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importType(XMLOverReader reader, Film film) throws XMLException {
-        Type type = typesService.getEmptyType();
+        SimpleData type = typesService.getEmptySimpleData();
         type.setName(reader.readString("./type"));
 
-        if (typesService.exists(type)) {
-            type.setId(typesService.getType(type.getName()).getId());
+        if (typesService.exist(type)) {
+            type.setId(typesService.getSimpleData(type.getName()).getId());
         } else {
             typesService.create(type);
         }
@@ -246,10 +240,10 @@ public final class XMLImporter implements Importer {
      * @param kindName The name of the kind.
      */
     private void addKindToFilm(Film film, String kindName) {
-        if (kindsService.exists(kindName)) {
-            film.addKind(kindsService.getKind(kindName));
+        if (kindsService.exist(kindName)) {
+            film.addKind(kindsService.getSimpleData(kindName));
         } else {
-            Kind kind = kindsService.getEmptyKind();
+            SimpleData kind = kindsService.getEmptySimpleData();
             kind.setName(kindName);
 
             kindsService.create(kind);
@@ -266,7 +260,7 @@ public final class XMLImporter implements Importer {
      */
     private void importActors(XMLOverReader reader, Film film) throws XMLException {
         while (reader.next("//actors/actor")) {
-            Person actor = actorService.getEmptyActor();
+            Person actor = actorService.getEmptyPerson();
             actor.setName(reader.readString("./name"));
             actor.setFirstName(reader.readString("./firstname"));
             actor.setNote(notesService.getDefaultNote());
@@ -274,7 +268,7 @@ public final class XMLImporter implements Importer {
             addCountryToPerson(actor, reader.readString("./country"));
 
             if (actorService.exist(actor)) {
-                film.addActor(actorService.getActor(actor.getFirstName(), actor.getName()));
+                film.addActor(actorService.getPerson(actor.getFirstName(), actor.getName()));
             } else {
                 actorService.create(actor);
                 film.addActor(actor);
@@ -290,9 +284,9 @@ public final class XMLImporter implements Importer {
      */
     private void addCountryToPerson(Person person, String countryName) {
         if (countriesService.exist(countryName)) {
-            person.setTheCountry(countriesService.getCountry(countryName));
+            person.setTheCountry(countriesService.getSimpleData(countryName));
         } else {
-            Country country = countriesService.getEmptyCountry();
+            SimpleData country = countriesService.getEmptySimpleData();
             country.setName(countryName);
 
             countriesService.create(country);

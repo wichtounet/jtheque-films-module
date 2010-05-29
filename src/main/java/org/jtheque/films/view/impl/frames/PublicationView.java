@@ -3,12 +3,13 @@ package org.jtheque.films.view.impl.frames;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.JThequeCheckBox;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.services.impl.utils.file.FTPConnectionInfos;
 import org.jtheque.films.utils.Constants.Properties.Publication;
 import org.jtheque.films.view.able.IPublicationView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.publication.AcValidatePublicationView;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
@@ -73,7 +74,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * @return The builded content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         Action validateAction = new AcValidatePublicationView();
         
@@ -94,7 +95,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * @param builder The builder of the view.
      * @param validateAction
      */
-    private void addPathFields(PanelBuilder builder, Action validateAction) {
+    private void addPathFields(I18nPanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.HOST, builder.gbcSet(0, 0));
 
         fieldHost = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 0, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
@@ -114,7 +115,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * @param builder The builder of the view.
      * @param validateAction
      */
-    private void addAuthenticationFields(PanelBuilder builder, Action validateAction) {
+    private void addAuthenticationFields(I18nPanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.USER, builder.gbcSet(0, 2));
 
         fieldUser = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 2, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
@@ -133,7 +134,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
      * @param builder The builder of the view.
      * @param validateAction
      */
-    private void addPortField(PanelBuilder builder, Action validateAction) {
+    private void addPortField(I18nPanelBuilder builder, Action validateAction) {
         builder.addI18nLabel(Publication.PORT, builder.gbcSet(0, 4));
 
         fieldPort = builder.add(new JTextField(FIELD_COLUMNS), builder.gbcSet(1, 4, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));

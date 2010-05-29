@@ -17,6 +17,7 @@ package org.jtheque.films.persistence.dao.impl;
  */
 
 import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.collection.Collection;
 import org.jtheque.core.managers.log.ILoggingManager;
 import org.jtheque.core.managers.persistence.GenericDao;
 import org.jtheque.core.managers.persistence.Query;
@@ -24,22 +25,18 @@ import org.jtheque.core.managers.persistence.QueryMapper;
 import org.jtheque.core.managers.persistence.able.Entity;
 import org.jtheque.core.managers.persistence.context.IDaoPersistenceContext;
 import org.jtheque.core.utils.db.DaoNotes;
-import org.jtheque.core.utils.db.DaoNotes.NoteType;
 import org.jtheque.films.persistence.dao.able.IDaoFilms;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.persistence.od.impl.FilmActorRelation;
 import org.jtheque.films.persistence.od.impl.FilmImpl;
 import org.jtheque.films.persistence.od.impl.FilmKindRelation;
-import org.jtheque.primary.dao.able.IDaoCollections;
-import org.jtheque.primary.dao.able.IDaoKinds;
-import org.jtheque.primary.dao.able.IDaoLanguages;
+import org.jtheque.core.managers.collection.IDaoCollections;
 import org.jtheque.primary.dao.able.IDaoLendings;
 import org.jtheque.primary.dao.able.IDaoPersons;
-import org.jtheque.primary.dao.able.IDaoSagas;
-import org.jtheque.primary.dao.able.IDaoTypes;
-import org.jtheque.primary.od.able.Collection;
-import org.jtheque.primary.od.able.Kind;
+import org.jtheque.primary.dao.able.IDaoSimpleDatas;
 import org.jtheque.primary.od.able.Person;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.collections.CollectionUtils;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -75,13 +72,13 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
     private IDaoCollections daoCollections;
 
     @Resource
-    private IDaoKinds daoKinds;
+    private IDaoSimpleDatas daoKinds;
 
     @Resource
-    private IDaoTypes daoTypes;
+    private IDaoSimpleDatas daoTypes;
 
     @Resource
-    private IDaoSagas daoSagas;
+    private IDaoSimpleDatas daoSagas;
 
     @Resource
     private IDaoLendings daoLendings;
@@ -90,7 +87,7 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
     private IDaoPersons daoPersons;
 
     @Resource
-    private IDaoLanguages daoLanguages;
+    private IDaoSimpleDatas daoLanguages;
 
     /**
      * Construct a new DaoFilms.
@@ -189,7 +186,7 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
             jdbcTemplate.update("INSERT INTO " + ACTORS_FILMS_TABLE + " (THE_FILM_FK, THE_ACTOR_FK) VALUES(?,?)", film.getId(), actor.getId());
         }
 
-        for (Kind kind : film.getKinds()) {
+        for (SimpleData kind : film.getKinds()) {
             jdbcTemplate.update("INSERT INTO " + KINDS_FILMS_TABLE + " (THE_FILM_FK, THE_KIND_FK) VALUES(?,?)", film.getId(), kind.getId());
         }
     }
@@ -275,18 +272,21 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
             film.setId(rs.getInt("ID"));
             film.setTitle(rs.getString("TITLE"));
             film.setYear(rs.getInt("YEAR"));
-            film.setNote(DaoNotes.getInstance().getNote(NoteType.getEnum(rs.getInt("NOTE"))));
             film.setComment(rs.getString("COMMENT"));
             film.setDuration(rs.getInt("DURATION"));
             film.setFilePath(rs.getString("FILEPATH"));
             film.setImage(rs.getString("IMAGE"));
             film.setResume(rs.getString("RESUME"));
             film.setTheCollection(daoCollections.getCollection(rs.getInt("THE_COLLECTION_FK")));
-            film.setTheLanguage(daoLanguages.getLanguage(rs.getInt("THE_LANGUAGE_FK")));
+            film.setTheLanguage(daoLanguages.getSimpleData(rs.getInt("THE_LANGUAGE_FK")));
             film.setTheLending(daoLendings.getLending(rs.getInt("THE_LENDING_FK")));
             film.setTheRealizer(daoPersons.getPerson(rs.getInt("THE_REALIZER_FK")));
-            film.setTheSaga(daoSagas.getSaga(rs.getInt("THE_SAGA_FK")));
-            film.setTheType(daoTypes.getType(rs.getInt("THE_TYPE_FK")));
+            film.setTheSaga(daoSagas.getSimpleData(rs.getInt("THE_SAGA_FK")));
+            film.setTheType(daoTypes.getSimpleData(rs.getInt("THE_TYPE_FK")));
+
+			if (StringUtils.isNotEmpty(rs.getString("NOTE"))){
+				film.setNote(DaoNotes.getInstance().getNote(DaoNotes.NoteType.getEnum(rs.getInt("NOTE"))));
+			}
 
             mapRelations(film);
 
@@ -312,14 +312,14 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
             if (relationsToKinds != null && !relationsToKinds.isEmpty()) {
                 for (FilmKindRelation relation : relationsToKinds) {
                     if (relation.getTheFilm() == film.getId()) {
-                        film.addKind(daoKinds.getKind(relation.getTheKind()));
+                        film.addKind(daoKinds.getSimpleData(relation.getTheKind()));
                     }
                 }
             } else {
                 relationsToKinds = jdbcTemplate.query("SELECT * FROM " + KINDS_FILMS_TABLE + " WHERE THE_FILM_FK = ?", relationKindRowMapper, film.getId());
 
                 for (FilmKindRelation relation : relationsToKinds) {
-                    film.addKind(daoKinds.getKind(relation.getTheKind()));
+                    film.addKind(daoKinds.getSimpleData(relation.getTheKind()));
                 }
 
                 relationsToKinds.clear();
@@ -379,7 +379,7 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
 
             Object[] parameters = {
                     film.getTitle(),
-                    film.getNote().getValue().intValue(),
+                    film.getNote() == null ? 0 : film.getNote().getValue().intValue(),
                     film.getComment(),
                     film.getDuration(),
                     film.getFilePath(),
@@ -405,7 +405,7 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
 
             Object[] parameters = {
                     film.getTitle(),
-                    film.getNote().getValue().intValue(),
+                    film.getNote() == null ? 0 : film.getNote().getValue().intValue(),
                     film.getComment(),
                     film.getDuration(),
                     film.getFilePath(),

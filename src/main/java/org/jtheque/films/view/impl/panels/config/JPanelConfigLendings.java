@@ -22,7 +22,8 @@ import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
 import org.jtheque.core.utils.ui.Borders;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
 import org.jtheque.films.services.impl.utils.config.Configuration;
@@ -70,12 +71,12 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
      * Build the view.
      */
     private void build() {
-        PanelBuilder builder = new PanelBuilder(this);
+        I18nPanelBuilder builder = new JThequePanelBuilder(this);
 
         boxControlLendings = builder.addI18nCheckBox("config.lendings.check", builder.gbcSet(0, 0));
         boxControlLendings.addActionListener(new AcCheckLendings());
 
-        PanelBuilder mailBuilder = builder.addPanel(builder.gbcSet(0, 1));
+        I18nPanelBuilder mailBuilder = builder.addPanel(builder.gbcSet(0, 1));
         mailBuilder.getPanel().setBackground(Color.white);
         mailBuilder.getPanel().setBorder(Borders.createTitledBorder("config.lendings.mail"));
 
@@ -93,7 +94,7 @@ public final class JPanelConfigLendings extends JPanel implements ConfigTabCompo
 
         mailBuilder.addScrolled(fieldMessage, mailBuilder.gbcSet(0, 3, GridBagUtils.BOTH, 2, 1));
 
-        PanelBuilder notificationsBuilder = builder.addPanel(builder.gbcSet(0, 2));
+        I18nPanelBuilder notificationsBuilder = builder.addPanel(builder.gbcSet(0, 2));
         notificationsBuilder.getPanel().setBackground(Color.white);
         notificationsBuilder.getPanel().setBorder(Borders.createTitledBorder("config.lendings.notifications"));
 

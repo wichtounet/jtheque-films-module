@@ -25,18 +25,12 @@ import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.IPersonService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 
 import javax.annotation.Resource;
 import java.io.DataOutputStream;
@@ -52,13 +46,13 @@ public final class JTDBackupWriter implements BackupWriter {
     private IFilmsService filmsService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
     private IActorService actorService;
@@ -70,10 +64,10 @@ public final class JTDBackupWriter implements BackupWriter {
     private ILendingsService lendingsService;
 
     @Resource
-    private IBorrowersService borrowersService;
+    private IPersonService borrowersService;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     /**
      * Construct a new JTDBackupWriter.
@@ -110,13 +104,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeBorrowers(DataOutputStream stream) throws IOException {
-        if (borrowersService.hasNoBorrowers()) {
+        if (borrowersService.hasNoPerson()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstBorrower = true;
-            for (Person borrower : borrowersService.getBorrowers()) {
+            for (Person borrower : borrowersService.getPersons()) {
                 if (firstBorrower) {
                     firstBorrower = false;
                 } else {
@@ -170,13 +164,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeCountries(DataOutputStream stream) throws IOException {
-        if (countriesService.getCountries() == null || countriesService.getCountries().isEmpty()) {
+        if (countriesService.getDatas() == null || countriesService.getDatas().isEmpty()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstCountry = true;
-            for (Country country : countriesService.getCountries()) {
+            for (SimpleData country : countriesService.getDatas()) {
                 if (firstCountry) {
                     firstCountry = false;
                 } else {
@@ -198,13 +192,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeTypes(DataOutputStream stream) throws IOException {
-        if (typesService.hasNoTypes()) {
+        if (typesService.hasNoDatas()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstType = true;
-            for (Type type : typesService.getTypes()) {
+            for (SimpleData type : typesService.getDatas()) {
                 if (firstType) {
                     firstType = false;
                 } else {
@@ -226,13 +220,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeKinds(DataOutputStream stream) throws IOException {
-        if (kindsService.hasNoKinds()) {
+        if (kindsService.hasNoDatas()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstKind = true;
-            for (Kind kind : kindsService.getKinds()) {
+            for (SimpleData kind : kindsService.getDatas()) {
                 if (firstKind) {
                     firstKind = false;
                 } else {
@@ -254,13 +248,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeLanguages(DataOutputStream stream) throws IOException {
-        if (languagesService.getLanguages() == null || languagesService.getLanguages().isEmpty()) {
+        if (languagesService.getDatas() == null || languagesService.getDatas().isEmpty()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstLanguage = true;
-            for (Language language : languagesService.getLanguages()) {
+            for (SimpleData language : languagesService.getDatas()) {
                 if (firstLanguage) {
                     firstLanguage = false;
                 } else {
@@ -313,13 +307,13 @@ public final class JTDBackupWriter implements BackupWriter {
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeActors(DataOutputStream stream) throws IOException {
-        if (actorService.hasNoActor()) {
+        if (actorService.hasNoPerson()) {
             stream.writeInt(IFileManager.NO_CONTENT);
         } else {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstActor = true;
-            for (Person actor : actorService.getActors()) {
+            for (Person actor : actorService.getPersons()) {
                 if (firstActor) {
                     firstActor = false;
                 } else {
@@ -404,7 +398,7 @@ public final class JTDBackupWriter implements BackupWriter {
             stream.writeInt(IFileManager.CONTENT);
 
             boolean firstKind = true;
-            for (Kind kind : film.getKinds()) {
+            for (SimpleData kind : film.getKinds()) {
                 if (firstKind) {
                     firstKind = false;
                 } else {

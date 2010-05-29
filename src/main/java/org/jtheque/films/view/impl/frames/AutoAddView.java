@@ -17,19 +17,20 @@ package org.jtheque.films.view.impl.frames;
  */
 
 import org.jtheque.core.managers.error.JThequeError;
+import org.jtheque.core.managers.view.impl.components.model.SimpleListModel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.services.impl.utils.web.FilmResult;
 import org.jtheque.films.utils.Constants.Properties.Film;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.view.able.IAutoAddView;
-import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
 import org.jtheque.films.view.impl.actions.auto.add.AcChooseSite;
 import org.jtheque.films.view.impl.actions.auto.add.AcCloseAutoAddView;
 import org.jtheque.films.view.impl.actions.auto.add.AcValidateAutoAddView;
 import org.jtheque.films.view.impl.models.able.IAutoAddModel;
-import org.jtheque.films.view.impl.models.list.SitesListModel;
 import org.jtheque.utils.ui.GridBagUtils;
 import org.jtheque.utils.ui.SwingUtils;
 
@@ -86,7 +87,7 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        I18nPanelBuilder builder = new JThequePanelBuilder();
 
         builder.addI18nLabel(Film.TITLE, builder.gbcSet(0, 0));
 
@@ -114,7 +115,7 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
     private void addListsPanel(PanelBuilder parent, Action chooseSiteAction) {
         PanelBuilder builder = parent.addPanel(parent.gbcSet(0, 1, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 2, 1));
 
-        listSites = new JList(new SitesListModel());
+        listSites = new JList(new SimpleListModel<Site>(Site.values()));
         listSites.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         builder.addScrolled(listSites, builder.gbcSet(0, 0, GridBagUtils.BOTH));

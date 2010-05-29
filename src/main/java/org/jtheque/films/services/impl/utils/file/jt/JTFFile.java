@@ -20,11 +20,8 @@ import org.jtheque.core.utils.file.jt.AbstractJTFileHeader;
 import org.jtheque.core.utils.file.jt.able.JTNotZippedFile;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.file.jt.header.JTFFileHeader;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,11 +36,11 @@ import java.util.Set;
 public final class JTFFile implements JTNotZippedFile {
     private Film film;
     private Set<Person> actors;
-    private Set<Kind> kinds;
+    private Set<SimpleData> kinds;
     private Person realizer;
-    private Language language;
-    private Type type;
-    private Collection<Country> countries;
+    private SimpleData language;
+    private SimpleData type;
+    private Collection<SimpleData> countries;
 
     private boolean correctSeparators = true;
 
@@ -92,7 +89,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @return A list containing all the kinds of the file.
      */
-    public Iterable<Kind> getKinds() {
+    public Iterable<SimpleData> getKinds() {
         return kinds;
     }
 
@@ -101,8 +98,8 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @param kinds The kinds of the file.
      */
-    public void setKinds(Set<Kind> kinds) {
-        this.kinds = new HashSet<Kind>(kinds);
+    public void setKinds(Set<SimpleData> kinds) {
+        this.kinds = new HashSet<SimpleData>(kinds);
     }
 
     /**
@@ -128,7 +125,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @return The language.
      */
-    public Language getLanguage() {
+    public SimpleData getLanguage() {
         return language;
     }
 
@@ -137,7 +134,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @param language The language.
      */
-    public void setLanguage(Language language) {
+    public void setLanguage(SimpleData language) {
         this.language = language;
     }
 
@@ -146,7 +143,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @return The countries.
      */
-    public Iterable<Country> getCountries() {
+    public Iterable<SimpleData> getCountries() {
         return countries;
     }
 
@@ -155,8 +152,8 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @param countries The countries.
      */
-    public void setCountries(Collection<Country> countries) {
-        this.countries = new ArrayList<Country>(countries);
+    public void setCountries(Collection<SimpleData> countries) {
+        this.countries = new ArrayList<SimpleData>(countries);
     }
 
     /**
@@ -182,7 +179,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @return The type.
      */
-    public Type getType() {
+    public SimpleData getType() {
         return type;
     }
 
@@ -191,7 +188,7 @@ public final class JTFFile implements JTNotZippedFile {
      *
      * @param type The type.
      */
-    public void setType(Type type) {
+    public void setType(SimpleData type) {
         this.type = type;
     }
 }

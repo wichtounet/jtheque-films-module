@@ -38,6 +38,6 @@ public final class AcDeleteRealizer extends JThequeAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController").deleteCurrentRealizer();
+        Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController").deleteCurrent();
     }
 }

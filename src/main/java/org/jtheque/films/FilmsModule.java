@@ -18,6 +18,7 @@ package org.jtheque.films;
 
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
+import org.jtheque.core.managers.collection.ICollectionsService;
 import org.jtheque.core.managers.error.IErrorManager;
 import org.jtheque.core.managers.error.InternationalizedError;
 import org.jtheque.core.managers.feature.Feature;
@@ -65,11 +66,7 @@ import org.jtheque.films.utils.Constants.Properties.Publication;
 import org.jtheque.films.utils.Constants.Properties.Saga;
 import org.jtheque.films.utils.Constants.Properties.Type;
 import org.jtheque.primary.PrimaryUtils;
-import org.jtheque.primary.services.able.ICollectionsService;
-import org.jtheque.primary.services.able.IKindsService;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ISagasService;
-import org.jtheque.primary.services.able.ITypesService;
 import org.jtheque.primary.utils.DataTypeManager;
 import org.jtheque.primary.view.impl.choice.ChoiceAction;
 import org.jtheque.primary.view.impl.choice.ChoiceActionFactory;
@@ -77,9 +74,6 @@ import org.jtheque.primary.view.impl.sort.Sorter;
 import org.jtheque.primary.view.impl.sort.SorterFactory;
 import org.jtheque.utils.collections.ArrayUtils;
 import org.jtheque.utils.collections.CollectionUtils;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * A JTheque Module for managing films.
@@ -167,17 +161,12 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         DataTypeManager.bindDataTypeToKey(IFilmsService.DATA_TYPE, "film.data.title");
         DataTypeManager.bindDataTypeToKey(IActorService.DATA_TYPE, "actor.data.title");
         DataTypeManager.bindDataTypeToKey(IRealizersService.DATA_TYPE, "realizer.data.title");
-        DataTypeManager.bindDataTypeToKey(ITypesService.DATA_TYPE, "type.data.title");
-        DataTypeManager.bindDataTypeToKey(IKindsService.DATA_TYPE, "kind.data.title");
-        DataTypeManager.bindDataTypeToKey(ISagasService.DATA_TYPE, "saga.data.title");
 
         for (Sorter sorter : sorters) {
             SorterFactory.getInstance().addSorter(sorter);
         }
 
         addFeatures();
-
-        UIManager.put("JXTitledPanel.title.foreground", Color.white);
         
         for (ConfigTabComponent component : configTabComponents) {
             Managers.getManager(IViewManager.class).addConfigTabComponent(component);
@@ -500,9 +489,6 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         DataTypeManager.unbindDataType(IFilmsService.DATA_TYPE);
         DataTypeManager.unbindDataType(IActorService.DATA_TYPE);
         DataTypeManager.unbindDataType(IRealizersService.DATA_TYPE);
-        DataTypeManager.unbindDataType(ITypesService.DATA_TYPE);
-        DataTypeManager.unbindDataType(IKindsService.DATA_TYPE);
-        DataTypeManager.unbindDataType(ISagasService.DATA_TYPE);
 
         Managers.getManager(ISchemaManager.class).unregisterSchema(schema);
     }

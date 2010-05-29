@@ -25,6 +25,7 @@ import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.able.FormBean;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.view.able.ViewMode;
 
@@ -35,7 +36,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class ModifyFilmState implements ControllerState {
+public final class ModifyFilmState extends AbstractControllerState {
     @Resource
     private IFilmController controller;
 
@@ -83,43 +84,6 @@ public final class ModifyFilmState implements ControllerState {
         getViewModel().getCurrentFilm().restoreMemento();
 
         return controller.getViewState();
-    }
-
-    @Override
-    public ControllerState create() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState manualEdit() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState delete() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Film film = (Film) data;
-
-        if (Managers.getManager(IViewManager.class).askI18nUserForConfirmation(
-                "film.dialogs.confirmSave", "film.dialogs.confirmSave.title")) {
-            controller.save();
-        } else {
-            getViewModel().getCurrentFilm().restoreMemento();
-        }
-
-        getViewModel().setCurrentFilm(film);
-
-        return controller.getAutoAddState();
     }
 
     @Override

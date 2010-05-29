@@ -21,38 +21,16 @@ import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.primary.controller.able.IPrincipalController;
 import org.jtheque.primary.od.able.Person;
 
-import javax.swing.event.TreeSelectionListener;
-
 /**
  * A realizer controller specification.
  *
  * @author Baptiste Wicht
  */
-public interface IRealizerController extends IPrincipalController<Person>, TreeSelectionListener {
+public interface IRealizerController extends IPrincipalController<Person> {
     /**
      * Save the current realizer.
      */
     void save();
-
-    /**
-     * Edit the current realizer.
-     */
-    void manualEdit();
-
-    /**
-     * Create new realizer.
-     */
-    void createRealizer();
-
-    /**
-     * Delete the current realizer.
-     */
-    void deleteCurrentRealizer();
-
-    /**
-     * Cancel the current state.
-     */
-    void cancel();
 
     @Override
     IRealizersModel getViewModel();

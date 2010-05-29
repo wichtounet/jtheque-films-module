@@ -30,13 +30,9 @@ import org.jtheque.films.services.impl.utils.file.jt.JTFFile;
 import org.jtheque.films.services.impl.utils.file.jt.reader.JTFFileReader;
 import org.jtheque.films.utils.Constants;
 import org.jtheque.films.utils.Constants.Files.FileType;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.io.FileException;
 
 import javax.annotation.Resource;
@@ -50,13 +46,13 @@ public final class JTFImporter implements Importer {
     private final ILanguageManager resources = Managers.getManager(ILanguageManager.class);
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
     private IFilmsService filmsService;
@@ -70,7 +66,7 @@ public final class JTFImporter implements Importer {
     private final DaoNotes daoNotes = DaoNotes.getInstance();
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     /**
      * Construct a new JTFImporter.
@@ -128,7 +124,7 @@ public final class JTFImporter implements Importer {
     private void importLanguage(JTFFile file) {
         if (file.getLanguage() != null) {
             if (languagesService.exist(file.getLanguage())) {
-                file.setLanguage(languagesService.getLanguage(file.getLanguage().getName()));
+                file.setLanguage(languagesService.getSimpleData(file.getLanguage().getName()));
             } else {
                 languagesService.create(file.getLanguage());
             }
@@ -143,9 +139,9 @@ public final class JTFImporter implements Importer {
      * @param file The file to import the countries from.
      */
     private void importCountries(JTFFile file) {
-        for (Country country : file.getCountries()) {
+        for (SimpleData country : file.getCountries()) {
             if (countriesService.exist(country)) {
-                country.setId(countriesService.getCountry(country.getName()).getId());
+                country.setId(countriesService.getSimpleData(country.getName()).getId());
             } else {
                 countriesService.create(country);
             }
@@ -158,9 +154,9 @@ public final class JTFImporter implements Importer {
      * @param file The file to import the kinds from.
      */
     private void importKinds(JTFFile file) {
-        for (Kind kind : file.getKinds()) {
-            if (kindsService.exists(kind)) {
-                kind.setId(kindsService.getKind(kind.getName()).getId());
+        for (SimpleData kind : file.getKinds()) {
+            if (kindsService.exist(kind)) {
+                kind.setId(kindsService.getSimpleData(kind.getName()).getId());
             } else {
                 kindsService.create(kind);
             }
@@ -176,8 +172,8 @@ public final class JTFImporter implements Importer {
      */
     private void importType(JTFFile file) {
         if (file.getType() != null) {
-            if (typesService.exists(file.getType())) {
-                file.getType().setId(typesService.getType(file.getType().getName()).getId());
+            if (typesService.exist(file.getType())) {
+                file.getType().setId(typesService.getSimpleData(file.getType().getName()).getId());
             } else {
                 typesService.create(file.getType());
             }
@@ -219,7 +215,7 @@ public final class JTFImporter implements Importer {
                     actor.getTemporaryContext().getCountry(), file.getCountries()));
 
             if (actorService.exist(actor)) {
-                actor.setId(actorService.getActor(actor.getFirstName(), actor.getName()).getId());
+                actor.setId(actorService.getPerson(actor.getFirstName(), actor.getName()).getId());
             } else {
                 actorService.create(actor);
             }

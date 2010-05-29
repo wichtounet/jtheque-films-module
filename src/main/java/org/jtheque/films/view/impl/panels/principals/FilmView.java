@@ -28,7 +28,10 @@ import org.jtheque.core.managers.language.TabTitleUpdater;
 import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.resource.IResourceManager;
 import org.jtheque.core.managers.resource.ImageType;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.CoreUtils;
+import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.core.utils.ui.constraints.ConstraintManager;
 import org.jtheque.films.controllers.able.IFilmController;
 import org.jtheque.films.services.able.IFilmsService;
@@ -48,10 +51,9 @@ import org.jtheque.films.view.impl.models.FilmsModel;
 import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.films.view.impl.toolbars.JPanelFilmToolBar;
 import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ITypesService;
-import org.jtheque.primary.view.impl.actions.type.AcNewType;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.view.impl.actions.principal.CreateNewPrincipalAction;
+import org.jtheque.primary.view.impl.components.panels.AbstractPrincipalDataPanel;
 import org.jtheque.primary.view.impl.components.panels.JThequeTitledPanel;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -77,9 +79,11 @@ import java.util.Map;
  *
  * @author Baptiste Wicht
  */
-public final class FilmView extends AbstractPrincipalDelegatedView implements IFilmView {
+public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrincipalDataPanel> implements IFilmView {
     public FilmView() {
-        super(1, "film.data.title");
+        super(1, "film.data.title");  
+
+        UIManager.put("JXTitledPanel.title.foreground", Color.white);
     }
 
     @Override
@@ -125,7 +129,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
         private JXTitledPanel panelFilm;
     
         private JTextField fieldTitle;
-        private DataContainerCachedComboBoxModel<Type> modelType;
+        private DataContainerCachedComboBoxModel<SimpleData> modelType;
         private JComboBox comboType;
         private JButton buttonNewType;
         private JXImagePanel panelImage;
@@ -146,7 +150,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
          * Build the view.
          */
         private void build() {
-            PanelBuilder builder = new PanelBuilder(this);
+            PanelBuilder builder = new JThequePanelBuilder(this);
     
             buildPanelList(builder);
             buildPanelTri(builder);
@@ -164,7 +168,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
             panelImage.addMouseListener(filmController);
             
             getTree().addTreeSelectionListener(filmController);
-            
+
             getModel().addDisplayListListener(this);
             
             getModel().addCurrentObjectListener(panelKinds);
@@ -184,7 +188,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
             panelFilm.setBorder(new DropShadowBorder());
             panelFilm.setTitleFont(panelFilm.getTitleFont().deriveFont(Font.BOLD));
     
-            PanelBuilder builder = new PanelBuilder();
+            I18nPanelBuilder builder = new JThequePanelBuilder();
     
             JPanelFilmToolBar toolBar = new JPanelFilmToolBar();
             
@@ -216,15 +220,17 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
          *
          * @param builder The builder of the view.
          */
-        private void addTypeField(PanelBuilder builder) {
+        private void addTypeField(I18nPanelBuilder builder) {
             builder.addI18nLabel(Film.TYPE, builder.gbcSet(0, 2));
     
-            modelType = new DataContainerCachedComboBoxModel<Type>(Managers.getManager(IBeansManager.class).<DataContainer<Type>>getBean("typesServices"));
+            modelType = new DataContainerCachedComboBoxModel<SimpleData>(
+					CoreUtils.<DataContainer<SimpleData>>getBean("typesServices"));
     
             comboType = builder.addComboBox(modelType, builder.gbcSet(1, 2));
             comboType.setEnabled(false);
     
-            buttonNewType = builder.addButton(new AcNewType(), builder.gbcSet(2, 2));
+            buttonNewType = builder.addButton(
+					new CreateNewPrincipalAction("generic.view.actions.new", "typeController"), builder.gbcSet(2, 2));
             buttonNewType.setEnabled(false);
         }
     
@@ -273,13 +279,13 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
             panelTri.setBorder(new DropShadowBorder());
             panelTri.setTitleFont(panelTri.getTitleFont().deriveFont(Font.BOLD));
     
-            PanelBuilder builder = new PanelBuilder();
+            PanelBuilder builder = new JThequePanelBuilder();
             
-            JXHyperlink linkTriGenre = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.kind", IKindsService.DATA_TYPE)),
+            JXHyperlink linkTriGenre = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.kind", SimpleData.DataType.KIND.getDataType())),
                     builder.gbcSet(0, 0, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriGenre.setClickedColor(linkTriGenre.getUnclickedColor());
     
-            JXHyperlink linkTriType = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.type", ITypesService.DATA_TYPE)),
+            JXHyperlink linkTriType = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.type", SimpleData.DataType.TYPE.getDataType())),
                     builder.gbcSet(0, 1, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriType.setClickedColor(linkTriType.getUnclickedColor());
     
@@ -306,7 +312,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView implements IF
             panelList.setBorder(new DropShadowBorder());
             panelList.setTitleFont(panelList.getTitleFont().deriveFont(Font.BOLD));
     
-            PanelBuilder builder = new PanelBuilder();
+            PanelBuilder builder = new JThequePanelBuilder();
     
             setTreeModel(getSorter().createInitialModel(IFilmsService.DATA_TYPE));
     

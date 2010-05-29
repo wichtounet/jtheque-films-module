@@ -42,74 +42,14 @@ public final class RealizerController extends PrincipalController<Person> implem
     @Resource
     private IRealizerView realizerView;
 
-    /**
-     * Init the view.
-     */
-    @PostConstruct
-    public void init() {
-        setState(getViewState());
-    }
-
-    @Override
-    public void valueChanged(TreeSelectionEvent e) {
-        TreePath current = ((JTree) e.getSource()).getSelectionPath();
-
-        if (current != null && current.getLastPathComponent() instanceof TreeElement) {
-            Data realizer = (Data) current.getLastPathComponent();
-
-            if (realizer != null) {
-                ControllerState newState = getState().view(realizer);
-
-                if (newState != null) {
-                    setAndApplyState(newState);
-                }
-            }
-        }
-    }
+	public RealizerController(ControllerState viewState, ControllerState modifyState,
+							  ControllerState newObjectState, ControllerState autoAddState){
+		super(viewState, modifyState, newObjectState, autoAddState);
+	}
 
     @Override
     public void save() {
-        ControllerState newState = getState().save(realizerView.fillPersonFormBean());
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void manualEdit() {
-        ControllerState newState = getState().manualEdit();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void createRealizer() {
-        ControllerState newState = getState().create();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void deleteCurrentRealizer() {
-        ControllerState newState = getState().delete();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void cancel() {
-        ControllerState newState = getState().cancel();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
+        save(realizerView.fillPersonFormBean());
     }
 
     @Override
@@ -125,10 +65,5 @@ public final class RealizerController extends PrincipalController<Person> implem
     @Override
     public String getDataType() {
         return IRealizersService.DATA_TYPE;
-    }
-
-    @Override
-    public Collection<Person> getDisplayList() {
-        return getViewModel().getDisplayList();
     }
 }

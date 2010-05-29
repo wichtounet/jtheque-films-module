@@ -25,18 +25,12 @@ import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.DataUtils;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.IPersonService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 
 import javax.annotation.Resource;
 
@@ -47,19 +41,19 @@ import javax.annotation.Resource;
  */
 public final class ImporterUtils {
     @Resource
-    private static ICountriesService countriesService;
+    private static ISimpleDataService countriesService;
 
     @Resource
     private static ILendingsService lendingsService;
 
     @Resource
-    private static ITypesService typesService;
+    private static ISimpleDataService typesService;
 
     @Resource
-    private static ILanguagesService languagesService;
+    private static ISimpleDataService languagesService;
 
     @Resource
-    private static IBorrowersService borrowersService;
+    private static IPersonService borrowersService;
 
     @Resource
     private static IFilmsService filmsService;
@@ -71,7 +65,7 @@ public final class ImporterUtils {
     private static IRealizersService realizersService;
 
     @Resource
-    private static IKindsService kindsService;
+    private static ISimpleDataService kindsService;
 
     private static final DaoNotes DAO_NOTES = DaoNotes.getInstance();
 
@@ -98,9 +92,9 @@ public final class ImporterUtils {
      * @param lendings  The lendings.
      */
     public static void persistDataOfImport(Iterable<Film> films, Iterable<Person> actors,
-                                           Iterable<Person> realizers, Iterable<Kind> kinds,
-                                           Iterable<Type> types, Iterable<Language> languages,
-                                           Iterable<Country> countries,
+                                           Iterable<Person> realizers, Iterable<SimpleData> kinds,
+                                           Iterable<SimpleData> types, Iterable<SimpleData> languages,
+                                           Iterable<SimpleData> countries,
                                            Iterable<Person> borrowers, Iterable<Lending> lendings) {
 
         countriesService.createAll(countries);
@@ -121,7 +115,7 @@ public final class ImporterUtils {
      * @param realizers The realizers to persist.
      * @param countries The countries.
      */
-    private static void persistRealizers(Iterable<Person> realizers, Iterable<Country> countries) {
+    private static void persistRealizers(Iterable<Person> realizers, Iterable<SimpleData> countries) {
         for (Person realizer : realizers) {
             realizer.setTheCountry(DataUtils.getDataByTemporaryId(realizer.getTemporaryContext().getCountry(), countries));
             realizer.setNote(DAO_NOTES.getNote(NoteType.getEnum(realizer.getTemporaryContext().getIntNote())));
@@ -136,7 +130,7 @@ public final class ImporterUtils {
      * @param actors    The actors to persist.
      * @param countries The countries.
      */
-    private static void persistActors(Iterable<Person> actors, Iterable<Country> countries) {
+    private static void persistActors(Iterable<Person> actors, Iterable<SimpleData> countries) {
         for (Person actor : actors) {
             actor.setTheCountry(DataUtils.getDataByTemporaryId(actor.getTemporaryContext().getCountry(), countries));
             actor.setNote(DAO_NOTES.getNote(NoteType.getEnum(actor.getTemporaryContext().getIntNote())));
@@ -155,7 +149,8 @@ public final class ImporterUtils {
      * @param types     The types.
      * @param languages The languages.
      */
-    private static void persistFilms(Iterable<Film> films, Iterable<Person> actors, Iterable<Person> realizers, Iterable<Kind> kinds, Iterable<Type> types, Iterable<Language> languages) {
+    private static void persistFilms(Iterable<Film> films, Iterable<Person> actors, Iterable<Person> realizers,
+									 Iterable<SimpleData> kinds, Iterable<SimpleData> types, Iterable<SimpleData> languages) {
         for (Film film : films) {
             film.setTheLanguage(DataUtils.getDataByTemporaryId(film.getTemporaryContext().getLanguage(), languages));
             film.setTheType(DataUtils.getDataByTemporaryId(film.getTemporaryContext().getType(), types));
@@ -170,7 +165,7 @@ public final class ImporterUtils {
             }
 
             for (Integer i : film.getTemporaryContext().getKinds()) {
-                Kind kind = DataUtils.getDataByTemporaryId(i, kinds);
+                SimpleData kind = DataUtils.getDataByTemporaryId(i, kinds);
 
                 if (kind != null) {
                     film.addKind(kind);

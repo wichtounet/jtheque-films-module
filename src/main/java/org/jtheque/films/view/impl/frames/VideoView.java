@@ -2,10 +2,10 @@ package org.jtheque.films.view.impl.frames;
 
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.services.impl.utils.VideoFile;
 import org.jtheque.films.view.able.IVideoView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
 import org.jtheque.films.view.impl.actions.video.AcNewVideoFile;
 import org.jtheque.films.view.impl.actions.video.AcOpenVideoFile;
 import org.jtheque.films.view.impl.actions.video.AcRefreshVideoView;
@@ -68,7 +68,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
      * @return The builded content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         list = new JList();
         list.setModel(model);

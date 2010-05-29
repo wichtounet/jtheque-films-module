@@ -32,49 +32,20 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class RealizersModel extends PrincipalDataModel<Person> implements IRealizersModel {
-    private Collection<Person> displayList;
-
     private Person currentRealizer;
-    
-    private final IRealizersService realizersService;
 
     public RealizersModel() {
         super();
-        
-        realizersService = Managers.getManager(IBeansManager.class).getBean("realizersService");
-                
-        realizersService.addDataListener(this);
+
+        Managers.getManager(IBeansManager.class).<IRealizersService>getBean("realizersService").addDataListener(this);
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void updateDisplayList(Collection<Person> realizers) {
-        getDisplayList().clear();
+	@Override
+	public Collection<Person> getDatas(){
+		return Managers.getManager(IBeansManager.class).<IRealizersService>getBean("realizersService").getDatas();
+	}
 
-        if (realizers != null) {
-            getDisplayList().addAll(realizers);
-        } else {
-            getDisplayList().addAll(realizersService.getRealizers());
-        }
-
-        fireDisplayListChanged();
-    }
-
-    @Override
-    public void updateDisplayList() {
-        updateDisplayList(null);
-    }
-
-    @Override
-    public Collection<Person> getDisplayList() {
-        if (displayList == null) {
-            displayList = realizersService.getRealizers();
-        }
-
-        return displayList;
-    }
-
-    @Override
+	@Override
     public Person getCurrentRealizer() {
         return currentRealizer;
     }

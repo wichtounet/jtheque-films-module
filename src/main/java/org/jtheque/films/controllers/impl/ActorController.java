@@ -42,75 +42,19 @@ public final class ActorController extends PrincipalController<Person> implement
     @Resource
     private IActorView actorView;
 
-    @Override
+	public ActorController(ControllerState viewState, ControllerState modifyState,
+						   ControllerState newObjectState, ControllerState autoAddState){
+		super(viewState, modifyState, newObjectState, autoAddState);
+	}
+
+	@Override
     public IActorView getView() {
         return actorView;
-    }
-
-    /**
-     * Init the controller.
-     */
-    @PostConstruct
-    public void init() {
-        setState(getViewState());
-    }
-
-    @Override
-    public void valueChanged(TreeSelectionEvent event) {
-        TreePath current = ((JTree) event.getSource()).getSelectionPath();
-
-        if (current != null && current.getLastPathComponent() instanceof TreeElement) {
-            Data actor = (Data) current.getLastPathComponent();
-
-            if (actor != null) {
-                ControllerState newState = getState().view(actor);
-
-                if (newState != null) {
-                    setAndApplyState(newState);
-                }
-            }
-        }
     }
 
     @Override
     public void save() {
         ControllerState newState = getState().save(actorView.fillActorFormBean());
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void manualEdit() {
-        ControllerState newState = getState().manualEdit();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void createActor() {
-        ControllerState newState = getState().create();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void deleteCurrentActor() {
-        ControllerState newState = getState().delete();
-
-        if (newState != null) {
-            setAndApplyState(newState);
-        }
-    }
-
-    @Override
-    public void cancel() {
-        ControllerState newState = getState().cancel();
 
         if (newState != null) {
             setAndApplyState(newState);
@@ -125,10 +69,5 @@ public final class ActorController extends PrincipalController<Person> implement
     @Override
     public String getDataType() {
         return IActorService.DATA_TYPE;
-    }
-
-    @Override
-    public Collection<Person> getDisplayList() {
-        return getViewModel().getDisplayList();
     }
 }

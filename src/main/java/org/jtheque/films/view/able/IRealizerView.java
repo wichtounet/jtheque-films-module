@@ -17,8 +17,8 @@ package org.jtheque.films.view.able;
  */
 
 import org.jtheque.core.managers.view.able.components.TabComponent;
-import org.jtheque.films.view.impl.fb.IPersonFormBean;
 import org.jtheque.primary.view.able.PrincipalDataView;
+import org.jtheque.primary.view.able.fb.IPersonFormBean;
 import org.jtheque.primary.view.impl.listeners.CurrentObjectListener;
 
 /**

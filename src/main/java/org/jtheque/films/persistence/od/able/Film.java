@@ -17,15 +17,12 @@ package org.jtheque.films.persistence.od.able;
  */
 
 import org.jtheque.films.persistence.od.impl.FilmTemporaryContext;
-import org.jtheque.primary.od.able.Collection;
+import org.jtheque.core.managers.collection.Collection;
 import org.jtheque.primary.od.able.Data;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Notable;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Saga;
-import org.jtheque.primary.od.able.Type;
+import org.jtheque.primary.od.able.SimpleData;
 
 import java.util.Set;
 
@@ -68,14 +65,14 @@ public interface Film extends Data, Notable {
      *
      * @param type The type of the film.
      */
-    void setTheType(Type type);
+    void setTheType(SimpleData type);
 
     /**
      * Return the type of the film.
      *
      * @return The type of the film.
      */
-    Type getTheType();
+    SimpleData getTheType();
 
     /**
      * Set the year of the film.
@@ -124,14 +121,14 @@ public interface Film extends Data, Notable {
      *
      * @param language The language of the film.
      */
-    void setTheLanguage(Language language);
+    void setTheLanguage(SimpleData language);
 
     /**
      * Return the language of the film.
      *
      * @return The language of the film.
      */
-    Language getTheLanguage();
+    SimpleData getTheLanguage();
 
     /**
      * Set the comment of the film.
@@ -201,7 +198,7 @@ public interface Film extends Data, Notable {
      *
      * @return A Set containing all the kinds of the film.
      */
-    Set<Kind> getKinds();
+    Set<SimpleData> getKinds();
 
     /**
      * Set the lending of the film.
@@ -222,14 +219,14 @@ public interface Film extends Data, Notable {
      *
      * @return The saga of the film.
      */
-    Saga getTheSaga();
+    SimpleData getTheSaga();
 
     /**
      * Set the saga of the film.
      *
      * @param theSaga The saga of the film.
      */
-    void setTheSaga(Saga theSaga);
+    void setTheSaga(SimpleData theSaga);
 
     /**
      * Indicate if the film has kinds.
@@ -286,7 +283,7 @@ public interface Film extends Data, Notable {
      *
      * @param kinds The kinds to add to the film.
      */
-    void addKinds(Set<Kind> kinds);
+    void addKinds(Set<SimpleData> kinds);
 
     /**
      * Add an actor to the film.
@@ -300,7 +297,7 @@ public interface Film extends Data, Notable {
      *
      * @param kind The kind to add.
      */
-    void addKind(Kind kind);
+    void addKind(SimpleData kind);
 
     /**
      * Indicate if the film contains the specified actor or not.
@@ -316,5 +313,5 @@ public interface Film extends Data, Notable {
      * @param kind The kind to to test for contains.
      * @return <code>true</code> if the film contains the kind else <code>false</code>.
      */
-    boolean containsKind(Kind kind);
+    boolean containsKind(SimpleData kind);
 }

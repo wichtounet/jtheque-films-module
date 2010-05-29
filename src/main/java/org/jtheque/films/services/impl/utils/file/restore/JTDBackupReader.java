@@ -27,18 +27,12 @@ import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.file.imports.ImporterUtils;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.IBorrowersService;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ILendingsService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.services.able.IPersonService;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.bean.IntDate;
 
 import javax.annotation.Resource;
@@ -57,30 +51,30 @@ public final class JTDBackupReader implements BackupReader {
     private Collection<Film> films;
     private Collection<Person> actors;
     private Collection<Person> realizers;
-    private Collection<Kind> kinds;
-    private Collection<Type> types;
-    private Collection<Language> languages;
-    private Collection<Country> countries;
+    private Collection<SimpleData> kinds;
+    private Collection<SimpleData> types;
+    private Collection<SimpleData> languages;
+    private Collection<SimpleData> countries;
     private Collection<Person> borrowers;
     private Collection<Lending> lendings;
 
     @Resource
-    private IBorrowersService borrowersService;
+    private IPersonService borrowersService;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
     private ILendingsService lendingsService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IActorService actorService;
@@ -132,7 +126,7 @@ public final class JTDBackupReader implements BackupReader {
 
             boolean endOfBorrowersList = false;
             while (!endOfBorrowersList) {
-                Person borrower = borrowersService.getEmptyBorrower();
+                Person borrower = borrowersService.getEmptyPerson();
 
                 borrower.getTemporaryContext().setId(stream.readInt());
                 borrower.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -199,10 +193,10 @@ public final class JTDBackupReader implements BackupReader {
     private void readCountries(DataInputStream stream, JTNotZippedFile file) throws IOException {
         if (stream.readInt() == IFileManager.CONTENT) {
             boolean endOfCountries = false;
-            countries = new ArrayList<Country>(20);
+            countries = new ArrayList<SimpleData>(20);
 
             while (!endOfCountries) {
-                Country country = countriesService.getEmptyCountry();
+                SimpleData country = countriesService.getEmptySimpleData();
 
                 country.getTemporaryContext().setId(stream.readInt());
                 country.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -232,10 +226,10 @@ public final class JTDBackupReader implements BackupReader {
     private void readTypes(DataInputStream stream, JTNotZippedFile file) throws IOException {
         if (stream.readInt() == IFileManager.CONTENT) {
             boolean endOfKindsList = false;
-            types = new ArrayList<Type>(10);
+            types = new ArrayList<SimpleData>(10);
 
             while (!endOfKindsList) {
-                Type type = typesService.getEmptyType();
+                SimpleData type = typesService.getEmptySimpleData();
 
                 type.getTemporaryContext().setId(stream.readInt());
                 type.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -266,10 +260,10 @@ public final class JTDBackupReader implements BackupReader {
         //Si y a des genres
         if (stream.readInt() == IFileManager.CONTENT) {
             boolean endOfKindsList = false;
-            kinds = new ArrayList<Kind>(10);
+            kinds = new ArrayList<SimpleData>(10);
 
             while (!endOfKindsList) {
-                Kind genre = kindsService.getEmptyKind();
+                SimpleData genre = kindsService.getEmptySimpleData();
 
                 genre.getTemporaryContext().setId(stream.readInt());
                 genre.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -299,10 +293,10 @@ public final class JTDBackupReader implements BackupReader {
     private void readLanguages(DataInputStream stream, JTNotZippedFile file) throws IOException {
         if (stream.readInt() == IFileManager.CONTENT) {
             boolean endOfLanguagesList = false;
-            languages = new ArrayList<Language>(10);
+            languages = new ArrayList<SimpleData>(10);
 
             while (!endOfLanguagesList) {
-                Language language = languagesService.getEmptyLanguage();
+                SimpleData language = languagesService.getEmptySimpleData();
 
                 language.getTemporaryContext().setId(stream.readInt());
                 language.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));
@@ -371,7 +365,7 @@ public final class JTDBackupReader implements BackupReader {
             actors = new ArrayList<Person>(50);
 
             while (!endOfActorsList) {
-                Person actor = actorService.getEmptyActor();
+                Person actor = actorService.getEmptyPerson();
 
                 actor.getTemporaryContext().setId(stream.readInt());
                 actor.setName(Managers.getManager(IFileManager.class).formatUTFToRead(stream.readUTF()));

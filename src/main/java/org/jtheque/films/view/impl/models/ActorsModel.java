@@ -46,36 +46,12 @@ public final class ActorsModel extends PrincipalDataModel<Person> implements IAc
         actorService.addDataListener(this);
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void updateDisplayList(Collection<Person> actors) {
-        getDisplayList().clear();
+	@Override
+	public Collection<Person> getDatas(){
+		return actorService.getDatas();
+	}
 
-        if (actors == null) {
-            getDisplayList().addAll(actorService.getActors());
-        } else {
-            getDisplayList().addAll(actors);
-        }
-
-        fireDisplayListChanged();
-    }
-
-    @Override
-    public void updateDisplayList() {
-        updateDisplayList(null);
-    }
-
-
-    @Override
-    public Collection<Person> getDisplayList() {
-        if (displayList == null) {
-            displayList = actorService.getActors();
-        }
-
-        return displayList;
-    }
-
-    @Override
+	@Override
     public Person getCurrentActor() {
         return currentActor;
     }

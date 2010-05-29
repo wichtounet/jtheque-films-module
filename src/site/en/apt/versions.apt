@@ -6,7 +6,7 @@ Versions
 
     * Solve bugs of 1.4.1
 
-* 1.4.1 01.12.2009 Passage à JTheque Core 2.0.2
+* 1.4.1 01.12.2009 Switch to JTheque Core 2.0.2
 
     * Switch to JTheque Core 2.0.2
     * Maven 2 folder architecture

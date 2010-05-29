@@ -19,14 +19,14 @@ package org.jtheque.films.view.impl.frames;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.log.IJThequeLogger;
 import org.jtheque.core.managers.log.Logger;
+import org.jtheque.core.managers.view.impl.components.model.SimpleListModel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.controllers.able.ISitesController;
 import org.jtheque.films.utils.Constants.Site;
 import org.jtheque.films.utils.FileUtils;
 import org.jtheque.films.view.able.ISitesView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
-import org.jtheque.films.view.impl.models.list.SitesListModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.annotation.PostConstruct;
@@ -90,9 +90,9 @@ public final class SitesView extends SwingDialogView implements ISitesView {
      * @return The content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
-        sitesModel = new SitesListModel();
+        sitesModel = new SimpleListModel<Site>(Site.values());
 
         listSites = new JList(sitesModel);
         listSites.setSelectedIndex(0);
@@ -128,7 +128,7 @@ public final class SitesView extends SwingDialogView implements ISitesView {
 
     @Override
     public String getSelectedSite() {
-        return ((Site) sitesModel.get(listSites.getSelectedIndex())).value();
+        return ((Site) sitesModel.getElementAt(listSites.getSelectedIndex())).value();
     }
 
     @Override

@@ -16,21 +16,16 @@ package org.jtheque.films.persistence;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.beans.IBeansManager;
+import org.jtheque.core.managers.collection.IDaoCollections;
 import org.jtheque.core.managers.schema.AbstractSchema;
 import org.jtheque.core.managers.schema.HSQLImporter;
 import org.jtheque.core.managers.schema.Insert;
 import org.jtheque.films.persistence.dao.able.IDaoFilms;
 import org.jtheque.films.services.able.IActorService;
 import org.jtheque.films.services.able.IRealizersService;
-import org.jtheque.primary.dao.able.IDaoCollections;
-import org.jtheque.primary.dao.able.IDaoKinds;
-import org.jtheque.primary.dao.able.IDaoLanguages;
 import org.jtheque.primary.dao.able.IDaoLendings;
 import org.jtheque.primary.dao.able.IDaoPersons;
-import org.jtheque.primary.dao.able.IDaoSagas;
-import org.jtheque.primary.dao.able.IDaoTypes;
+import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.Version;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -54,8 +49,6 @@ public final class FilmsSchema extends AbstractSchema {
      */
     public FilmsSchema() {
         super();
-
-        Managers.getManager(IBeansManager.class).inject(this);
     }
 
     @Override
@@ -92,7 +85,7 @@ public final class FilmsSchema extends AbstractSchema {
      * Create the tables for the data.
      */
     private void createDataTable() {
-        jdbcTemplate.update("CREATE TABLE " + IDaoFilms.TABLE + " (ID INT IDENTITY PRIMARY KEY, TITLE VARCHAR(150) NOT NULL UNIQUE, YEAR INT, COMMENT VARCHAR(2000),DURATION INT,IMAGE VARCHAR(200),NOTE INT, FILEPATH VARCHAR(250), RESUME VARCHAR(2000),THE_REALIZER_FK INT,THE_COLLECTION_FK INT NOT NULL, THE_KIND_FK INT, THE_LANGUAGE_FK INT, THE_LENDING_FK INT, THE_SAGA_FK INT, THE_TYPE_FK INT)");
+        update("CREATE TABLE " + IDaoFilms.TABLE + " (ID INT IDENTITY PRIMARY KEY, TITLE VARCHAR(150) NOT NULL UNIQUE, YEAR INT, COMMENT VARCHAR(2000),DURATION INT,IMAGE VARCHAR(200),NOTE INT, FILEPATH VARCHAR(250), RESUME VARCHAR(2000),THE_REALIZER_FK INT,THE_COLLECTION_FK INT NOT NULL, THE_KIND_FK INT, THE_LANGUAGE_FK INT, THE_LENDING_FK INT, THE_SAGA_FK INT, THE_TYPE_FK INT)");
         jdbcTemplate.update("CREATE TABLE " + IDaoFilms.ACTORS_FILMS_TABLE + " (THE_FILM_FK INT NOT NULL, THE_ACTOR_FK INT NOT NULL)");
         jdbcTemplate.update("CREATE TABLE " + IDaoFilms.KINDS_FILMS_TABLE + " (THE_FILM_FK INT NOT NULL, THE_KIND_FK INT NOT NULL)");
 
@@ -107,15 +100,15 @@ public final class FilmsSchema extends AbstractSchema {
         jdbcTemplate.update("ALTER TABLE " + IDaoFilms.ACTORS_FILMS_TABLE + " ADD FOREIGN KEY (THE_ACTOR_FK) REFERENCES  " + IDaoPersons.TABLE + "  (ID) ON UPDATE SET NULL");
 
         jdbcTemplate.update("ALTER TABLE " + IDaoFilms.KINDS_FILMS_TABLE + " ADD FOREIGN KEY (THE_FILM_FK) REFERENCES  " + IDaoFilms.TABLE + "  (ID) ON UPDATE SET NULL");
-        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.KINDS_FILMS_TABLE + " ADD FOREIGN KEY (THE_KIND_FK) REFERENCES  " + IDaoKinds.TABLE + "  (ID) ON UPDATE SET NULL");
+        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.KINDS_FILMS_TABLE + " ADD FOREIGN KEY (THE_KIND_FK) REFERENCES  " + SimpleData.DataType.KIND.getTable() + "  (ID) ON UPDATE SET NULL");
 
-        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_KIND_FK) REFERENCES  " + IDaoKinds.TABLE + "  (ID) ON UPDATE SET NULL");
+        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_KIND_FK) REFERENCES  " + SimpleData.DataType.KIND.getTable() + "  (ID) ON UPDATE SET NULL");
         jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_REALIZER_FK) REFERENCES  " + IDaoPersons.TABLE + "  (ID) ON UPDATE SET NULL");
         jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_COLLECTION_FK) REFERENCES  " + IDaoCollections.TABLE + "  (ID) ON UPDATE SET NULL");
-        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_LANGUAGE_FK) REFERENCES  " + IDaoLanguages.TABLE + "  (ID) ON UPDATE SET NULL");
+        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_LANGUAGE_FK) REFERENCES  " + SimpleData.DataType.LANGUAGE.getTable() + "  (ID) ON UPDATE SET NULL");
         jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_LENDING_FK) REFERENCES  " + IDaoLendings.TABLE + "  (ID) ON UPDATE SET NULL");
-        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_SAGA_FK) REFERENCES  " + IDaoSagas.TABLE + "  (ID) ON UPDATE SET NULL");
-        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_TYPE_FK) REFERENCES  " + IDaoTypes.TABLE + "  (ID) ON UPDATE SET NULL");
+        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_SAGA_FK) REFERENCES  " + SimpleData.DataType.SAGA.getTable() + "  (ID) ON UPDATE SET NULL");
+        jdbcTemplate.update("ALTER TABLE " + IDaoFilms.TABLE + " ADD FOREIGN KEY (THE_TYPE_FK) REFERENCES  " + SimpleData.DataType.TYPE.getTable() + "  (ID) ON UPDATE SET NULL");
     }
 
     /**
@@ -159,9 +152,9 @@ public final class FilmsSchema extends AbstractSchema {
     public void importDataFromHSQL(Iterable<Insert> inserts) {
         HSQLImporter importer = new HSQLImporter();
 
-        importer.match("OD_SAGA_FILM", "INSERT INTO " + IDaoSagas.TABLE + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
-        importer.match("OD_KIND", "INSERT INTO " + IDaoKinds.TABLE + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
-        importer.match("OD_TYPE", "INSERT INTO " + IDaoTypes.TABLE + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
+        importer.match("OD_SAGA_FILM", "INSERT INTO " + SimpleData.DataType.SAGA.getTable() + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
+        importer.match("OD_KIND", "INSERT INTO " + SimpleData.DataType.KIND.getTable() + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
+        importer.match("OD_TYPE", "INSERT INTO " + SimpleData.DataType.TYPE.getTable() + " (ID, NAME, IMPL) VALUES (?,?,?)", "Films", 0, 2);
         importer.match("FILM_ACTOR", "INSERT INTO " + IDaoFilms.ACTORS_FILMS_TABLE + " (THE_FILM_FK, THE_ACTOR_FK) VALUES (?,?)", 0, 1);
         importer.match("FILM_KIND", "INSERT INTO " + IDaoFilms.KINDS_FILMS_TABLE + " (THE_FILM_FK, THE_KIND_FK) VALUES (?,?)", 0, 1);
         importer.match("OD_LENDING", "INSERT INTO " + IDaoLendings.TABLE + " (ID, DATE, THE_BORROWER_FK, IMPL) VALUES (?,?,?,?)", "Films", 0, 2, 3);

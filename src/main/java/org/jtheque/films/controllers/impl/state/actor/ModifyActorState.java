@@ -20,13 +20,14 @@ import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.films.controllers.able.IActorController;
 import org.jtheque.films.services.able.IActorService;
-import org.jtheque.films.view.impl.fb.IPersonFormBean;
 import org.jtheque.films.view.impl.models.able.IActorsModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.able.FormBean;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.able.ViewMode;
+import org.jtheque.primary.view.able.fb.IPersonFormBean;
 
 import javax.annotation.Resource;
 
@@ -35,7 +36,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class ModifyActorState implements ControllerState {
+public final class ModifyActorState extends AbstractControllerState {
     @Resource
     private IActorController controller;
 
@@ -80,45 +81,6 @@ public final class ModifyActorState implements ControllerState {
         getViewModel().getCurrentActor().restoreMemento();
 
         return controller.getViewState();
-    }
-
-    @Override
-    public ControllerState create() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState manualEdit() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState delete() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Person actor = (Person) data;
-
-        assert actor.getType().equals(IActorService.PERSON_TYPE) : "The person must of type Actor";
-
-        if (Managers.getManager(IViewManager.class).askI18nUserForConfirmation(
-                "actor.dialogs.confirmSave", "actor.dialogs.confirmSave.title")) {
-            controller.save();
-        } else {
-            getViewModel().getCurrentActor().restoreMemento();
-        }
-
-        getViewModel().setCurrentActor(actor);
-
-        return controller.getAutoAddState();
     }
 
     @Override

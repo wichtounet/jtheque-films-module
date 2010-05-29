@@ -26,15 +26,9 @@ import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.services.able.INotesService;
 import org.jtheque.films.services.able.IRealizersService;
 import org.jtheque.films.services.impl.utils.file.imports.ImporterUtils;
-import org.jtheque.primary.od.able.Country;
-import org.jtheque.primary.od.able.Kind;
-import org.jtheque.primary.od.able.Language;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.od.able.Type;
-import org.jtheque.primary.services.able.ICountriesService;
-import org.jtheque.primary.services.able.IKindsService;
-import org.jtheque.primary.services.able.ILanguagesService;
-import org.jtheque.primary.services.able.ITypesService;
+import org.jtheque.primary.od.able.SimpleData;
+import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.DatabaseException;
 import org.jtheque.utils.DatabaseUtils;
 
@@ -58,16 +52,16 @@ public final class DBV3BackupReader implements BackupReader {
     private INotesService notesService;
 
     @Resource
-    private ICountriesService countriesService;
+    private ISimpleDataService countriesService;
 
     @Resource
-    private ILanguagesService languagesService;
+    private ISimpleDataService languagesService;
 
     @Resource
-    private ITypesService typesService;
+    private ISimpleDataService typesService;
 
     @Resource
-    private IKindsService kindsService;
+    private ISimpleDataService kindsService;
 
     @Resource
     private IActorService actorService;
@@ -95,10 +89,10 @@ public final class DBV3BackupReader implements BackupReader {
             Collection<Film> films = importFilms(connection);
             Collection<Person> actors = importActors(connection);
             Collection<Person> realizers = importRealizers(connection);
-            Collection<Kind> kinds = importKinds(connection);
-            Collection<Type> types = importTypes(connection);
-            Collection<Language> languages = importLanguages(connection);
-            Collection<Country> countries = importCountries(connection);
+            Collection<SimpleData> kinds = importKinds(connection);
+            Collection<SimpleData> types = importTypes(connection);
+            Collection<SimpleData> languages = importLanguages(connection);
+            Collection<SimpleData> countries = importCountries(connection);
 
             ImporterUtils.persistDataOfImport(films, actors, realizers, kinds, types, languages, countries, null, null);
         } catch (DatabaseException e) {
@@ -207,7 +201,7 @@ public final class DBV3BackupReader implements BackupReader {
             result = statement.executeQuery("SELECT * FROM acteur");
 
             while (result.next()) {
-                Person actor = actorService.getEmptyActor();
+                Person actor = actorService.getEmptyPerson();
 
                 actor.getTemporaryContext().setId(result.getInt("ID"));
                 actor.setName(result.getString("nom"));
@@ -271,8 +265,8 @@ public final class DBV3BackupReader implements BackupReader {
      * @return The imported kinds.
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
-    private Collection<Kind> importKinds(Connection connection) throws DatabaseException {
-        Collection<Kind> kinds = new ArrayList<Kind>(10);
+    private Collection<SimpleData> importKinds(Connection connection) throws DatabaseException {
+        Collection<SimpleData> kinds = new ArrayList<SimpleData>(10);
 
         Statement statement = null;
         ResultSet result = null;
@@ -281,7 +275,7 @@ public final class DBV3BackupReader implements BackupReader {
             result = statement.executeQuery("SELECT * FROM genre");
 
             while (result.next()) {
-                Kind kind = kindsService.getEmptyKind();
+                SimpleData kind = kindsService.getEmptySimpleData();
 
                 kind.getTemporaryContext().setId(result.getInt("ID"));
                 kind.setName(result.getString("nom"));
@@ -305,8 +299,8 @@ public final class DBV3BackupReader implements BackupReader {
      * @return The imported types.
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
-    private Collection<Type> importTypes(Connection connection) throws DatabaseException {
-        Collection<Type> types = new ArrayList<Type>(10);
+    private Collection<SimpleData> importTypes(Connection connection) throws DatabaseException {
+        Collection<SimpleData> types = new ArrayList<SimpleData>(10);
 
         Statement statement = null;
         ResultSet result = null;
@@ -315,7 +309,7 @@ public final class DBV3BackupReader implements BackupReader {
             result = statement.executeQuery("SELECT * FROM type");
 
             while (result.next()) {
-                Type type = typesService.getEmptyType();
+                SimpleData type = typesService.getEmptySimpleData();
 
                 type.getTemporaryContext().setId(result.getInt("ID"));
                 type.setName(result.getString("nom"));
@@ -339,8 +333,8 @@ public final class DBV3BackupReader implements BackupReader {
      * @return The imported languages.
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
-    private Collection<Language> importLanguages(Connection connection) throws DatabaseException {
-        Collection<Language> languages = new ArrayList<Language>(10);
+    private Collection<SimpleData> importLanguages(Connection connection) throws DatabaseException {
+        Collection<SimpleData> languages = new ArrayList<SimpleData>(10);
 
         Statement statement = null;
         ResultSet result = null;
@@ -349,7 +343,7 @@ public final class DBV3BackupReader implements BackupReader {
             result = statement.executeQuery("SELECT * FROM langue");
 
             while (result.next()) {
-                Language language = languagesService.getEmptyLanguage();
+                SimpleData language = languagesService.getEmptySimpleData();
 
                 language.getTemporaryContext().setId(result.getInt("ID"));
                 language.setName(result.getString("nom"));
@@ -373,8 +367,8 @@ public final class DBV3BackupReader implements BackupReader {
      * @return The imported countries.
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
-    private Collection<Country> importCountries(Connection connection) throws DatabaseException {
-        Collection<Country> countries = new ArrayList<Country>(20);
+    private Collection<SimpleData> importCountries(Connection connection) throws DatabaseException {
+        Collection<SimpleData> countries = new ArrayList<SimpleData>(20);
 
         Statement statement = null;
         ResultSet result = null;
@@ -383,7 +377,7 @@ public final class DBV3BackupReader implements BackupReader {
             result = statement.executeQuery("SELECT * FROM pays");
 
             while (result.next()) {
-                Country country = countriesService.getEmptyCountry();
+                SimpleData country = countriesService.getEmptySimpleData();
 
                 country.getTemporaryContext().setId(result.getInt("ID"));
                 country.setName(result.getString("nom"));

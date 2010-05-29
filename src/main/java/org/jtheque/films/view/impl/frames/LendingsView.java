@@ -22,10 +22,9 @@ import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.persistence.able.DataContainer;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
-import org.jtheque.core.utils.ui.PanelBuilder;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
+import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.view.able.ILendingsView;
-import org.jtheque.films.view.impl.actions.CloseViewAction;
-import org.jtheque.films.view.impl.actions.DisplayBeanViewAction;
 import org.jtheque.films.view.impl.actions.lendings.AcReturnCurrentFilm;
 import org.jtheque.films.view.impl.editors.DataCellEditor;
 import org.jtheque.films.view.impl.menus.JMenuBarLendings;
@@ -81,7 +80,7 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
      * @return the content pane.
      */
     private Container buildContentPane() {
-        PanelBuilder builder = new PanelBuilder();
+        PanelBuilder builder = new JThequePanelBuilder();
 
         model = new LendingsTableModel();
         setTableHeader();

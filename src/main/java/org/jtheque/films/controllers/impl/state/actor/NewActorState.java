@@ -21,14 +21,15 @@ import org.jtheque.core.managers.undo.IUndoRedoManager;
 import org.jtheque.core.managers.view.able.IViewManager;
 import org.jtheque.films.controllers.able.IActorController;
 import org.jtheque.films.services.able.IActorService;
-import org.jtheque.films.view.impl.fb.IPersonFormBean;
 import org.jtheque.films.view.impl.models.able.IActorsModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.able.FormBean;
-import org.jtheque.primary.controller.impl.undo.CreatedPersonEdit;
+import org.jtheque.primary.controller.impl.AbstractControllerState;
+import org.jtheque.primary.controller.impl.undo.GenericDataCreatedEdit;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.view.able.ViewMode;
+import org.jtheque.primary.view.able.fb.IPersonFormBean;
 
 import javax.annotation.Resource;
 
@@ -37,7 +38,7 @@ import javax.annotation.Resource;
  *
  * @author Baptiste Wicht
  */
-public final class NewActorState implements ControllerState {
+public final class NewActorState extends AbstractControllerState {
     @Resource
     private IActorController controller;
 
@@ -55,7 +56,7 @@ public final class NewActorState implements ControllerState {
 
     @Override
     public void apply() {
-        getViewModel().setCurrentActor(actorService.getDefaultActor());
+        getViewModel().setCurrentActor(actorService.getDefaultPerson());
         controller.getView().setEnabled(true);
         controller.getView().getToolbarView().setDisplayMode(ViewMode.NEW);
     }
@@ -64,16 +65,14 @@ public final class NewActorState implements ControllerState {
     public ControllerState save(FormBean bean) {
         IPersonFormBean infos = (IPersonFormBean) bean;
 
-        Person actor = actorService.getEmptyActor();
+        Person actor = actorService.getEmptyPerson();
 
-        actor.setName(infos.getName());
-        actor.setFirstName(infos.getFirstName());
-        actor.setNote(infos.getNote());
-        actor.setTheCountry(infos.getCountry());
+        infos.fillPerson(actor);
 
         actorService.create(actor);
 
-        Managers.getManager(IUndoRedoManager.class).addEdit(new CreatedPersonEdit(actor));
+        Managers.getManager(IUndoRedoManager.class).addEdit(
+				new GenericDataCreatedEdit<Person>("actorService", actor));
 
         controller.getView().resort();
 
@@ -86,46 +85,11 @@ public final class NewActorState implements ControllerState {
 
         controller.getView().selectFirst();
 
-        if (actorService.hasNoActor()) {
+        if (actorService.hasNoPerson()) {
             nextState = controller.getViewState();
         }
 
         return nextState;
-    }
-
-    @Override
-    public ControllerState create() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState manualEdit() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState delete() {
-        //Do nothing
-
-        return null;
-    }
-
-    @Override
-    public ControllerState autoEdit(Data data) {
-        Person actor = (Person) data;
-
-        if (Managers.getManager(IViewManager.class).askI18nUserForConfirmation(
-                "actor.dialogs.confirmSave", "actor.dialogs.confirmSave.title")) {
-            controller.save();
-        }
-
-        getViewModel().setCurrentActor(actor);
-
-        return controller.getAutoAddState();
     }
 
     @Override
