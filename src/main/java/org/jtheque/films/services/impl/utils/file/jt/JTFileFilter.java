@@ -44,6 +44,7 @@ public final class JTFileFilter extends SimpleFilter {
      * Indicate if this filter can filter a certain type of file.
      *
      * @param fileType The file type we must test if this filter can filter.
+     *
      * @return <code>true</code> if it can filter this type else <code>false</code>.
      */
     public boolean canFilter(FileType fileType) {

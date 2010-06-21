@@ -35,7 +35,7 @@ public final class Constants {
 
     public static final double A_QUARTER = 0.25;
     public static final double AN_HALF = 0.25;
-    
+
     /**
      * Construct a new Constants. This class isn't instanciable.
      */
@@ -216,6 +216,7 @@ public final class Constants {
              * Return the FileType enum value from the String value.
              *
              * @param fileType The string value of the enum.
+             *
              * @return The FileType enum value.
              */
             public static FileType fromString(String fileType) {

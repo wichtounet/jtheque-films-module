@@ -23,6 +23,7 @@ import org.jtheque.core.managers.view.impl.actions.JThequeSimpleAction;
 import org.jtheque.films.view.impl.panels.config.JPanelConfigLendings;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 
 /**
@@ -36,9 +37,9 @@ public final class AcCheckLendings extends JThequeSimpleAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JPanelConfigLendings config = 
+        JPanelConfigLendings config =
                 (JPanelConfigLendings) Managers.getManager(IViewManager.class).getViews().getConfigView().getSelectedPanelConfig();
-        
+
         boolean selected = config.getBoxControlLendings().isSelected();
         config.setLendingsConfigurationEnabled(selected);
     }

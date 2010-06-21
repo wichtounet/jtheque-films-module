@@ -23,6 +23,7 @@ import org.jtheque.films.view.able.IInfosActorsView;
 import org.jtheque.utils.collections.ArrayUtils;
 
 import javax.swing.DefaultListModel;
+
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
@@ -44,7 +45,7 @@ public final class AcRemoveActorFromList extends JThequeSimpleAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         IInfosActorsView actorsView = Managers.getManager(IBeansManager.class).getBean("filmActorsView");
-        
+
         DefaultListModel modelActors = actorsView.getActorsModel();
         DefaultListModel modelActorsForFilm = actorsView.getActorsForFilmModel();
 

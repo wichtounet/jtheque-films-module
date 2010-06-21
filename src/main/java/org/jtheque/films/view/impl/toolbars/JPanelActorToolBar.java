@@ -32,6 +32,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
@@ -56,7 +57,7 @@ public final class JPanelActorToolBar extends JPanel implements ToolbarView {
 
     public JPanelActorToolBar() {
         super();
-        
+
         setBackground(Color.white);
         setBorder(Borders.DIALOG_BORDER);
 

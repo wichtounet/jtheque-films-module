@@ -23,23 +23,23 @@ import org.jtheque.core.managers.view.able.components.IModel;
 import org.jtheque.core.managers.view.edt.SimpleTask;
 
 /**
- * An abstract delegated view. It seems a view who delegates all the view's operations to an other view. 
- * 
+ * An abstract delegated view. It seems a view who delegates all the view's operations to an other view.
+ *
  * @author Baptiste Wicht
  */
 public abstract class AbstractDelegatedView implements IView {
     /**
-     * Return the implementation of the view. 
-     * 
-     * @return The implementation of the view. 
+     * Return the implementation of the view.
+     *
+     * @return The implementation of the view.
      */
     public abstract IView getImplementationView();
 
     /**
-     * Build the delegated view in EDT. This method only call the buildDelegatedView() method in the EDT. 
+     * Build the delegated view in EDT. This method only call the buildDelegatedView() method in the EDT.
      */
-    public final void buildInEDT(){
-        Managers.getManager(IViewManager.class).execute(new SimpleTask(){
+    public final void buildInEDT() {
+        Managers.getManager(IViewManager.class).execute(new SimpleTask() {
             @Override
             public void run() {
                 buildDelegatedView();
@@ -48,8 +48,8 @@ public abstract class AbstractDelegatedView implements IView {
     }
 
     /**
-     * Build the delegated view. This method must only be called from the buildInEDT() method. With that contract respected, 
-     * this method is always called in the EDT. 
+     * Build the delegated view. This method must only be called from the buildInEDT() method. With that contract
+     * respected, this method is always called in the EDT.
      */
     protected abstract void buildDelegatedView();
 

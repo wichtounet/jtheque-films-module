@@ -20,8 +20,8 @@ import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.panel.FileChooserPanel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.Borders;
-import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.ValidationUtils;
+import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
 import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.services.impl.utils.search.Searcher;
@@ -54,7 +54,7 @@ public final class ExportView extends SwingDialogView implements IExportView {
      */
     public ExportView(Frame parent) {
         super(parent);
-        
+
         build();
     }
 
@@ -86,7 +86,7 @@ public final class ExportView extends SwingDialogView implements IExportView {
         searchPanel.setBorder(Borders.createTitledBorder("export.view.search"));
         builder.add(searchPanel, builder.gbcSet(0, 1, GridBagUtils.BOTH));
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL), 
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL),
                 new AcValidateExportView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();

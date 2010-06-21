@@ -26,8 +26,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A film form bean. This form bean contains all the informations of a film. It is used by the interface
- * to pass data to the controller.
+ * A film form bean. This form bean contains all the informations of a film. It is used by the interface to pass data to
+ * the controller.
  *
  * @author Baptiste Wicht
  */

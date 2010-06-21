@@ -39,7 +39,7 @@ public final class AcValidateSearchView extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ISearchController searchController = Managers.getManager(IBeansManager.class).getBean("searchController");
-        
+
         searchController.search(searchController.getView().buildSearcher());
     }
 }

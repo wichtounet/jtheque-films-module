@@ -1,8 +1,5 @@
 package org.jtheque.films.services.impl.utils.file.exports.datasources;
 
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRField;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.properties.IPropertiesManager;
 import org.jtheque.films.persistence.od.able.Film;
@@ -14,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
 
 /*
  * This file is part of JTheque.
@@ -109,6 +110,7 @@ public final class FilmsDatasource implements JRDataSource {
      * Return the actors description of the film.
      *
      * @param film The film to get the descriptions from.
+     *
      * @return The String description of the actors of the film.
      */
     private static Object getActorsDescription(Film film) {
@@ -131,6 +133,7 @@ public final class FilmsDatasource implements JRDataSource {
      * Return the kinds description of the film.
      *
      * @param film The film to get the descriptions from.
+     *
      * @return The String description of the kinds of the film.
      */
     private static Object getKindsDescription(Film film) {

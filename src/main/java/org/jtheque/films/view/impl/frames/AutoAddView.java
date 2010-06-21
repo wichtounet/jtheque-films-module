@@ -19,9 +19,9 @@ package org.jtheque.films.view.impl.frames;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.components.model.SimpleListModel;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
+import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
 import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
-import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.core.utils.ui.builders.PanelBuilder;
 import org.jtheque.films.services.impl.utils.web.FilmResult;
 import org.jtheque.films.utils.Constants.Properties.Film;
@@ -40,6 +40,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -63,7 +64,7 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
     /**
      * Construct a new JFrameAutoAdd.
      *
-     * @param parent                      The parent frame.
+     * @param parent The parent frame.
      */
     public AutoAddView(Frame parent) {
         super(parent);
@@ -92,14 +93,14 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
         builder.addI18nLabel(Film.TITLE, builder.gbcSet(0, 0));
 
         Action chooseSiteAction = new AcChooseSite();
-        
+
         fieldTitle = builder.add(new JTextField(), builder.gbcSet(1, 0));
         SwingUtils.addFieldValidateAction(fieldTitle, chooseSiteAction);
 
         addListsPanel(builder, chooseSiteAction);
 
         builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, GridBagUtils.BASELINE_LEADING, 2, 1),
-                new DisplayBeanViewAction("auto.add.view.actions.infos", "sitesView"), 
+                new DisplayBeanViewAction("auto.add.view.actions.infos", "sitesView"),
                 new AcValidateAutoAddView(),
                 new AcCloseAutoAddView());
 
@@ -109,8 +110,8 @@ public final class AutoAddView extends SwingDialogView implements IAutoAddView {
     /**
      * Add the list panel.
      *
-     * @param parent The parent builder.
-     * @param chooseSiteAction The action to choose a site. 
+     * @param parent           The parent builder.
+     * @param chooseSiteAction The action to choose a site.
      */
     private void addListsPanel(PanelBuilder parent, Action chooseSiteAction) {
         PanelBuilder builder = parent.addPanel(parent.gbcSet(0, 1, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 2, 1));

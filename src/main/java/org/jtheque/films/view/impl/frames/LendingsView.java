@@ -16,7 +16,6 @@ package org.jtheque.films.view.impl.frames;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXTable;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
@@ -32,8 +31,11 @@ import org.jtheque.films.view.impl.models.table.LendingsTableModel;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.utils.ui.GridBagUtils;
 
+import org.jdesktop.swingx.JXTable;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
     /**
      * Construct a new <code>JFrameLendings</code>.
      *
-     * @param parent       The parent frame.
+     * @param parent The parent frame.
      */
     public LendingsView(Frame parent) {
         super(parent);
@@ -98,7 +100,7 @@ public final class LendingsView extends SwingDialogView implements ILendingsView
         builder.addScrolled(tableLendings, builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 0, -1, 1.0, 1.0));
 
         builder.addButtonBar(builder.gbcSet(0, 1, GridBagUtils.HORIZONTAL, 0, 0),
-                new DisplayBeanViewAction("lendings.view.actions.lend", "lendFilmView"), new AcReturnCurrentFilm(), 
+                new DisplayBeanViewAction("lendings.view.actions.lend", "lendFilmView"), new AcReturnCurrentFilm(),
                 new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();

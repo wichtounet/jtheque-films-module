@@ -30,9 +30,9 @@ import org.jtheque.primary.utils.web.analyzers.generic.field.FieldGetter;
 import org.jtheque.primary.utils.web.analyzers.generic.operation.ScannerPossessor;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.bean.DataUtils;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.annotation.Resource;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 

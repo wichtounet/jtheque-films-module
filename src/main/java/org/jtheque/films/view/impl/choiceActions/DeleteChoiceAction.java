@@ -39,7 +39,7 @@ public final class DeleteChoiceAction extends AbstractPrimaryDeleteChoiceAction 
         super();
 
         addDeleters(new FilmDeleter(), new ActorDeleter(), new RealizerDeleter());
-		addPrimaryDeleters();
+        addPrimaryDeleters();
     }
 
     /**
@@ -58,8 +58,8 @@ public final class DeleteChoiceAction extends AbstractPrimaryDeleteChoiceAction 
         @Override
         public void delete(Film o) {
             addEditIfDeleted(
-					CoreUtils.<IFilmsService>getBean("filmsService").delete(o),
-					new GenericDataDeletedEdit<Film>("filmsService", o));
+                    CoreUtils.<IFilmsService>getBean("filmsService").delete(o),
+                    new GenericDataDeletedEdit<Film>("filmsService", o));
         }
     }
 
@@ -79,8 +79,8 @@ public final class DeleteChoiceAction extends AbstractPrimaryDeleteChoiceAction 
         @Override
         public void delete(Person o) {
             addEditIfDeleted(
-					CoreUtils.<IActorService>getBean("actorService").delete(o),
-					new GenericDataDeletedEdit<Person>("actorService", o));
+                    CoreUtils.<IActorService>getBean("actorService").delete(o),
+                    new GenericDataDeletedEdit<Person>("actorService", o));
         }
     }
 
@@ -100,8 +100,8 @@ public final class DeleteChoiceAction extends AbstractPrimaryDeleteChoiceAction 
         @Override
         public void delete(Person o) {
             addEditIfDeleted(
-					CoreUtils.<IRealizersService>getBean("realizersService").delete(o),
-					new GenericDataDeletedEdit<Person>("realizersService", o));
+                    CoreUtils.<IRealizersService>getBean("realizersService").delete(o),
+                    new GenericDataDeletedEdit<Person>("realizersService", o));
         }
     }
 }

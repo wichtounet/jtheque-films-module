@@ -33,6 +33,7 @@ import org.jtheque.primary.services.able.IPersonService;
 import org.jtheque.primary.services.able.ISimpleDataService;
 
 import javax.annotation.Resource;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -101,6 +102,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the borrowers to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeBorrowers(DataOutputStream stream) throws IOException {
@@ -131,6 +133,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the lendings to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeLendings(DataOutputStream stream) throws IOException {
@@ -161,6 +164,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the countries to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeCountries(DataOutputStream stream) throws IOException {
@@ -189,6 +193,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the types to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeTypes(DataOutputStream stream) throws IOException {
@@ -217,6 +222,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the kinds to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeKinds(DataOutputStream stream) throws IOException {
@@ -245,6 +251,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the languages to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeLanguages(DataOutputStream stream) throws IOException {
@@ -273,6 +280,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the realizers to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeRealizers(DataOutputStream stream) throws IOException {
@@ -304,6 +312,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the actors to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeActors(DataOutputStream stream) throws IOException {
@@ -335,6 +344,7 @@ public final class JTDBackupWriter implements BackupWriter {
      * Write the films to the stream.
      *
      * @param stream The stream to write in.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private void writeFilms(DataOutputStream stream) throws IOException {
@@ -363,6 +373,7 @@ public final class JTDBackupWriter implements BackupWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film to write.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private static void writeFilm(DataOutputStream stream, Film film) throws IOException {
@@ -389,6 +400,7 @@ public final class JTDBackupWriter implements BackupWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film to write.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private static void writeKindsOfFilm(DataOutputStream stream, Film film) throws IOException {
@@ -417,6 +429,7 @@ public final class JTDBackupWriter implements BackupWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film to write.
+     *
      * @throws IOException Thrown when an exception occurs during the writing of data.
      */
     private static void writeActorsOfFilm(DataOutputStream stream, Film film) throws IOException {

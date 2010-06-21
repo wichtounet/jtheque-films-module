@@ -42,7 +42,7 @@ public final class AcReturnCurrentFilm extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ILendingsController lendingsController = Managers.getManager(IBeansManager.class).getBean("lendingsController");
-        
+
         ILendingsView view = (ILendingsView) lendingsController.getView();
 
         Collection<Integer> ids = view.getSelectedLendingsID();

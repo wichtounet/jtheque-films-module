@@ -119,6 +119,7 @@ public final class XMLImporter implements Importer {
      *
      * @param reader The XML Reader.
      * @param film   The film to get the informations from.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importPropertiesOfFilm(XMLOverReader reader, Film film) throws XMLException {
@@ -134,7 +135,9 @@ public final class XMLImporter implements Importer {
      * Read the version of the XML file.
      *
      * @param reader The XML reader
+     *
      * @return The version.
+     *
      * @throws XMLException  If an error occurs during the XML reading.
      * @throws FileException If the version of the
      */
@@ -153,6 +156,7 @@ public final class XMLImporter implements Importer {
      *
      * @param reader The XML reader
      * @param film   The film to fill.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importLanguage(XMLOverReader reader, Film film) throws XMLException {
@@ -173,6 +177,7 @@ public final class XMLImporter implements Importer {
      *
      * @param reader The XML reader
      * @param film   The film to fill.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importType(XMLOverReader reader, Film film) throws XMLException {
@@ -193,6 +198,7 @@ public final class XMLImporter implements Importer {
      *
      * @param reader The XML reader
      * @param film   The film to fill.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importRealizer(XMLOverReader reader, Film film) throws XMLException {
@@ -221,6 +227,7 @@ public final class XMLImporter implements Importer {
      * @param reader  The XML reader
      * @param version The version of the file.
      * @param film    The film to fill.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importKinds(XMLOverReader reader, int version, Film film) throws XMLException {
@@ -256,6 +263,7 @@ public final class XMLImporter implements Importer {
      *
      * @param reader The XML reader
      * @param film   The film to fill.
+     *
      * @throws XMLException If an error occurs during the XML reading.
      */
     private void importActors(XMLOverReader reader, Film film) throws XMLException {

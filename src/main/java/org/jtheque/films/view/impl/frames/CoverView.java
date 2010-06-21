@@ -16,7 +16,6 @@ package org.jtheque.films.view.impl.frames;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXImagePanel;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.view.impl.frame.abstraction.SwingDialogView;
 import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
@@ -33,8 +32,11 @@ import org.jtheque.films.view.impl.models.combo.CoverFormatComboBoxModel;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
+import org.jdesktop.swingx.JXImagePanel;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -60,7 +62,7 @@ public final class CoverView extends SwingDialogView implements ICoverView {
     /**
      * Construct a new CoverView.
      *
-     * @param frame        The parent frame.
+     * @param frame The parent frame.
      */
     public CoverView(Frame frame) {
         super(frame);

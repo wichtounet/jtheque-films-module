@@ -55,7 +55,7 @@ public final class AcValidateExportView extends JThequeAction {
         @Override
         public void run() {
             final IExportController exportController = Managers.getManager(IBeansManager.class).getBean("exportController");
-            
+
             exportController.getView().startWait();
 
             new Thread(new Runnable() {

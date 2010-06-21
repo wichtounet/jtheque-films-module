@@ -24,9 +24,11 @@ import org.jtheque.primary.dao.able.IDaoPersons;
 import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.services.impl.PersonService;
 import org.jtheque.primary.view.able.fb.IPersonFormBean;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,17 +38,17 @@ import java.util.Collection;
  * @author Baptiste Wicht
  */
 public final class ActorService extends PersonService implements IActorService {
-	@Resource
+    @Resource
     private IDaoPersons daoPersons;
 
     @Resource
     private IFilmsService filmsService;
 
-	public ActorService(){
-		super(PERSON_TYPE, DATA_TYPE);
-	}
+    public ActorService() {
+        super(PERSON_TYPE, DATA_TYPE);
+    }
 
-	@Override
+    @Override
     @Transactional
     public void edit(Person actor, IPersonFormBean infos) {
         infos.fillPerson(actor);

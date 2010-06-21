@@ -46,6 +46,7 @@ public final class DataCellEditor extends DefaultCellEditor {
      *
      * @param container The container.
      * @param <T>       The type of data.
+     *
      * @return A JCombobox with a model bounded to the data container.
      */
     private static <T extends Data> JComboBox buildCombo(DataContainer<T> container) {

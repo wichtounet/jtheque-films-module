@@ -16,7 +16,6 @@ package org.jtheque.films.view.impl.choiceActions;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.primary.view.impl.choice.AbstractChoiceAction;
 import org.jtheque.primary.view.impl.choice.AbstractModifyChoiceAction;
 
 /**

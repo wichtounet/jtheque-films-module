@@ -29,6 +29,7 @@ import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.HashCodeUtils;
 
 import javax.swing.Icon;
+
 import java.util.Set;
 
 /**

@@ -44,6 +44,7 @@ final class WebGetterFactory {
      * Return the getter for the specified getter.
      *
      * @param site The site on which we want search.
+     *
      * @return The good web getter if we found it or <code>null</code> if we doesn't found.
      */
     public WebGetter getWebGetter(Site site) {

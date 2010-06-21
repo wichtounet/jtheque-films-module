@@ -40,12 +40,12 @@ public final class RealizersModel extends PrincipalDataModel<Person> implements 
         Managers.getManager(IBeansManager.class).<IRealizersService>getBean("realizersService").addDataListener(this);
     }
 
-	@Override
-	public Collection<Person> getDatas(){
-		return Managers.getManager(IBeansManager.class).<IRealizersService>getBean("realizersService").getDatas();
-	}
+    @Override
+    public Collection<Person> getDatas() {
+        return Managers.getManager(IBeansManager.class).<IRealizersService>getBean("realizersService").getDatas();
+    }
 
-	@Override
+    @Override
     public Person getCurrentRealizer() {
         return currentRealizer;
     }

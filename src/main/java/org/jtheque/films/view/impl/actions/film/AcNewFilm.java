@@ -31,7 +31,6 @@ import java.awt.event.ActionEvent;
 public final class AcNewFilm extends JThequeAction {
     /**
      * Construct a new AcNewFilm.
-     *  
      */
     public AcNewFilm() {
         super("film.view.actions.add.manual");

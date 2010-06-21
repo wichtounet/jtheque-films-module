@@ -30,9 +30,11 @@ import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.print.PrintUtils;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -140,6 +142,7 @@ public final class FilmsService implements IFilmsService {
      * Create a string description for a film.
      *
      * @param film The film to generate the description for.
+     *
      * @return The string description of the film.
      */
     private static String generateFilmDescription(Film film) {

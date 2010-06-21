@@ -43,7 +43,7 @@ public final class AcValidateImportView extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         IImportController importController = Managers.getManager(IBeansManager.class).getBean("importController");
-        
+
         try {
             importController.importData(importController.getView().getFilePath());
         } catch (FileException e1) {

@@ -26,6 +26,7 @@ import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.io.SimpleFilter;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 
 /**
@@ -47,7 +48,7 @@ public final class AcExportFilm extends JThequeAction {
      */
     public AcExportFilm() {
         super("film.view.actions.export");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

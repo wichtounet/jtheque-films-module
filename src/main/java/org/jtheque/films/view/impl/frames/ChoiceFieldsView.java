@@ -25,6 +25,7 @@ import org.jtheque.films.view.able.IChoiceFieldsView;
 import org.jtheque.films.view.impl.actions.auto.choice.AcValidateChoiceFieldsView;
 
 import javax.swing.JCheckBox;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -48,7 +49,7 @@ public final class ChoiceFieldsView extends SwingDialogView implements IChoiceFi
     /**
      * Construct a new JFrameChoiceFields.
      *
-     * @param parent         The parent frame.
+     * @param parent The parent frame.
      */
     public ChoiceFieldsView(Frame parent) {
         super(parent);

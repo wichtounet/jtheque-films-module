@@ -31,6 +31,7 @@ public interface Exporter<T extends Data> {
      * Indicate if the exporter can export to a file format.
      *
      * @param fileType The file format destination.
+     *
      * @return true if the exporter can export to this file type else false.
      */
     boolean canExportTo(FileType fileType);

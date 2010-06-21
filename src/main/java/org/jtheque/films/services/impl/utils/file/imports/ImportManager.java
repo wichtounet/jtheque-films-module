@@ -37,6 +37,7 @@ public final class ImportManager {
      *
      * @param fileType The file type.
      * @param filePath The path to the file.
+     *
      * @throws FileException If there is an I/O during the import.
      */
     public static void importFrom(FileType fileType, String filePath) throws FileException {

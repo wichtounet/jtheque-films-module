@@ -19,6 +19,7 @@ package org.jtheque.films.controllers.impl;
 import org.jtheque.core.managers.view.able.controller.AbstractController;
 import org.jtheque.films.controllers.able.IVideoFileController;
 import org.jtheque.films.view.able.IVideoFileView;
+
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

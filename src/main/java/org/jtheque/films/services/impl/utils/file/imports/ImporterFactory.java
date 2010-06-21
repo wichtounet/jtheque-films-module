@@ -41,6 +41,7 @@ final class ImporterFactory {
      * Get the importer for the specified file type.
      *
      * @param fileType The file type.
+     *
      * @return The importer for the specified file type.
      */
     public static Importer getImporter(FileType fileType) {

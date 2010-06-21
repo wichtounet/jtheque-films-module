@@ -45,7 +45,7 @@ public final class AcSearchRealizer extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ISearchController searchController = Managers.getManager(IBeansManager.class).getBean("filmSearchController");
-        
+
         searchController.setResearchController(Managers.getManager(IBeansManager.class).<IRealizerController>getBean("realizerController"));
         searchController.displayView();
     }

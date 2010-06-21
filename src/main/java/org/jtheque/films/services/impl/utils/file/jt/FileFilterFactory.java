@@ -66,6 +66,7 @@ public final class FileFilterFactory {
      * Return the file filter for this type of file.
      *
      * @param fileType The file type.
+     *
      * @return The good filter or <code>null</code> if we doesn't filter an appropriate filter.
      */
     public static SimpleFilter getFileFilter(FileType fileType) {

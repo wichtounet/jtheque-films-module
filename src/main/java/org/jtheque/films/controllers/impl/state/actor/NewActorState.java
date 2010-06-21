@@ -72,7 +72,7 @@ public final class NewActorState extends AbstractControllerState {
         actorService.create(actor);
 
         Managers.getManager(IUndoRedoManager.class).addEdit(
-				new GenericDataCreatedEdit<Person>("actorService", actor));
+                new GenericDataCreatedEdit<Person>("actorService", actor));
 
         controller.getView().resort();
 

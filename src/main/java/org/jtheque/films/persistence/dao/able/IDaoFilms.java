@@ -42,6 +42,7 @@ public interface IDaoFilms extends JThequeDao {
      * Return the film with the specified id.
      *
      * @param id The id of the searched film.
+     *
      * @return The <code>Film</code> with the specified id or <code>null</code> if there is no film with this id.
      */
     Film getFilm(int id);
@@ -71,6 +72,7 @@ public interface IDaoFilms extends JThequeDao {
      * Delete the film.
      *
      * @param film The film to delete.
+     *
      * @return true if the object is deleted else false.
      */
     boolean delete(Film film);

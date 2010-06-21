@@ -16,10 +16,6 @@ package org.jtheque.films.view.impl.panels.principals;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXHyperlink;
-import org.jdesktop.swingx.JXImagePanel;
-import org.jdesktop.swingx.JXTitledPanel;
-import org.jdesktop.swingx.border.DropShadowBorder;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
@@ -58,6 +54,11 @@ import org.jtheque.primary.view.impl.components.panels.JThequeTitledPanel;
 import org.jtheque.primary.view.impl.models.DataContainerCachedComboBoxModel;
 import org.jtheque.utils.ui.GridBagUtils;
 
+import org.jdesktop.swingx.JXHyperlink;
+import org.jdesktop.swingx.JXImagePanel;
+import org.jdesktop.swingx.JXTitledPanel;
+import org.jdesktop.swingx.border.DropShadowBorder;
+
 import javax.annotation.PostConstruct;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,6 +66,7 @@ import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -81,7 +83,7 @@ import java.util.Map;
  */
 public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrincipalDataPanel> implements IFilmView {
     public FilmView() {
-        super(1, "film.data.title");  
+        super(1, "film.data.title");
 
         UIManager.put("JXTitledPanel.title.foreground", Color.white);
     }
@@ -97,25 +99,25 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
 
     @Override
     public void setImageOfPanel(BufferedImage image) {
-        ((FilmViewImpl)getImplementationView()).setImage(image);
+        ((FilmViewImpl) getImplementationView()).setImage(image);
     }
 
     @Override
     public IFilmsModel getModel() {
         return (IFilmsModel) super.getModel();
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         buildInEDT();
     }
-    
+
     @Override
     protected void buildDelegatedView() {
         FilmViewImpl impl = new FilmViewImpl();
         setView(impl);
         impl.build();
-        
+
         getModel().addCurrentObjectListener(this);
     }
 
@@ -125,9 +127,9 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
         private final IInfosPersoView panelPerso;
         private final IInfosFilmView panelInfos;
         private final IInfosOthersView panelOthers;
-        
+
         private JXTitledPanel panelFilm;
-    
+
         private JTextField fieldTitle;
         private DataContainerCachedComboBoxModel<SimpleData> modelType;
         private JComboBox comboType;
@@ -136,9 +138,9 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
 
         private FilmViewImpl() {
             super(IFilmsService.DATA_TYPE);
-            
+
             setModel(new FilmsModel());
-            
+
             panelKinds = Managers.getManager(IBeansManager.class).getBean("filmKindsView");
             panelActors = Managers.getManager(IBeansManager.class).getBean("filmActorsView");
             panelPerso = Managers.getManager(IBeansManager.class).getBean("filmPersoView");
@@ -151,33 +153,33 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
          */
         private void build() {
             PanelBuilder builder = new JThequePanelBuilder(this);
-    
+
             buildPanelList(builder);
             buildPanelTri(builder);
             buildPanelFilm(builder);
-    
+
             addListeners();
         }
-    
+
         /**
          * Add listeners to and from the view.
          */
         private void addListeners() {
             IFilmController filmController = Managers.getManager(IBeansManager.class).getBean("filmController");
-            
+
             panelImage.addMouseListener(filmController);
-            
+
             getTree().addTreeSelectionListener(filmController);
 
             getModel().addDisplayListListener(this);
-            
+
             getModel().addCurrentObjectListener(panelKinds);
             getModel().addCurrentObjectListener(panelInfos);
             getModel().addCurrentObjectListener(panelActors);
             getModel().addCurrentObjectListener(panelPerso);
             getModel().addCurrentObjectListener(panelOthers);
         }
-        
+
         /**
          * Build the internal panel film.
          *
@@ -187,34 +189,34 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
             panelFilm = new JThequeTitledPanel("film.view.panel.film.title");
             panelFilm.setBorder(new DropShadowBorder());
             panelFilm.setTitleFont(panelFilm.getTitleFont().deriveFont(Font.BOLD));
-    
+
             I18nPanelBuilder builder = new JThequePanelBuilder();
-    
+
             JPanelFilmToolBar toolBar = new JPanelFilmToolBar();
-            
+
             setToolBar(toolBar);
-            
+
             builder.add(toolBar, builder.gbcSet(0, 0, GridBagUtils.HORIZONTAL, 4, 1));
-    
+
             builder.addI18nLabel(Film.TITLE, builder.gbcSet(0, 1));
-    
+
             fieldTitle = builder.add(new JTextField(20), builder.gbcSet(1, 1, GridBagUtils.NONE, 0, 1));
             ConstraintManager.configure(fieldTitle, Film.TITLE);
             fieldTitle.setEnabled(false);
-    
+
             addTypeField(builder);
-    
+
             panelImage = new JXImagePanel();
             panelImage.setBackground(Color.white);
             builder.add(panelImage, builder.gbcSet(3, 1, GridBagUtils.BOTH, 1, 2));
-    
+
             addTabbedPane(builder);
-    
+
             panelFilm.setContentContainer(builder.getPanel());
-    
+
             parent.add(panelFilm, parent.gbcSet(1, 0, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 1, 2, 1 - Constants.A_QUARTER, 1.0));
         }
-    
+
         /**
          * Add the field for the type.
          *
@@ -222,18 +224,18 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
          */
         private void addTypeField(I18nPanelBuilder builder) {
             builder.addI18nLabel(Film.TYPE, builder.gbcSet(0, 2));
-    
+
             modelType = new DataContainerCachedComboBoxModel<SimpleData>(
-					CoreUtils.<DataContainer<SimpleData>>getBean("typesServices"));
-    
+                    CoreUtils.<DataContainer<SimpleData>>getBean("typesServices"));
+
             comboType = builder.addComboBox(modelType, builder.gbcSet(1, 2));
             comboType.setEnabled(false);
-    
+
             buttonNewType = builder.addButton(
-					new CreateNewPrincipalAction("generic.view.actions.new", "typeController"), builder.gbcSet(2, 2));
+                    new CreateNewPrincipalAction("generic.view.actions.new", "typeController"), builder.gbcSet(2, 2));
             buttonNewType.setEnabled(false);
         }
-    
+
         /**
          * Add the tabbed pane to the view.
          *
@@ -242,33 +244,33 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
         private void addTabbedPane(PanelBuilder builder) {
             Insets oldInsets = UIManager.getInsets("TabbedPane.contentBorderInsets");
             UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
-    
+
             JTabbedPane tabInfos = new JTabbedPane();
-    
+
             UIManager.put("TabbedPane.contentBorderInsets", oldInsets);
-    
+
             Map<JComponent, String> components = new HashMap<JComponent, String>(3);
-    
+
             components.put(panelInfos.getImpl(), "film.view.panel.general.title");
             tabInfos.addTab(getMessage("film.view.panel.general.title"), panelInfos.getImpl());
-    
+
             components.put(panelKinds.getImpl(), "film.view.panel.kinds.title");
             tabInfos.addTab(getMessage("film.view.panel.kinds.title"), panelKinds.getImpl());
-    
+
             components.put(panelActors.getImpl(), "film.view.panel.actors.title");
             tabInfos.addTab(getMessage("film.view.panel.actors.title"), panelActors.getImpl());
-    
+
             components.put(panelOthers.getImpl(), "film.view.panel.others.title");
             tabInfos.addTab(getMessage("film.view.panel.others.title"), panelOthers.getImpl());
-    
+
             components.put(panelPerso.getImpl(), "film.view.panel.personal.title");
             tabInfos.addTab(getMessage("film.view.panel.personal.title"), panelPerso.getImpl());
-    
+
             builder.add(tabInfos, builder.gbcSet(0, 3, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 0, 0, 1.0, 1.0));
-    
+
             Managers.getManager(ILanguageManager.class).addInternationalizable(new TabTitleUpdater(tabInfos, components));
         }
-    
+
         /**
          * Build the internal panel sort.
          *
@@ -278,30 +280,30 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
             JXTitledPanel panelTri = new JThequeTitledPanel("film.view.panel.sort.title");
             panelTri.setBorder(new DropShadowBorder());
             panelTri.setTitleFont(panelTri.getTitleFont().deriveFont(Font.BOLD));
-    
+
             PanelBuilder builder = new JThequePanelBuilder();
-            
+
             JXHyperlink linkTriGenre = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.kind", SimpleData.DataType.KIND.getDataType())),
                     builder.gbcSet(0, 0, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriGenre.setClickedColor(linkTriGenre.getUnclickedColor());
-    
+
             JXHyperlink linkTriType = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.type", SimpleData.DataType.TYPE.getDataType())),
                     builder.gbcSet(0, 1, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriType.setClickedColor(linkTriType.getUnclickedColor());
-    
+
             JXHyperlink linkTriRealizer = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.realizer", IRealizersService.DATA_TYPE)),
                     builder.gbcSet(0, 2, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriRealizer.setClickedColor(linkTriRealizer.getUnclickedColor());
-    
+
             JXHyperlink linkTriYear = builder.add(new JXHyperlink(new AcSortFilm("film.view.actions.sort.year", "Year")),
                     builder.gbcSet(0, 3, GridBagUtils.NONE, GridBagUtils.BASELINE_LEADING, 0, 1, 1.0, 0.0));
             linkTriYear.setClickedColor(linkTriYear.getUnclickedColor());
-    
+
             panelTri.setContentContainer(builder.getPanel());
-    
+
             parent.add(panelTri, parent.gbcSet(0, 1, GridBagUtils.HORIZONTAL, GridBagUtils.FIRST_LINE_START, Constants.A_QUARTER, 0.0));
         }
-    
+
         /**
          * Build the internal panel list.
          *
@@ -311,32 +313,32 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
             JXTitledPanel panelList = new JThequeTitledPanel("film.view.panel.list.title");
             panelList.setBorder(new DropShadowBorder());
             panelList.setTitleFont(panelList.getTitleFont().deriveFont(Font.BOLD));
-    
+
             PanelBuilder builder = new JThequePanelBuilder();
-    
+
             setTreeModel(getSorter().createInitialModel(IFilmsService.DATA_TYPE));
-    
+
             initTree();
-    
+
             builder.addScrolled(getTree(), builder.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, 0, 0, 1.0, 1.0));
-    
+
             panelList.setContentContainer(builder.getPanel());
-    
+
             parent.add(panelList, parent.gbcSet(0, 0, GridBagUtils.BOTH, GridBagUtils.BASELINE_LEADING, Constants.A_QUARTER, 1.0));
         }
-    
+
         @Override
         public void setCurrent(Object object) {
-            org.jtheque.films.persistence.od.able.Film film = (org.jtheque.films.persistence.od.able.Film)object;
-            
+            org.jtheque.films.persistence.od.able.Film film = (org.jtheque.films.persistence.od.able.Film) object;
+
             panelFilm.setTitle(film.getDisplayableText());
-    
+
             fieldTitle.setText(film.getTitle());
-    
+
             if (film.getTheType() != null) {
                 modelType.setSelectedItem(film.getTheType());
             }
-    
+
             if (film.getImage() == null || film.getImage().length() == 0) {
                 panelImage.setImage(null);
             } else {
@@ -352,7 +354,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
             fieldTitle.setEnabled(enabled);
             buttonNewType.setEnabled(enabled);
             comboType.setEnabled(enabled);
-    
+
             panelKinds.setEnabled(enabled);
             panelActors.setEnabled(enabled);
             panelPerso.setEnabled(enabled);
@@ -362,11 +364,11 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
 
         @Override
         public void fillFormBean(FormBean formBean) {
-            IFilmFormBean fb = (IFilmFormBean)formBean;
-            
+            IFilmFormBean fb = (IFilmFormBean) formBean;
+
             fb.setTitle(fieldTitle.getText());
             fb.setType(modelType.getSelectedData());
-    
+
             panelActors.fillFilm(fb);
             panelPerso.fillFilm(fb);
             panelInfos.fillFilm(fb);
@@ -382,7 +384,7 @@ public final class FilmView extends AbstractPrincipalDelegatedView<AbstractPrinc
         public void validate(Collection<JThequeError> errors) {
             ConstraintManager.validate(Film.TITLE, fieldTitle.getText(), errors);
             ConstraintManager.validate(Film.TYPE, modelType, errors);
-    
+
             panelKinds.validate(errors);
             panelActors.validate(errors);
             panelPerso.validate(errors);

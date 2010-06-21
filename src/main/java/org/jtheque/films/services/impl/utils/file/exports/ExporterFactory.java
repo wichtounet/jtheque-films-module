@@ -50,6 +50,7 @@ public final class ExporterFactory {
      * Return the exporter for the spécific file type.
      *
      * @param fileType The file type.
+     *
      * @return The exporter or <code>null</code> if we don't find the exporter of the file type
      */
     public static Exporter<Film> getExporter(FileType fileType) {

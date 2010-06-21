@@ -40,18 +40,18 @@ public final class ActorsModel extends PrincipalDataModel<Person> implements IAc
 
     public ActorsModel() {
         super();
-        
+
         actorService = Managers.getManager(IBeansManager.class).getBean("actorService");
-        
+
         actorService.addDataListener(this);
     }
 
-	@Override
-	public Collection<Person> getDatas(){
-		return actorService.getDatas();
-	}
+    @Override
+    public Collection<Person> getDatas() {
+        return actorService.getDatas();
+    }
 
-	@Override
+    @Override
     public Person getCurrentActor() {
         return currentActor;
     }

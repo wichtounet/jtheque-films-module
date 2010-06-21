@@ -41,6 +41,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -51,18 +52,18 @@ public final class JPanelInfosKinds extends JPanel implements DataListener, IInf
     private final JButton buttonAdd;
     private final JButton buttonRemove;
     private final JButton buttonNew;
-    
+
     private final JList listKinds;
     private final JList listKindsForFilm;
 
     private final DataCachedContainerListModel<SimpleData> kindsModel;
     private final SimpleListModel<SimpleData> kindsForFilmModel;
-    
+
     private static final double AN_HALF = 0.5;
 
     public JPanelInfosKinds() {
         super();
-        
+
         PanelBuilder builder = new JThequePanelBuilder(this);
 
         kindsModel = new DataCachedContainerListModel<SimpleData>(CoreUtils.<DataContainer<SimpleData>>getBean("kindsService"));

@@ -41,7 +41,7 @@ public final class AcValidateLendView extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ILendController lendController = Managers.getManager(IBeansManager.class).getBean("lendController");
-        
+
         ILendFilmView view = lendController.getView();
 
         if (view.getSelectedBorrower() == null || view.getSelectedFilm() == null) {

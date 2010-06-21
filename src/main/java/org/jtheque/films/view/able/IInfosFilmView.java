@@ -5,6 +5,7 @@ import org.jtheque.films.view.impl.fb.IFilmFormBean;
 import org.jtheque.primary.view.impl.listeners.CurrentObjectListener;
 
 import javax.swing.JComponent;
+
 import java.util.Collection;
 
 /*

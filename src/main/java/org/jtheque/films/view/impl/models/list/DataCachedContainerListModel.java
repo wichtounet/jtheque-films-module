@@ -21,6 +21,7 @@ import org.jtheque.core.managers.persistence.able.DataListener;
 import org.jtheque.core.managers.persistence.able.Entity;
 
 import javax.swing.DefaultListModel;
+
 import java.util.ArrayList;
 import java.util.List;
 

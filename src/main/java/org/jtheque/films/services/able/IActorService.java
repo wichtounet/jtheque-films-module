@@ -34,6 +34,7 @@ public interface IActorService extends IPersonService {
      * Return the filmography of the actor.
      *
      * @param actor The actor.
+     *
      * @return The filmography of the actor.
      */
     Filmography getFilmography(Person actor);

@@ -24,6 +24,7 @@ import org.jtheque.films.view.able.IVideoFileView;
 import org.jtheque.films.view.able.IVideoView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 
 /**
@@ -46,7 +47,7 @@ public final class AcValidateVideoFileView extends JThequeAction {
      */
     public AcValidateVideoFileView() {
         super("video.file.view.actions.validate");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

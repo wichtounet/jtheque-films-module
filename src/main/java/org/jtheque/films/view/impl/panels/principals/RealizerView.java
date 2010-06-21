@@ -16,9 +16,6 @@ package org.jtheque.films.view.impl.panels.principals;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXHyperlink;
-import org.jdesktop.swingx.JXTitledPanel;
-import org.jdesktop.swingx.border.DropShadowBorder;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
@@ -49,12 +46,17 @@ import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
 import org.jtheque.primary.view.impl.renderers.NoteComboRenderer;
 import org.jtheque.utils.ui.GridBagUtils;
 
+import org.jdesktop.swingx.JXHyperlink;
+import org.jdesktop.swingx.JXTitledPanel;
+import org.jdesktop.swingx.border.DropShadowBorder;
+
 import javax.annotation.PostConstruct;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.event.TreeSelectionListener;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Collection;
@@ -97,7 +99,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView<AbstractP
     @PostConstruct
     public void init() {
         buildInEDT();
-        
+
         getModel().addCurrentObjectListener(this);
     }
 
@@ -126,7 +128,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView<AbstractP
             super(IRealizersService.DATA_TYPE);
 
             setModel(new RealizersModel());
-            
+
             newCountryAction = new CreateNewPrincipalAction("generic.view.actions.new", "realizersController");
         }
 
@@ -204,7 +206,7 @@ public final class RealizerView extends AbstractPrincipalDelegatedView<AbstractP
             builder.addI18nLabel(Constants.Properties.Person.COUNTRY, builder.gbcSet(0, 3));
 
             modelCountries = new DataContainerCachedComboBoxModel<SimpleData>(
-					Managers.getManager(IBeansManager.class).<DataContainer<SimpleData>>getBean("countriesService"));
+                    Managers.getManager(IBeansManager.class).<DataContainer<SimpleData>>getBean("countriesService"));
 
             comboCountries = builder.addComboBox(modelCountries, builder.gbcSet(1, 3));
             comboCountries.setEnabled(false);

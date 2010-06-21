@@ -39,6 +39,7 @@ public interface ICoverService {
      *
      * @param film   The film.
      * @param format The format.
+     *
      * @return The image.
      */
     Image getReportImage(Film film, Format format);

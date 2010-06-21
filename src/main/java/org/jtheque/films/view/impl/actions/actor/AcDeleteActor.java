@@ -41,7 +41,7 @@ public final class AcDeleteActor extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent event) {
         IActorController actorController = Managers.getManager(IBeansManager.class).getBean("actorController");
-        
+
         final boolean yes = Managers.getManager(IViewManager.class).askUserForConfirmation(
                 Managers.getManager(ILanguageManager.class).getMessage("actor.dialogs.confirmDelete",
                         actorController.getViewModel().getCurrentActor().getDisplayableText()),

@@ -16,6 +16,13 @@ package org.jtheque.films.services.impl.utils.file.exports;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import org.jtheque.core.managers.Managers;
+import org.jtheque.core.managers.log.ILoggingManager;
+import org.jtheque.films.persistence.od.able.Film;
+import org.jtheque.films.utils.Constants.Files.FileType;
+import org.jtheque.films.utils.Constants.Report;
+import org.jtheque.films.utils.ReportUtils;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -25,12 +32,6 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRTextExporter;
 import net.sf.jasperreports.engine.export.JRTextExporterParameter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import org.jtheque.core.managers.Managers;
-import org.jtheque.core.managers.log.ILoggingManager;
-import org.jtheque.films.persistence.od.able.Film;
-import org.jtheque.films.utils.Constants.Files.FileType;
-import org.jtheque.films.utils.Constants.Report;
-import org.jtheque.films.utils.ReportUtils;
 
 /**
  * An exporter to plain text file.

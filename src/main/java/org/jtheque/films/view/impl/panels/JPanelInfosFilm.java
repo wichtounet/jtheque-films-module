@@ -42,6 +42,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultFormatter;
+
 import java.text.NumberFormat;
 import java.util.Collection;
 
@@ -159,9 +160,9 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
 
         comboLanguage = builder.addComboBox(modelLanguage, builder.gbcSet(1, 3));
         comboLanguage.setEnabled(false);
-        
+
         buttonAddLanguage = builder.addButton(
-				new CreateNewPrincipalAction("generic.view.actions.new", "languageController"), builder.gbcSet(2, 3));
+                new CreateNewPrincipalAction("generic.view.actions.new", "languageController"), builder.gbcSet(2, 3));
         buttonAddLanguage.setEnabled(false);
     }
 
@@ -178,8 +179,8 @@ public final class JPanelInfosFilm extends JPanel implements IInfosFilmView {
         comboSaga = builder.addComboBox(modelSaga, builder.gbcSet(1, 4));
         comboSaga.setEnabled(false);
 
-        buttonAddSaga = builder.addButton(new CreateNewPrincipalAction("generic.view.actions.new", "sagaController"), 
-				builder.gbcSet(2, 4));
+        buttonAddSaga = builder.addButton(new CreateNewPrincipalAction("generic.view.actions.new", "sagaController"),
+                builder.gbcSet(2, 4));
         buttonAddSaga.setEnabled(false);
     }
 

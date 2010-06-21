@@ -22,9 +22,9 @@ import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
 import org.jtheque.core.utils.ui.Borders;
+import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
 import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
-import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
 import org.jtheque.films.services.impl.utils.config.Configuration;
 import org.jtheque.films.view.impl.actions.config.AcCheckLendings;
@@ -37,6 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import java.awt.Color;
 import java.util.Collection;
 

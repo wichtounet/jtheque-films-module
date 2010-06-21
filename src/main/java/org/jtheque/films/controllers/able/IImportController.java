@@ -38,10 +38,11 @@ public interface IImportController extends Controller {
      * Import Data from a file.
      *
      * @param filePath The path to the file.
+     *
      * @throws FileException If there is an I/O problem during the import.
      */
     void importData(String filePath) throws FileException;
-    
+
     @Override
     IImportView getView();
 }

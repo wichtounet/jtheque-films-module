@@ -39,6 +39,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -50,7 +51,7 @@ import java.util.HashSet;
 public final class JPanelInfosActors extends JPanel implements IInfosActorsView {
     private final JButton buttonAdd;
     private final JButton buttonRemove;
-    
+
     private final JList listActors;
     private final JList listActorsForFilm;
 
@@ -61,9 +62,8 @@ public final class JPanelInfosActors extends JPanel implements IInfosActorsView 
 
     /**
      * Construct a new JPanelInfosActors.
-     * 
      */
-    public JPanelInfosActors(){
+    public JPanelInfosActors() {
         super();
 
         PanelBuilder builder = new JThequePanelBuilder(this);

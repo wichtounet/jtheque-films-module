@@ -33,6 +33,7 @@ import org.jtheque.utils.DatabaseException;
 import org.jtheque.utils.DatabaseUtils;
 
 import javax.annotation.Resource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,7 +110,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the films.
      *
      * @param connection The connection.
+     *
      * @return The imported films.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<Film> importFilms(Connection connection) throws DatabaseException {
@@ -144,6 +147,7 @@ public final class DBV3BackupReader implements BackupReader {
      *
      * @param result The result set.
      * @param film   The film to fill.
+     *
      * @throws SQLException If an error occurs during the result set read.
      */
     private void importInformationsOfFilm(ResultSet result, Film film) throws SQLException {
@@ -163,6 +167,7 @@ public final class DBV3BackupReader implements BackupReader {
      *
      * @param connection The connection to get information from.
      * @param film       The film to get the informations for.
+     *
      * @throws DatabaseException If a database exception occurs during JDBC operations.
      */
     private static void importActorsOfFilm(Connection connection, Film film) throws DatabaseException {
@@ -188,7 +193,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the actors.
      *
      * @param connection The connection.
+     *
      * @return The imported actors.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<Person> importActors(Connection connection) throws DatabaseException {
@@ -225,7 +232,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the realizers.
      *
      * @param connection The connection.
+     *
      * @return The imported realizers.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<Person> importRealizers(Connection connection) throws DatabaseException {
@@ -262,7 +271,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the kinds.
      *
      * @param connection The connection.
+     *
      * @return The imported kinds.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<SimpleData> importKinds(Connection connection) throws DatabaseException {
@@ -296,7 +307,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the types.
      *
      * @param connection The connection.
+     *
      * @return The imported types.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<SimpleData> importTypes(Connection connection) throws DatabaseException {
@@ -330,7 +343,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the languages.
      *
      * @param connection The connection.
+     *
      * @return The imported languages.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<SimpleData> importLanguages(Connection connection) throws DatabaseException {
@@ -364,7 +379,9 @@ public final class DBV3BackupReader implements BackupReader {
      * Import the countries.
      *
      * @param connection The connection.
+     *
      * @return The imported countries.
+     *
      * @throws DatabaseException Thrown when an error occurs during the database data getting process.
      */
     private Collection<SimpleData> importCountries(Connection connection) throws DatabaseException {

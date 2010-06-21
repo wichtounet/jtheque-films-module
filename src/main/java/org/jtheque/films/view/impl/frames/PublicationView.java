@@ -17,6 +17,7 @@ import org.jtheque.utils.ui.SwingUtils;
 import javax.swing.Action;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -56,7 +57,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     /**
      * Construct a new Publication View.
      *
-     * @param parent         The parent frame.
+     * @param parent The parent frame.
      */
     public PublicationView(Frame parent) {
         super(parent);
@@ -77,7 +78,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
         I18nPanelBuilder builder = new JThequePanelBuilder();
 
         Action validateAction = new AcValidatePublicationView();
-        
+
         addPathFields(builder, validateAction);
         addAuthenticationFields(builder, validateAction);
         addPortField(builder, validateAction);
@@ -92,7 +93,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     /**
      * Add the field for the path.
      *
-     * @param builder The builder of the view.
+     * @param builder        The builder of the view.
      * @param validateAction
      */
     private void addPathFields(I18nPanelBuilder builder, Action validateAction) {
@@ -112,7 +113,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     /**
      * Add the field for the authentication.
      *
-     * @param builder The builder of the view.
+     * @param builder        The builder of the view.
      * @param validateAction
      */
     private void addAuthenticationFields(I18nPanelBuilder builder, Action validateAction) {
@@ -131,7 +132,7 @@ public final class PublicationView extends SwingDialogView implements IPublicati
     /**
      * Add the field for the port.
      *
-     * @param builder The builder of the view.
+     * @param builder        The builder of the view.
      * @param validateAction
      */
     private void addPortField(I18nPanelBuilder builder, Action validateAction) {

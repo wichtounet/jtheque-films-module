@@ -27,10 +27,12 @@ import org.jtheque.primary.dao.able.IDaoLendings;
 import org.jtheque.primary.dao.able.IDaoPersons;
 import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.bean.Version;
+
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import javax.annotation.Resource;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

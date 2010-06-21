@@ -23,6 +23,7 @@ import org.jtheque.films.view.able.IInfosKindsView;
 import org.jtheque.utils.collections.ArrayUtils;
 
 import javax.swing.DefaultListModel;
+
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
@@ -44,7 +45,7 @@ public final class AcAddKindToList extends JThequeSimpleAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         IInfosKindsView kindsView = Managers.getManager(IBeansManager.class).getBean("filmKindsView");
-        
+
         DefaultListModel kindsModel = kindsView.getKindsModel();
         DefaultListModel kindsForFilmModel = kindsView.getKindsForFilmModel();
 

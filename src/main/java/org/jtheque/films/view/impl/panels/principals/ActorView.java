@@ -16,9 +16,6 @@ package org.jtheque.films.view.impl.panels.principals;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdesktop.swingx.JXHyperlink;
-import org.jdesktop.swingx.JXTitledPanel;
-import org.jdesktop.swingx.border.DropShadowBorder;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
@@ -50,10 +47,19 @@ import org.jtheque.primary.view.impl.models.NotesComboBoxModel;
 import org.jtheque.primary.view.impl.renderers.NoteComboRenderer;
 import org.jtheque.utils.ui.GridBagUtils;
 
+import org.jdesktop.swingx.JXHyperlink;
+import org.jdesktop.swingx.JXTitledPanel;
+import org.jdesktop.swingx.border.DropShadowBorder;
+
 import javax.annotation.PostConstruct;
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.TreeSelectionListener;
-import java.awt.*;
+
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Collection;
 
 /**
@@ -70,7 +76,7 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
 
         UIManager.put("JXTitledPanel.title.foreground", Color.white);
     }
-    
+
     @Override
     public IPersonFormBean fillActorFormBean() {
         IPersonFormBean fb = new PersonFormBean();
@@ -91,12 +97,12 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         buildInEDT();
-        
+
         getModel().addCurrentObjectListener(this);
     }
-    
+
     @Override
     protected void buildDelegatedView() {
         ActorViewImpl impl = new ActorViewImpl();
@@ -106,11 +112,11 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
 
     private static final class ActorViewImpl extends AbstractPrincipalDataPanel<IActorsModel> {
         private static final int FIELD_COLUMNS = 20;
-        
+
         private final Action newCountryAction;
-        
+
         private JXTitledPanel actorPanel;
-    
+
         private JTextField fieldFirstName;
         private JTextField fieldName;
         private DataContainerCachedComboBoxModel<SimpleData> modelCountries;
@@ -120,9 +126,9 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
 
         private ActorViewImpl() {
             super(IActorService.DATA_TYPE);
-            
+
             setModel(new ActorsModel());
-            
+
             newCountryAction = new CreateNewPrincipalAction("generic.view.actions.new", "countryController");
         }
 
@@ -160,9 +166,9 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
             I18nPanelBuilder builder = new JThequePanelBuilder();
 
             JPanelActorToolBar toolBar = new JPanelActorToolBar();
-            
+
             setToolBar(toolBar);
-            
+
             builder.add(toolBar, builder.gbcSet(0, 0, GridBagUtils.HORIZONTAL, 0, 1));
 
             addFirstNameField(builder);
@@ -210,7 +216,7 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
             builder.addI18nLabel(Constants.Properties.Person.COUNTRY, builder.gbcSet(0, 3));
 
             modelCountries = new DataContainerCachedComboBoxModel<SimpleData>(
-					CoreUtils.<DataContainer<SimpleData>>getBean("countriesService"));
+                    CoreUtils.<DataContainer<SimpleData>>getBean("countriesService"));
 
             comboCountries = builder.addComboBox(modelCountries, builder.gbcSet(1, 3));
             comboCountries.setEnabled(false);
@@ -285,7 +291,7 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
 
         @Override
         public void fillFormBean(FormBean formBean) {
-            IPersonFormBean fb = (IPersonFormBean)formBean;
+            IPersonFormBean fb = (IPersonFormBean) formBean;
 
             fb.setName(fieldName.getText());
             fb.setFirstName(fieldFirstName.getText());
@@ -296,11 +302,11 @@ public final class ActorView extends AbstractPrincipalDelegatedView<AbstractPrin
         @Override
         public void setCurrent(Object object) {
             Person current = (Person) object;
-            
+
             assert current.getType().equals(IActorService.PERSON_TYPE) : "The person must of type Actor";
 
             actorPanel.setTitle(current.getDisplayableText());
-    
+
             fieldFirstName.setText(current.getFirstName());
             fieldName.setText(current.getName());
             modelCountries.setSelectedItem(current.getTheCountry());

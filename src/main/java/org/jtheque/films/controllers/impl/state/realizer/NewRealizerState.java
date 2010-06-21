@@ -72,7 +72,7 @@ public final class NewRealizerState extends AbstractControllerState {
         realizersService.create(realizer);
 
         Managers.getManager(IUndoRedoManager.class).addEdit(
-				new GenericDataDeletedEdit<Person>("realizersService", realizer));
+                new GenericDataDeletedEdit<Person>("realizersService", realizer));
 
         controller.getView().resort();
 

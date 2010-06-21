@@ -36,6 +36,7 @@ import org.jtheque.utils.io.FileException;
 import org.jtheque.utils.io.FileUtils;
 
 import javax.annotation.Resource;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -114,6 +115,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private static void readHeader(DataInputStream stream, JTNotZippedFile file) throws IOException {
@@ -130,6 +132,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readFilm(DataInputStream stream, JTFFile file) throws IOException {
@@ -150,6 +153,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readActors(DataInputStream stream, JTFFile file) throws IOException {
@@ -191,6 +195,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readRealizer(DataInputStream stream, JTFFile file) throws IOException {
@@ -216,6 +221,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readLanguage(DataInputStream stream, JTFFile file) throws IOException {
@@ -237,6 +243,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readKinds(DataInputStream stream, JTFFile file) throws IOException {
@@ -252,6 +259,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readOneKind(DataInputStream stream, JTFFile file) throws IOException {
@@ -277,6 +285,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readMultipleKinds(DataInputStream stream, JTFFile file) throws IOException {
@@ -315,6 +324,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readType(DataInputStream stream, JTFFile file) throws IOException {
@@ -336,6 +346,7 @@ public final class JTFFileReader extends JTFileReader {
      *
      * @param stream The stream to read from.
      * @param file   The file to read.
+     *
      * @throws IOException Thrown if an exception occurs during the write process.
      */
     private void readCountries(DataInputStream stream, JTFFile file) throws IOException {

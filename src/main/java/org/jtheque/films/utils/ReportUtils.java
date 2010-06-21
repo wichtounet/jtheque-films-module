@@ -1,9 +1,5 @@
 package org.jtheque.films.utils;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.films.services.impl.utils.file.exports.datasources.FilmsDatasource;
@@ -14,6 +10,11 @@ import org.jtheque.films.utils.Constants.Report.Form001_Parameters;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 /*
  * This file is part of JTheque.
@@ -49,7 +50,9 @@ public final class ReportUtils {
      *
      * @param jasperReport The report.
      * @param films        The films to include.
+     *
      * @return The jasper print.
+     *
      * @throws JRException Jasper could throw this exception.
      */
     public static JasperPrint configureForm001(JasperReport jasperReport, Collection<org.jtheque.films.persistence.od.able.Film> films) throws JRException {

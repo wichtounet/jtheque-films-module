@@ -20,6 +20,7 @@ import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.log.ILoggingManager;
 
 import javax.swing.AbstractSpinnerModel;
+
 import java.util.regex.Pattern;
 
 /**

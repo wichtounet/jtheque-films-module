@@ -16,8 +16,8 @@ package org.jtheque.films.persistence.od.able;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jtheque.films.persistence.od.impl.FilmTemporaryContext;
 import org.jtheque.core.managers.collection.Collection;
+import org.jtheque.films.persistence.od.impl.FilmTemporaryContext;
 import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Lending;
 import org.jtheque.primary.od.able.Notable;
@@ -303,6 +303,7 @@ public interface Film extends Data, Notable {
      * Indicate if the film contains the specified actor or not.
      *
      * @param actor The actor to to test for contains.
+     *
      * @return <code>true</code> if the film contains the actor else <code>false</code>.
      */
     boolean containsActor(Person actor);
@@ -311,6 +312,7 @@ public interface Film extends Data, Notable {
      * Indicate if the film contains the specified kind or not.
      *
      * @param kind The kind to to test for contains.
+     *
      * @return <code>true</code> if the film contains the kind else <code>false</code>.
      */
     boolean containsKind(SimpleData kind);

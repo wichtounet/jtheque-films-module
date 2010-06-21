@@ -43,11 +43,11 @@ public final class ImportView extends SwingDialogView implements IImportView {
     /**
      * Construct a new <code>JFrameImport</code>.
      *
-     * @param parent         The parent frame.
+     * @param parent The parent frame.
      */
     public ImportView(Frame parent) {
         super(parent);
-        
+
         setResizable(false);
         setTitleKey("import.view.title");
         setContentPane(buildContentPane());

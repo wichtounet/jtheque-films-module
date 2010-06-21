@@ -17,6 +17,7 @@ import org.jtheque.utils.ui.SwingUtils;
 
 import javax.swing.Action;
 import javax.swing.JComponent;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -47,7 +48,7 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
     /**
      * Construct a new VideoFileView modal to his parent view.
      *
-     * @param parent         The parent frame.
+     * @param parent The parent frame.
      */
     public VideoFileView(Frame parent) {
         super(parent);
@@ -67,7 +68,7 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
         I18nPanelBuilder builder = new JThequePanelBuilder();
 
         Action validateAction = new AcValidateVideoFileView();
-        
+
         fieldFile = new FileChooserPanel();
         fieldFile.setTextKey("video.file.view.file");
         SwingUtils.addFieldValidateAction(fieldFile, validateAction);
@@ -81,7 +82,7 @@ public final class VideoFileView extends SwingDialogView implements IVideoFileVi
         JComponent combo = builder.addComboBox(model, builder.gbcSet(1, 1));
         SwingUtils.addFieldValidateAction(combo, validateAction);
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 2, 1), 
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 2, 1),
                 validateAction, new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();

@@ -24,6 +24,7 @@ import org.jtheque.films.services.impl.utils.EditArguments;
 import org.jtheque.films.view.able.IChoiceFieldsView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 
 /**
@@ -43,7 +44,7 @@ public final class AcValidateChoiceFieldsView extends JThequeAction {
      */
     public AcValidateChoiceFieldsView() {
         super("generic.view.actions.validate");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

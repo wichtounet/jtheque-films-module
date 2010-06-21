@@ -40,7 +40,7 @@ public final class AcDeleteTitle extends JThequeAction {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         IAutoImportView autoImportView = Managers.getManager(IBeansManager.class).getBean("autoImportView");
-        
+
         String title = autoImportView.getSelectedTitle();
 
         if (!StringUtils.isEmpty(title)) {

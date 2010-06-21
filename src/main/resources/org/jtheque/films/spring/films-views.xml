@@ -98,16 +98,16 @@
 
     <!-- Panels -->
 
-    <bean id="_actorView" class="org.jtheque.films.view.impl.panels.principals.ActorView" />
-    <bean id="_filmView" class="org.jtheque.films.view.impl.panels.principals.FilmView" />
-    <bean id="_realizerView" class="org.jtheque.films.view.impl.panels.principals.RealizerView" />
+    <bean id="_actorView" class="org.jtheque.films.view.impl.panels.principals.ActorView"/>
+    <bean id="_filmView" class="org.jtheque.films.view.impl.panels.principals.FilmView"/>
+    <bean id="_realizerView" class="org.jtheque.films.view.impl.panels.principals.RealizerView"/>
 
-    <bean id="filmActorsView" class="org.jtheque.films.view.impl.panels.JPanelInfosActors" />
-    <bean id="filmInfosView" class="org.jtheque.films.view.impl.panels.JPanelInfosFilm" />
-    <bean id="filmKindsView" class="org.jtheque.films.view.impl.panels.JPanelInfosKinds" />
+    <bean id="filmActorsView" class="org.jtheque.films.view.impl.panels.JPanelInfosActors"/>
+    <bean id="filmInfosView" class="org.jtheque.films.view.impl.panels.JPanelInfosFilm"/>
+    <bean id="filmKindsView" class="org.jtheque.films.view.impl.panels.JPanelInfosKinds"/>
     <bean id="filmOthersView" class="org.jtheque.films.view.impl.panels.JPanelInfosOthers"/>
     <bean id="filmPersoView" class="org.jtheque.films.view.impl.panels.JPanelInfosPerso"/>
-    
+
     <!-- Search Panels -->
 
     <bean id="actorSearchPanel" class="org.jtheque.films.view.impl.panels.search.JPanelActorSearch"/>

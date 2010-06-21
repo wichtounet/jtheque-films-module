@@ -29,8 +29,8 @@ import org.jtheque.primary.od.able.Data;
  */
 public interface ISearchController extends Controller {
     /**
-     * Execute the search. Function of the preview mode, we display the results directly in the principal view
-     * or in the search view.
+     * Execute the search. Function of the preview mode, we display the results directly in the principal view or in the
+     * search view.
      *
      * @param research The search to execute.
      */

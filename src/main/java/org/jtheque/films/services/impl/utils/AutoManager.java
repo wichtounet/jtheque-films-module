@@ -25,6 +25,7 @@ import org.jtheque.films.services.impl.utils.web.FilmResult;
 import org.jtheque.films.utils.Constants.Site;
 
 import javax.annotation.Resource;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,6 +68,7 @@ public final class AutoManager {
      * @param titles  The films titles.
      * @param webMode The mode to fill the films.
      * @param site    The site to get the informations from.
+     *
      * @return A list containing all the films.
      */
     public Collection<Film> getFilmsOfFolder(Collection<String> titles, boolean webMode, Site site) {
@@ -110,6 +112,7 @@ public final class AutoManager {
      *
      * @param folder   The folder
      * @param fileMode The file mode.
+     *
      * @return A List containing all the titles of the film.
      */
     public Collection<String> getFilmTitles(File folder, boolean fileMode) {

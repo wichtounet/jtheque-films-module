@@ -21,8 +21,6 @@ import org.jtheque.films.view.impl.models.able.IActorsModel;
 import org.jtheque.primary.controller.able.IPrincipalController;
 import org.jtheque.primary.od.able.Person;
 
-import javax.swing.event.TreeSelectionListener;
-
 /**
  * An actor controller specification.
  *

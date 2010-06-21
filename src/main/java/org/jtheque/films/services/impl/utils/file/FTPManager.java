@@ -1,13 +1,14 @@
 package org.jtheque.films.services.impl.utils.file;
 
-import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPConnectionClosedException;
-import org.apache.commons.net.ftp.FTPReply;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.log.ILoggingManager;
 import org.jtheque.core.utils.Response;
 import org.jtheque.utils.io.FileUtils;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPConnectionClosedException;
+import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -112,6 +113,7 @@ public final class FTPManager {
      *
      * @param local  The local file.
      * @param remote The remote file.
+     *
      * @return The response of the store.
      */
     public Response upload(String local, String remote) {

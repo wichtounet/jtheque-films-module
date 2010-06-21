@@ -37,6 +37,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
@@ -49,7 +50,7 @@ public final class JPanelFilmToolBar extends JPanel implements ToolbarView {
     private final JDropDownButton buttonAdd;
     private final JDropDownButton buttonEdit;
     private final JDropDownButton buttonOther;
-    
+
     private final JButton buttonSave;
     private final JButton buttonCancel;
     private final JButton buttonDelete;
@@ -60,10 +61,10 @@ public final class JPanelFilmToolBar extends JPanel implements ToolbarView {
 
     public JPanelFilmToolBar() {
         super();
-        
+
         setBackground(Color.white);
         setBorder(Borders.DIALOG_BORDER);
-        
+
         buttonSave = new JButton(new AcSaveFilm());
         buttonCancel = new JButton(new AcCancel());
         buttonDelete = new JButton(new AcDelete());
@@ -80,7 +81,7 @@ public final class JPanelFilmToolBar extends JPanel implements ToolbarView {
             addOtherModesButton();
         }
     }
-    
+
     /**
      * Set the display mode.
      *

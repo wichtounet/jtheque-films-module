@@ -66,6 +66,7 @@ public interface IAutoAddView extends IWindowView {
      * Validate the content of the view.
      *
      * @param phase The current process phase.
+     *
      * @return The result of the validation.
      */
     boolean validateContent(int phase);

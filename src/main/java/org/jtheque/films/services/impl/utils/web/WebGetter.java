@@ -34,6 +34,7 @@ public interface WebGetter {
      * Indicate if the web getter can get informations on the site.
      *
      * @param site The site we must test if the getter can get on.
+     *
      * @return <code>true</code> if the getter can search on the site else <code>false</code>.
      */
     boolean canGetOn(Site site);
@@ -70,6 +71,7 @@ public interface WebGetter {
      * Return all the films on the site for the search.
      *
      * @param search The research.
+     *
      * @return A list containing all the films on the site corresponding to the search.
      */
     Collection<FilmResult> getFilms(String search);
@@ -80,6 +82,7 @@ public interface WebGetter {
      * @param search The search for the film.
      * @param film   The film to modify or <code>null</code> if this is only a get.
      * @param args   The arguments to specify what we must modify or only null if this only a get.
+     *
      * @return The film modified or a new film if there is no film to modify. .
      */
     Film getFilm(FilmResult search, Film film, EditArguments args);

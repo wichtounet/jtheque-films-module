@@ -19,6 +19,7 @@ import org.jtheque.primary.utils.web.analyzers.generic.operation.ScannerPossesso
 import org.jtheque.primary.utils.web.analyzers.generic.transform.Transformer;
 
 import javax.annotation.Resource;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -280,6 +281,7 @@ public final class GenericWebGetter extends AbstractWebGetter implements Scanner
      * Open a connection to the URL.
      *
      * @param url The URL to open connection to.
+     *
      * @throws IOException If an error occurs during opening the connection to the URL.
      */
     private void openConnectionToURL(String url) throws IOException {

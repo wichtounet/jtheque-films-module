@@ -8,7 +8,7 @@
             http://www.jtheque.com/schema/jtheque
             http://www.jtheque.com/schema/jtheque/jtheque.xsd"
        default-lazy-init="true">
-    
+
     <jtheque:display id="openAutoImportViewAction" key="menu.jtheque.import.folder" view="autoImportView"/>
 
     <jtheque:display id="openCoverViewAction" key="cover.view.actions.open" view="coverView"/>
@@ -17,7 +17,7 @@
 
     <bean id="removeKindFromList" class="org.jtheque.films.view.impl.actions.film.AcRemoveKindFromList"/>
     <bean id="addKindToList" class="org.jtheque.films.view.impl.actions.film.AcAddKindToList"/>
-    
+
     <jtheque:display id="openLendingsViewAction" key="jtheque.actions.lendings" view="lendingsView"/>
 
     <bean id="refreshListAction" class="org.jtheque.films.view.impl.actions.jtheque.AcRefreshList"/>
@@ -92,13 +92,13 @@
     <bean id="newLanguageMenuAction" class="org.jtheque.primary.view.impl.actions.language.AcNewLanguage">
         <constructor-arg value="Property:jtheque.actions.language"/>
     </bean>
-    
+
     <jtheque:display id="lendFilmAction" key="lendings.view.actions.lend" view="lendFilmView"/>
-    
+
     <bean id="returnFilmAction" class="org.jtheque.films.view.impl.actions.lendings.ReturnFilmAction"/>
 
     <jtheque:display id="openPublicationViewAction" key="publication.view.actions.open" view="publicationView"/>
-    
+
     <bean id="searchFilmAction" class="org.jtheque.films.view.impl.actions.film.AcSearchFilm"/>
     <bean id="searchActorAction" class="org.jtheque.films.view.impl.actions.actor.AcSearchActor"/>
     <bean id="searchRealizerAction" class="org.jtheque.films.view.impl.actions.realizer.AcSearchRealizer"/>
@@ -142,14 +142,14 @@
     <bean id="editSagaMenuAction" class="org.jtheque.primary.view.impl.actions.saga.AcEditSaga">
         <constructor-arg value="actions.saga"/>
     </bean>
-    
+
     <bean id="newBorrowerAction" class="org.jtheque.primary.view.impl.actions.borrower.AcNewBorrower">
         <constructor-arg value="generic.view.actions.new"/>
     </bean>
-    
+
     <bean id="newSagaAction" class="org.jtheque.primary.view.impl.actions.saga.NewSagaAction"/>
     <jtheque:display id="newTypeAction" key="type.actions.new" view="typeView"/>
-    
+
     <bean id="editTypeAction" class="org.jtheque.primary.view.impl.actions.type.AcEditType"/>
     <bean id="deleteTypeAction" class="org.jtheque.primary.view.impl.actions.type.AcDeleteType"/>
 </beans>

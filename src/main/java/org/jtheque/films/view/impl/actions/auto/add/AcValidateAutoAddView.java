@@ -25,6 +25,7 @@ import org.jtheque.films.controllers.able.IAutoAddController;
 import org.jtheque.films.view.able.IAutoAddView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 
 /**
@@ -41,7 +42,7 @@ public final class AcValidateAutoAddView extends JThequeAction {
      */
     public AcValidateAutoAddView() {
         super("generic.view.actions.ok");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

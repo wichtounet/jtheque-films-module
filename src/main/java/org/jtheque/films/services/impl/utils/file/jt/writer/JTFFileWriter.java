@@ -78,6 +78,7 @@ public final class JTFFileWriter extends JTFileWriter {
      *
      * @param stream     The stream to write to.
      * @param dataSource The data source.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeHeader(DataOutputStream stream, BasicDataSource dataSource) throws IOException {
@@ -95,6 +96,7 @@ public final class JTFFileWriter extends JTFileWriter {
      * @param stream    The stream to write to.
      * @param film      The film.
      * @param countries The countries.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeActors(DataOutputStream stream, Film film, Collection<SimpleData> countries) throws IOException {
@@ -130,6 +132,7 @@ public final class JTFFileWriter extends JTFileWriter {
      * @param stream    The stream to write to.
      * @param film      The film.
      * @param countries The countries.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeRealizer(DataOutputStream stream, Film film, Collection<SimpleData> countries) throws IOException {
@@ -158,6 +161,7 @@ public final class JTFFileWriter extends JTFileWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeLanguage(DataOutputStream stream, Film film) throws IOException {
@@ -177,6 +181,7 @@ public final class JTFFileWriter extends JTFileWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeKinds(DataOutputStream stream, Film film) throws IOException {
@@ -206,6 +211,7 @@ public final class JTFFileWriter extends JTFileWriter {
      *
      * @param stream The stream to write to.
      * @param film   The film.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeType(DataOutputStream stream, Film film) throws IOException {
@@ -225,6 +231,7 @@ public final class JTFFileWriter extends JTFileWriter {
      *
      * @param stream    The stream to write to.
      * @param countries The countries to write.
+     *
      * @throws IOException Thrown if an error occurs during the stream writing.
      */
     private static void writeCountries(DataOutputStream stream, Collection<SimpleData> countries) throws IOException {

@@ -33,6 +33,7 @@ public interface IAutoImportService {
      *
      * @param folder   The folder to search in.
      * @param fileMode The fileMode. If true, we search for filename, else for directory name.
+     *
      * @return A List containing all the titles found in the folder.
      */
     Collection<String> getFilmTitles(File folder, boolean fileMode);
@@ -41,8 +42,10 @@ public interface IAutoImportService {
      * Import the films titles.
      *
      * @param titles  All the titles to search.
-     * @param webMode The mode. If true, all the informations are extracted from internet, else the film are simply created but not filled.
+     * @param webMode The mode. If true, all the informations are extracted from internet, else the film are simply
+     *                created but not filled.
      * @param site    The site to search in.
+     *
      * @return A List containing all the films.
      */
     Collection<Film> importFilms(Collection<String> titles, boolean webMode, Site site);

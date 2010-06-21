@@ -77,7 +77,7 @@ public final class ViewRealizerState extends AbstractControllerState {
 
         if (deleted) {
             Managers.getManager(IUndoRedoManager.class).addEdit(
-					new GenericDataDeletedEdit<Person>("realizersService", getViewModel().getCurrentRealizer()));
+                    new GenericDataDeletedEdit<Person>("realizersService", getViewModel().getCurrentRealizer()));
 
             controller.getView().selectFirst();
         }

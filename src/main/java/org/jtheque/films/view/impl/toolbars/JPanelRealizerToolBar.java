@@ -31,6 +31,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 
@@ -54,10 +55,10 @@ public final class JPanelRealizerToolBar extends JPanel implements ToolbarView {
 
     public JPanelRealizerToolBar() {
         super();
-        
+
         setBackground(Color.white);
         setBorder(Borders.DIALOG_BORDER);
-        
+
         buttonSave = new JButton(new AcSaveRealizer());
         buttonCancel = new JButton(new AcCancelRealizer());
         buttonDelete = new JButton(new AcDeleteRealizer());

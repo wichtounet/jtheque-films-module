@@ -31,7 +31,6 @@ import java.awt.event.ActionEvent;
 public final class AcNewRealizer extends JThequeAction {
     /**
      * Construct a new AcNewRealizer.
-     *  
      */
     public AcNewRealizer() {
         super("generic.view.actions.add");

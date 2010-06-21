@@ -38,6 +38,7 @@ public interface Searcher<T> {
      * Search the results of the search.
      *
      * @param datas The datas
+     *
      * @return The results
      */
     Collection<T> search(Collection<T> datas);

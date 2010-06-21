@@ -25,6 +25,7 @@ import org.jtheque.films.services.able.IAutoImportService;
 import org.jtheque.films.view.able.IAutoImportView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Collection;
@@ -46,7 +47,7 @@ public final class AcSearchTitles extends JThequeAction {
      */
     public AcSearchTitles() {
         super("generic.view.actions.search");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

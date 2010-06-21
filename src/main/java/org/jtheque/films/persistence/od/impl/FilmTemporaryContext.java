@@ -45,8 +45,8 @@ public final class FilmTemporaryContext extends TemporaryContext {
     }
 
     /**
-     * Sets the temporary note. The temporary note is used while importation to link note and
-     * film when there are not completely loaded.
+     * Sets the temporary note. The temporary note is used while importation to link note and film when there are not
+     * completely loaded.
      *
      * @param intNote The temporary note.
      */

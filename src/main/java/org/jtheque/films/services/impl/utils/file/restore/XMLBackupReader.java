@@ -16,9 +16,6 @@ package org.jtheque.films.services.impl.utils.file.restore;
  * along with JTheque.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.file.able.BackupReader;
@@ -38,7 +35,12 @@ import org.jtheque.primary.services.able.IPersonService;
 import org.jtheque.primary.services.able.ISimpleDataService;
 import org.jtheque.utils.bean.IntDate;
 
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.xpath.XPath;
+
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -123,6 +125,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the languages in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readLanguages(Element root) throws JDOMException {
@@ -143,6 +146,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the countries in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readCountries(Element root) throws JDOMException {
@@ -163,6 +167,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the kinds in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readKinds(Element root) throws JDOMException {
@@ -183,6 +188,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the types in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readTypes(Element root) throws JDOMException {
@@ -203,6 +209,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the borrowers in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readBorrowers(Element root) throws JDOMException {
@@ -225,6 +232,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the realizers in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readRealizers(Element root) throws JDOMException {
@@ -249,6 +257,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the actors in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readActors(Element root) throws JDOMException {
@@ -273,6 +282,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the films in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException         This exception is throwed when an error occurs during the xml reading process.
      * @throws NumberFormatException This exception is throwed when an error occurs during the parse process.
      */
@@ -297,6 +307,7 @@ public final class XMLBackupReader implements BackupReader {
      *
      * @param filmElement The XML film element.
      * @param film        The film to fill.
+     *
      * @throws JDOMException If an error occurs during the XML reading.
      */
     private void readValuesOfFilm(Object filmElement, Film film) throws JDOMException {
@@ -320,6 +331,7 @@ public final class XMLBackupReader implements BackupReader {
      *
      * @param filmElement The XML film element.
      * @param film        The film to fill.
+     *
      * @throws JDOMException If an error occurs during the XML reading.
      */
     private void readActorsOfFilm(Object filmElement, Film film) throws JDOMException {
@@ -338,6 +350,7 @@ public final class XMLBackupReader implements BackupReader {
      *
      * @param filmElement The XML film element.
      * @param film        The film to fill.
+     *
      * @throws JDOMException If an error occurs during the XML reading.
      */
     private void readKindsOfFilm(Object filmElement, Film film) throws JDOMException {
@@ -355,6 +368,7 @@ public final class XMLBackupReader implements BackupReader {
      * Read all the lendings in the root element.
      *
      * @param root The root element.
+     *
      * @throws JDOMException This exception is throwed when an error occurs during the xml reading process.
      */
     private void readLendings(Element root) throws JDOMException {

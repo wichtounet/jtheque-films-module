@@ -27,6 +27,7 @@ import org.jtheque.films.services.able.IFilmsService;
 import org.jtheque.films.view.able.IAutoImportView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 
@@ -50,7 +51,7 @@ public final class AcValidateAutoImportView extends JThequeAction {
      */
     public AcValidateAutoImportView() {
         super("auto.import.view.actions.import");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

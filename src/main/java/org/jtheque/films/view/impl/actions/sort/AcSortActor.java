@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
  */
 public final class AcSortActor extends JThequeSimpleAction {
     private final String sortType;
-    
+
     /**
      * Construct a new AcSortActor.
      *

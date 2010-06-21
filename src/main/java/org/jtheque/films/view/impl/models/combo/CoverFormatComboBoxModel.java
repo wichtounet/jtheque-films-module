@@ -35,7 +35,7 @@ public final class CoverFormatComboBoxModel extends SimpleComboBoxModel<Format> 
         super();
 
         ICoverService coverService = CoreUtils.getBean("coverService");
-        
+
         setElements(coverService.getFormats());
     }
 

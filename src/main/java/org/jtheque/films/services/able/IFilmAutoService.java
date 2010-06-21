@@ -34,6 +34,7 @@ public interface IFilmAutoService {
      *
      * @param site   The site to search in.
      * @param search The film search.
+     *
      * @return A List containing all the films found on the site for the search.
      */
     Collection<FilmResult> getFilms(Site site, String search);
@@ -51,6 +52,7 @@ public interface IFilmAutoService {
      * Fill a film with the information of the film result and return it.
      *
      * @param filmResult The fim result to get the information from.
+     *
      * @return A film filled with the information of the site.
      */
     Film getFilm(FilmResult filmResult);

@@ -33,6 +33,7 @@ import org.jtheque.films.view.impl.panels.search.JPanelSearch;
 import org.jtheque.primary.od.able.Data;
 
 import javax.annotation.PostConstruct;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;

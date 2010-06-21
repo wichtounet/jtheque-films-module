@@ -35,6 +35,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
+
 import java.util.Collection;
 
 /**
@@ -48,9 +49,9 @@ public final class JPanelInfosPerso extends JPanel implements IInfosPersoView {
     private final JTextArea areaComment;
 
     /**
-     * Construct a new JPanelInfosPerso. 
+     * Construct a new JPanelInfosPerso.
      */
-    public JPanelInfosPerso(){
+    public JPanelInfosPerso() {
         super();
 
         I18nPanelBuilder builder = new JThequePanelBuilder(this);

@@ -37,6 +37,7 @@ import org.jtheque.utils.io.SimpleFilter;
 import org.jtheque.utils.print.PrintUtils;
 
 import javax.annotation.Resource;
+
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
@@ -55,7 +56,7 @@ public final class FilmController extends PrincipalController<Film> implements I
     private final SimpleFilter imagesFilter = new SimpleFilter("Images(*.jpg,*.png)", ".jpg,.png,.gif");
 
     public FilmController(ControllerState viewState, ControllerState modifyState,
-                          ControllerState newObjectState, ControllerState autoAddState){
+                          ControllerState newObjectState, ControllerState autoAddState) {
         super(viewState, modifyState, newObjectState, autoAddState);
     }
 

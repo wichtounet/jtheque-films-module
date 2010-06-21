@@ -41,7 +41,7 @@ public final class AcUpdateCover extends JThequeAction {
     public void actionPerformed(ActionEvent e) {
         ICoverService coverService = Managers.getManager(IBeansManager.class).getBean("coverService");
         ICoverView coverView = Managers.getManager(IBeansManager.class).getBean("coverView");
-        
+
         coverView.display(coverService.getReportImage(coverView.getSelectedFilm(), coverView.getSelectedFormat()));
     }
 }

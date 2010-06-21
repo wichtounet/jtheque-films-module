@@ -29,6 +29,7 @@ public interface Importer {
      * Indicate if the importer can import from the specified file type.
      *
      * @param fileType The file type.
+     *
      * @return <code>true</code> if the importer can import from this file type else <code>false</code>.
      */
     boolean canImportFrom(FileType fileType);
@@ -37,6 +38,7 @@ public interface Importer {
      * Import all the data from the file.
      *
      * @param filePath The path to the file.
+     *
      * @throws FileException This exception is throwed when the import cannot be correctly.
      */
     void importFrom(String filePath) throws FileException;

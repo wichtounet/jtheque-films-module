@@ -17,8 +17,8 @@ package org.jtheque.films.services.impl.utils;
  */
 
 /**
- * This class is a bean representing the arguments of an automatic edit. It seems the fields who want to
- * automatically edit.
+ * This class is a bean representing the arguments of an automatic edit. It seems the fields who want to automatically
+ * edit.
  *
  * @author Baptiste Wicht
  */

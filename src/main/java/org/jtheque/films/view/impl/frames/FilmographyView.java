@@ -27,6 +27,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.swing.JTextPane;
 import javax.swing.text.html.HTMLEditorKit;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -85,6 +86,7 @@ public final class FilmographyView extends SwingDialogView implements IFilmograp
      * Return the content pane initialized.
      *
      * @param filmo The filmography we want to display.
+     *
      * @return The content pane.
      */
     private Container buildContentPane(Filmography filmo) {

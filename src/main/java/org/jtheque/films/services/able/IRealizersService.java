@@ -55,6 +55,7 @@ public interface IRealizersService extends DataContainer<Person> {
      * Delete the realizer.
      *
      * @param realizer The realizer to delete.
+     *
      * @return true if the realizer has been deleted else false.
      */
     boolean delete(Person realizer);
@@ -64,6 +65,7 @@ public interface IRealizersService extends DataContainer<Person> {
      *
      * @param firstName The first name.
      * @param name      The name.
+     *
      * @return true if the realizer exists else false.
      */
     boolean exists(String firstName, String name);
@@ -73,6 +75,7 @@ public interface IRealizersService extends DataContainer<Person> {
      *
      * @param firstName The first name.
      * @param name      The name.
+     *
      * @return The realizer.
      */
     Person getRealizer(String firstName, String name);
@@ -88,6 +91,7 @@ public interface IRealizersService extends DataContainer<Person> {
      * Indicate if the realizer exists or not.
      *
      * @param realizer The realizer to test.
+     *
      * @return true if the realizer exist else false.
      */
     boolean exists(Person realizer);

@@ -47,6 +47,7 @@ public interface IFilmsService extends DataContainer<Film> {
      * Generate an email with the description of the film to advise it to someone else.
      *
      * @param film The film to advise.
+     *
      * @return The String representing the body of the email.
      */
     String generateEmail(Film film);
@@ -55,6 +56,7 @@ public interface IFilmsService extends DataContainer<Film> {
      * Generate the description of the film in a String for printing it.
      *
      * @param film The film to describe.
+     *
      * @return The String representation of the description of the film.
      */
     String generateFilmDescriptionForPrinting(Film film);
@@ -84,6 +86,7 @@ public interface IFilmsService extends DataContainer<Film> {
      * Delete the film.
      *
      * @param film The film to delete.
+     *
      * @return true if the film has been deleted else false.
      */
     boolean delete(Film film);

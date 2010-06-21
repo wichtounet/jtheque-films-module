@@ -43,12 +43,12 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
         getFilmsService().addDataListener(this);
     }
 
-	@Override
-	public Collection<Film> getDatas(){
-		return getFilmsService().getDatas();
-	}
+    @Override
+    public Collection<Film> getDatas() {
+        return getFilmsService().getDatas();
+    }
 
-	@Override
+    @Override
     public Film getCurrentFilm() {
         return currentFilm;
     }
@@ -59,7 +59,7 @@ public final class FilmsModel extends PrincipalDataModel<Film> implements IFilms
 
         fireCurrentObjectChanged(new ObjectChangedEvent(this, currentFilm));
     }
-    
+
     /**
      * Return the service for the films.
      *

@@ -22,16 +22,9 @@ import org.jtheque.films.view.able.IRealizerView;
 import org.jtheque.films.view.impl.models.able.IRealizersModel;
 import org.jtheque.primary.controller.able.ControllerState;
 import org.jtheque.primary.controller.impl.PrincipalController;
-import org.jtheque.primary.od.able.Data;
 import org.jtheque.primary.od.able.Person;
-import org.jtheque.primary.view.impl.models.tree.TreeElement;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.swing.JTree;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.tree.TreePath;
-import java.util.Collection;
 
 /**
  * A realizer controller implementation.
@@ -42,10 +35,10 @@ public final class RealizerController extends PrincipalController<Person> implem
     @Resource
     private IRealizerView realizerView;
 
-	public RealizerController(ControllerState viewState, ControllerState modifyState,
-							  ControllerState newObjectState, ControllerState autoAddState){
-		super(viewState, modifyState, newObjectState, autoAddState);
-	}
+    public RealizerController(ControllerState viewState, ControllerState modifyState,
+                              ControllerState newObjectState, ControllerState autoAddState) {
+        super(viewState, modifyState, newObjectState, autoAddState);
+    }
 
     @Override
     public void save() {

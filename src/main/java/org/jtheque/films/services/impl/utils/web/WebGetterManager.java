@@ -44,6 +44,7 @@ public final class WebGetterManager {
      *
      * @param site   The site on which we must search.
      * @param search The search of films we search.
+     *
      * @return A list containing all the films found on the site with the search.
      */
     public Collection<FilmResult> getFilms(Site site, String search) {
@@ -56,6 +57,7 @@ public final class WebGetterManager {
      * Return the film on the site for the result.
      *
      * @param search The search of this films.
+     *
      * @return The film with all the informations.
      */
     public Film getFilm(FilmResult search) {

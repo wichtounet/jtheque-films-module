@@ -93,6 +93,7 @@ public final class JTFImporter implements Importer {
      * Import from a JTFFile.
      *
      * @param file The JTF File.
+     *
      * @throws FileException If there is a problem during the import.
      */
     public void importFrom(JTFFile file) throws FileException {

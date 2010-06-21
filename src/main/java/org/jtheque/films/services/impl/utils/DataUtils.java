@@ -39,6 +39,7 @@ public final class DataUtils {
      * @param id         The id searched.
      * @param collection The collection in which we must search.
      * @param <T>        The specialized type of Data.
+     *
      * @return The good data or <code>null</code> if we doesn't find it.
      */
     public static <T extends Data> T getDataByTemporaryId(int id, Iterable<T> collection) {
@@ -56,6 +57,7 @@ public final class DataUtils {
      *
      * @param film       The film for which we want the lending.
      * @param collection The collection of lendings.
+     *
      * @return The good lending or <code>null</code> if we don't find one.
      */
     public static Lending getLendingForFilm(Film film, Iterable<Lending> collection) {

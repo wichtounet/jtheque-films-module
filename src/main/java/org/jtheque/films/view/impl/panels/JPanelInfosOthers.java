@@ -15,6 +15,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.annotation.PostConstruct;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+
 import java.util.Collection;
 
 /*

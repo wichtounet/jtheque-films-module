@@ -27,6 +27,7 @@ import org.jtheque.films.view.impl.models.able.IAutoImportFilm;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Frame;
@@ -54,7 +55,7 @@ public final class AutoImportVIew extends SwingDialogView implements IAutoImport
     /**
      * Construct a new JFrameAutoImport.
      *
-     * @param parent             The parent frame.
+     * @param parent The parent frame.
      */
     public AutoImportVIew(Frame parent) {
         super(parent);

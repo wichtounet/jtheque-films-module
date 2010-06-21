@@ -26,6 +26,7 @@ import org.jtheque.films.services.impl.utils.web.FilmResult;
 import org.jtheque.films.view.able.IAutoAddView;
 
 import javax.annotation.Resource;
+
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 
@@ -48,7 +49,7 @@ public final class AcChooseSite extends JThequeSimpleAction {
         super();
 
         setText(">>");
-        
+
         Managers.getManager(IBeansManager.class).inject(this);
     }
 

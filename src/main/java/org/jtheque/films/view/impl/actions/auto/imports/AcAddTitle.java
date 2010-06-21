@@ -46,7 +46,7 @@ public final class AcAddTitle extends JThequeAction {
 
         if (!StringUtils.isEmpty(title)) {
             IAutoImportView autoImportView = Managers.getManager(IBeansManager.class).getBean("autoImportView");
-            
+
             autoImportView.getModelTitles().addElement(title);
             autoImportView.getModel().getTitles().add(title);
         }

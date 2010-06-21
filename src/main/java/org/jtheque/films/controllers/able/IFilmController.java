@@ -22,6 +22,7 @@ import org.jtheque.films.view.impl.models.able.IFilmsModel;
 import org.jtheque.primary.controller.able.IPrincipalController;
 
 import javax.swing.event.TreeSelectionListener;
+
 import java.awt.event.MouseListener;
 
 /**
@@ -34,6 +35,7 @@ public interface IFilmController extends IPrincipalController<Film>, MouseListen
      * Save the current film.
      */
     void save();
+
     /**
      * Send the current film by email.
      */

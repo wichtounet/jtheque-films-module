@@ -25,6 +25,7 @@ import org.jtheque.films.view.able.ISitesView;
 
 import javax.annotation.Resource;
 import javax.swing.event.ListSelectionEvent;
+
 import java.io.IOException;
 
 /**

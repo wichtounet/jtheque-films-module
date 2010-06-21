@@ -167,7 +167,7 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         }
 
         addFeatures();
-        
+
         for (ConfigTabComponent component : configTabComponents) {
             Managers.getManager(IViewManager.class).addConfigTabComponent(component);
         }
@@ -278,9 +278,9 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         exportFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         exportFeature.setIcon("export");
 
-        addSubFeatures(manager, exportFeature, "exportToExcelAction", "exportToXMLAction", "exportToHTMLAction", 
+        addSubFeatures(manager, exportFeature, "exportToExcelAction", "exportToXMLAction", "exportToHTMLAction",
                 "exportToPDFAction", "exportToTXTAction", "exportToJTFEAction", "exportToCSVAction", "exportToRTFAction");
-        
+
         manager.getFeature(CoreFeature.FILE).addSubFeature(exportFeature);
     }
 
@@ -326,7 +326,7 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
 
         addSubFeatures(manager, newFeature, "newKindAction", "newTypeAction", "newLanguageMenuAction",
                 "newBorrowerMenuAction", "newCountryMenuAction", "newSagaAction");
-        
+
         othersFeature.addSubFeature(newFeature);
     }
 
@@ -340,9 +340,9 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         deleteFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         deleteFeature.setIcon("delete_others");
 
-        addSubFeatures(manager, deleteFeature, "deleteKindMenuAction", "deleteTypeAction", "deleteLanguageMenuAction", 
+        addSubFeatures(manager, deleteFeature, "deleteKindMenuAction", "deleteTypeAction", "deleteLanguageMenuAction",
                 "deleteCountryMenuAction", "deleteBorrowerMenuAction", "deleteSagaMenuAction");
-        
+
         othersFeature.addSubFeature(deleteFeature);
     }
 
@@ -356,18 +356,18 @@ public final class FilmsModule implements CollectionBasedModule, IFilmsModule {
         editFeature.setBaseName(Constants.IMAGE_BASE_NAME);
         editFeature.setIcon("edit_others");
 
-        addSubFeatures(manager, editFeature, "editKindMenuAction", "editTypeAction", "editLanguageMenuAction", 
+        addSubFeatures(manager, editFeature, "editKindMenuAction", "editTypeAction", "editLanguageMenuAction",
                 "editBorrowerMenuAction", "editCountryMenuAction", "editSagaMenuAction");
-        
+
         othersFeature.addSubFeature(editFeature);
     }
 
-    private static void addSubFeatures(IFeatureManager manager, Feature parent, String... actions){
-        for(int i = 0; i < actions.length; i++){
+    private static void addSubFeatures(IFeatureManager manager, Feature parent, String... actions) {
+        for (int i = 0; i < actions.length; i++) {
             manager.addSubFeature(parent, actions[i], FeatureType.ACTION, i + 1);
         }
     }
-    
+
     @Override
     public boolean chooseCollection(String collection, String password, boolean create) {
         ICollectionsService collectionsService = Managers.getManager(IBeansManager.class).getBean("collectionsService");

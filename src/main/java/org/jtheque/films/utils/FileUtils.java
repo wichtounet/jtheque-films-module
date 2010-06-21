@@ -42,6 +42,7 @@ public final class FileUtils {
      * Prepare a string to be a file. It seems deleting special characters with normal characters.
      *
      * @param destinationPath The string path to prepare.
+     *
      * @return The prepared path.
      */
     public static String prepareFilePath(String destinationPath) {
@@ -56,6 +57,7 @@ public final class FileUtils {
      * Return the HTML page's link for the id in the good language.
      *
      * @param id The id of the localised page
+     *
      * @return The HTML page's link
      */
     public static URL getLocalisedPage(String id) {

@@ -18,6 +18,7 @@ package org.jtheque.films.persistence.dao.impl;
 
 import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.collection.Collection;
+import org.jtheque.core.managers.collection.IDaoCollections;
 import org.jtheque.core.managers.log.ILoggingManager;
 import org.jtheque.core.managers.persistence.GenericDao;
 import org.jtheque.core.managers.persistence.Query;
@@ -30,7 +31,6 @@ import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.films.persistence.od.impl.FilmActorRelation;
 import org.jtheque.films.persistence.od.impl.FilmImpl;
 import org.jtheque.films.persistence.od.impl.FilmKindRelation;
-import org.jtheque.core.managers.collection.IDaoCollections;
 import org.jtheque.primary.dao.able.IDaoLendings;
 import org.jtheque.primary.dao.able.IDaoPersons;
 import org.jtheque.primary.dao.able.IDaoSimpleDatas;
@@ -38,10 +38,12 @@ import org.jtheque.primary.od.able.Person;
 import org.jtheque.primary.od.able.SimpleData;
 import org.jtheque.utils.StringUtils;
 import org.jtheque.utils.collections.CollectionUtils;
+
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import javax.annotation.Resource;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -110,6 +112,7 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
      * Return all the films of the collection.
      *
      * @param collection The collection.
+     *
      * @return A List containing all the films of the collections.
      */
     private java.util.Collection<Film> getFilms(Collection collection) {
@@ -284,9 +287,9 @@ public final class DaoFilms extends GenericDao<Film> implements IDaoFilms {
             film.setTheSaga(daoSagas.getSimpleData(rs.getInt("THE_SAGA_FK")));
             film.setTheType(daoTypes.getSimpleData(rs.getInt("THE_TYPE_FK")));
 
-			if (StringUtils.isNotEmpty(rs.getString("NOTE"))){
-				film.setNote(DaoNotes.getInstance().getNote(DaoNotes.NoteType.getEnum(rs.getInt("NOTE"))));
-			}
+            if (StringUtils.isNotEmpty(rs.getString("NOTE"))) {
+                film.setNote(DaoNotes.getInstance().getNote(DaoNotes.NoteType.getEnum(rs.getInt("NOTE"))));
+            }
 
             mapRelations(film);
 

@@ -21,9 +21,9 @@ import org.jtheque.core.managers.beans.IBeansManager;
 import org.jtheque.core.managers.error.JThequeError;
 import org.jtheque.core.managers.language.ILanguageManager;
 import org.jtheque.core.managers.view.impl.components.config.ConfigTabComponent;
+import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.core.utils.ui.builders.I18nPanelBuilder;
 import org.jtheque.core.utils.ui.builders.JThequePanelBuilder;
-import org.jtheque.core.utils.ui.ValidationUtils;
 import org.jtheque.films.IFilmsModule;
 import org.jtheque.films.services.impl.utils.config.Configuration;
 import org.jtheque.utils.ui.GridBagUtils;
@@ -31,6 +31,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import java.util.Collection;
 
 /**
@@ -42,7 +43,7 @@ public final class JPanelConfigAuto extends JPanel implements ConfigTabComponent
     private JTextField fieldNumberOfActors;
 
     /**
-     * Construct a new JPanelConfigAuto. 
+     * Construct a new JPanelConfigAuto.
      */
     public JPanelConfigAuto() {
         super();

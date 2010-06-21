@@ -15,6 +15,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -52,7 +53,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
      */
     public VideoView(Frame parent) {
         super(parent);
-        
+
         model = new VideoListModel();
 
         setTitleKey("video.view.title");
@@ -61,7 +62,7 @@ public final class VideoView extends SwingDialogView implements IVideoView {
 
         setLocationRelativeTo(getOwner());
     }
-    
+
     /**
      * Build the content pane.
      *

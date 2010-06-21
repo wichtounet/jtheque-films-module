@@ -34,6 +34,7 @@ import org.jtheque.utils.ui.GridBagUtils;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.swing.Action;
+
 import java.awt.Container;
 import java.awt.Frame;
 import java.util.Collection;
@@ -98,7 +99,7 @@ public final class LendFilmView extends SwingDialogView implements ILendFilmView
 
         builder.addButton(Managers.getManager(IBeansManager.class).<Action>getBean("newBorrowerAction"), builder.gbcSet(2, 1));
 
-        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 3, 1), 
+        builder.addButtonBar(builder.gbcSet(0, 2, GridBagUtils.HORIZONTAL, 3, 1),
                 new AcValidateLendView(), new CloseViewAction("generic.view.actions.cancel", this));
 
         return builder.getPanel();
