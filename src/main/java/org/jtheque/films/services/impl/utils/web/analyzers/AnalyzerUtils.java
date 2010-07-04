@@ -20,7 +20,7 @@ import org.jtheque.core.managers.Managers;
 import org.jtheque.core.managers.log.ILoggingManager;
 import org.jtheque.films.persistence.od.able.Film;
 import org.jtheque.utils.io.FileException;
-import org.jtheque.utils.io.FileUtils;
+import org.jtheque.utils.io.WebUtils;
 
 import java.io.File;
 
@@ -59,7 +59,7 @@ final class AnalyzerUtils {
                             "/miniatures/" + film.getTitle() + ".jpg");
 
             try {
-                FileUtils.downloadFile(path, destinationPath);
+                WebUtils.downloadFile(path, destinationPath);
             } catch (FileException e) {
                 Managers.getManager(ILoggingManager.class).getLogger(AnalyzerUtils.class).error(e);
             }
