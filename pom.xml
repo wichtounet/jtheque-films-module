@@ -9,16 +9,31 @@
     <groupId>org.jtheque</groupId>
     <artifactId>org.jtheque.films-module</artifactId>
     <packaging>jar</packaging>
-    <name>JTheque Films Module</name>
+    <name>jtheque-films-module</name>
     <version>1.4.3-SNAPSHOT</version>
 
-    <url>http://jtheque.developpez.com/collections/films</url>
+    <url>http://github.com/wichtounet/jtheque-films-module</url>
+
+    <ciManagement>
+        <system>Hudson</system>
+        <url>http://wichtounet.homedns.org:8280/hudson/</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>http://github.com/wichtounet/jtheque-films-module/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>http://github.com/wichtounet/jtheque-films-module</url>
+        <connection>scm:git:git@github.com:wichtounet/jtheque-films-module.git</connection>
+    </scm>
 
     <distributionManagement>
         <site>
-            <id>jtheque-web-server</id>
-            <name>JTheque FTP Server</name>
-            <url>ftp://developpez.com/collections/films</url>
+            <id>bw-web-server</id>
+            <name>BW FTP Server</name>
+            <url>ftp://baptiste-wicht.com/jtheque/films</url>
         </site>
         <repository>
             <id>Server-PC-releases</id>
@@ -32,34 +47,7 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <repositories>
-        <repository>
-            <id>JTheque</id>
-            <url>http://jtheque.developpez.com/repository</url>
-        </repository>
-        <repository>
-            <id>Version99</id>
-            <name>Version 99 Does Not Exist Maven repository</name>
-            <layout>default</layout>
-            <url>http://no-commons-logging.zapto.org/mvn2</url>
-        </repository>
-    </repositories>
-
-    <issueManagement>
-        <system>Redmine</system>
-        <url>http://projets.developpez.com/projects/jtheque-films-mod/issues</url>
-    </issueManagement>
-
-    <scm>
-        <url>http://wichtounet.homedns.org/svn/jtheque-films-module/</url>
-        <connection>scm:svn:http://wichtounet.homedns.org/svn/jtheque-films-module/</connection>
-    </scm>
-
     <build>
-        <directory>${env.BUILD_HOME}/modules/jtheque-films-module</directory>
-
-        <outputDirectory>${env.BUILD_HOME}/modules/jtheque-films-module/classes/production</outputDirectory>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -196,8 +184,8 @@
 
     <licenses>
         <license>
-            <name>GNU GPL V3</name>
-            <url>http://www.gnu.org/copyleft/gpl.html</url>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
